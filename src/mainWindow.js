@@ -101,6 +101,8 @@ var MainWindow = new Lang.Class({
         params = Params.fill(params, { title: GLib.get_application_name(),
                                        default_height: 480,
                                        default_width: 780,
+                                       height_request: 480,
+                                       width_request: 640,
                                        hexpand: true,
                                        vexpand: true,
                                        icon_name: "org.gnome.SoundRecorder" });
