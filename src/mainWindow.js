@@ -407,7 +407,7 @@ var MainView = new Lang.Class({
                 this.playImage = new Gtk.Image({ name: "PlayImage" });
                 this.playImage.set_from_icon_name('media-playback-start-symbolic', Gtk.IconSize.BUTTON);
                 this._playListButton = new Gtk.Button({ name: "PlayButton",
-                                                        hexpand: true,
+                                                        hexpand: false,
                                                         vexpand: true });
                 this._playListButton.set_image(this.playImage);
                 this._playListButton.set_tooltip_text(_("Play"));
@@ -428,7 +428,7 @@ var MainView = new Lang.Class({
                 this.pauseImage = Gtk.Image.new();
                 this.pauseImage.set_from_icon_name('media-playback-pause-symbolic', Gtk.IconSize.BUTTON);
                 this._pauseListButton = new Gtk.Button({ name: "PauseButton",
-                                                         hexpand: true,
+                                                         hexpand: false,
                                                          vexpand: true });
                 this._pauseListButton.set_image(this.pauseImage);
                 this._pauseListButton.set_tooltip_text(_("Pause"));
