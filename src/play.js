@@ -91,8 +91,8 @@ var Play = new Lang.Class({
         } else if (this.ret == Gst.StateChangeReturn.SUCCESS) {
             MainWindow.view.setVolume();
         }
-        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGINT, Application.application.onWindowDestroy, this.play);
-        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGTERM, Application.application.onWindowDestroy, this.play);
+        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGINT, Application.application.onWindowDestroy);
+        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGTERM, Application.application.onWindowDestroy);
     },
 
     pausePlaying: function() {
@@ -178,8 +178,8 @@ var Play = new Lang.Class({
     },
 
     _updateTime: function() {
-        var time = this.play.query_position(Gst.Format.TIME, null)[1]/Gst.SECOND;
-        this.trackDuration = this.play.query_duration(Gst.Format.TIME, null)[1];
+        var time = this.play.query_position(Gst.Format.TIME)[1]/Gst.SECOND;
+        this.trackDuration = this.play.query_duration(Gst.Format.TIME)[1];
         this.trackDurationSecs = this.trackDuration/Gst.SECOND;
 
         if (time >= 0 && this.playState != PipelineStates.STOPPED) {
@@ -215,7 +215,7 @@ var Play = new Lang.Class({
     queryPosition: function() {
         var position = 0;
         while (position == 0) {
-            position = this.play.query_position(Gst.Format.TIME, null)[1]/Gst.SECOND;
+            position = this.play.query_position(Gst.Format.TIME)[1]/Gst.SECOND;
         }
 
         return position;
@@ -259,4 +259,3 @@ var Play = new Lang.Class({
         }
     }
 });
-

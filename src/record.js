@@ -151,12 +151,12 @@ var Record = new Lang.Class({
             this.onEndOfStream();
         }
 
-        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGINT, Application.application.onWindowDestroy, this.pipeline);
-        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGTERM, Application.application.onWindowDestroy, this.pipeline);
+        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGINT, Application.application.onWindowDestroy);
+        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGTERM, Application.application.onWindowDestroy);
     },
 
     _updateTime: function() {
-        var time = this.pipeline.query_position(Gst.Format.TIME, null)[1]/Gst.SECOND;
+        var time = this.pipeline.query_position(Gst.Format.TIME)[1]/Gst.SECOND;
 
         if (time >= 0) {
             this._view.setLabel(time, 0);
@@ -375,5 +375,3 @@ var BuildFileName = new Lang.Class({
         return this.dateTime;
     }
 });
-
-

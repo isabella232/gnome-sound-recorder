@@ -95,8 +95,8 @@ var WaveForm = new Lang.Class({
         var decode = this.pipeline.get_by_name("decode");
         var bus = this.pipeline.get_bus();
         bus.add_signal_watch();
-        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGINT, Application.application.onWindowDestroy, this.pipeline);
-        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGTERM, Application.application.onWindowDestroy, this.pipeline);
+        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGINT, Application.application.onWindowDestroy);
+        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGTERM, Application.application.onWindowDestroy);
 
         this.nSamples = Math.ceil(this.duration / INTERVAL);
 
