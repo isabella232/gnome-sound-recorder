@@ -9,16 +9,16 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=General\n"
-"POT-Creation-Date: 2017-10-25 14:59+0000\n"
-"PO-Revision-Date: 2017-12-06 14:46+0200\n"
-"Last-Translator: Pieter Schoeman <pieter@sonbesie.co.za>\n"
+"POT-Creation-Date: 2017-12-18 15:01+0000\n"
+"PO-Revision-Date: 2018-02-05 18:59+0200\n"
+"Last-Translator: Pieter Schalk Schoeman <pieter@sonbesie.co.za>\n"
 "Language-Team: Afrikaans <pieter@sonbesie.co.za>\n"
 "Language: af\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 2.91.7\n"
+"X-Generator: Poedit 2.0.3\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
@@ -38,7 +38,7 @@ msgid ""
 msgstr ""
 "Klankopnemer verskaf 'n moderne koppelvlak en bied 'n eenvoudige manier om "
 "klank op te neem en terug te speel. Verder laat dit basiese redigeering toe "
-"en stel jou instaat om klanknotas te neem"
+"en stel jou instaat om klanknotas te neem."
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:4
 msgid ""
@@ -119,7 +119,7 @@ msgstr "Neem klank op deur die mikrofoon en speel dit terug"
 
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
 msgid "Audio;Application;Record;"
-msgstr "Audio;Application;Record;Klank;Toepassing;Opneem"
+msgstr "Klank;Toepassing;Opneem;"
 
 #: ../src/application.js:43
 msgid "SoundRecorder"
@@ -149,7 +149,7 @@ msgstr "Opnames"
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: ../src/application.js:167
 msgid "translator-credits"
-msgstr "Pieter Schalk Schoeman"
+msgstr "Pieter Schoeman"
 
 #: ../src/fileUtil.js:88
 msgid "Yesterday"
@@ -258,15 +258,15 @@ msgstr "Gebruik die <b>Opneem</b> knoppie om 'n klankopname te maak"
 
 #: ../src/mainWindow.js:300
 msgid "Recording…"
-msgstr "Besig met opname..."
+msgstr "Besig met opname…"
 
 #. Translators: This is the title in the headerbar
 #: ../src/mainWindow.js:352
 #, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
-msgstr[0] "%d Klank Opgeneem"
-msgstr[1] "%d Klanke Opgeneem"
+msgstr[0] "%d Klank opgeneem"
+msgstr[1] "%d Klanke opgeneem"
 
 #: ../src/mainWindow.js:401
 msgid "Play"
@@ -322,7 +322,7 @@ msgstr "Verkose formaat"
 
 #: ../src/preferences.js:72
 msgid "Default mode"
-msgstr "Verstek modus"
+msgstr "Verstekmodus"
 
 #: ../src/preferences.js:80
 msgid "Volume"
@@ -334,7 +334,7 @@ msgstr "Mikrofoon"
 
 #: ../src/record.js:71
 msgid "Unable to create Recordings directory."
-msgstr "Kan nie die opnames lêergids maak nie"
+msgstr "Kan nie die opnames lêergids maak nie."
 
 #: ../src/record.js:84
 msgid "Please install the GStreamer 1.0 PulseAudio plugin."
@@ -362,7 +362,7 @@ msgid ""
 " to the recording state."
 msgstr ""
 "Kon nie die pyplyn na die \n"
-"opname toestand stel nie"
+"opname toestand stel nie."
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
 #. by the application (for example, "Clip 1").
