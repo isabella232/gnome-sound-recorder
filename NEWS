@@ -1,7 +1,12 @@
+ 3.27.90
+ =======
+ Bug 790682 Fix scoping error caused by deprecated "let" keywork
+ build: Install appstream metadata to non-deprecated location by Jeremy Bicha
+
  3.24.00
  =======
 configure: Drop id3mux check failure to a warning by David King
- 
+
  3.24.00
  =======
  Fix codec errors caused by mono/stereo combobox
