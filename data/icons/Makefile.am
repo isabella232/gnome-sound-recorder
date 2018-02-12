@@ -10,7 +10,8 @@ nobase_icon_DATA = \
 	hicolor/symbolic/apps/gnome-sound-recorder-symbolic.svg
 
 EXTRA_DIST = $(nobase_icon_DATA) \
-	hicolor/gnome-sound-recorder.svg
+	hicolor/gnome-sound-recorder.svg \
+	.gitignore
 
 gtk_update_icon_cache = gtk-update-icon-cache -f $(datadir)/icons/hicolor
 

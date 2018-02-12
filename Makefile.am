@@ -17,6 +17,9 @@ MAINTAINERCLEANFILES = \
 	$(srcdir)/missing \
 	$(srcdir)/mkinstalldirs
 
+EXTRA_DIST = .gitignore
+GITIGNOREFILES = .anjuta .anjuta_sym_db.db m4/
+
 distdir = $(PACKAGE_NAME)-$(VERSION)
 
 include $(top_srcdir)/git.mk

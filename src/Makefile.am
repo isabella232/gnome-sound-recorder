@@ -23,6 +23,7 @@ org.gnome.SoundRecorder: org.gnome.SoundRecorder.in
 EXTRA_DIST = \
 	org.gnome.SoundRecorder.in \
 	org.gnome.SoundRecorder.src.gresource.xml \
+	.gitignore \
 	$(app_resource_files) \
 	$(NULL)
 
