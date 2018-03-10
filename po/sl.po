@@ -2,16 +2,16 @@
 # Copyright (C) 2013 gnome-sound-recorder's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-sound-recorder package.
 #
-# Martin Srebotnjak <<miles@filmsi.net>, 2013-2016.
-# Matej Urbančič <mateju@svn.gnome.org>, 2015-2016.
+# Martin Srebotnjak <<miles@filmsi.net>, 2013–2016.
+# Matej Urbančič <mateju@svn.gnome.org>, 2015–2018.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-08-21 21:29+0200\n"
-"PO-Revision-Date: 2016-08-21 21:30+0200\n"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"sound-recorder&keywords=I18N+L10N&component=General\n"
+"POT-Creation-Date: 2018-02-19 14:48+0000\n"
+"PO-Revision-Date: 2018-03-06 21:50+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian <gnome-si@googlegroups.com>\n"
 "Language: sl\n"
@@ -20,12 +20,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.0.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
-#: ../src/record.js:113
+#: ../src/record.js:120
 msgid "Sound Recorder"
 msgstr "Snemalnik zvoka"
 
@@ -271,6 +271,7 @@ msgstr "Uporabite gumb <b>Posnemi</b> za snemanje posnetkov"
 msgid "Recording…"
 msgstr "Poteka snemanje ..."
 
+#. Translators: This is the title in the headerbar
 #: ../src/mainWindow.js:352
 #, javascript-format
 msgid "%d Recorded Sound"
@@ -348,23 +349,27 @@ msgstr "Mikrofon"
 msgid "Unable to create Recordings directory."
 msgstr "Mape Posnetki ni mogoče ustvariti!"
 
-#: ../src/record.js:80
+#: ../src/record.js:84
+msgid "Please install the GStreamer 1.0 PulseAudio plugin."
+msgstr "Namestiti je treba vstavek GStreamer 1.0 PulseAudio."
+
+#: ../src/record.js:86
 msgid "Your audio capture settings are invalid."
 msgstr "Določene so neveljavne nastavitve zajemanja zvoka."
 
-#: ../src/record.js:130
+#: ../src/record.js:137
 msgid "Not all elements could be created."
 msgstr "Vseh predmetov ni mogoče ustvariti."
 
-#: ../src/record.js:142
+#: ../src/record.js:149
 msgid "Not all of the elements were linked."
 msgstr "Vsi predmeti niso povezani."
 
-#: ../src/record.js:167
+#: ../src/record.js:174
 msgid "No Media Profile was set."
 msgstr "Ni nastavljenega profila posnetkov."
 
-#: ../src/record.js:178
+#: ../src/record.js:185
 msgid ""
 "Unable to set the pipeline \n"
 " to the recording state."
@@ -374,7 +379,7 @@ msgstr ""
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
 #. by the application (for example, "Clip 1").
-#: ../src/record.js:357
+#: ../src/record.js:364
 #, javascript-format
 msgid "Clip %d"
 msgstr "Izrez %d"
