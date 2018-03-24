@@ -4,14 +4,14 @@
 #
 # Erwin Poeze <donnut@outlook.com>, 2013.
 # Hannie Dumoleyn <hannie@ubuntu-nl.org>, 2014, 2016.
-# Nathan Follens <nthn@unseen.is>, 2015-2017.
+# Nathan Follens <nthn@unseen.is>, 2015-2018.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-music 3.10\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=General\n"
-"POT-Creation-Date: 2017-08-24 04:11+0000\n"
-"PO-Revision-Date: 2017-08-24 20:41+0200\n"
+"POT-Creation-Date: 2018-02-19 06:43+0000\n"
+"PO-Revision-Date: 2018-03-24 17:39+0100\n"
 "Last-Translator: Nathan Follens <nthn@unseen.is>\n"
 "Language-Team: Dutch <gnome-nl-list@gnome.org>\n"
 "Language: nl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.3\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
@@ -37,22 +37,21 @@ msgid ""
 "straight-forward way to record and play audio. It allows you to do basic "
 "editing, and create voice memos."
 msgstr ""
-"Geluidsrecorder biedt een eenvoudige en moderne interface die toelaat audio "
-"op te nemen en af te spelen. Het laat elementair bewerken van de audio en "
-"het maken van stem-memo's toe."
+"Geluidsrecorder biedt een eenvoudige en moderne interface waarmee u audio "
+"kunt opnemen en afspelen. Het laat elementair bewerken van de audio en het "
+"maken van stem-memo’s toe."
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:4
 msgid ""
 "Sound Recorder automatically handles the saving process so that you do not "
 "need to worry about accidentally discarding the previous recording."
 msgstr ""
-"Geluidsrecorder zorgt automatisch voor het proces van opslaan, zodat u zich "
-"geen zorgen hoeft te maken over het per ongeluk verwijderen van de vorige "
-"opname."
+"Geluidsrecorder zorgt automatisch voor het opslagproces, zodat u zich geen "
+"zorgen hoeft te maken over het per ongeluk verwijderen van de vorige opname."
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:5
 msgid "Supported audio formats:"
-msgstr "Ondersteunde audio-formaten:"
+msgstr "Ondersteunde audioformaten:"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:6
 msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
@@ -121,7 +120,7 @@ msgstr "Geluid via de microfoon opnemen en het afspelen"
 
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
 msgid "Audio;Application;Record;"
-msgstr "Audio;Application;Toepassing;Record;Opnemen;"
+msgstr "Audio;Application;Toepassing;Record;Opnemen;Geluidsopname;Memo;"
 
 #: ../src/application.js:43
 msgid "SoundRecorder"
@@ -156,7 +155,7 @@ msgstr ""
 "Hannie Dumoleyn\n"
 "Nathan Follens\n"
 "\n"
-"Kijk voor meer info op http://nl.gnome.org/"
+"Meer info over Gnome-NL http://nl.gnome.org/"
 
 #: ../src/fileUtil.js:88
 msgid "Yesterday"
@@ -257,11 +256,11 @@ msgstr "Opnemen"
 
 #: ../src/mainWindow.js:149
 msgid "Add Recordings"
-msgstr "Opnames toevoegen"
+msgstr "Voeg opnames toe"
 
 #: ../src/mainWindow.js:154
 msgid "Use the <b>Record</b> button to make sound recordings"
-msgstr "De knop <b>Opnemen</b> gebruiken om geluidsopnames te maken"
+msgstr "Gebruik de knop <b>Opnemen</b> om geluidsopnames te maken"
 
 #: ../src/mainWindow.js:300
 msgid "Recording…"
@@ -376,7 +375,7 @@ msgstr ""
 #: ../src/record.js:364
 #, javascript-format
 msgid "Clip %d"
-msgstr "Clip %d"
+msgstr "Geluidsopname %d"
 
 #~ msgid "%Y-%m-%d %H:%M:%S"
 #~ msgstr "%d-%m-%Y %H:%M:%S"
