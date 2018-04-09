@@ -1,3 +1,7 @@
+ 3.28.1
+ =======
+ Translation updates
+
  3.27.90
  =======
  Bug 790682 Fix scoping error caused by deprecated "let" keywork
@@ -5,7 +9,7 @@
 
  3.24.00
  =======
-configure: Drop id3mux check failure to a warning by David King
+ Configure: Drop id3mux check failure to a warning by David King
 
  3.24.00
  =======
