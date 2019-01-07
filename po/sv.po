@@ -1,16 +1,16 @@
 # Swedish translation for gnome-sound-recorder.
-# Copyright © 2014-2016 gnome-sound-recorder's COPYRIGHT HOLDER
+# Copyright © 2014-2019 gnome-sound-recorder's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-sound-recorder package.
-# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2014, 2015, 2016.
+# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2014, 2015, 2016, 2017, 2019.
 # Sebastian Rasmussen <sebras@gmail.com>, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
-"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"sound-recorder&keywords=I18N+L10N&component=General\n"
-"POT-Creation-Date: 2017-03-18 20:24+0000\n"
-"PO-Revision-Date: 2017-03-18 23:14+0100\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
+"issues\n"
+"POT-Creation-Date: 2019-01-07 22:29+0000\n"
+"PO-Revision-Date: 2019-01-07 23:36+0100\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -18,10 +18,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.2\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:159
 #: ../src/record.js:120
 msgid "Sound Recorder"
 msgstr "Ljudinspelare"
@@ -124,29 +124,17 @@ msgstr "Ljud;Program;Inspelning;"
 msgid "SoundRecorder"
 msgstr "Ljudinspelare"
 
-#: ../src/application.js:50 ../src/preferences.js:40
-msgid "Preferences"
-msgstr "Inställningar"
-
-#: ../src/application.js:53
-msgid "About"
-msgstr "Om"
-
-#: ../src/application.js:54
-msgid "Quit"
-msgstr "Avsluta"
-
-#: ../src/application.js:83
+#: ../src/application.js:74
 msgid "Sound Recorder started"
 msgstr "Ljudinspelare startad"
 
 #. Translators: "Recordings" here refers to the name of the directory where the application places files
-#: ../src/application.js:93
+#: ../src/application.js:84
 msgid "Recordings"
 msgstr "Inspelningar"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: ../src/application.js:167
+#: ../src/application.js:158
 msgid "translator-credits"
 msgstr ""
 "Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
@@ -199,7 +187,7 @@ msgid_plural "%d years ago"
 msgstr[0] "%d år sedan"
 msgstr[1] "%d år sedan"
 
-#: ../src/info.js:44 ../src/mainWindow.js:515
+#: ../src/info.js:44 ../src/mainWindow.js:530
 msgid "Info"
 msgstr "Info"
 
@@ -208,7 +196,7 @@ msgid "Cancel"
 msgstr "Avbryt"
 
 #. finish button (stop recording)
-#: ../src/info.js:53 ../src/mainWindow.js:314
+#: ../src/info.js:53 ../src/mainWindow.js:329
 msgid "Done"
 msgstr "Klar"
 
@@ -248,71 +236,79 @@ msgstr "Typ"
 msgid "Unknown"
 msgstr "Okänd"
 
-#: ../src/mainWindow.js:113 ../src/mainWindow.js:794
+#: ../src/mainWindow.js:114 ../src/mainWindow.js:809
 msgid "Record"
 msgstr "Spela in"
 
-#: ../src/mainWindow.js:149
+#: ../src/mainWindow.js:126 ../src/preferences.js:40
+msgid "Preferences"
+msgstr "Inställningar"
+
+#: ../src/mainWindow.js:127
+msgid "About Sound Recorder"
+msgstr "Om Ljudinspelare"
+
+#: ../src/mainWindow.js:164
 msgid "Add Recordings"
 msgstr "Lägg till inspelningar"
 
-#: ../src/mainWindow.js:154
+#: ../src/mainWindow.js:169
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Använd knappen <b>Inspelning</b> för att göra ljudinspelningar"
 
-#: ../src/mainWindow.js:300
+#: ../src/mainWindow.js:315
 msgid "Recording…"
 msgstr "Spelar in…"
 
 #. Translators: This is the title in the headerbar
-#: ../src/mainWindow.js:352
+#: ../src/mainWindow.js:367
 #, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
 msgstr[0] "%d inspelat ljud"
 msgstr[1] "%d inspelade ljud"
 
-#: ../src/mainWindow.js:401
+#: ../src/mainWindow.js:416
 msgid "Play"
 msgstr "Spela"
 
-#: ../src/mainWindow.js:422
+#: ../src/mainWindow.js:437
 msgid "Pause"
 msgstr "Gör paus"
 
-#: ../src/mainWindow.js:530
+#: ../src/mainWindow.js:545
 msgid "Delete"
 msgstr "Ta bort"
 
-#: ../src/mainWindow.js:829
+#: ../src/mainWindow.js:844
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:829
+#: ../src/mainWindow.js:844
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:829
+#: ../src/mainWindow.js:844
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:829
+#: ../src/mainWindow.js:844
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:829
+#: ../src/mainWindow.js:844
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:853
+#: ../src/mainWindow.js:868
 msgid "Mono"
 msgstr "Mono"
 
-#: ../src/mainWindow.js:853
+#: ../src/mainWindow.js:868
 msgid "Stereo"
 msgstr "Stereo"
 
-#: ../src/mainWindow.js:877
+#: ../src/mainWindow.js:892
 msgid "Load More"
 msgstr "Läs in fler"
 
@@ -374,6 +370,12 @@ msgstr ""
 #, javascript-format
 msgid "Clip %d"
 msgstr "Klipp %d"
+
+#~ msgid "About"
+#~ msgstr "Om"
+
+#~ msgid "Quit"
+#~ msgstr "Avsluta"
 
 #~ msgid "%Y-%m-%d %H:%M:%S"
 #~ msgstr "%Y-%m-%d %H:%M:%S"
