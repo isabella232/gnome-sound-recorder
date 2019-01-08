@@ -2,15 +2,15 @@
 # Copyright (C) 2013 gnome-sound-recorder's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-sound-recorder package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2013, 2014, 2015, 2016, 2017.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2013, 2014, 2015, 2016, 2017, 2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
-"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"sound-recorder&keywords=I18N+L10N&component=General\n"
-"POT-Creation-Date: 2017-03-18 20:24+0000\n"
-"PO-Revision-Date: 2017-03-21 12:43+0100\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
+"issues\n"
+"POT-Creation-Date: 2019-01-07 22:29+0000\n"
+"PO-Revision-Date: 2019-01-08 15:59+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: es <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -18,10 +18,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 2.91.6\n"
+"X-Generator: Gtranslator 2.91.7\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:159
 #: ../src/record.js:120
 msgid "Sound Recorder"
 msgstr "Grabadora de sonidos"
@@ -128,29 +128,17 @@ msgstr "sonido;aplicación;grabar;"
 msgid "SoundRecorder"
 msgstr "Grabadora de sonidos"
 
-#: ../src/application.js:50 ../src/preferences.js:40
-msgid "Preferences"
-msgstr "Preferencias"
-
-#: ../src/application.js:53
-msgid "About"
-msgstr "Acerca de"
-
-#: ../src/application.js:54
-msgid "Quit"
-msgstr "Salir"
-
-#: ../src/application.js:83
+#: ../src/application.js:74
 msgid "Sound Recorder started"
 msgstr "Grabadora de sonidos iniciada"
 
 #. Translators: "Recordings" here refers to the name of the directory where the application places files
-#: ../src/application.js:93
+#: ../src/application.js:84
 msgid "Recordings"
 msgstr "Grabaciones"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: ../src/application.js:167
+#: ../src/application.js:158
 msgid "translator-credits"
 msgstr "Daniel Mustieles <daniel.mustieles@gmail.com>, 2013 - 2015"
 
@@ -198,7 +186,7 @@ msgid_plural "%d years ago"
 msgstr[0] "hace %d año"
 msgstr[1] "hace %d años"
 
-#: ../src/info.js:44 ../src/mainWindow.js:515
+#: ../src/info.js:44 ../src/mainWindow.js:530
 msgid "Info"
 msgstr "Información"
 
@@ -207,7 +195,7 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #. finish button (stop recording)
-#: ../src/info.js:53 ../src/mainWindow.js:314
+#: ../src/info.js:53 ../src/mainWindow.js:329
 msgid "Done"
 msgstr "Hecho"
 
@@ -247,71 +235,80 @@ msgstr "Tipo"
 msgid "Unknown"
 msgstr "Desconocido"
 
-#: ../src/mainWindow.js:113 ../src/mainWindow.js:794
+#: ../src/mainWindow.js:114 ../src/mainWindow.js:809
 msgid "Record"
 msgstr "Grabar"
 
-#: ../src/mainWindow.js:149
+#: ../src/mainWindow.js:126 ../src/preferences.js:40
+msgid "Preferences"
+msgstr "Preferencias"
+
+#: ../src/mainWindow.js:127
+#| msgid "Sound Recorder"
+msgid "About Sound Recorder"
+msgstr "Acerca de la grabadora de sonidos"
+
+#: ../src/mainWindow.js:164
 msgid "Add Recordings"
 msgstr "Añadir grabaciones"
 
-#: ../src/mainWindow.js:154
+#: ../src/mainWindow.js:169
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Use el botón <b>Grabar</b> para realizar grabaciones de sonido"
 
-#: ../src/mainWindow.js:300
+#: ../src/mainWindow.js:315
 msgid "Recording…"
 msgstr "Grabando…"
 
 #. Translators: This is the title in the headerbar
-#: ../src/mainWindow.js:352
+#: ../src/mainWindow.js:367
 #, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
 msgstr[0] "%d sonido grabado"
 msgstr[1] "%d sonidos grabados"
 
-#: ../src/mainWindow.js:401
+#: ../src/mainWindow.js:416
 msgid "Play"
 msgstr "Reproducir"
 
-#: ../src/mainWindow.js:422
+#: ../src/mainWindow.js:437
 msgid "Pause"
 msgstr "Pausar"
 
-#: ../src/mainWindow.js:530
+#: ../src/mainWindow.js:545
 msgid "Delete"
 msgstr "Eliminar"
 
-#: ../src/mainWindow.js:829
+#: ../src/mainWindow.js:844
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:829
+#: ../src/mainWindow.js:844
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:829
+#: ../src/mainWindow.js:844
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:829
+#: ../src/mainWindow.js:844
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:829
+#: ../src/mainWindow.js:844
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:853
+#: ../src/mainWindow.js:868
 msgid "Mono"
 msgstr "Mono"
 
-#: ../src/mainWindow.js:853
+#: ../src/mainWindow.js:868
 msgid "Stereo"
 msgstr "Estéreo"
 
-#: ../src/mainWindow.js:877
+#: ../src/mainWindow.js:892
 msgid "Load More"
 msgstr "Cargar más"
 
@@ -373,6 +370,12 @@ msgstr ""
 #, javascript-format
 msgid "Clip %d"
 msgstr "Clip %d"
+
+#~ msgid "About"
+#~ msgstr "Acerca de"
+
+#~ msgid "Quit"
+#~ msgstr "Salir"
 
 #~ msgid "%Y-%m-%d %H:%M:%S"
 #~ msgstr "%d/%m/%Y %H:%M:%S"
