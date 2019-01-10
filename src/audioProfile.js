@@ -17,17 +17,17 @@
  *
  */
 
-const _ = imports.gettext.gettext;
-const Gio = imports.gi.Gio;
-const Gst = imports.gi.Gst;
-const GstPbutils = imports.gi.GstPbutils;
-const Lang = imports.lang;
-const Mainloop = imports.mainloop;
+var _ = imports.gettext.gettext;
+var Gio = imports.gi.Gio;
+var Gst = imports.gi.Gst;
+var GstPbutils = imports.gi.GstPbutils;
+var Lang = imports.lang;
+var Mainloop = imports.mainloop;
 
-const MainWindow = imports.mainWindow;
-const Preferences = imports.preferences;
+var MainWindow = imports.mainWindow;
+var Preferences = imports.preferences;
 
-const comboBoxMap = {
+var comboBoxMap = {
     OGG_VORBIS: 0,
     OPUS: 1,
     FLAC: 2,
@@ -35,7 +35,7 @@ const comboBoxMap = {
     MP4: 4
 };
 
-const containerProfileMap = {
+var containerProfileMap = {
     OGG: "application/ogg",
     ID3: "application/x-id3",
     MP4: "video/quicktime,variant=(string)iso",
@@ -43,7 +43,7 @@ const containerProfileMap = {
 };
 
 
-const audioCodecMap = {
+var audioCodecMap = {
     FLAC: "audio/x-flac",
     MP3: "audio/mpeg,mpegversion=(int)1,layer=(int)3",
     MP4: "audio/mpeg,mpegversion=(int)4",
@@ -52,7 +52,7 @@ const audioCodecMap = {
 };
 
 
-const AudioProfile = new Lang.Class({
+var AudioProfile = new Lang.Class({
     Name: 'AudioProfile',
 
     profile: function(profileName){
@@ -89,10 +89,10 @@ const AudioProfile = new Lang.Class({
     },
 
     mediaProfile: function(){
-        let audioCaps;
+        var audioCaps;
         this._containerProfile = null;
         if (this._values.audio && this._values.container) {
-            let caps = Gst.Caps.from_string(this._values.container);
+            var caps = Gst.Caps.from_string(this._values.container);
             this._containerProfile = GstPbutils.EncodingContainerProfile.new("record", null, caps, null);
             audioCaps = Gst.Caps.from_string(this._values.audio);
             this.encodingProfile = GstPbutils.EncodingAudioProfile.new(audioCaps, null, null, 1);
@@ -108,7 +108,7 @@ const AudioProfile = new Lang.Class({
     },
 
     fileExtensionReturner: function() {
-        let suffixName;
+        var suffixName;
 
         if (this._values.audio) {
             if (this._containerProfile != null)

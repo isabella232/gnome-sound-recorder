@@ -17,24 +17,24 @@
 *
 */
 
-const Gio = imports.gi.Gio;
-const GLib = imports.gi.GLib;
-const Gst = imports.gi.Gst;
-const Gtk = imports.gi.Gtk;
-const Lang = imports.lang;
+var Gio = imports.gi.Gio;
+var GLib = imports.gi.GLib;
+var Gst = imports.gi.Gst;
+var Gtk = imports.gi.Gtk;
+var Lang = imports.lang;
 
-const MainWindow = imports.mainWindow;
-const Preferences = imports.preferences;
-const Util = imports.util;
+var MainWindow = imports.mainWindow;
+var Preferences = imports.preferences;
+var Util = imports.util;
 
-const SIGINT = 2;
-const SIGTERM = 15;
+var SIGINT = 2;
+var SIGTERM = 15;
 
-let application = null;
-let settings = null;
+var application = null;
+var settings = null;
 
 
-const Application = new Lang.Class({
+var Application = new Lang.Class({
     Name: 'Application',
     Extends: Gtk.Application,
 
@@ -44,21 +44,21 @@ const Application = new Lang.Class({
     },
 
     _initAppMenu: function() {
-        let preferences = new Gio.SimpleAction({ name: 'preferences' });
+        var preferences = new Gio.SimpleAction({ name: 'preferences' });
         preferences.connect('activate', Lang.bind(this,
             function() {
                 this._showPreferences();
             }));
         this.add_action(preferences);
 
-        let aboutAction = new Gio.SimpleAction({ name: 'about' });
+        var aboutAction = new Gio.SimpleAction({ name: 'about' });
         aboutAction.connect('activate', Lang.bind(this,
             function() {
                 this._showAbout();
             }));
         this.add_action(aboutAction);
 
-        let quitAction = new Gio.SimpleAction({ name: 'quit' });
+        var quitAction = new Gio.SimpleAction({ name: 'quit' });
         quitAction.connect('activate', Lang.bind(this,
             function() {
                 this.quit();
@@ -81,7 +81,7 @@ const Application = new Lang.Class({
 
     ensure_directory: function() {
         /* Translators: "Recordings" here refers to the name of the directory where the application places files */
-        let path = GLib.build_filenamev([GLib.get_home_dir(), _("Recordings")]);
+        var path = GLib.build_filenamev([GLib.get_home_dir(), _("Recordings")]);
 
         // Ensure Recordings directory
         GLib.mkdir_with_parents(path, parseInt("0755", 8));
@@ -103,7 +103,7 @@ const Application = new Lang.Class({
     },
 
     _showPreferences: function() {
-        let preferencesDialog = new Preferences.Preferences();
+        var preferencesDialog = new Preferences.Preferences();
 
         preferencesDialog.widget.connect('response', Lang.bind(this,
             function(widget, response) {
@@ -112,7 +112,7 @@ const Application = new Lang.Class({
     },
 
     getPreferences: function() {
-        let set = settings.get_int("media-type-preset");
+        var set = settings.get_int("media-type-preset");
         return set;
      },
 
@@ -121,7 +121,7 @@ const Application = new Lang.Class({
     },
 
     getChannelsPreferences: function() {
-        let set = settings.get_int("channel");
+        var set = settings.get_int("channel");
         return set;
     },
 
@@ -130,7 +130,7 @@ const Application = new Lang.Class({
     },
 
     getMicVolume: function() {
-        let micVolLevel = settings.get_double("mic-volume");
+        var micVolLevel = settings.get_double("mic-volume");
         return micVolLevel;
     },
 
@@ -139,7 +139,7 @@ const Application = new Lang.Class({
     },
 
     getSpeakerVolume: function() {
-        let speakerVolLevel = settings.get_double("speaker-volume");
+        var speakerVolLevel = settings.get_double("speaker-volume");
         return speakerVolLevel;
     },
 
@@ -148,7 +148,7 @@ const Application = new Lang.Class({
     },
 
     _showAbout: function() {
-        let aboutDialog = new Gtk.AboutDialog();
+        var aboutDialog = new Gtk.AboutDialog();
         aboutDialog.artists = [ 'Reda Lazri <the.red.shortcut@gmail.com>',
                                 'Garrett LeSage <garrettl@gmail.com>',
                                 'Hylke Bons <hylkebons@gmail.com>',

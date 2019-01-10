@@ -17,23 +17,23 @@
 *
 */
 
-const Gio = imports.gi.Gio;
-const GLib = imports.gi.GLib;
-const Gtk = imports.gi.Gtk;
-const Lang = imports.lang;
+var Gio = imports.gi.Gio;
+var GLib = imports.gi.GLib;
+var Gtk = imports.gi.Gtk;
+var Lang = imports.lang;
 
-const _ = imports.gettext.gettext;
-const C_ = imports.gettext.pgettext;
+var _ = imports.gettext.gettext;
+var C_ = imports.gettext.pgettext;
 
-const MainWindow = imports.mainWindow;
-const Main = imports.main;
+var MainWindow = imports.mainWindow;
+var Main = imports.main;
 
-let formatComboBoxText = null;
-let channelsComboBoxText = null;
-let recordVolume= null;
-let playVolume = null;
+var formatComboBoxText = null;
+var channelsComboBoxText = null;
+var recordVolume= null;
+var playVolume = null;
 
-const Preferences = new Lang.Class({
+var Preferences = new Lang.Class({
     Name: 'Preferences',
     
      _init: function() {    
@@ -48,7 +48,7 @@ const Preferences = new Lang.Class({
                                         
         this.widget.set_transient_for(Gio.Application.get_default().get_active_window());
         
-        let grid = new Gtk.Grid ({ orientation: Gtk.Orientation.VERTICAL,
+        var grid = new Gtk.Grid ({ orientation: Gtk.Orientation.VERTICAL,
                                    row_homogeneous: true,
                                    column_homogeneous: true,
                                    halign: Gtk.Align.CENTER,
@@ -58,10 +58,10 @@ const Preferences = new Lang.Class({
                                    margin_end: 24,
                                    margin_start: 24,
                                    margin_top: 12 });
-        let contentArea = this.widget.get_content_area();
+        var contentArea = this.widget.get_content_area();
         contentArea.pack_start(grid, true, true, 2);
         
-        let formatLabel = new Gtk.Label({ label: _("Preferred format"),
+        var formatLabel = new Gtk.Label({ label: _("Preferred format"),
                                           halign: Gtk.Align.END });
         formatLabel.get_style_context().add_class('dim-label');
         grid.attach(formatLabel, 0, 0, 2, 1);
@@ -69,7 +69,7 @@ const Preferences = new Lang.Class({
         formatComboBoxText = new MainWindow.EncoderComboBox();
         grid.attach(formatComboBoxText, 2, 0, 2, 1);
         
-        let channelsLabel = new Gtk.Label({ label: _("Default mode"),
+        var channelsLabel = new Gtk.Label({ label: _("Default mode"),
                                             halign: Gtk.Align.END });
         channelsLabel.get_style_context().add_class('dim-label');
         grid.attach(channelsLabel, 0, 1, 2, 1);
@@ -77,7 +77,7 @@ const Preferences = new Lang.Class({
         channelsComboBoxText = new MainWindow.ChannelsComboBox();
         grid.attach(channelsComboBoxText, 2, 1, 2, 1);
 
-        let volumeLabel = new Gtk.Label({ label: _("Volume"),
+        var volumeLabel = new Gtk.Label({ label: _("Volume"),
                                           halign: Gtk.Align.END });
         volumeLabel.get_style_context().add_class('dim-label');
         grid.attach(volumeLabel, 0, 2, 2, 1);
@@ -92,7 +92,7 @@ const Preferences = new Lang.Class({
             }));
         grid.attach(playVolume, 2, 2, 2, 1);
         
-        let micVolLabel = new Gtk.Label({ label: _("Microphone"),
+        var micVolLabel = new Gtk.Label({ label: _("Microphone"),
                                           halign: Gtk.Align.END });
         micVolLabel.get_style_context().add_class('dim-label');
         grid.attach(micVolLabel, 0, 3, 2, 1);

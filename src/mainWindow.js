@@ -17,77 +17,77 @@
 *
 */
 
-const Gettext = imports.gettext;
-const _ = imports.gettext.gettext;
-const Gdk = imports.gi.Gdk;
-const GdkPixbuf = imports.gi.GdkPixbuf;
-const Gio = imports.gi.Gio;
-const GLib = imports.gi.GLib;
-const Gst = imports.gi.Gst;
-const Gtk = imports.gi.Gtk;
-const Lang = imports.lang;
-const Pango = imports.gi.Pango;
+var Gettext = imports.gettext;
+var _ = imports.gettext.gettext;
+var Gdk = imports.gi.Gdk;
+var GdkPixbuf = imports.gi.GdkPixbuf;
+var Gio = imports.gi.Gio;
+var GLib = imports.gi.GLib;
+var Gst = imports.gi.Gst;
+var Gtk = imports.gi.Gtk;
+var Lang = imports.lang;
+var Pango = imports.gi.Pango;
 
-const Application = imports.application;
-const AudioProfile = imports.audioProfile;
-const FileUtil = imports.fileUtil;
-const Info = imports.info;
-const Listview = imports.listview;
-const Params = imports.params;
-const Play = imports.play;
-const Preferences = imports.preferences;
-const Record = imports.record;
-const Waveform = imports.waveform;
+var Application = imports.application;
+var AudioProfile = imports.audioProfile;
+var FileUtil = imports.fileUtil;
+var Info = imports.info;
+var Listview = imports.listview;
+var Params = imports.params;
+var Play = imports.play;
+var Preferences = imports.preferences;
+var Record = imports.record;
+var Waveform = imports.waveform;
 
-let activeProfile = null;
-let audioProfile = null;
-let displayTime = null;
-let grid = null;
-let groupGrid;
-let header;
-let list = null;
-let loadMoreButton = null;
-let offsetController = null;
-let play = null;
-let previousSelRow = null;
-let recordPipeline = null;
-let recordButton = null;
-let appMenuButton = null;
-let selectable = null;
-let setVisibleID = null;
-let UpperBoundVal = 182;
-let view = null;
-let volumeValue = [];
+var activeProfile = null;
+var audioProfile = null;
+var displayTime = null;
+var grid = null;
+var groupGrid;
+var header;
+var list = null;
+var loadMoreButton = null;
+var offsetController = null;
+var play = null;
+var previousSelRow = null;
+var recordPipeline = null;
+var recordButton = null;
+var appMenuButton = null;
+var selectable = null;
+var setVisibleID = null;
+var UpperBoundVal = 182;
+var view = null;
+var volumeValue = [];
 var wave = null;
 
-const rtl = Gtk.Widget.get_default_direction() == Gtk.TextDirection.RTL;
+var rtl = Gtk.Widget.get_default_direction() == Gtk.TextDirection.RTL;
 
-const ActiveArea = {
+var ActiveArea = {
     RECORD: 0,
     PLAY: 1
 };
 
-const ListColumns = {
+var ListColumns = {
     NAME: 0,
     MENU: 1
 };
 
-const PipelineStates = {
+var PipelineStates = {
     PLAYING: 0,
     PAUSED: 1,
     STOPPED: 2
 };
 
-const RecordPipelineStates = {
+var RecordPipelineStates = {
     PLAYING: 0,
     PAUSED: 1,
     STOPPED: 2
 };
 
-const _TIME_DIVISOR = 60;
-const _SEC_TIMEOUT = 100;
+var _TIME_DIVISOR = 60;
+var _SEC_TIMEOUT = 100;
 
-const MainWindow = new Lang.Class({
+var MainWindow = new Lang.Class({
     Name: 'MainWindow',
     Extends: Gtk.ApplicationWindow,
 
@@ -122,7 +122,7 @@ const MainWindow = new Lang.Class({
     },
 
     _addAppMenu: function() {
-        let menu = new Gio.Menu();
+        var menu = new Gio.Menu();
         menu.append(_("Preferences"), 'app.preferences');
         menu.append(_("About Sound Recorder"), 'app.about');
 
@@ -134,7 +134,7 @@ const MainWindow = new Lang.Class({
     }
 });
 
-const MainView = new Lang.Class({
+var MainView = new Lang.Class({
     Name: 'MainView',
     Extends: Gtk.Stack,
 
@@ -157,16 +157,16 @@ const MainView = new Lang.Class({
                                         valign: Gtk.Align.CENTER });
         this._scrolledWin.add(this.emptyGrid);
 
-        let emptyPageImage = new Gtk.Image({ icon_name: 'audio-input-microphone-symbolic',
+        var emptyPageImage = new Gtk.Image({ icon_name: 'audio-input-microphone-symbolic',
                                              icon_size: Gtk.IconSize.DIALOG });
         emptyPageImage.get_style_context().add_class('dim-label');
         this.emptyGrid.add(emptyPageImage);
-        let emptyPageTitle = new Gtk.Label({ label: _("Add Recordings"),
+        var emptyPageTitle = new Gtk.Label({ label: _("Add Recordings"),
                                              halign: Gtk.Align.CENTER,
                                              valign: Gtk.Align.CENTER });
         emptyPageTitle.get_style_context().add_class('dim-label');
         this.emptyGrid.add(emptyPageTitle);
-        let emptyPageDirections = new Gtk.Label({ label: _("Use the <b>Record</b> button to make sound recordings"),
+        var emptyPageDirections = new Gtk.Label({ label: _("Use the <b>Record</b> button to make sound recordings"),
                                                   use_markup: true,
                                                   max_width_chars: 30,
                                                   halign: Gtk.Align.CENTER,
@@ -191,8 +191,8 @@ const MainView = new Lang.Class({
     onPlayStopClicked: function() {
         if (play.getPipeStates() == PipelineStates.PLAYING) {
             play.stopPlaying();
-            let listRow = this.listBox.get_selected_row();
-            let rowWidget = listRow.get_child(this.widget);
+            var listRow = this.listBox.get_selected_row();
+            var rowWidget = listRow.get_child(this.widget);
             rowWidget.foreach(Lang.bind(this,
                 function(child) {
 
@@ -232,18 +232,18 @@ const MainView = new Lang.Class({
 
     _formatTime: function(unformattedTime) {
         this.unformattedTime = unformattedTime;
-        let seconds = Math.floor(this.unformattedTime);
-        let hours = parseInt(seconds / Math.pow(_TIME_DIVISOR, 2));
-        let hoursString = ""
+        var seconds = Math.floor(this.unformattedTime);
+        var hours = parseInt(seconds / Math.pow(_TIME_DIVISOR, 2));
+        var hoursString = ""
 
         if (hours > 10)
             hoursString = hours + ":"
         else if (hours < 10 && hours > 0)
             hoursString = "0" + hours + ":"
 
-        let minuteString = parseInt(seconds / _TIME_DIVISOR) % _TIME_DIVISOR;
-        let secondString = parseInt(seconds % _TIME_DIVISOR);
-        let timeString =
+        var minuteString = parseInt(seconds / _TIME_DIVISOR) % _TIME_DIVISOR;
+        var secondString = parseInt(seconds % _TIME_DIVISOR);
+        var timeString =
             hoursString +
             (minuteString < 10 ? "0" + minuteString : minuteString)+
             ":" +
@@ -253,7 +253,7 @@ const MainView = new Lang.Class({
     },
 
     _updatePositionCallback: function() {
-        let position = MainWindow.play.queryPosition();
+        var position = MainWindow.play.queryPosition();
 
         if (position >= 0) {
             this.progressScale.set_value(position);
@@ -280,7 +280,7 @@ const MainView = new Lang.Class({
     },
 
     getVolume: function() {
-        let volumeValue = this.playVolume.get_value();
+        var volumeValue = this.playVolume.get_value();
 
         return volumeValue;
     },
@@ -288,8 +288,8 @@ const MainView = new Lang.Class({
     listBoxAdd: function() {
         selectable = true;
         this.groupGrid = groupGrid;
-        let playVolume = Application.application.getSpeakerVolume();
-        let micVolume = Application.application.getMicVolume();
+        var playVolume = Application.application.getSpeakerVolume();
+        var micVolume = Application.application.getMicVolume();
         volumeValue.push({ record: micVolume, play: playVolume });
         activeProfile = Application.application.getPreferences();
 
@@ -326,7 +326,7 @@ const MainView = new Lang.Class({
         this.toolbarStart.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
 
         // finish button (stop recording)
-        let stopRecord = new Gtk.Button({ label: _("Done"),
+        var stopRecord = new Gtk.Button({ label: _("Done"),
                                           halign: Gtk.Align.FILL,
                                           valign: Gtk.Align.CENTER,
                                           hexpand: true,
@@ -360,8 +360,8 @@ const MainView = new Lang.Class({
 
         this.groupGrid.add(this._scrolledWin);
         this._scrolledWin.show();
-        let sounds = list.getItemCount();
-        let title;
+        var sounds = list.getItemCount();
+        var title;
         if (sounds > 0) {
             // Translators: This is the title in the headerbar
             title = Gettext.ngettext("%d Recorded Sound",
@@ -394,7 +394,7 @@ const MainView = new Lang.Class({
             this._files = [];
             this._files = list.getFilesInfoForList();
 
-            for (let i = this._startIdx; i <= this._endIdx; i++) {
+            for (var i = this._startIdx; i <= this._endIdx; i++) {
                 this.rowGrid = new Gtk.Grid({ name: i.toString(),
                                               height_request: 45,
                                               orientation: Gtk.Orientation.VERTICAL,
@@ -418,12 +418,12 @@ const MainView = new Lang.Class({
                 this._playListButton.show();
                 this._playListButton.connect('clicked', Lang.bind(this,
                     function(button){
-                        let row = button.get_parent().get_parent();
+                        var row = button.get_parent().get_parent();
                         this.listBox.select_row(row);
                         play.passSelected(row);
-                        let gridForName = row.get_child();
-                        let idx = parseInt(gridForName.name);
-                        let file = this._files[idx];
+                        var gridForName = row.get_child();
+                        var idx = parseInt(gridForName.name);
+                        var file = this._files[idx];
                         this.onPlayPauseToggled(row, file);
                     }));
 
@@ -439,7 +439,7 @@ const MainView = new Lang.Class({
                 this._pauseListButton.hide();
                 this._pauseListButton.connect('clicked', Lang.bind(this,
                     function(button){
-                        let row = button.get_parent().get_parent();
+                        var row = button.get_parent().get_parent();
                         this.listBox.select_row(row);
                         this.onPause(row);
                     }));
@@ -453,7 +453,7 @@ const MainView = new Lang.Class({
                                                  use_markup: true,
                                                  width_chars: 35,
                                                  xalign: 0 });
-                let markup = ('<b>'+ this._files[i].fileName + '</b>');
+                var markup = ('<b>'+ this._files[i].fileName + '</b>');
                 this._fileName.label = markup;
                 this._fileName.set_no_show_all(true);
                 this.rowGrid.attach(this._fileName, 3, 0, 10, 3);
@@ -520,11 +520,11 @@ const MainView = new Lang.Class({
                 this._info.image = Gtk.Image.new_from_icon_name("dialog-information-symbolic", Gtk.IconSize.BUTTON);
                 this._info.connect("clicked", Lang.bind(this,
                     function(button) {
-                        let row = button.get_parent().get_parent();
+                        var row = button.get_parent().get_parent();
                         this.listBox.select_row(row);
-                        let gridForName = row.get_child();
-                        let idx = parseInt(gridForName.name);
-                        let file = this._files[idx];
+                        var gridForName = row.get_child();
+                        var idx = parseInt(gridForName.name);
+                        var file = this._files[idx];
                         this._onInfoButton(file);
                     }));
                 this._info.set_tooltip_text(_("Info"));
@@ -538,7 +538,7 @@ const MainView = new Lang.Class({
                 this._delete.image = Gtk.Image.new_from_icon_name("user-trash-symbolic", Gtk.IconSize.BUTTON);
                 this._delete.connect("clicked", Lang.bind(this,
                     function(button) {
-                        let row = button.get_parent().get_parent();
+                        var row = button.get_parent().get_parent();
                         this.listBox.select_row(row);
                         this._deleteFile(row);
                     }));
@@ -593,10 +593,10 @@ const MainView = new Lang.Class({
     hasPreviousSelRow: function() {
        this.destroyLoadMoreButton();
            if (previousSelRow != null) {
-              let rowWidget = previousSelRow.get_child(this.widget);
+              var rowWidget = previousSelRow.get_child(this.widget);
               rowWidget.foreach(Lang.bind(this,
                 function(child) {
-                    let alwaysShow = child.get_no_show_all();
+                    var alwaysShow = child.get_no_show_all();
 
                     if (!alwaysShow)
                         child.hide();
@@ -633,7 +633,7 @@ const MainView = new Lang.Class({
     },
 
     rowGridCallback: function() {
-        let selectedRow = this.listBox.get_selected_row();
+        var selectedRow = this.listBox.get_selected_row();
         this.destroyLoadMoreButton();
 
         if (selectedRow) {
@@ -643,11 +643,11 @@ const MainView = new Lang.Class({
             }
 
             previousSelRow = selectedRow;
-            let selectedRowWidget = previousSelRow.get_child(this.widget);
+            var selectedRowWidget = previousSelRow.get_child(this.widget);
             selectedRowWidget.show_all();
             selectedRowWidget.foreach(Lang.bind(this,
                 function(child) {
-                    let alwaysShow = child.get_no_show_all();
+                    var alwaysShow = child.get_no_show_all();
 
                     if (!alwaysShow)
                         child.sensitive = true;
@@ -664,14 +664,14 @@ const MainView = new Lang.Class({
     },
 
     _getFileFromRow: function(selected) {
-        let fileForAction = null;
-        let rowWidget = selected.get_child(this.fileName);
+        var fileForAction = null;
+        var rowWidget = selected.get_child(this.fileName);
         rowWidget.foreach(Lang.bind(this,
             function(child) {
 
                 if (child.name == "FileNameLabel") {
-                    let name = child.get_text();
-                    let application = Gio.Application.get_default();
+                    var name = child.get_text();
+                    var application = Gio.Application.get_default();
                     fileForAction = application.saveDir.get_child_for_display_name(name);
                 }
              }));
@@ -680,18 +680,18 @@ const MainView = new Lang.Class({
     },
 
     _deleteFile: function(selected) {
-        let fileToDelete = this._getFileFromRow(selected);
+        var fileToDelete = this._getFileFromRow(selected);
         fileToDelete.trash_async(GLib.PRIORITY_DEFAULT, null, null);
     },
 
     loadPlay: function(selected) {
-        let fileToPlay = this._getFileFromRow(selected);
+        var fileToPlay = this._getFileFromRow(selected);
 
         return fileToPlay;
     },
 
     _onInfoButton: function(selected) {
-        let infoDialog = new Info.InfoDialog(selected);
+        var infoDialog = new Info.InfoDialog(selected);
 
         infoDialog.widget.connect('response', Lang.bind(this,
             function(widget, response) {
@@ -713,14 +713,14 @@ const MainView = new Lang.Class({
     },
 
     setNameLabel: function(newName, oldName, index) {
-        let selected = this.listBox.get_row_at_index(index);
-        let rowWidget = selected.get_child(oldName);
+        var selected = this.listBox.get_row_at_index(index);
+        var rowWidget = selected.get_child(oldName);
         rowWidget.foreach(Lang.bind(this,
             function(child) {
 
                 if (child.name == "FileNameLabel") {
-                    let name = child.get_text();
-                    let markup = ('<b>'+ newName + '</b>');
+                    var name = child.get_text();
+                    var markup = ('<b>'+ newName + '</b>');
                     child.label = markup;
                 }
              }));
@@ -728,11 +728,11 @@ const MainView = new Lang.Class({
     },
 
     onPause: function(listRow) {
-        let activeState = play.getPipeStates();
+        var activeState = play.getPipeStates();
 
         if (activeState == PipelineStates.PLAYING) {
             play.pausePlaying();
-            let rowWidget = listRow.get_child(this.widget);
+            var rowWidget = listRow.get_child(this.widget);
             rowWidget.foreach(Lang.bind(this,
                 function(child) {
 
@@ -751,12 +751,12 @@ const MainView = new Lang.Class({
 
     onPlayPauseToggled: function(listRow, selFile) {
         setVisibleID = ActiveArea.PLAY;
-        let activeState = play.getPipeStates();
+        var activeState = play.getPipeStates();
 
         if (activeState != PipelineStates.PLAYING) {
             play.startPlaying();
 
-            let rowWidget = listRow.get_child(this.widget);
+            var rowWidget = listRow.get_child(this.widget);
             rowWidget.foreach(Lang.bind(this,
                 function(child) {
 
@@ -797,7 +797,7 @@ const MainView = new Lang.Class({
     }
 });
 
-const RecordButton = new Lang.Class({
+var RecordButton = new Lang.Class({
     Name: "RecordButton",
     Extends: Gtk.Button,
 
@@ -834,16 +834,16 @@ const RecordButton = new Lang.Class({
     }
 });
 
-const EncoderComboBox = new Lang.Class({
+var EncoderComboBox = new Lang.Class({
     Name: "EncoderComboBox",
     Extends: Gtk.ComboBoxText,
 
     // encoding setting labels in combobox
     _init: function() {
         this.parent();
-        let combo = [_("Ogg Vorbis"), _("Opus"), _("FLAC"), _("MP3"), _("MOV")];
+        var combo = [_("Ogg Vorbis"), _("Opus"), _("FLAC"), _("MP3"), _("MOV")];
 
-        for (let i = 0; i < combo.length; i++)
+        for (var i = 0; i < combo.length; i++)
             this.append_text(combo[i]);
         this.set_property('valign', Gtk.Align.CENTER);
         this.set_sensitive(true);
@@ -858,31 +858,31 @@ const EncoderComboBox = new Lang.Class({
     }
 });
 
-const ChannelsComboBox = new Lang.Class({
+var ChannelsComboBox = new Lang.Class({
     Name: "ChannelsComboBox",
     Extends: Gtk.ComboBoxText,
 
     // channel setting labels in combobox
     _init: function() {
         this.parent();
-        let combo = [_("Mono"), _("Stereo")];
+        var combo = [_("Mono"), _("Stereo")];
 
-        for (let i = 0; i < combo.length; i++)
+        for (var i = 0; i < combo.length; i++)
             this.append_text(combo[i]);
         this.set_property('valign', Gtk.Align.CENTER);
         this.set_sensitive(true);
-        let chanProfile = Application.application.getChannelsPreferences();
+        var chanProfile = Application.application.getChannelsPreferences();
         this.set_active(chanProfile);
         this.connect("changed", Lang.bind(this, this._onChannelComboBoxTextChanged));
     },
 
     _onChannelComboBoxTextChanged: function() {
-        let channelProfile = this.get_active();
+        var channelProfile = this.get_active();
         Application.application.setChannelsPreferences(channelProfile);
     }
 });
 
-const LoadMoreButton = new Lang.Class({
+var LoadMoreButton = new Lang.Class({
     Name: 'LoadMoreButton',
     Extends: Gtk.Button,
 

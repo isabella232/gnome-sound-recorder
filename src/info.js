@@ -18,21 +18,21 @@
  *
  */
 
-const Gio = imports.gi.Gio;
-const GLib = imports.gi.GLib;
-const Gtk = imports.gi.Gtk;
-const Lang = imports.lang;
+var Gio = imports.gi.Gio;
+var GLib = imports.gi.GLib;
+var Gtk = imports.gi.Gtk;
+var Lang = imports.lang;
 
-const _ = imports.gettext.gettext;
-const C_ = imports.gettext.pgettext;
+var _ = imports.gettext.gettext;
+var C_ = imports.gettext.pgettext;
 
-const MainWindow = imports.mainWindow;
+var MainWindow = imports.mainWindow;
 
-const InfoDialog = new Lang.Class({
+var InfoDialog = new Lang.Class({
     Name: 'InfoDialog',
 
     _init: function(fileNav) {
-        let fileName = fileNav;
+        var fileName = fileNav;
 
         this._file = Gio.File.new_for_uri(fileNav.uri);
 
@@ -41,26 +41,26 @@ const InfoDialog = new Lang.Class({
                                         destroy_with_parent: true,
                                         default_width: 400 });
         this.widget.set_transient_for(Gio.Application.get_default().get_active_window());
-        let header = new Gtk.HeaderBar({ title: _("Info") });
+        var header = new Gtk.HeaderBar({ title: _("Info") });
         header.set_show_close_button(false);
         this.widget.set_titlebar(header);
 
-        let cancelButton = new Gtk.Button({ label: _("Cancel") });
+        var cancelButton = new Gtk.Button({ label: _("Cancel") });
         cancelButton.connect("clicked", Lang.bind(this, this.onCancelClicked));
 
         header.pack_start(cancelButton);
 
-        let doneButton = new Gtk.Button({ label: _("Done") });
+        var doneButton = new Gtk.Button({ label: _("Done") });
         doneButton.connect("clicked", Lang.bind(this, this.onDoneClicked));
 
         header.pack_end(doneButton);
 
-        let headerBarSizeGroup = new Gtk.SizeGroup({ mode: Gtk.SizeGroupMode.HORIZONTAL });
+        var headerBarSizeGroup = new Gtk.SizeGroup({ mode: Gtk.SizeGroupMode.HORIZONTAL });
 
         headerBarSizeGroup.add_widget(cancelButton);
         headerBarSizeGroup.add_widget(doneButton);
 
-        let grid = new Gtk.Grid ({ orientation: Gtk.Orientation.VERTICAL,
+        var grid = new Gtk.Grid ({ orientation: Gtk.Orientation.VERTICAL,
                                    row_homogeneous: true,
                                    column_homogeneous: true,
                                    halign: Gtk.Align.CENTER,
@@ -71,7 +71,7 @@ const InfoDialog = new Lang.Class({
                                    margin_start: 18,
                                    margin_top: 18 });
 
-        let contentArea = this.widget.get_content_area();
+        var contentArea = this.widget.get_content_area();
         contentArea.pack_start(grid, true, true, 2);
 
         // File Name item
@@ -125,8 +125,8 @@ const InfoDialog = new Lang.Class({
         grid.attach_next_to(this._fileNameEntry, this._name, Gtk.PositionType.RIGHT, 2, 1);
 
         // Source value
-        let sourceLink = this._file.get_parent();
-        let sourcePath = sourceLink.get_path();
+        var sourceLink = this._file.get_parent();
+        var sourcePath = sourceLink.get_path();
 
         this._sourceData = new Gtk.LinkButton({ label: sourcePath,
                                                 uri: sourceLink.get_uri(),
@@ -157,7 +157,7 @@ const InfoDialog = new Lang.Class({
     },
 
     onDoneClicked: function() {
-        let newFileName = this._fileNameEntry.get_text();
+        var newFileName = this._fileNameEntry.get_text();
         this._file.set_display_name_async(newFileName, GLib.PRIORITY_DEFAULT, null, null);
         this.widget.destroy();
     },
