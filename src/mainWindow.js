@@ -103,7 +103,7 @@ var MainWindow = new Lang.Class({
                                        default_width: 780,
                                        hexpand: true,
                                        vexpand: true,
-                                       icon_name: "gnome-sound-recorder" });
+                                       icon_name: "org.gnome.SoundRecorder" });
         this.parent(params);
 
         header = new Gtk.HeaderBar({ hexpand: true,
