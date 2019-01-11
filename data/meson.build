@@ -16,7 +16,7 @@ install_data(
 i18n.merge_file(
   'desktop',
   input: '@0@.desktop.in'.format(application_id),
-  output: '.@0@desktop'.format(application_id),
+  output: '@0@.desktop'.format(application_id),
   install: true,
   install_dir: join_paths(sound_recorder_datadir, 'applications'),
   po_dir: po_dir,
