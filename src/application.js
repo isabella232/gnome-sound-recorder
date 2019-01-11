@@ -26,7 +26,6 @@ const Gtk = imports.gi.Gtk;
 
 const MainWindow = imports.mainWindow;
 const Preferences = imports.preferences;
-const Util = imports.util;
 
 var SIGINT = 2;
 var SIGTERM = 15;
@@ -64,7 +63,7 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
     vfunc_startup() {
         super.vfunc_startup();
 
-        Util.loadStyleSheet();
+        this._loadStyleSheet();
         log(_("Sound Recorder started"));
         Gst.init(null);
         this._initAppMenu();
@@ -140,8 +139,17 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
          settings.set_double("speaker-volume", level);
     }
 
-    _showAbout() {
-        let aboutDialog = new Gtk.AboutDialog();
+    _loadStyleSheet: function() {
+        var resource = 'resource:///org/gnome/SoundRecorder/Application/application.css';
+        var provider = new Gtk.CssProvider();
+        provider.load_from_resource(resource);
+        Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),
+                                                 provider,
+                                                 Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+    },
+
+    _showAbout: function() {
+        var aboutDialog = new Gtk.AboutDialog();
         aboutDialog.artists = [ 'Reda Lazri <the.red.shortcut@gmail.com>',
                                 'Garrett LeSage <garrettl@gmail.com>',
                                 'Hylke Bons <hylkebons@gmail.com>',

@@ -11,7 +11,6 @@
     <file>play.js</file>
     <file>preferences.js</file>
     <file>record.js</file>
-    <file>util.js</file>
     <file>waveform.js</file>
   </gresource>
 </gresources>

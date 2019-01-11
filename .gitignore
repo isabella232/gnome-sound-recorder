@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 _build
 **/*.swp
 **/*.*~
 **/tags.*
+=======
+_build/
+>>>>>>> application: bundle the css file in gresources

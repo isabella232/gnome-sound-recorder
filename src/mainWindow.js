@@ -104,7 +104,7 @@ var MainWindow = GObject.registerClass(class MainWindow extends Gtk.ApplicationW
             width_request: 640,
             hexpand: true,
             vexpand: true,
-            icon_name: "org.gnome.SoundRecorder"
+            icon_name: pkg.name
         }, params));
 
         header = new Gtk.HeaderBar({ hexpand: true,
