@@ -4,16 +4,15 @@
 # Takashi Sakamoto <o-takashi@sakamocchi.jp>, 2014.
 # Hajime Taira <htaira@redhat.com>, 2015.
 # Jiro Matsuzawa <jmatsuzawa@gnome.org>, 2015.
-# sicklylife <translation@sicklylife.jp>, 2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
 "issues\n"
-"POT-Creation-Date: 2019-01-11 16:46+0000\n"
-"PO-Revision-Date: 2019-01-12 21:58+0900\n"
-"Last-Translator: sicklylife <translation@sicklylife.jp>\n"
+"POT-Creation-Date: 2019-01-12 13:00+0000\n"
+"PO-Revision-Date: 2019-01-13 13:20+0900\n"
+"Last-Translator: Japanese translation team <>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -187,7 +186,7 @@ msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "%d年前"
 
-#: src/info.js:44 src/mainWindow.js:530
+#: src/info.js:44 src/mainWindow.js:532
 msgid "Info"
 msgstr "情報"
 
@@ -196,7 +195,7 @@ msgid "Cancel"
 msgstr "キャンセル"
 
 #. finish button (stop recording)
-#: src/info.js:53 src/mainWindow.js:329
+#: src/info.js:53 src/mainWindow.js:331
 msgid "Done"
 msgstr "完了"
 
@@ -236,78 +235,78 @@ msgstr "タイプ"
 msgid "Unknown"
 msgstr "不明"
 
-#: src/mainWindow.js:114 src/mainWindow.js:809
+#: src/mainWindow.js:116 src/mainWindow.js:811
 msgid "Record"
 msgstr "録音"
 
-#: src/mainWindow.js:126 src/preferences.js:40
+#: src/mainWindow.js:128 src/preferences.js:40
 msgid "Preferences"
 msgstr "設定"
 
-#: src/mainWindow.js:127
+#: src/mainWindow.js:129
 msgid "About Sound Recorder"
 msgstr "サウンドレコーダーについて"
 
-#: src/mainWindow.js:164
+#: src/mainWindow.js:166
 msgid "Add Recordings"
 msgstr "レコーディングを追加"
 
-#: src/mainWindow.js:169
+#: src/mainWindow.js:171
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "<b>録音</b>ボタンを押して音声のレコーディングを作成します"
 
-#: src/mainWindow.js:315
+#: src/mainWindow.js:317
 msgid "Recording…"
 msgstr "録音中…"
 
 #. Translators: This is the title in the headerbar
-#: src/mainWindow.js:367
+#: src/mainWindow.js:369
 #, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
 msgstr[0] "%d件の録音済み音声"
 
-#: src/mainWindow.js:416
+#: src/mainWindow.js:418
 msgid "Play"
 msgstr "再生"
 
-#: src/mainWindow.js:437
+#: src/mainWindow.js:439
 msgid "Pause"
 msgstr "一時停止"
 
-#: src/mainWindow.js:545
+#: src/mainWindow.js:547
 msgid "Delete"
 msgstr "削除"
 
-#: src/mainWindow.js:844
+#: src/mainWindow.js:846
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: src/mainWindow.js:844
+#: src/mainWindow.js:846
 msgid "Opus"
 msgstr "Opus"
 
-#: src/mainWindow.js:844
+#: src/mainWindow.js:846
 msgid "FLAC"
 msgstr "FLAC"
 
-#: src/mainWindow.js:844
+#: src/mainWindow.js:846
 msgid "MP3"
 msgstr "MP3"
 
-#: src/mainWindow.js:844
+#: src/mainWindow.js:846
 msgid "MOV"
 msgstr "MOV"
 
-#: src/mainWindow.js:868
+#: src/mainWindow.js:870
 msgid "Mono"
 msgstr "モノラル"
 
-#: src/mainWindow.js:868
+#: src/mainWindow.js:870
 msgid "Stereo"
 msgstr "ステレオ"
 
-#: src/mainWindow.js:892
+#: src/mainWindow.js:894
 msgid "Load More"
 msgstr "さらに読み込む"
 
