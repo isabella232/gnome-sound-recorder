@@ -177,8 +177,8 @@ const MainView = new Lang.Class({
         if (play.getPipeStates() == PipelineStates.PLAYING) {
             play.stopPlaying();
             let listRow = this.listBox.get_selected_row();
-            let rowWidget = listRow.get_child(this.widget);
-            rowWidget.foreach(Lang.bind(this,
+            let rowGrid = listRow.get_child();
+            rowGrid.foreach(Lang.bind(this,
                 function(child) {
 
                     if (child.name == "PauseButton") {
@@ -578,8 +578,8 @@ const MainView = new Lang.Class({
     hasPreviousSelRow: function() {
        this.destroyLoadMoreButton();
            if (previousSelRow != null) {
-              let rowWidget = previousSelRow.get_child(this.widget);
-              rowWidget.foreach(Lang.bind(this,
+              let rowGrid = previousSelRow.get_child();
+              rowGrid.foreach(Lang.bind(this,
                 function(child) {
                     let alwaysShow = child.get_no_show_all();
 
@@ -628,9 +628,9 @@ const MainView = new Lang.Class({
             }
 
             previousSelRow = selectedRow;
-            let selectedRowWidget = previousSelRow.get_child(this.widget);
-            selectedRowWidget.show_all();
-            selectedRowWidget.foreach(Lang.bind(this,
+            let selectedRowGrid = previousSelRow.get_child();
+            selectedRowGrid.show_all();
+            selectedRowGrid.foreach(Lang.bind(this,
                 function(child) {
                     let alwaysShow = child.get_no_show_all();
 
@@ -650,8 +650,8 @@ const MainView = new Lang.Class({
 
     _getFileFromRow: function(selected) {
         let fileForAction = null;
-        let rowWidget = selected.get_child(this.fileName);
-        rowWidget.foreach(Lang.bind(this,
+        let rowGrid = selected.get_child();
+        rowGrid.foreach(Lang.bind(this,
             function(child) {
 
                 if (child.name == "FileNameLabel") {
@@ -699,8 +699,8 @@ const MainView = new Lang.Class({
 
     setNameLabel: function(newName, oldName, index) {
         let selected = this.listBox.get_row_at_index(index);
-        let rowWidget = selected.get_child(oldName);
-        rowWidget.foreach(Lang.bind(this,
+        let rowGrid = selected.get_child();
+        rowGrid.foreach(Lang.bind(this,
             function(child) {
 
                 if (child.name == "FileNameLabel") {
@@ -709,7 +709,7 @@ const MainView = new Lang.Class({
                     child.label = markup;
                 }
              }));
-        rowWidget.set_name(newName);
+        rowGrid.set_name(newName);
     },
 
     onPause: function(listRow) {
@@ -717,8 +717,8 @@ const MainView = new Lang.Class({
 
         if (activeState == PipelineStates.PLAYING) {
             play.pausePlaying();
-            let rowWidget = listRow.get_child(this.widget);
-            rowWidget.foreach(Lang.bind(this,
+            let rowGrid = listRow.get_child();
+            rowGrid.foreach(Lang.bind(this,
                 function(child) {
 
                     if (child.name == "PauseButton") {
@@ -741,8 +741,8 @@ const MainView = new Lang.Class({
         if (activeState != PipelineStates.PLAYING) {
             play.startPlaying();
 
-            let rowWidget = listRow.get_child(this.widget);
-            rowWidget.foreach(Lang.bind(this,
+            let rowGrid = listRow.get_child();
+            rowGrid.foreach(Lang.bind(this,
                 function(child) {
 
                     if (child.name == "InfoButton" || child.name == "DeleteButton" ||
