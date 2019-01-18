@@ -46,8 +46,8 @@ i18n = import('i18n')
 
 po_dir = meson.source_root() / 'po'
 
-subdir('src')
 subdir('data')
+subdir('src')
 subdir('po')
 
 meson.add_install_script(
