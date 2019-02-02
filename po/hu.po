@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
 "issues\n"
-"POT-Creation-Date: 2019-01-11 16:46+0000\n"
-"PO-Revision-Date: 2019-01-27 15:03+0100\n"
+"POT-Creation-Date: 2019-02-01 14:43+0000\n"
+"PO-Revision-Date: 2019-02-02 08:46+0100\n"
 "Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
 "Language: hu\n"
@@ -189,7 +189,7 @@ msgid_plural "%d years ago"
 msgstr[0] "%d éve"
 msgstr[1] "%d éve"
 
-#: src/info.js:44 src/mainWindow.js:530
+#: src/info.js:44 src/mainWindow.js:527
 msgid "Info"
 msgstr "Információ"
 
@@ -238,7 +238,7 @@ msgstr "Típus"
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: src/mainWindow.js:114 src/mainWindow.js:809
+#: src/mainWindow.js:114 src/mainWindow.js:806
 msgid "Record"
 msgstr "Felvétel"
 
@@ -263,54 +263,58 @@ msgid "Recording…"
 msgstr "Felvétel…"
 
 #. Translators: This is the title in the headerbar
-#: src/mainWindow.js:367
+#: src/mainWindow.js:366
 #, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
 msgstr[0] "%d felvett hang"
 msgstr[1] "%d felvett hang"
 
-#: src/mainWindow.js:416
+#: src/mainWindow.js:370
+msgid "No Recorded Sounds"
+msgstr "Nincsenek felvett hangok"
+
+#: src/mainWindow.js:413
 msgid "Play"
 msgstr "Lejátszás"
 
-#: src/mainWindow.js:437
+#: src/mainWindow.js:434
 msgid "Pause"
 msgstr "Szünet"
 
-#: src/mainWindow.js:545
+#: src/mainWindow.js:542
 msgid "Delete"
 msgstr "Törlés"
 
-#: src/mainWindow.js:844
+#: src/mainWindow.js:841
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: src/mainWindow.js:844
+#: src/mainWindow.js:841
 msgid "Opus"
 msgstr "Opus"
 
-#: src/mainWindow.js:844
+#: src/mainWindow.js:841
 msgid "FLAC"
 msgstr "FLAC"
 
-#: src/mainWindow.js:844
+#: src/mainWindow.js:841
 msgid "MP3"
 msgstr "MP3"
 
-#: src/mainWindow.js:844
+#: src/mainWindow.js:841
 msgid "MOV"
 msgstr "MOV"
 
-#: src/mainWindow.js:868
+#: src/mainWindow.js:865
 msgid "Mono"
 msgstr "Mono"
 
-#: src/mainWindow.js:868
+#: src/mainWindow.js:865
 msgid "Stereo"
 msgstr "Sztereó"
 
-#: src/mainWindow.js:892
+#: src/mainWindow.js:889
 msgid "Load More"
 msgstr "Több betöltése"
 
