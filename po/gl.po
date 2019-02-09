@@ -2,27 +2,26 @@
 # Copyright (C) 2013 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Fran Dieguez <frandieguez@gnome.org>, 2013-2019.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
 "issues\n"
-"POT-Creation-Date: 2019-01-11 16:46+0000\n"
-"PO-Revision-Date: 2019-01-28 23:29+0100\n"
+"POT-Creation-Date: 2019-02-04 17:36+0000\n"
+"PO-Revision-Date: 2019-02-09 16:54+0200\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
-"Language-Team: Galician <proxecto@trasno.gal>\n"
+"Language-Team: Galician\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"X-Generator: Gtranslator 3.30.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Virtaal 0.7.1\n"
 "X-Project-Style: gnome\n"
 
 #: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:5
-#: data/org.gnome.SoundRecorder.desktop.in:4 src/application.js:159
-#: src/record.js:120
+#: data/org.gnome.SoundRecorder.desktop.in:4 src/application.js:152
+#: src/record.js:115
 msgid "Sound Recorder"
 msgstr "Gravadora de son"
 
@@ -56,28 +55,32 @@ msgstr "Formatos de son admitidos:"
 msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
 msgstr "Ogg Vorbis, Opus, FLAC, MP3 e MOV"
 
-#: data/org.gnome.gnome-sound-recorder.gschema.xml:5
+#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:42
+msgid "The GNOME Project"
+msgstr "O Proxecto GNOME"
+
+#: data/org.gnome.SoundRecorder.gschema.xml.in:5
 msgid "Window size"
 msgstr "Tamaño da xanela"
 
-#: data/org.gnome.gnome-sound-recorder.gschema.xml:6
+#: data/org.gnome.SoundRecorder.gschema.xml.in:6
 msgid "Window size (width and height)."
 msgstr "Tamaño da xanela (ancho e alto)."
 
-#: data/org.gnome.gnome-sound-recorder.gschema.xml:10
+#: data/org.gnome.SoundRecorder.gschema.xml.in:10
 msgid "Window position"
 msgstr "Posición da xanela"
 
-#: data/org.gnome.gnome-sound-recorder.gschema.xml:11
+#: data/org.gnome.SoundRecorder.gschema.xml.in:11
 msgid "Window position (x and y)."
 msgstr "Posición da xanela (x e y)."
 
-#: data/org.gnome.gnome-sound-recorder.gschema.xml:15
+#: data/org.gnome.SoundRecorder.gschema.xml.in:15
 msgid "Maps media types to audio encoder preset names."
 msgstr ""
 "Mapea os tipos de medio a nomes de coficicadores de son prestabelecidos."
 
-#: data/org.gnome.gnome-sound-recorder.gschema.xml:16
+#: data/org.gnome.SoundRecorder.gschema.xml.in:16
 msgid ""
 "Maps media types to audio encoder preset names. If there is no mapping set, "
 "the default encoder settings will be used."
@@ -86,11 +89,11 @@ msgstr ""
 "Se non existe a asociación para un tipo de medio, usarase a configuración do "
 "codificador predeterminado."
 
-#: data/org.gnome.gnome-sound-recorder.gschema.xml:20
+#: data/org.gnome.SoundRecorder.gschema.xml.in:20
 msgid "Available channels"
 msgstr "Canles dispoñíbeis"
 
-#: data/org.gnome.gnome-sound-recorder.gschema.xml:21
+#: data/org.gnome.SoundRecorder.gschema.xml.in:21
 msgid ""
 "Maps available channels. If there is not no mapping set, stereo channel will "
 "be used by default."
@@ -98,19 +101,19 @@ msgstr ""
 "Canles de maps dispoñíbeis. Se non hai ningún mapeo configurado, usarase o "
 "canle estéreo por omisión."
 
-#: data/org.gnome.gnome-sound-recorder.gschema.xml:25
+#: data/org.gnome.SoundRecorder.gschema.xml.in:25
 msgid "Microphone volume level"
 msgstr "Nivel de volume do micrófono"
 
-#: data/org.gnome.gnome-sound-recorder.gschema.xml:26
+#: data/org.gnome.SoundRecorder.gschema.xml.in:26
 msgid "Microphone volume level."
 msgstr "Nivel de volume do micrófono."
 
-#: data/org.gnome.gnome-sound-recorder.gschema.xml:30
+#: data/org.gnome.SoundRecorder.gschema.xml.in:30
 msgid "Speaker volume level"
 msgstr "Nivel de volume do altofalante."
 
-#: data/org.gnome.gnome-sound-recorder.gschema.xml:31
+#: data/org.gnome.SoundRecorder.gschema.xml.in:31
 msgid "Speaker volume level."
 msgstr "Nivel de volume do altofalante."
 
@@ -120,7 +123,6 @@ msgstr "Grava son co micrófono e reprodúceo"
 
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: data/org.gnome.SoundRecorder.desktop.in:7
-#| msgid "SoundRecorder"
 msgid "org.gnome.SoundRecorder"
 msgstr "org.gnome.SoundRecorder"
 
@@ -129,239 +131,244 @@ msgstr "org.gnome.SoundRecorder"
 msgid "Audio;Application;Record;"
 msgstr "Son;Aplicativo;Gravar;"
 
-#: src/application.js:43
+#: src/application.js:40
 msgid "SoundRecorder"
 msgstr "Gravadora de sons"
 
-#: src/application.js:74
+#: src/application.js:68
 msgid "Sound Recorder started"
 msgstr "Gravadora de son iniciada"
 
 #. Translators: "Recordings" here refers to the name of the directory where the application places files
-#: src/application.js:84
+#: src/application.js:78
 msgid "Recordings"
 msgstr "Gravacións"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/application.js:158
+#: src/application.js:151
 msgid "translator-credits"
 msgstr "Fran Dieguez <frandieguez@gnome.org>, 2013-2014"
 
-#: src/fileUtil.js:88
+#: src/fileUtil.js:84
 msgid "Yesterday"
 msgstr "Onte"
 
-#: src/fileUtil.js:90
+#: src/fileUtil.js:86
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "fai %d día"
 msgstr[1] "fai %d días"
 
-#: src/fileUtil.js:94
+#: src/fileUtil.js:90
 msgid "Last week"
 msgstr "Última semana"
 
-#: src/fileUtil.js:96
+#: src/fileUtil.js:92
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "fai %d semana"
 msgstr[1] "fai %d semanas"
 
-#: src/fileUtil.js:100
+#: src/fileUtil.js:96
 msgid "Last month"
 msgstr "Último mes"
 
-#: src/fileUtil.js:102
+#: src/fileUtil.js:98
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "fai %d mes"
 msgstr[1] "fai %d meses"
 
-#: src/fileUtil.js:106
+#: src/fileUtil.js:102
 msgid "Last year"
 msgstr "Último ano"
 
-#: src/fileUtil.js:108
+#: src/fileUtil.js:104
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "fai %d ano"
 msgstr[1] "fai %d anos"
 
-#: src/info.js:44 src/mainWindow.js:530
+#: src/info.js:42 src/mainWindow.js:518
 msgid "Info"
 msgstr "Información"
 
-#: src/info.js:48
+#: src/info.js:47
 msgid "Cancel"
 msgstr "Cancelar"
 
 #. finish button (stop recording)
-#: src/info.js:53 src/mainWindow.js:329
+#: src/info.js:52 src/mainWindow.js:325
 msgid "Done"
 msgstr "Feito"
 
 #. File Name item
 #. Translators: "File Name" is the label next to the file name
 #. in the info dialog
-#: src/info.js:80
+#: src/info.js:79
 msgctxt "File Name"
 msgid "Name"
 msgstr "Nome"
 
 #. Source item
-#: src/info.js:87
+#: src/info.js:86
 msgid "Source"
 msgstr "Fonte"
 
 #. Date Modified item
-#: src/info.js:96
+#: src/info.js:95
 msgid "Date Modified"
 msgstr "Data de modificación"
 
 #. Date Created item
-#: src/info.js:102
+#: src/info.js:101
 msgid "Date Created"
 msgstr "Data de creación"
 
 #. Media type item
 #. Translators: "Type" is the label next to the media type
 #. (Ogg Vorbis, AAC, ...) in the info dialog
-#: src/info.js:113
+#: src/info.js:112
 msgctxt "Media Type"
 msgid "Type"
 msgstr "Tipo"
 
 #. Media type data
-#: src/info.js:152
+#: src/info.js:151
 msgid "Unknown"
 msgstr "Descoñecido"
 
-#: src/mainWindow.js:114 src/mainWindow.js:809
+#: src/mainWindow.js:115 src/mainWindow.js:782
 msgid "Record"
 msgstr "Gravar"
 
-#: src/mainWindow.js:126 src/preferences.js:40
+#: src/mainWindow.js:127 src/preferences.js:38
 msgid "Preferences"
 msgstr "Preferencias"
 
-#: src/mainWindow.js:127
-#| msgid "Sound Recorder"
+#: src/mainWindow.js:128
 msgid "About Sound Recorder"
 msgstr "Sobre Gravadora de son"
 
-#: src/mainWindow.js:164
+#: src/mainWindow.js:163
 msgid "Add Recordings"
 msgstr "Engadir gravacións"
 
-#: src/mainWindow.js:169
+#: src/mainWindow.js:168
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Use o botón <b>Gravar</b> para facer novas gravacións de son"
 
-#: src/mainWindow.js:315
+#: src/mainWindow.js:311
 msgid "Recording…"
 msgstr "Gravando…"
 
 #. Translators: This is the title in the headerbar
-#: src/mainWindow.js:367
+#: src/mainWindow.js:361
 #, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
 msgstr[0] "%d son gravado"
 msgstr[1] "%d sons gravados"
 
-#: src/mainWindow.js:416
+#: src/mainWindow.js:365
+#| msgid "%d Recorded Sound"
+#| msgid_plural "%d Recorded Sounds"
+msgid "No Recorded Sounds"
+msgstr "Non hai ningunha gravación"
+
+#: src/mainWindow.js:407
 msgid "Play"
 msgstr "Reproducir"
 
-#: src/mainWindow.js:437
+#: src/mainWindow.js:427
 msgid "Pause"
 msgstr "Pausar"
 
-#: src/mainWindow.js:545
+#: src/mainWindow.js:532
 msgid "Delete"
 msgstr "Eliminar"
 
-#: src/mainWindow.js:844
+#: src/mainWindow.js:814
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: src/mainWindow.js:844
+#: src/mainWindow.js:814
 msgid "Opus"
 msgstr "Opus"
 
-#: src/mainWindow.js:844
+#: src/mainWindow.js:814
 msgid "FLAC"
 msgstr "FLAC"
 
-#: src/mainWindow.js:844
+#: src/mainWindow.js:814
 msgid "MP3"
 msgstr "MP3"
 
-#: src/mainWindow.js:844
+#: src/mainWindow.js:814
 msgid "MOV"
 msgstr "MOV"
 
-#: src/mainWindow.js:868
+#: src/mainWindow.js:835
 msgid "Mono"
 msgstr "Mono"
 
-#: src/mainWindow.js:868
+#: src/mainWindow.js:835
 msgid "Stereo"
 msgstr "Estéreo"
 
-#: src/mainWindow.js:892
+#: src/mainWindow.js:856
 msgid "Load More"
 msgstr "Cargar máis"
 
-#: src/play.js:89
+#: src/play.js:85
 msgid "Unable to play recording"
 msgstr "Non foi posíbel reproducir a gravación"
 
-#: src/preferences.js:64
+#: src/preferences.js:62
 msgid "Preferred format"
 msgstr "Formato preferido"
 
-#: src/preferences.js:72
+#: src/preferences.js:70
 msgid "Default mode"
 msgstr "Modo predeterminado"
 
-#: src/preferences.js:80
+#: src/preferences.js:78
 msgid "Volume"
 msgstr "Volume"
 
-#: src/preferences.js:95
+#: src/preferences.js:92
 msgid "Microphone"
 msgstr "Micrófono"
 
-#: src/record.js:71
+#: src/record.js:69
 msgid "Unable to create Recordings directory."
 msgstr "Non foi posíbel crear o cartafol de Gravacións"
 
-#: src/record.js:84
+#: src/record.js:82
 msgid "Please install the GStreamer 1.0 PulseAudio plugin."
 msgstr "Por favor instale o engadido de PulseAudio para Gstreamer 1.0"
 
-#: src/record.js:86
+#: src/record.js:84
 msgid "Your audio capture settings are invalid."
 msgstr "As súas preferencias de captura de audio son inválidas."
 
-#: src/record.js:137
+#: src/record.js:132
 msgid "Not all elements could be created."
 msgstr "Non foi posíbel crear todos os elementos."
 
-#: src/record.js:149
+#: src/record.js:144
 msgid "Not all of the elements were linked."
 msgstr "Non están todos os elementos foron ligados."
 
-#: src/record.js:174
+#: src/record.js:169
 msgid "No Media Profile was set."
 msgstr "Non se estabeleceu ningún perfil multimedia."
 
-#: src/record.js:185
+#: src/record.js:180
 msgid ""
 "Unable to set the pipeline \n"
 " to the recording state."
@@ -371,7 +378,7 @@ msgstr ""
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
 #. by the application (for example, "Clip 1").
-#: src/record.js:364
+#: src/record.js:356
 #, javascript-format
 msgid "Clip %d"
 msgstr "Anaco %d"
