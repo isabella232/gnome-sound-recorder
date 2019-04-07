@@ -8,9 +8,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
-"issues\n"
-"POT-Creation-Date: 2019-02-04 17:36+0000\n"
+"Report-Msgid-Bugs-To: "
+"https://gitlab.gnome.org/GNOME/gnome-sound-recorder/issues\n"
+"POT-Creation-Date: 2019-03-25 19:51+0000\n"
 "PO-Revision-Date: 2019-02-11 19:47+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -98,8 +98,8 @@ msgid ""
 "Maps available channels. If there is not no mapping set, stereo channel will "
 "be used by default."
 msgstr ""
-"Tildeler tilgængelige kanaler. Hvis ingen indstilling er givet, vil stereo-"
-"kanalen blive brugt som standard."
+"Tildeler tilgængelige kanaler. Hvis ingen indstilling er givet, vil "
+"stereo-kanalen blive brugt som standard."
 
 #: data/org.gnome.SoundRecorder.gschema.xml.in:25
 msgid "Microphone volume level"
@@ -120,12 +120,6 @@ msgstr "Højtalerlydstyrke."
 #: data/org.gnome.SoundRecorder.desktop.in:5
 msgid "Record sound via the microphone and play it back"
 msgstr "Optag lyd via mikrofonen og afspil den"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: data/org.gnome.SoundRecorder.desktop.in:7
-#| msgid "SoundRecorder"
-msgid "org.gnome.SoundRecorder"
-msgstr "org.gnome.SoundRecorder"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/org.gnome.SoundRecorder.desktop.in:10
@@ -152,8 +146,9 @@ msgstr ""
 "Ask Hjorth Larsen\n"
 "Kris Thomsen\n"
 "\n"
-"Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
-"Mere info: http://www.dansk-gruppen.dk"
+"Dansk-gruppen\n"
+"Websted <http://dansk-gruppen.dk>\n"
+"E-mail <dansk@dansk-gruppen.dk>"
 
 #: src/fileUtil.js:84
 msgid "Yesterday"
@@ -387,6 +382,9 @@ msgstr ""
 msgid "Clip %d"
 msgstr "Klip %d"
 
+#~ msgid "org.gnome.SoundRecorder"
+#~ msgstr "org.gnome.SoundRecorder"
+
 #~ msgid "About"
 #~ msgstr "Om"
 
@@ -400,10 +398,9 @@ msgstr "Klip %d"
 #~ msgstr "Foretrukken medietype til lydkodning ved optagelse"
 
 #~ msgid ""
-#~ "Preferred media type for encoding audio when recording. 'audio/x-vorbis' "
-#~ "for Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME "
-#~ "type."
+#~ "Preferred media type for encoding audio when recording. 'audio/x-vorbis' for "
+#~ "Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type."
 #~ msgstr ""
-#~ "Foretrukken medietype til lydkodning ved optagelse. 'audio/x-vorbis' for "
-#~ "Ogg Vorbis, eller 'audio/mpeg' for MP3, for eksempel. Dette er ikke en "
-#~ "MIME-type."
+#~ "Foretrukken medietype til lydkodning ved optagelse. 'audio/x-vorbis' for Ogg "
+#~ "Vorbis, eller 'audio/mpeg' for MP3, for eksempel. Dette er ikke en MIME-type."
+
