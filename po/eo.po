@@ -4,21 +4,23 @@
 # Daniel PUENTES <blatberk@openmailbox.org>, 2015.
 # Tirifto <tirifto@posteo.cz>, 2017-2019.
 # Kristjan SCHMIDT <kristjan.schmidt@googlemail.com>, 2015-2019.
+# Carmen Bianca BAKKER <carmen@carmenbianca.eu>, 2019.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: unnamed project\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
 "issues\n"
-"POT-Creation-Date: 2019-02-04 17:36+0000\n"
-"PO-Revision-Date: 2019-03-09 17:46+0200\n"
-"Last-Translator: Kristjan SCHMIDT <kristjan.schmidt@googlemail.com>\n"
+"POT-Creation-Date: 2019-03-25 19:51+0000\n"
+"PO-Revision-Date: 2019-04-07 11:46+0200\n"
+"Last-Translator: Carmen Bianca BAKKER <carmen@carmenbianca.eu>\n"
 "Language-Team: Esperanto <gnome-eo-list@gnome.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Virtaal 0.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"X-Generator: Gtranslator 3.32.0\n"
 "X-Project-Style: gnome\n"
 
 #: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:5
@@ -51,7 +53,7 @@ msgstr ""
 
 #: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:19
 msgid "Supported audio formats:"
-msgstr "Kongruaj sonaj formoj:"
+msgstr "Subtenataj sonaj formoj:"
 
 #: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:21
 msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
@@ -59,7 +61,7 @@ msgstr "Ogg Vorbis, Opus, FLAC, MP3 kaj MOV"
 
 #: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:42
 msgid "The GNOME Project"
-msgstr "La Projekto GNOME"
+msgstr "La GNOME Projekto"
 
 #: data/org.gnome.SoundRecorder.gschema.xml.in:5
 msgid "Window size"
@@ -79,15 +81,15 @@ msgstr "Fenestra pozicio (x kaj y)."
 
 #: data/org.gnome.SoundRecorder.gschema.xml.in:15
 msgid "Maps media types to audio encoder preset names."
-msgstr "Atribuas aŭdvidaĵajn tipojn al implicitaj nomoj de la sonkodilo."
+msgstr "Atribuas aŭdovidajn tipojn al implicitaj nomoj de la sonkodilo."
 
 #: data/org.gnome.SoundRecorder.gschema.xml.in:16
 msgid ""
 "Maps media types to audio encoder preset names. If there is no mapping set, "
 "the default encoder settings will be used."
 msgstr ""
-"Atribuas aŭdvidaĵajn tipojn al implicitaj nomoj de la sonkodilo. Se mankas "
-"atribuo, la implicita agordaro estos uzata."
+"Atribuas aŭdovidajn tipojn al implicitaj nomoj de la sonkodilo. Se mankas "
+"atribuo, la implicita agordaro estos uzata.f"
 
 #: data/org.gnome.SoundRecorder.gschema.xml.in:20
 msgid "Available channels"
@@ -121,11 +123,6 @@ msgstr "Laŭtparolila sonforteco."
 msgid "Record sound via the microphone and play it back"
 msgstr "Registri per la mikrofono kaj legi la sonregistradon"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: data/org.gnome.SoundRecorder.desktop.in:7
-msgid "org.gnome.SoundRecorder"
-msgstr "org.gnome.SoundRecorder"
-
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/org.gnome.SoundRecorder.desktop.in:10
 msgid "Audio;Application;Record;"
@@ -142,12 +139,16 @@ msgstr "Sonregistrilo startis"
 #. Translators: "Recordings" here refers to the name of the directory where the application places files
 #: src/application.js:78
 msgid "Recordings"
-msgstr "Registradoj"
+msgstr "Registraĵoj"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/application.js:151
 msgid "translator-credits"
-msgstr "Daniel PUENTES, Kristjan SCHMIDT, Tirifto"
+msgstr ""
+"Daniel PUENTES\n"
+"Kristjan SCHMIDT\n"
+"Tirifto\n"
+"Carmen Bianca BAKKER"
 
 #: src/fileUtil.js:84
 msgid "Yesterday"
@@ -157,8 +158,8 @@ msgstr "Hieraŭ"
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
-msgstr[0] "%d tago antaŭe"
-msgstr[1] "%d tagoj antaŭe"
+msgstr[0] "Antaŭ %d tago"
+msgstr[1] "Antaŭ %d tagoj"
 
 #: src/fileUtil.js:90
 msgid "Last week"
@@ -168,8 +169,8 @@ msgstr "Lastsemajne"
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
-msgstr[0] "%d semajno antaŭe"
-msgstr[1] "%d semajnoj antaŭe"
+msgstr[0] "Antau %d semajno"
+msgstr[1] "Antau %d semajnoj"
 
 #: src/fileUtil.js:96
 msgid "Last month"
@@ -179,8 +180,8 @@ msgstr "Lastmonate"
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
-msgstr[0] "%d monato antaŭe"
-msgstr[1] "%d monatoj antaŭe"
+msgstr[0] "Antaŭ %d monato"
+msgstr[1] "Antaŭ %d monatoj"
 
 #: src/fileUtil.js:102
 msgid "Last year"
@@ -190,8 +191,8 @@ msgstr "Lastjare"
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
-msgstr[0] "%d jaro antaŭe"
-msgstr[1] "%d jaroj antaŭe"
+msgstr[0] "Antaŭ %d jaro"
+msgstr[1] "Antaŭ %d jaroj"
 
 #: src/info.js:42 src/mainWindow.js:518
 msgid "Info"
@@ -324,7 +325,7 @@ msgstr "Montri pli"
 
 #: src/play.js:85
 msgid "Unable to play recording"
-msgstr "Ne eblas ludi registradon"
+msgstr "Ne eblas ludi registraĵon"
 
 #: src/preferences.js:62
 msgid "Preferred format"
@@ -364,7 +365,7 @@ msgstr "Ne ĉiuj elementoj estis ligitaj."
 
 #: src/record.js:169
 msgid "No Media Profile was set."
-msgstr "Neniu aŭdvidaĵa profilo estis agordita."
+msgstr "Neniu aŭdovida profilo estis agordita."
 
 #: src/record.js:180
 msgid ""
@@ -380,6 +381,9 @@ msgstr ""
 #, javascript-format
 msgid "Clip %d"
 msgstr "Registraĵo %d"
+
+#~ msgid "org.gnome.SoundRecorder"
+#~ msgstr "org.gnome.SoundRecorder"
 
 #~ msgid "About"
 #~ msgstr "Pri"
