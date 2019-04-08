@@ -147,7 +147,7 @@ msgstr ""
 "Kris Thomsen\n"
 "\n"
 "Dansk-gruppen\n"
-"Websted <http://dansk-gruppen.dk>\n"
+"Websted http://dansk-gruppen.dk\n"
 "E-mail <dansk@dansk-gruppen.dk>"
 
 #: src/fileUtil.js:84
