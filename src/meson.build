@@ -9,7 +9,7 @@ configure_file(
   input: 'org.gnome.SoundRecorder.in',
   output: application_id,
   install: true,
-  install_dir: sound_recoder_pkgdatadir,
+  install_dir: sound_recorder_pkgdatadir,
   configuration: app_conf
 )
 
@@ -19,5 +19,5 @@ gnome.compile_resources(
   source_dir: '.',
   gresource_bundle: true,
   install: true,
-  install_dir: sound_recoder_pkgdatadir
+  install_dir: sound_recorder_pkgdatadir
 )
