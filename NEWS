@@ -1,3 +1,9 @@
+ 3.32.1
+ ======
+ Translation updates
+ Keep the same app ID as in 3.30 in the appdata file by Kalev Lember
+ Add release and OARS tags to appdata file by Felipe Borges
+
  3.32.0
  ======
  Translation updates
