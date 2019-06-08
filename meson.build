@@ -36,5 +36,6 @@ subdir('po')
 meson.add_install_script(
   join_paths('build-aux', 'meson_post_install.py'),
   sound_recorder_datadir,
-  sound_recorder_bindir
+  sound_recorder_bindir,
+  application_id
 )
