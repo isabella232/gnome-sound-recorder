@@ -11,7 +11,7 @@ bindir = os.path.normpath(destdir + os.sep + sys.argv[2])
 if not os.path.exists(bindir):
   os.makedirs(bindir)
 
-src = os.path.join(datadir, 'gnome-sound-recorder', 'org.gnome.SoundRecorder')
+src = os.path.join(datadir, 'org.gnome.SoundRecorder', 'org.gnome.SoundRecorder')
 dest = os.path.join(bindir, 'gnome-sound-recorder')
 subprocess.call(['ln', '-s', '-f', src, dest])
 
