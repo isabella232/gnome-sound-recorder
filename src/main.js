@@ -34,7 +34,11 @@ pkg.require({ 'Gdk': '3.0',
               'Gtk': '3.0',
               'Gst': '1.0',
               'GstAudio': '1.0',
-              'GstPbutils': '1.0' });
+              'GstPbutils': '1.0',
+              'Handy': '0.0' });
+
+const Handy = imports.gi.Handy;
+Handy.init(null);
 
 const Application = imports.application;
 

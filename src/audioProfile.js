@@ -52,8 +52,13 @@ var audioCodecMap = {
     VORBIS: "audio/x-vorbis"
 };
 
-var AudioProfile = class AudioProfile {
-    profile(profileName) {
+var AudioProfile = GObject.registerClass({
+
+
+  },
+  class AudioProfile extends GObject.Object {
+    _init(profileName) {
+        super._init();
         if (profileName) {
             this._profileName = profileName;
         } else {
@@ -120,4 +125,5 @@ var AudioProfile = class AudioProfile {
         this.audioSuffix = ("." + suffixName);
         return this.audioSuffix;
     }
-}
+  }
+);

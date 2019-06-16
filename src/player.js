@@ -20,10 +20,12 @@
 
 const _ = imports.gettext.gettext;
 const Gio = imports.gi.Gio;
+const GObject = imports.gi.GObject;
 const GLib = imports.gi.GLib;
 const Gst = imports.gi.Gst;
 const GstAudio = imports.gi.GstAudio;
 const GstPbutils = imports.gi.GstPbutils;
+
 const Gtk = imports.gi.Gtk;
 const Mainloop = imports.mainloop;
 
@@ -47,16 +49,28 @@ let errorDialogState;
 
 const _TENTH_SEC = 100000000;
 
-var Play = class Play {
+var Player = GObject.registerClass({
+    Signals: {
+      'timer-updated': {
+          flags: GObject.SignalFlags.RUN_FIRST,
+          param_types: [ GObject.TYPE_INT ]
+      }
+    }
+
+  },
+  class Player extends GObject.Object {
+    _init() {
+      super._init();
+      this.playState = PipelineStates.STOPPED;
+      this.play = Gst.ElementFactory.make("playbin", "play");
+      this.sink = Gst.ElementFactory.make("pulsesink", "sink");
+      this.play.set_property("audio-sink", this.sink);
+      this.clock = this.play.get_clock();
+      this.playBus = this.play.get_bus();
+      this._asset = null;
+    }
     _playPipeline() {
         errorDialogState = ErrState.OFF;
-        let uri = this._fileToPlay.get_uri();
-        this.play = Gst.ElementFactory.make("playbin", "play");
-        this.play.set_property("uri", uri);
-        this.sink = Gst.ElementFactory.make("pulsesink", "sink");
-        this.play.set_property("audio-sink", this.sink);
-        this.clock = this.play.get_clock();
-        this.playBus = this.play.get_bus();
         this.playBus.add_signal_watch();
         this.playBus.connect("message", (playBus, message) => {
             if (message != null) {
@@ -64,6 +78,16 @@ var Play = class Play {
             }
         });
     }
+
+    get duration() {
+      return this.play.query_duration(Gst.Format.TIME)
+
+    }
+
+    setUri(uri) {
+        this.play.set_property("uri", uri);
+    }
+
 
     startPlaying() {
         this.baseTime = 0;
@@ -85,7 +109,7 @@ var Play = class Play {
             this._showErrorDialog(_('Unable to play recording'));
             errorDialogState = ErrState.ON;
         } else if (this.ret == Gst.StateChangeReturn.SUCCESS) {
-            MainWindow.view.setVolume();
+            /*MainWindow.view.setVolume();*/
         }
         GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGINT, Application.application.onWindowDestroy);
         GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGTERM, Application.application.onWindowDestroy);
@@ -117,15 +141,17 @@ var Play = class Play {
             GLib.source_remove(this.timeout);
             this.timeout = null;
         }
-
+        /*
         if (MainWindow.wave != null)
             MainWindow.wave.endDrawing();
-
+        */
         errorDialogState = ErrState.OFF;
     }
 
     onEndOfStream() {
+      /*
         MainWindow.view.onPlayStopClicked();
+      */
     }
 
     _onMessageReceived(message) {
@@ -179,9 +205,9 @@ var Play = class Play {
         this.trackDurationSecs = this.trackDuration/Gst.SECOND;
 
         if (time >= 0 && this.playState != PipelineStates.STOPPED) {
-            MainWindow.view.setLabel(time);
+            this.emit("timer-updated", time);
         } else if (time >= 0 && this.playState == PipelineStates.STOPPED) {
-            MainWindow.view.setLabel(0);
+            this.emit("timer-updated", 0);
         }
 
         let absoluteTime = 0;
@@ -253,4 +279,5 @@ var Play = class Play {
             errorDialog.show();
         }
     }
-}
+  }
+);

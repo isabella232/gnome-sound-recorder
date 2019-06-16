@@ -32,8 +32,9 @@ const Signals = imports.signals;
 
 const Application = imports.application;
 const AudioProfile = imports.audioProfile;
+const WaveForm = imports.waveform.WaveForm;
 const MainWindow = imports.mainWindow;
-const Listview = imports.listview;
+const RecordingsManager = imports.recordingsManager;
 
 const PipelineStates = {
     PLAYING: 0,
@@ -55,17 +56,33 @@ const _TENTH_SEC = 100000000;
 
 let errorDialogState;
 
-var Record = class Record {
-    _recordPipeline() {
-        errorDialogState = ErrState.OFF;
-        this.baseTime = 0;
-        this._view = MainWindow.view;
-        this._buildFileName = new BuildFileName();
-        this.initialFileName = this._buildFileName.buildInitialFilename();
-        let localDateTime = this._buildFileName.getOrigin();
-        this.gstreamerDateTime = Gst.DateTime.new_from_g_date_time(localDateTime);
+var Recorder = GObject.registerClass({
+    Signals: {
+      'timer-updated': {
+          flags: GObject.SignalFlags.RUN_FIRST,
+          param_types: [ GObject.TYPE_INT ]
+      }
+    }
 
-        if (this.initialFileName == -1) {
+  },class Recorder extends GObject.Object {
+    _init() {
+      super._init();
+
+        let audioProfile = new AudioProfile.AudioProfile();
+        this._mediaProfile = audioProfile.mediaProfile();
+        this.pipeline = null;
+        this.wave = null;
+        this.clipFile = null;
+    }
+
+    _recordPipeline(clipFile) {
+        errorDialogState = ErrState.OFF;
+        this.clipFile = clipFile;
+        this.baseTime = 0;
+        this.wave = new WaveForm(null);
+
+        let gstreamerDateTime = Gst.DateTime.new_from_g_date_time(GLib.DateTime.new_now_local());
+        if (!clipFile) {
             this._showErrorDialog(_("Unable to create Recordings directory."));
             errorDialogState = ErrState.ON;
             this.onEndOfStream();
@@ -114,9 +131,9 @@ var Record = class Record {
                     this.taglist = Gst.TagList.new_empty();
                     this.taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_APPLICATION_NAME, _("Sound Recorder"));
                     element.merge_tags(this.taglist, Gst.TagMergeMode.REPLACE);
-                    this.taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_TITLE, this.initialFileName);
+                    this.taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_TITLE, clipFile.get_uri());
                     element.merge_tags(this.taglist, Gst.TagMergeMode.REPLACE);
-                    this.taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_DATE_TIME, this.gstreamerDateTime);
+                    this.taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_DATE_TIME, gstreamerDateTime);
                     element.merge_tags(this.taglist, Gst.TagMergeMode.REPLACE);
                 }
             }
@@ -125,7 +142,7 @@ var Record = class Record {
         let ebinProfile = this.ebin.set_property("profile", this._mediaProfile);
         let srcpad = this.ebin.get_static_pad("src");
         this.filesink = Gst.ElementFactory.make("filesink", "filesink");
-        this.filesink.set_property("location", this.initialFileName);
+        this.filesink.set_property("location", clipFile.get_path());
         this.pipeline.add(this.filesink);
 
         if (!this.pipeline || !this.filesink) {
@@ -154,51 +171,63 @@ var Record = class Record {
         let time = this.pipeline.query_position(Gst.Format.TIME)[1]/Gst.SECOND;
 
         if (time >= 0) {
-            this._view.setLabel(time, 0);
+            this.emit("timer-updated", time);
         }
 
         return true;
     }
 
-    startRecording(profile) {
-        this.profile = profile;
-        this._audioProfile = MainWindow.audioProfile;
-        this._mediaProfile = this._audioProfile.mediaProfile();
-
+    startNewRecording(uri) {
+        this.uri = uri;
         if (this._mediaProfile == -1) {
             this._showErrorDialog(_("No Media Profile was set."));
             errorDialogState = ErrState.ON;
         }
 
         if (!this.pipeline || this.pipeState == PipelineStates.STOPPED )
-            this._recordPipeline();
+            this._recordPipeline(uri);
 
         let ret = this.pipeline.set_state(Gst.State.PLAYING);
         this.pipeState = PipelineStates.PLAYING;
 
+          /* FIX ME
         if (ret == Gst.StateChangeReturn.FAILURE) {
             this._showErrorDialog(_("Unable to set the pipeline \n to the recording state."));
             errorDialogState = ErrState.ON;
-            this._buildFileName.getTitle().delete_async(GLib.PRIORITY_DEFAULT, null, null);
+            clip.delete_async(GLib.PRIORITY_DEFAULT, null, null);
         } else {
             MainWindow.view.setVolume();
-        }
+                  }
+        */
 
         if (!this.timeout) {
             this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, MainWindow._SEC_TIMEOUT, () => this._updateTime());
         }
     }
 
+    isRecording ()  {
+      if (!this.pipeline)
+        return false;
+      return this.pipeline.get_state(10000) === Gst.State.PLAYING;
+    }
+
+    pauseRecording () {
+      this.pipeline.set_state(Gst.State.PAUSED);
+    }
+
+    resumeRecording () {
+      this.pipeline.set_state(Gst.State.PLAYING);
+    }
+
     stopRecording() {
         let sent = this.pipeline.send_event(Gst.Event.new_eos());
-
+        let clipFile = this.clipFile;
+        this.clipFile = null;
         if (this.timeout) {
             GLib.source_remove(this.timeout);
             this.timeout = null;
         }
-
-        if (MainWindow.wave != null)
-            MainWindow.wave.endDrawing();
+        return clipFile;
     }
 
     onEndOfStream() {
@@ -215,8 +244,8 @@ var Record = class Record {
     _onMessageReceived(message) {
         this.localMsg = message;
         let msg = message.type;
-        switch(msg) {
 
+        switch(msg) {
         case Gst.MessageType.ELEMENT:
             if (GstPbutils.is_missing_plugin_message(this.localMsg)) {
                 let errorOne = null;
@@ -271,7 +300,7 @@ var Record = class Record {
 
                             this.runTime = this.absoluteTime- this.baseTime;
                             let approxTime = Math.round(this.runTime/_TENTH_SEC);
-                            MainWindow.wave._drawEvent(approxTime, this.peak);
+                            this.wave._drawEvent(approxTime, this.peak);
                             }
                         }
                     }
@@ -343,27 +372,5 @@ var Record = class Record {
             errorDialog.show();
         }
     }
-}
+});
 
-const BuildFileName = class BuildFileName {
-    buildInitialFilename() {
-        var fileExtensionName = MainWindow.audioProfile.fileExtensionReturner();
-        var dir = Gio.Application.get_default().saveDir;
-        this.dateTime = GLib.DateTime.new_now_local();
-        var clipNumber = Listview.trackNumber + 1;
-        /* Translators: ""Clip %d"" is the default name assigned to a file created
-            by the application (for example, "Clip 1"). */
-        var clipName = _("Clip %d").format(clipNumber.toString());
-        this.clip = dir.get_child_for_display_name(clipName);
-        var file = this.clip.get_path();
-        return file;
-    }
-
-    getTitle() {
-        return this.clip;
-    }
-
-    getOrigin() {
-        return this.dateTime;
-    }
-}

@@ -1,4 +1,11 @@
+.record-button label{
+  color: @theme_bg_color;
+}
 
+.new-recording-widget{
+  background-color: white;
+
+}
 .emptyGrid {
    background-color: @theme_bg_color;
 }

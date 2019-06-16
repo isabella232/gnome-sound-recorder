@@ -45,10 +45,9 @@ const WaveType = {
     PLAY: 1
 };
 
-var WaveForm = class WaveForm {
-    constructor(grid, file) {
-        this._grid = grid;
-
+var WaveForm =  GObject.registerClass(class WaveForm extends Gtk.DrawingArea {
+    _init(file) {
+        super._init();
         let placeHolder = -100;
         for (let i = 0; i < 40; i++)
             peaks.push(placeHolder);
@@ -56,34 +55,30 @@ var WaveForm = class WaveForm {
             this.waveType = WaveType.PLAY;
             this.file = file;
             this.duration = this.file.duration;
+
             this._uri = this.file.uri;
+            log(this.duration );
         } else {
           this.waveType = WaveType.RECORD;
         }
+        this.recordTime = -1;
+        this.playTime = 0;
 
         let gridWidth = 0;
         let drawingWidth = 0;
         let drawingHeight = 0;
-        this.drawing = Gtk.DrawingArea.new();
-        if (this.waveType == WaveType.RECORD) {
-            this.drawing.set_property("valign", Gtk.Align.FILL);
-            this.drawing.set_property("hexpand",true);
-            this._grid.attach(this.drawing, 2, 0, 3, 2);
-        } else {
-            this.drawing.set_property("valign", Gtk.Align.FILL);
-            this.drawing.set_property("hexpand",true);
-            this.drawing.set_property("vexpand",true);
-            this._grid.add(this.drawing);
-        }
 
-        this.drawing.connect("draw", (drawing, cr) => this.fillSurface(drawing, cr));
-        this.drawing.show_all();
-        this._grid.show_all();
+        this.set_property("hexpand", true);
+
+        this.connect("draw", (drawing, cr) => this.fillSurface(drawing, cr));
 
         if (this.waveType == WaveType.PLAY) {
             this._launchPipeline();
             this.startGeneration();
+
         }
+        this.show_all();
+
     }
 
     _launchPipeline() {
@@ -93,6 +88,7 @@ var WaveForm = class WaveForm {
         let decode = this.pipeline.get_by_name("decode");
         let bus = this.pipeline.get_bus();
         bus.add_signal_watch();
+
         GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGINT, Application.application.onWindowDestroy);
         GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGTERM, Application.application.onWindowDestroy);
 
@@ -107,7 +103,6 @@ var WaveForm = class WaveForm {
 
     _messageCb(message) {
         let msg = message.type;
-
         switch(msg) {
         case Gst.MessageType.ELEMENT:
             let s = message.get_structure();
@@ -154,6 +149,7 @@ var WaveForm = class WaveForm {
 
     stopGeneration() {
         this.pipeline.set_state(Gst.State.NULL);
+
     }
 
     fillSurface(drawing, cr) {
@@ -168,14 +164,16 @@ var WaveForm = class WaveForm {
         } else {
             if (this.recordTime >= 0) {
                 start = this.recordTime;
+            } else {
+              return
             }
         }
 
         let i = 0;
         let xAxis = 0;
         let end = start + 40;
-        let width = this.drawing.get_allocated_width();
-        let waveheight = this.drawing.get_allocated_height();
+        let width = this.get_allocated_width();
+        let waveheight = this.get_allocated_height();
         let length = this.nSamples;
         let pixelsPerSample = width/waveSamples;
         let gradient = new Cairo.LinearGradient(0, 0, width , waveheight);
@@ -231,7 +229,7 @@ var WaveForm = class WaveForm {
             }
 
             if (lastTime != this.playTime) {
-                this.drawing.queue_draw();
+                this.queue_draw();
             }
 
         } else {
@@ -243,8 +241,7 @@ var WaveForm = class WaveForm {
                 log("error");
                 return true;
             }
-            if (this.drawing)
-                this.drawing.queue_draw();
+            this.queue_draw();
         }
         return true;
     }
@@ -255,10 +252,5 @@ var WaveForm = class WaveForm {
 
         this.count = 0;
         peaks.length = 0;
-        try {
-            this.drawing.destroy();
-        } catch (e) {
-            log(e);
-        }
     }
-}
+});

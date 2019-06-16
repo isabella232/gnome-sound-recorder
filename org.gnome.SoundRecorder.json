@@ -20,6 +20,22 @@
         "--filesystem=~/Recordings:create"
     ],
     "modules" : [
+    	{
+    		"name": "libhandy",
+    		"buildsystem": "meson",
+    		"config-opts": [
+			"-Dexamples=false",
+			"-Dglade_catalog=disabled",
+			"-Dtests=false",
+			"-Dvapi=false"
+    		],
+	    	"sources":[{
+	    		"type": "git",
+	    		"url": "https://source.puri.sm/Librem5/libhandy.git",
+	    		"tag": "v0.0.10",
+	    		"commit": "2d777677352d037b6f5cc24d9c1c8d9a74ac0ded"
+	    	}]
+    	},
         {
             "name" : "gnome-sound-recorder",
             "buildsystem": "meson",

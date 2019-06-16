@@ -1,4 +1,4 @@
-/* exported audioProfile displayTime list offsetController
+/* exported displayTime list offsetController
             play recordPipeline view volumeValue wave ActiveArea
             RecordPipelineStates _SEC_TIMEOUT MainWindow
             EncoderComboBox ChannelsComboBox */
@@ -33,17 +33,18 @@ const Gtk = imports.gi.Gtk;
 const Pango = imports.gi.Pango;
 
 const Application = imports.application;
-const AudioProfile = imports.audioProfile;
-const FileUtil = imports.fileUtil;
+
 const Info = imports.info;
-const Listview = imports.listview;
-const Play = imports.play;
+const RecordingsManager = imports.recordingsManager.RecordingsManager;
+const NewRecording = imports.recording.NewRecording;
+const RecordingRow = imports.recording.RecordingRow;
+
 const Preferences = imports.preferences;
-const Record = imports.record;
+
 const Waveform = imports.waveform;
 
 let activeProfile = null;
-var audioProfile = null;
+
 var displayTime = null;
 let grid = null;
 let groupGrid;
@@ -85,53 +86,131 @@ var RecordPipelineStates = {
     STOPPED: 2
 };
 
+var RecordingState = {
+  RECORDING: 0,
+  PAUSED: 1,
+  STOPPED: 2
+};
+
 const _TIME_DIVISOR = 60;
 var _SEC_TIMEOUT = 100;
 
-var MainWindow = GObject.registerClass(class MainWindow extends Gtk.ApplicationWindow {
-     _init(params) {
-        audioProfile = new AudioProfile.AudioProfile();
-        offsetController = new FileUtil.OffsetController;
-        displayTime = new FileUtil.DisplayTime;
-        view = new MainView();
-        play = new Play.Play();
-
-        super._init(Object.assign({
-            title: GLib.get_application_name(),
-            default_height: 480,
-            default_width: 780,
-            height_request: 480,
-            width_request: 640,
-            hexpand: true,
-            vexpand: true,
-            icon_name: pkg.name
-        }, params));
-
-        header = new Gtk.HeaderBar({ hexpand: true,
-                                     show_close_button: true });
-        this.set_titlebar(header);
-        header.get_style_context().add_class('titlebar');
-
-        recordButton = new RecordButton({ label: _("Record") });
-        recordButton.get_style_context().add_class('suggested-action');
-        header.pack_start(recordButton);
-
+var MainWindow = GObject.registerClass({
+      Template: 'resource:///org/gnome/SoundRecorder/main_window.ui',
+      Properties: {
+        'recording-state': GObject.ParamSpec.int(
+            'recording-state',
+            'RecordingState',
+            'The recording state',
+            GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
+            0, 2,
+            RecordingState.STOPPED
+        )
+      },
+      InternalChildren: [
+        'menu_button',
+        'main_stack',
+        'record_button',
+        'record_label',
+        'records_listbox',
+        'new_recording_revealer',
+      ]
+  },
+  class MainWindow extends Gtk.ApplicationWindow {
+     _init() {
+        super._init();
         this._addAppMenu();
+        this._recordingsManager = new RecordingsManager();
+        this._initWidgets();
 
-        this.add(view);
         this.show_all();
     }
+
+    _initWidgets() {
+
+        this._record_button.connect('clicked', () => this._onRecordClicked())
+        this._recordingsManager.connect('recording-added', (obj, recording) => {
+          this._onRecordingAdded(recording);
+        });
+
+        this._records_listbox.set_header_func(this._updateHeaderFunc)
+        this._records_listbox.set_sort_func(this._sortRecordings);
+
+        this._newRecordingWidget = new NewRecording();
+        this._newRecordingWidget.connect("paused", () => this._record.pauseRecording());
+        this._newRecordingWidget.connect("resumed", () => this._record.resumeRecording());
+        this._recordingsManager._recorder.connect("timer-updated", (obj ,recordTime) => {
+          this._newRecordingWidget.updateRecordTime(recordTime);
+        });
+        this._new_recording_revealer.add(this._newRecordingWidget);
+    }
+
+
 
     _addAppMenu() {
         let menu = new Gio.Menu();
         menu.append(_("Preferences"), 'app.preferences');
         menu.append(_("About Sound Recorder"), 'app.about');
 
-        appMenuButton = new Gtk.MenuButton({
-          image: new Gtk.Image({ icon_name: 'open-menu-symbolic' }),
-          menu_model: menu
-        });
-        header.pack_end(appMenuButton);
+        this._menu_button.set_menu_model(menu);
+    }
+
+    _onRecordClicked() {
+        if(this.recording_state === RecordingState.STOPPED) {
+            this._main_stack.set_visible_child_name('records_view');
+            this._main_stack.show_all();
+            this._record_button.get_style_context().remove_class('suggeted-action');
+            this._record_button.get_style_context().add_class('destructive-action');
+
+            this._record_label.set_text('Stop');
+
+           let wave = this._recordingsManager.startNewRecording();
+           this._newRecordingWidget.setWave(wave);
+            this._newRecordingWidget.show_all();
+
+            this._new_recording_revealer.set_reveal_child(true);
+
+            this.set_property('recording-state', RecordingState.RECORDING);
+        } else {
+
+            this._recordingsManager.saveRecording();
+            this._newRecordingWidget.reset();
+
+            this._record_button.get_style_context().add_class('suggested-action');
+            this._record_button.get_style_context().remove_class('destructive-action');
+            this._record_label.set_text('Record');
+            this.set_property('recording-state', RecordingState.STOPPED);
+
+            this._new_recording_revealer.set_reveal_child(false);
+        }
+    }
+
+    _onRecordingAdded(recording) {
+        this._main_stack.set_visible_child_name('records_view');
+        let recordingRow = new RecordingRow(recording);
+        this._records_listbox.add(recordingRow);
+        this._records_listbox.show_all();
+    }
+
+
+	 _updateHeaderFunc(row, before) {
+        if (before) {
+            let separator = new Gtk.Separator();
+            separator.connect("realize", (seperator) => {
+              separator.set_size_request(before.get_allocated_width(), -1)
+            })
+            row.set_header(separator)
+            separator.show()
+        }
+    }
+    _sortRecordings(row1, row2) {
+      if (row2.recording) {
+        if(row1.recording.fileName < row2.recording.fileName) {
+          return -1;
+        } else {
+          return 1;
+        }
+      }
     }
 });
 
@@ -148,38 +227,11 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
         this.labelID = null;
     }
 
-    _addEmptyPage() {
-        this.emptyGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
-                                        hexpand: true,
-                                        vexpand: true,
-                                        halign: Gtk.Align.CENTER,
-                                        valign: Gtk.Align.CENTER });
-        this._scrolledWin.add(this.emptyGrid);
-
-        let emptyPageImage = new Gtk.Image({ icon_name: 'audio-input-microphone-symbolic',
-                                             icon_size: Gtk.IconSize.DIALOG });
-        emptyPageImage.get_style_context().add_class('dim-label');
-        this.emptyGrid.add(emptyPageImage);
-        let emptyPageTitle = new Gtk.Label({ label: _("Add Recordings"),
-                                             halign: Gtk.Align.CENTER,
-                                             valign: Gtk.Align.CENTER });
-        emptyPageTitle.get_style_context().add_class('dim-label');
-        this.emptyGrid.add(emptyPageTitle);
-        let emptyPageDirections = new Gtk.Label({ label: _("Use the <b>Record</b> button to make sound recordings"),
-                                                  use_markup: true,
-                                                  max_width_chars: 30,
-                                                  halign: Gtk.Align.CENTER,
-                                                  valign: Gtk.Align.CENTER });
-        emptyPageDirections.get_style_context().add_class('dim-label');
-        this.emptyGrid.add(emptyPageDirections);
-        this.emptyGrid.show_all();
-    }
-
     _addListviewPage(name) {
         list = new Listview.Listview();
         list.setListTypeNew();
         list.enumerateDirectory();
-        this._record = new Record.Record(audioProfile);
+
 
         groupGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
                                    hexpand: true,
@@ -773,39 +825,6 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
     }
 });
 
-const RecordButton = GObject.registerClass(class RecordButton extends Gtk.Button {
-    _init(activeProfile) {
-        super._init();
-        this.image = Gtk.Image.new_from_icon_name('media-record-symbolic', Gtk.IconSize.BUTTON);
-        this.set_always_show_image(true);
-        this.set_valign(Gtk.Align.CENTER);
-        this.set_label(_("Record"));
-        this.get_style_context().add_class('text-button');
-        this.connect("clicked", () => this._onRecord());
-    }
-
-    _onRecord() {
-        view.destroyLoadMoreButton();
-        view.hasPreviousSelRow();
-
-        if (view.listBox) {
-            view.listBox.set_selection_mode(Gtk.SelectionMode.NONE);
-        } else {
-            view.emptyGrid.destroy();
-        }
-
-        this.set_sensitive(false);
-        setVisibleID = ActiveArea.RECORD;
-        view.recordGrid.show_all();
-
-        if (activeProfile == null)
-            activeProfile = 0;
-
-        audioProfile.profile(activeProfile);
-        view._record.startRecording(activeProfile);
-        wave = new Waveform.WaveForm(view.recordGrid, null);
-    }
-});
 
 var EncoderComboBox = GObject.registerClass(class EncoderComboBox extends Gtk.ComboBoxText {
     // encoding setting labels in combobox
