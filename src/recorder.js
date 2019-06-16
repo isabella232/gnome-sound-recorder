@@ -124,17 +124,15 @@ var Recorder = GObject.registerClass({
         this.ebin = Gst.ElementFactory.make("encodebin", "ebin");
         this.ebin.connect("element-added", (ebin, element) => {
             let factory = element.get_factory();
-
             if (factory != null) {
-                this.hasTagSetter = factory.has_interface("GstTagSetter");
-                if (this.hasTagSetter == true) {
-                    this.taglist = Gst.TagList.new_empty();
-                    this.taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_APPLICATION_NAME, _("Sound Recorder"));
-                    element.merge_tags(this.taglist, Gst.TagMergeMode.REPLACE);
-                    this.taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_TITLE, clipFile.get_uri());
-                    element.merge_tags(this.taglist, Gst.TagMergeMode.REPLACE);
-                    this.taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_DATE_TIME, gstreamerDateTime);
-                    element.merge_tags(this.taglist, Gst.TagMergeMode.REPLACE);
+                if (factory.has_interface("GstTagSetter")) {
+                    let taglist = Gst.TagList.new_empty();
+                    taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_APPLICATION_NAME, _("Sound Recorder"));
+                    element.merge_tags(taglist, Gst.TagMergeMode.REPLACE);
+                    taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_TITLE, clipFile.get_uri());
+                    element.merge_tags(taglist, Gst.TagMergeMode.REPLACE);
+                    taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_DATE_TIME, gstreamerDateTime);
+                    element.merge_tags(taglist, Gst.TagMergeMode.REPLACE);
                 }
             }
         });
@@ -162,9 +160,6 @@ var Recorder = GObject.registerClass({
             errorDialogState = ErrState.ON;
             this.onEndOfStream();
         }
-
-        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGINT, Application.application.onWindowDestroy);
-        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGTERM, Application.application.onWindowDestroy);
     }
 
     _updateTime() {
@@ -227,6 +222,7 @@ var Recorder = GObject.registerClass({
             GLib.source_remove(this.timeout);
             this.timeout = null;
         }
+        this.pipleline = null;
         return clipFile;
     }
 

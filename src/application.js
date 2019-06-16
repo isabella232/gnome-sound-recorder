@@ -90,15 +90,6 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
             this.window.get_style_context().add_class("devel");
     }
 
-    onWindowDestroy() {
-        if (MainWindow.wave.pipeline)
-            MainWindow.wave.pipeline.set_state(Gst.State.NULL);
-        if (MainWindow._record.pipeline)
-            MainWindow._record.pipeline.set_state(Gst.State.NULL);
-
-        if (MainWindow.play.play)
-            MainWindow.play.play.set_state(Gst.State.NULL);
-    }
 
     _showPreferences() {
         let preferencesDialog = new Preferences.Preferences();

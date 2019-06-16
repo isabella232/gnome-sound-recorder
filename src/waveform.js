@@ -35,7 +35,7 @@ const C_ = imports.gettext.pgettext;
 const MainWindow = imports.mainWindow;
 const Application = imports.application;
 
-const INTERVAL = 100000000;
+const SAMPLE_DURATION = Gst.SECOND / 100;
 const peaks = [];
 const pauseVal = 10;
 const waveSamples = 40;
@@ -46,18 +46,15 @@ const WaveType = {
 };
 
 var WaveForm =  GObject.registerClass(class WaveForm extends Gtk.DrawingArea {
-    _init(file) {
+    _init(recording) {
         super._init();
         let placeHolder = -100;
         for (let i = 0; i < 40; i++)
             peaks.push(placeHolder);
-        if (file) {
+        if (recording) {
             this.waveType = WaveType.PLAY;
-            this.file = file;
-            this.duration = this.file.duration;
-
-            this._uri = this.file.uri;
-            log(this.duration );
+            this.duration = recording.duration;
+            this._uri = recording.uri;
         } else {
           this.waveType = WaveType.RECORD;
         }
@@ -70,7 +67,7 @@ var WaveForm =  GObject.registerClass(class WaveForm extends Gtk.DrawingArea {
 
         this.set_property("hexpand", true);
 
-        this.connect("draw", (drawing, cr) => this.fillSurface(drawing, cr));
+        this.connect("draw", (drawing, cr) => this.fillSurface(cr));
 
         if (this.waveType == WaveType.PLAY) {
             this._launchPipeline();
@@ -89,12 +86,11 @@ var WaveForm =  GObject.registerClass(class WaveForm extends Gtk.DrawingArea {
         let bus = this.pipeline.get_bus();
         bus.add_signal_watch();
 
-        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGINT, Application.application.onWindowDestroy);
-        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGTERM, Application.application.onWindowDestroy);
+        this.nSamples = Math.ceil(this.duration / SAMPLE_DURATION);
 
-        this.nSamples = Math.ceil(this.duration / INTERVAL);
 
         bus.connect("message", (bus, message) => {
+
             if (message != null) {
                 this._messageCb(message);
             }
@@ -102,20 +98,11 @@ var WaveForm =  GObject.registerClass(class WaveForm extends Gtk.DrawingArea {
     }
 
     _messageCb(message) {
-        let msg = message.type;
-        switch(msg) {
-        case Gst.MessageType.ELEMENT:
-            let s = message.get_structure();
-
-            if (s) {
-
-                if (s.has_name("level")) {
-                    let peaknumber = 0;
-                    let st = s.get_value("timestamp");
-                    let dur = s.get_value("duration");
-                    let runTime = s.get_value("running-time");
-                    let peakVal = s.get_value("peak");
-
+        switch(message.type) {
+            case Gst.MessageType.ELEMENT:
+                let messageStructure = message.get_structure();
+                if (messageStructure && messageStructure.has_name("level")) {
+                    let peakVal = messageStructure.get_value("peak");
                     if (peakVal) {
                         let val = peakVal.get_nth(0);
 
@@ -126,19 +113,13 @@ var WaveForm =  GObject.registerClass(class WaveForm extends Gtk.DrawingArea {
                         peaks.push(value);
                     }
                 }
-            }
-
-            if (peaks.length == this.playTime) {
-                this.pipeline.set_state(Gst.State.PAUSED);
-            }
-
-            if (peaks.length == pauseVal) {
-                this.pipeline.set_state(Gst.State.PAUSED);
-            }
+                if (peaks.length == this.playTime || peaks.length == pauseVal) {
+                    this.pipeline.set_state(Gst.State.PAUSED);
+                }
             break;
 
-        case Gst.MessageType.EOS:
-            this.stopGeneration();
+            case Gst.MessageType.EOS:
+                this.stopGeneration();
             break;
         }
     }
@@ -152,7 +133,7 @@ var WaveForm =  GObject.registerClass(class WaveForm extends Gtk.DrawingArea {
 
     }
 
-    fillSurface(drawing, cr) {
+    fillSurface(cr) {
         let start = 0;
 
         if (this.waveType == WaveType.PLAY) {
@@ -175,6 +156,7 @@ var WaveForm =  GObject.registerClass(class WaveForm extends Gtk.DrawingArea {
         let width = this.get_allocated_width();
         let waveheight = this.get_allocated_height();
         let length = this.nSamples;
+        log(`Samples are good : ${length}`)
         let pixelsPerSample = width/waveSamples;
         let gradient = new Cairo.LinearGradient(0, 0, width , waveheight);
         if (this.waveType == WaveType.PLAY) {
@@ -188,9 +170,8 @@ var WaveForm =  GObject.registerClass(class WaveForm extends Gtk.DrawingArea {
             cr.setLineWidth(1);
             cr.setSourceRGBA(0.0, 185, 161, 255);
         }
-
-        for(i = start; i <= end; i++) {
-
+        log(`Start ${start} end ${end}`)
+        for(i=0; i < peaks.length; i++) {
             // Keep moving until we get to a non-null array member
             if (peaks[i] < 0) {
                 cr.moveTo((xAxis * pixelsPerSample), (waveheight - (peaks[i] * waveheight)))
@@ -198,11 +179,7 @@ var WaveForm =  GObject.registerClass(class WaveForm extends Gtk.DrawingArea {
 
             // Start drawing when we reach the first non-null array member
             if (peaks[i] != null && peaks[i] >= 0) {
-                let idx = i - 1;
 
-                if (start >= 40 && xAxis == 0) {
-                     cr.moveTo((xAxis * pixelsPerSample), waveheight);
-                }
 
                 cr.lineTo((xAxis * pixelsPerSample), (waveheight - (peaks[i] * waveheight)));
             }
@@ -218,10 +195,11 @@ var WaveForm =  GObject.registerClass(class WaveForm extends Gtk.DrawingArea {
     }
 
     _drawEvent(playTime, recPeaks) {
+        log(`play time ${playTime}, recPeaks ${recPeaks}`)
         let lastTime;
-
         if (this.waveType == WaveType.PLAY) {
             lastTime = this.playTime;
+            log(playTime)
             this.playTime = playTime;
 
             if (peaks.length < this.playTime) {
@@ -244,6 +222,10 @@ var WaveForm =  GObject.registerClass(class WaveForm extends Gtk.DrawingArea {
             this.queue_draw();
         }
         return true;
+    }
+
+    clearDrawing() {
+
     }
 
     endDrawing() {

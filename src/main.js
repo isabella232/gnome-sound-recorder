@@ -38,7 +38,10 @@ pkg.require({ 'Gdk': '3.0',
               'Handy': '0.0' });
 
 const Handy = imports.gi.Handy;
+const GstPbutils = imports.gi.GstPbutils;
+
 Handy.init(null);
+GstPbutils.pb_utils_init()
 
 const Application = imports.application;
 

@@ -31,7 +31,8 @@ const Mainloop = imports.mainloop;
 
 const Application = imports.application;
 const MainWindow = imports.mainWindow;
-const Waveform = imports.waveform;
+
+const utils = imports.utils;
 
 const PipelineStates = {
     PLAYING: 0,
@@ -51,9 +52,12 @@ const _TENTH_SEC = 100000000;
 
 var Player = GObject.registerClass({
     Signals: {
-      'timer-updated': {
+      'time-updated': {
           flags: GObject.SignalFlags.RUN_FIRST,
           param_types: [ GObject.TYPE_INT ]
+      },
+      'stream-ended': {
+          flags: GObject.SignalFlags.RUN_FIRST
       }
     }
 
@@ -62,11 +66,11 @@ var Player = GObject.registerClass({
     _init() {
       super._init();
       this.playState = PipelineStates.STOPPED;
-      this.play = Gst.ElementFactory.make("playbin", "play");
+      this.playbin = Gst.ElementFactory.make("playbin", "play");
       this.sink = Gst.ElementFactory.make("pulsesink", "sink");
-      this.play.set_property("audio-sink", this.sink);
-      this.clock = this.play.get_clock();
-      this.playBus = this.play.get_bus();
+      this.playbin.set_property("audio-sink", this.sink);
+      this.clock = this.playbin.get_clock();
+      this.playBus = this.playbin.get_bus();
       this._asset = null;
     }
     _playPipeline() {
@@ -80,12 +84,17 @@ var Player = GObject.registerClass({
     }
 
     get duration() {
-      return this.play.query_duration(Gst.Format.TIME)
+      return this.playbin.query_duration(Gst.Format.TIME)
 
     }
 
-    setUri(uri) {
-        this.play.set_property("uri", uri);
+    play(recording) {
+        this.playbin.set_property("uri", recording.uri);
+        this.startPlaying();
+    }
+
+    isPlaying() {
+      return this.playState == PipelineStates.PLAYING
     }
 
 
@@ -98,11 +107,11 @@ var Player = GObject.registerClass({
 
         if (this.playState == PipelineStates.PAUSED) {
             this.updatePosition();
-            this.play.set_base_time(this.clock.get_time());
-            this.baseTime = this.play.get_base_time() - this.runTime;
+            this.playbin.set_base_time(this.clock.get_time());
+            this.baseTime = this.playbin.get_base_time() - this.runTime;
         }
 
-        this.ret = this.play.set_state(Gst.State.PLAYING);
+        this.ret = this.playbin.set_state(Gst.State.PLAYING);
         this.playState = PipelineStates.PLAYING;
 
         if (this.ret == Gst.StateChangeReturn.FAILURE) {
@@ -111,12 +120,10 @@ var Player = GObject.registerClass({
         } else if (this.ret == Gst.StateChangeReturn.SUCCESS) {
             /*MainWindow.view.setVolume();*/
         }
-        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGINT, Application.application.onWindowDestroy);
-        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGTERM, Application.application.onWindowDestroy);
     }
 
     pausePlaying() {
-        this.play.set_state(Gst.State.PAUSED);
+        this.playbin.set_state(Gst.State.PAUSED);
         this.playState = PipelineStates.PAUSED;
 
         if (this.timeout) {
@@ -125,6 +132,12 @@ var Player = GObject.registerClass({
         }
     }
 
+    resumePlaying () {
+        this.playbin.set_state(Gst.State.PLAYING);
+        this.playState = PipelineStates.PLAYING;
+    }
+
+
     stopPlaying() {
         if (this.playState != PipelineStates.STOPPED) {
             this.onEnd();
@@ -132,7 +145,7 @@ var Player = GObject.registerClass({
     }
 
     onEnd() {
-        this.play.set_state(Gst.State.NULL);
+        this.playbin.set_state(Gst.State.NULL);
         this.playState = PipelineStates.STOPPED;
         this.playBus.remove_signal_watch();
         this._updateTime();
@@ -141,56 +154,46 @@ var Player = GObject.registerClass({
             GLib.source_remove(this.timeout);
             this.timeout = null;
         }
-        /*
-        if (MainWindow.wave != null)
-            MainWindow.wave.endDrawing();
-        */
-        errorDialogState = ErrState.OFF;
+        this.emit("stream-ended")
     }
 
-    onEndOfStream() {
-      /*
-        MainWindow.view.onPlayStopClicked();
-      */
-    }
 
     _onMessageReceived(message) {
         this.localMsg = message;
-        let msg = message.type;
-        switch(msg) {
+        switch(message.type) {
 
-        case Gst.MessageType.EOS:
-            this.onEndOfStream();
+            case Gst.MessageType.EOS:
+                this.emit("stream-ended")
             break;
 
-        case Gst.MessageType.WARNING:
-            let warningMessage = message.parse_warning()[0];
-            log(warningMessage.toString());
+            case Gst.MessageType.WARNING:
+                let warningMessage = message.parse_warning()[0];
+                log(warningMessage.toString());
             break;
 
-        case Gst.MessageType.ERROR:
-            let errorMessage = message.parse_error()[0];
-            this._showErrorDialog(errorMessage.toString());
-            errorDialogState = ErrState.ON;
+            case Gst.MessageType.ERROR:
+                let errorMessage = message.parse_error()[0];
+                this._showErrorDialog(errorMessage.toString());
+                errorDialogState = ErrState.ON;
             break;
 
-        case Gst.MessageType.ASYNC_DONE:
-            if (this.sought) {
-                this.play.set_state(this._lastState);
-                MainWindow.view.setProgressScaleSensitive();
-            }
-            this.updatePosition();
+            case Gst.MessageType.ASYNC_DONE:
+                if (this.sought) {
+                    this.playbin.set_state(this._lastState);
+                    MainWindow.view.setProgressScaleSensitive();
+                }
+                this.updatePosition();
             break;
 
-        case Gst.MessageType.CLOCK_LOST:
-            this.pausePlaying();
+            case Gst.MessageType.CLOCK_LOST:
+                this.pausePlaying();
             break;
 
-        case Gst.MessageType.NEW_CLOCK:
-            if (this.playState == PipelineStates.PAUSED) {
-                this.clock = this.play.get_clock();
-                this.startPlaying();
-            }
+            case Gst.MessageType.NEW_CLOCK:
+                if (this.playState == PipelineStates.PAUSED) {
+                    this.clock = this.playbin.get_clock();
+                    this.startPlaying();
+                }
             break;
         }
     }
@@ -200,44 +203,26 @@ var Player = GObject.registerClass({
     }
 
     _updateTime() {
-        let time = this.play.query_position(Gst.Format.TIME)[1]/Gst.SECOND;
-        this.trackDuration = this.play.query_duration(Gst.Format.TIME)[1];
-        this.trackDurationSecs = this.trackDuration/Gst.SECOND;
+        let time = this.playbin.query_position(Gst.Format.TIME)[1];
+        let trackDuration = this.playbin.query_duration(Gst.Format.TIME)[1];
 
-        if (time >= 0 && this.playState != PipelineStates.STOPPED) {
-            this.emit("timer-updated", time);
-        } else if (time >= 0 && this.playState == PipelineStates.STOPPED) {
-            this.emit("timer-updated", 0);
-        }
+        this.emit("time-updated", time);
 
-        let absoluteTime = 0;
+        if(this.wave)
+            this.wave._drawEvent(time);
 
-        if  (this.clock == null) {
-            this.clock = this.play.get_clock();
-        }
-        try {
-            absoluteTime = this.clock.get_time();
-        } catch(error) {
-            // no-op
-        }
 
-        if (this.baseTime == 0)
-            this.baseTime = absoluteTime;
-
-        this.runTime = absoluteTime- this.baseTime;
-        let approxTime = Math.round(this.runTime/_TENTH_SEC);
-
-        if (MainWindow.wave != null) {
-            MainWindow.wave._drawEvent(approxTime);
-        }
 
         return true;
     }
 
+
+
+
     queryPosition() {
         let position = 0;
         while (position == 0) {
-            position = this.play.query_position(Gst.Format.TIME)[1]/Gst.SECOND;
+            position = this.playbin.query_position(Gst.Format.TIME)[1]/Gst.SECOND;
         }
 
         return position;
@@ -251,7 +236,7 @@ var Player = GObject.registerClass({
     }
 
     setVolume(value) {
-        this.play.set_volume(GstAudio.StreamVolumeFormat.CUBIC, value);
+        this.playbin.set_volume(GstAudio.StreamVolumeFormat.CUBIC, value);
     }
 
     passSelected(selected) {
@@ -279,5 +264,65 @@ var Player = GObject.registerClass({
             errorDialog.show();
         }
     }
+  }
+);
+
+
+var PlayerWidget = GObject.registerClass({
+    Template: 'resource:///org/gnome/SoundRecorder/player.ui',
+    Signals: {
+      'pause': {
+          flags: GObject.SignalFlags.RUN_FIRST
+      },
+      'play': {
+          flags: GObject.SignalFlags.RUN_FIRST
+      }
+    },
+    InternalChildren: [
+      'clip_name_label',
+      'clip_duration_label',
+      'player_scale',
+      'player_adjustement',
+      'pause_button',
+      'play_button',
+      'pause_stack'
+    ],
+  },
+  class PlayerWidget extends Gtk.Box {
+    _init() {
+      super._init();
+
+
+      this._pause_button.connect('clicked', () => {
+        this._pause_stack.set_visible_child_name('play');
+        this.emit('pause');
+      });
+
+      this._play_button.connect('clicked', () => {
+        this._pause_stack.set_visible_child_name('pause');
+        this.emit('play');
+      });
+
+      this.show_all();
+    }
+
+    setPlaying(recording) {
+      this._player_adjustement.set_upper(recording.duration);
+      this._player_adjustement.set_value(0);
+      this._clip_name_label.set_text(recording.fileName);
+      this._pause_stack.set_visible_child_name('pause');
+    }
+
+    updateTime(time) {
+      log(time);
+      this._clip_duration_label.set_text(utils.getDisplayDuration(time));
+      this._player_adjustement.set_value(time);
+    }
+
+    reset() {
+      this._player_adjustement.set_value(this._player_adjustement.upper);
+      this._pause_stack.set_visible_child_name('play');
+    }
+
   }
 );

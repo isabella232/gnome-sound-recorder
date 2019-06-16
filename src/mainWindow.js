@@ -40,7 +40,8 @@ const NewRecording = imports.recording.NewRecording;
 const RecordingRow = imports.recording.RecordingRow;
 
 const Preferences = imports.preferences;
-
+const Player = imports.player.Player;
+const PlayerWidget = imports.player.PlayerWidget;
 const Waveform = imports.waveform;
 
 let activeProfile = null;
@@ -111,9 +112,11 @@ var MainWindow = GObject.registerClass({
         'menu_button',
         'main_stack',
         'record_button',
-        'record_label',
+        'stop_button',
+        'record_stack',
         'records_listbox',
         'new_recording_revealer',
+        'player_revealer',
       ]
   },
   class MainWindow extends Gtk.ApplicationWindow {
@@ -121,14 +124,16 @@ var MainWindow = GObject.registerClass({
         super._init();
         this._addAppMenu();
         this._recordingsManager = new RecordingsManager();
+        this._player = new Player();
         this._initWidgets();
-
+        this.connect("destroy", () => this._onWindowDestroy)
         this.show_all();
     }
 
     _initWidgets() {
 
         this._record_button.connect('clicked', () => this._onRecordClicked())
+        this._stop_button.connect('clicked', () => this._onStopRecordingClicked())
         this._recordingsManager.connect('recording-added', (obj, recording) => {
           this._onRecordingAdded(recording);
         });
@@ -143,6 +148,26 @@ var MainWindow = GObject.registerClass({
           this._newRecordingWidget.updateRecordTime(recordTime);
         });
         this._new_recording_revealer.add(this._newRecordingWidget);
+
+
+        this._playerWidget = new PlayerWidget();
+        this._playerWidget.connect("pause", () => {
+          if(this._player.isPlaying()){
+            this._player.pausePlaying();
+          }
+        });
+        this._playerWidget.connect("play", () => {
+          this._player.resumePlaying();
+        });
+        this._player_revealer.add(this._playerWidget);
+        this._player_revealer.set_reveal_child(false);
+
+        this._player.connect("time-updated", (obj, time) => {
+            this._playerWidget.updateTime(time);
+        });
+        this._player.connect("stream-ended", () => {
+            this._playerWidget.reset();
+        })
     }
 
 
@@ -156,42 +181,48 @@ var MainWindow = GObject.registerClass({
     }
 
     _onRecordClicked() {
-        if(this.recording_state === RecordingState.STOPPED) {
-            this._main_stack.set_visible_child_name('records_view');
-            this._main_stack.show_all();
-            this._record_button.get_style_context().remove_class('suggeted-action');
-            this._record_button.get_style_context().add_class('destructive-action');
+        this._main_stack.set_visible_child_name('records_view');
+        this._record_stack.set_visible_child_name('stop')
+        this._main_stack.show_all();
 
-            this._record_label.set_text('Stop');
+        let wave = this._recordingsManager.startNewRecording();
+        this._newRecordingWidget.setWave(wave);
+        this._newRecordingWidget.show_all();
 
-           let wave = this._recordingsManager.startNewRecording();
-           this._newRecordingWidget.setWave(wave);
-            this._newRecordingWidget.show_all();
+        this._new_recording_revealer.set_reveal_child(true);
 
-            this._new_recording_revealer.set_reveal_child(true);
+        this.set_property('recording-state', RecordingState.RECORDING);
+        this._records_listbox.set_sensitive(false);
+        this._playerWidget.set_sensitive(false);
+    }
 
-            this.set_property('recording-state', RecordingState.RECORDING);
-        } else {
+    _onStopRecordingClicked() {
+          this._recordingsManager.saveRecording();
+          this._newRecordingWidget.reset();
 
-            this._recordingsManager.saveRecording();
-            this._newRecordingWidget.reset();
+          this._new_recording_revealer.set_reveal_child(false);
+        this._record_stack.set_visible_child_name('record')
 
-            this._record_button.get_style_context().add_class('suggested-action');
-            this._record_button.get_style_context().remove_class('destructive-action');
-            this._record_label.set_text('Record');
-            this.set_property('recording-state', RecordingState.STOPPED);
-
-            this._new_recording_revealer.set_reveal_child(false);
-        }
+          this.set_property('recording-state', RecordingState.STOPPED);
+          this._records_listbox.set_sensitive(true);
+          this._playerWidget.set_sensitive(true);
     }
 
     _onRecordingAdded(recording) {
         this._main_stack.set_visible_child_name('records_view');
         let recordingRow = new RecordingRow(recording);
+        recordingRow.connect("play", (obj, recording) => {
+            this._playerWidget.setPlaying(recording);
+            this._player.play(recording);
+            this._player_revealer.set_reveal_child(true);
+        });
+        recordingRow.connect("stop", () => {
+          this._player.stopPlaying();
+          this._player_revealer.set_reveal_child(false);
+        });
         this._records_listbox.add(recordingRow);
         this._records_listbox.show_all();
     }
-
 
 	 _updateHeaderFunc(row, before) {
         if (before) {
@@ -203,14 +234,21 @@ var MainWindow = GObject.registerClass({
             separator.show()
         }
     }
+
     _sortRecordings(row1, row2) {
-      if (row2.recording) {
-        if(row1.recording.fileName < row2.recording.fileName) {
-          return -1;
-        } else {
-          return 1;
-        }
+      if (row1.recording && row1.recording.dateCreated) {
+        if (row2.recording.dateCreated.difference(row1.recording.dateCreated) > 0)
+            return 1
+        else
+            return -1
       }
+    }
+
+    _onWindowDestory() {
+        this._player.stopPlaying();
+        this._recordingsManager._recorder.stopRecording()
+
+
     }
 });
 

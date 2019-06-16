@@ -23,6 +23,7 @@
 const Gdk = imports.gi.Gdk;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
+const Gst = imports.gi.Gst;
 
 
 const Gettext = imports.gettext;
@@ -71,7 +72,8 @@ var getDisplayTime = function (mtime) {
 }
 
 
-var getDisplayDuration = function (seconds) {
+var getDisplayDuration = function (nanoseconds) {
+    let seconds = nanoseconds/Gst.SECOND;
     let hoursStr = String(parseInt((seconds / 3600) % 60)).padStart(2, '0')
     let minutesStr = String(parseInt((seconds / 60) % 60)).padStart(2, '0')
     let secondsStr = String(parseInt(seconds % 60)).padStart(2, '0')
