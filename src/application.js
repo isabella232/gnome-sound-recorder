@@ -38,6 +38,7 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
     _init() {
         super._init({ application_id: pkg.name });
         GLib.set_application_name(_("SoundRecorder"));
+        GLib.set_prgname("gnome-sound-recorder");
     }
 
     _initAppMenu() {
