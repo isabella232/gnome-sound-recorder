@@ -350,11 +350,10 @@ const BuildFileName = class BuildFileName {
         var fileExtensionName = MainWindow.audioProfile.fileExtensionReturner();
         var dir = Gio.Application.get_default().saveDir;
         this.dateTime = GLib.DateTime.new_now_local();
-        var clipNumber = Listview.trackNumber + 1;
-        /* Translators: ""Clip %d"" is the default name assigned to a file created
-            by the application (for example, "Clip 1"). */
-        var clipName = _("Clip %d").format(clipNumber.toString());
-        this.clip = dir.get_child_for_display_name(clipName);
+        /* Translators: ""Recording from %R on %A %F "" is the default name assigned to a file created
+            by the application (for example, "Recording from 14:40:30 on Tuesday 2020-02-25"). */
+        var clipName = this.dateTime.format (_("Recording from %R on %A %F"));        
+        this.clip = dir.get_child_for_display_name(clipName); 
         var file = this.clip.get_path();
         return file;
     }
