@@ -117,16 +117,17 @@ var Listview = class Listview {
                         let finalFileName = GLib.build_filenamev([this._saveDir.get_path(),
                                                                   returnedName]);
                         let fileUri = GLib.filename_to_uri(finalFileName, null);
-                        let timeVal = file.get_modification_time();
-                        let date = GLib.DateTime.new_from_timeval_local(timeVal);
+                        let timeVal = file.get_modification_date_time();
+                        let timeModified = file.get_attribute_uint64("time::modified");
+                        let date = GLib.DateTime.new_from_unix_local(timeModified);
                         let dateModifiedSortString = date.format("%Y%m%d%H%M%S");
-                        let dateTime = GLib.DateTime.new_from_timeval_local(timeVal);
+                        let dateTime = GLib.DateTime.new_from_unix_local(timeModified);
                         let dateModifiedDisplayString = MainWindow.displayTime.getDisplayTime(dateTime);
                         let dateCreatedYes = file.has_attribute("time::created");
                         let dateCreatedString = null;
                         if (this.dateCreatedYes) {
                             let dateCreatedVal = file.get_attribute_uint64("time::created");
-                            let dateCreated = GLib.DateTime.new_from_timeval_local(dateCreatedVal);
+                            let dateCreated = GLib.DateTime.new_from_unix_local(dateCreatedVal);
                             dateCreatedString = MainWindow.displayTime.getDisplayTime(dateCreated);
                         }
 
