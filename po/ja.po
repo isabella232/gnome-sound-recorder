@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
 "issues\n"
-"POT-Creation-Date: 2019-02-04 17:36+0000\n"
+"POT-Creation-Date: 2020-02-26 16:43+0000\n"
 "PO-Revision-Date: 2019-02-09 20:41+0900\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
@@ -22,17 +22,17 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 2.2.1\n"
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:5
-#: data/org.gnome.SoundRecorder.desktop.in:4 src/application.js:152
+#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in:5
+#: data/org.gnome.SoundRecorder.desktop.in.in:4 src/application.js:177
 #: src/record.js:115
 msgid "Sound Recorder"
 msgstr "サウンドレコーダー"
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:6
+#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in:6
 msgid "A simple, modern sound recorder for GNOME"
 msgstr "GNOME 用のシンプルでモダンなサウンドレコーダー"
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:10
+#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in:10
 msgid ""
 "Sound Recorder provides a simple and modern interface that provides a "
 "straight-forward way to record and play audio. It allows you to do basic "
@@ -42,7 +42,7 @@ msgstr ""
 "音、再生を直感的に行うことができます。また、基本的な音声編集やボイスメモの作"
 "成もできます。"
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:15
+#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in:15
 msgid ""
 "Sound Recorder automatically handles the saving process so that you do not "
 "need to worry about accidentally discarding the previous recording."
@@ -50,15 +50,15 @@ msgstr ""
 "サウンドレコーダーは自動的に保存処理を行います。録音データをうっかり破棄して"
 "しまう心配はもうありません。"
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:19
+#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in:19
 msgid "Supported audio formats:"
 msgstr "サポートしている音声フォーマット:"
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:21
+#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in:21
 msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
 msgstr "Ogg Vorbis、Opus、FLAC、MP3、MOV"
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:42
+#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in:47
 msgid "The GNOME Project"
 msgstr "The GNOME Project"
 
@@ -118,17 +118,12 @@ msgstr "スピーカーの音量レベル"
 msgid "Speaker volume level."
 msgstr "スピーカーの音量レベルです。"
 
-#: data/org.gnome.SoundRecorder.desktop.in:5
+#: data/org.gnome.SoundRecorder.desktop.in.in:5
 msgid "Record sound via the microphone and play it back"
 msgstr "マイクからの音声を録音し、再生します"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: data/org.gnome.SoundRecorder.desktop.in:7
-msgid "org.gnome.SoundRecorder"
-msgstr "org.gnome.SoundRecorder"
-
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.SoundRecorder.desktop.in:10
+#: data/org.gnome.SoundRecorder.desktop.in.in:10
 msgid "Audio;Application;Record;"
 msgstr ""
 "Audio;Application;Record;オーディオ;音声;アプリケーション;録音;soundrecorder;"
@@ -137,17 +132,17 @@ msgstr ""
 msgid "SoundRecorder"
 msgstr "サウンドレコーダー"
 
-#: src/application.js:68
+#: src/application.js:83
 msgid "Sound Recorder started"
 msgstr "サウンドレコーダーは開始しました"
 
 #. Translators: "Recordings" here refers to the name of the directory where the application places files
-#: src/application.js:78
+#: src/application.js:93
 msgid "Recordings"
 msgstr "レコーディング"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/application.js:151
+#: src/application.js:176
 msgid "translator-credits"
 msgstr ""
 "坂本 貴史 <o-takashi@sakamocchi.jp>\n"
@@ -381,6 +376,9 @@ msgstr ""
 #, javascript-format
 msgid "Clip %d"
 msgstr "クリップ %d"
+
+#~ msgid "org.gnome.SoundRecorder"
+#~ msgstr "org.gnome.SoundRecorder"
 
 #~ msgid "About"
 #~ msgstr "このアプリケーションについて"
