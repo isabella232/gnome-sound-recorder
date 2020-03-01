@@ -2,6 +2,18 @@ include: 'https://gitlab.gnome.org/GNOME/citemplates/raw/master/flatpak/flatpak_
 
 variables:
     BUNDLE: "sound-recorder-dev.flatpak"
+    LINT_LOG: "eslint-report.txt"
+
+
+eslint:
+    image: registry.gitlab.gnome.org/gnome/gjs:fedora.static-analysis
+    script:
+        - eslint -o $LINT_LOG --no-color src || { cat $LINT_LOG; false; }
+    artifacts:
+        paths:
+            - ${LINT_LOG}
+        when: on_failure
+
 
 flatpak:
     image: 'registry.gitlab.gnome.org/gnome/gnome-runtime-images/gnome:master'
