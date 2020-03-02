@@ -18,15 +18,9 @@
  *
  */
 
-const _ = imports.gettext.gettext;
-const Gio = imports.gi.Gio;
-const GObject = imports.gi.GObject;
 const Gst = imports.gi.Gst;
 const GstPbutils = imports.gi.GstPbutils;
-const Mainloop = imports.mainloop;
 
-const MainWindow = imports.mainWindow;
-const Preferences = imports.preferences;
 
 const comboBoxMap = {
     OGG_VORBIS: 0,
@@ -110,10 +104,10 @@ var AudioProfile = class AudioProfile {
         let suffixName;
 
         if (this._values.audio) {
-            if (this._containerProfile != null)
+            if (this._containerProfile !== null)
                 suffixName = this._containerProfile.get_file_extension();
 
-            if (suffixName == null)
+            if (suffixName === null)
                 suffixName = this.encodingProfile.get_file_extension();
         }
 
