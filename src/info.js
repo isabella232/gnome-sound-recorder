@@ -23,10 +23,8 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 
-const _ = imports.gettext.gettext;
-const C_ = imports.gettext.pgettext;
 
-const MainWindow = imports.mainWindow;
+
 
 var InfoDialog = class InfoDialog {
     constructor(fileNav) {
@@ -87,7 +85,7 @@ var InfoDialog = class InfoDialog {
             halign: Gtk.Align.END });
         this._source.get_style_context().add_class('dim-label');
 
-        if (fileName.appName != null)
+        if (fileName.appName !== null)
             grid.add(this._source);
 
 
@@ -102,7 +100,7 @@ var InfoDialog = class InfoDialog {
             halign: Gtk.Align.END });
         this._dateCreatedLabel.get_style_context().add_class('dim-label');
 
-        if (fileName.dateCreated != null)
+        if (fileName.dateCreated !== null)
             grid.add(this._dateCreatedLabel);
 
 
@@ -130,11 +128,11 @@ var InfoDialog = class InfoDialog {
         this._sourceData = new Gtk.LinkButton({ label: sourcePath,
             uri: sourceLink.get_uri(),
             halign: Gtk.Align.START });
-        if (fileName.appName != null)
+        if (fileName.appName !== null)
             grid.attach_next_to(this._sourceData, this._source, Gtk.PositionType.RIGHT, 2, 1);
 
         // Date Modified value
-        if (fileName.dateModified != null) {
+        if (fileName.dateModified !== null) {
             this._dateModifiedData = new Gtk.Label({ label: fileName.dateModified,
                 halign: Gtk.Align.START });
             grid.attach_next_to(this._dateModifiedData, this._dateModifiedLabel, Gtk.PositionType.RIGHT, 2, 1);
