@@ -33,8 +33,8 @@ function loadStyleSheet() {
     let file = 'application.css';
     let provider = new Gtk.CssProvider();
     provider.load_from_path(GLib.build_filenamev([pkg.pkgdatadir,
-                                                  file]));
+        file]));
     Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),
-                                             provider,
-                                             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        provider,
+        Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 }

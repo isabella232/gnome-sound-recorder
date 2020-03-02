@@ -37,11 +37,11 @@ let settings = null;
 var Application = GObject.registerClass(class Application extends Gtk.Application {
     _init() {
         super._init({ application_id: pkg.name });
-        GLib.set_application_name(_("SoundRecorder"));
-        GLib.set_prgname("gnome-sound-recorder");
+        GLib.set_application_name(_('SoundRecorder'));
+        GLib.set_prgname('gnome-sound-recorder');
 
         this.add_main_option('version', 'v'.charCodeAt(0), GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
-                             "Print version information and exit", null);
+            'Print version information and exit', null);
 
         this.connect('handle-local-options', (app, options) => {
             if (options.contains('version')) {
@@ -80,7 +80,7 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
         super.vfunc_startup();
 
         this._loadStyleSheet();
-        log(_("Sound Recorder started"));
+        log(_('Sound Recorder started'));
         Gst.init(null);
         this._initAppMenu();
         application = this;
@@ -90,17 +90,17 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
 
     ensure_directory() {
         /* Translators: "Recordings" here refers to the name of the directory where the application places files */
-        let path = GLib.build_filenamev([GLib.get_home_dir(), _("Recordings")]);
+        let path = GLib.build_filenamev([GLib.get_home_dir(), _('Recordings')]);
 
         // Ensure Recordings directory
-        GLib.mkdir_with_parents(path, parseInt("0755", 8));
+        GLib.mkdir_with_parents(path, 0o0755);
         this.saveDir = Gio.file_new_for_path(path);
     }
 
     vfunc_activate() {
         (this.window = new MainWindow.MainWindow({ application: this })).show();
         if (pkg.name.endsWith('Devel'))
-            this.window.get_style_context().add_class("devel");
+            this.window.get_style_context().add_class('devel');
     }
 
     onWindowDestroy() {
@@ -122,60 +122,60 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
     }
 
     getPreferences() {
-        let set = settings.get_int("media-type-preset");
+        let set = settings.get_int('media-type-preset');
         return set;
     }
 
     setPreferences(profileName) {
-        settings.set_int("media-type-preset", profileName);
+        settings.set_int('media-type-preset', profileName);
     }
 
     getChannelsPreferences() {
-        let set = settings.get_int("channel");
+        let set = settings.get_int('channel');
         return set;
     }
 
     setChannelsPreferences(channel) {
-        settings.set_int("channel", channel);
+        settings.set_int('channel', channel);
     }
 
     getMicVolume() {
-        let micVolLevel = settings.get_double("mic-volume");
+        let micVolLevel = settings.get_double('mic-volume');
         return micVolLevel;
     }
 
     setMicVolume(level) {
-         settings.set_double("mic-volume", level);
+        settings.set_double('mic-volume', level);
     }
 
     getSpeakerVolume() {
-        let speakerVolLevel = settings.get_double("speaker-volume");
+        let speakerVolLevel = settings.get_double('speaker-volume');
         return speakerVolLevel;
     }
 
     setSpeakerVolume(level) {
-         settings.set_double("speaker-volume", level);
+        settings.set_double('speaker-volume', level);
     }
 
     _loadStyleSheet() {
         let provider = new Gtk.CssProvider();
         provider.load_from_resource('/org/gnome/SoundRecorder/application.css');
         Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),
-                                                 provider,
-                                                 Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+            provider,
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
     }
 
     _showAbout() {
         let aboutDialog = new Gtk.AboutDialog();
-        aboutDialog.artists = [ 'Reda Lazri <the.red.shortcut@gmail.com>',
-                                'Garrett LeSage <garrettl@gmail.com>',
-                                'Hylke Bons <hylkebons@gmail.com>',
-                                'Sam Hewitt <hewittsamuel@gmail.com>' ];
-        aboutDialog.authors = [ 'Meg Ford <megford@gnome.org>' ];
+        aboutDialog.artists = ['Reda Lazri <the.red.shortcut@gmail.com>',
+            'Garrett LeSage <garrettl@gmail.com>',
+            'Hylke Bons <hylkebons@gmail.com>',
+            'Sam Hewitt <hewittsamuel@gmail.com>'];
+        aboutDialog.authors = ['Meg Ford <megford@gnome.org>'];
         /* Translators: Replace "translator-credits" with your names, one name per line */
-        aboutDialog.translator_credits = _("translator-credits");
-        aboutDialog.program_name = _("Sound Recorder");
-        aboutDialog.copyright = 'Copyright ' + String.fromCharCode(0x00A9) + ' 2013' + String.fromCharCode(0x2013) + 'Meg Ford';
+        aboutDialog.translator_credits = _('translator-credits');
+        aboutDialog.program_name = _('Sound Recorder');
+        aboutDialog.copyright = `Copyright ${String.fromCharCode(0x00A9)} 2013${String.fromCharCode(0x2013)}Meg Ford`;
         aboutDialog.license_type = Gtk.License.GPL_2_0;
         aboutDialog.logo_icon_name = pkg.name;
         aboutDialog.version = pkg.version;
@@ -185,7 +185,7 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
         aboutDialog.transient_for = this.window;
 
         aboutDialog.show();
-        aboutDialog.connect('response', function() {
+        aboutDialog.connect('response', () => {
             aboutDialog.destroy();
         });
     }

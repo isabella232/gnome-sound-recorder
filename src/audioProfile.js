@@ -33,34 +33,34 @@ const comboBoxMap = {
     OPUS: 1,
     FLAC: 2,
     MP3: 3,
-    MP4: 4
+    MP4: 4,
 };
 
 var containerProfileMap = {
-    OGG: "application/ogg",
-    ID3: "application/x-id3",
-    MP4: "video/quicktime,variant=(string)iso",
-    AUDIO_OGG: "application/ogg;audio/ogg;video/ogg"
+    OGG: 'application/ogg',
+    ID3: 'application/x-id3',
+    MP4: 'video/quicktime,variant=(string)iso',
+    AUDIO_OGG: 'application/ogg;audio/ogg;video/ogg',
 };
 
 
 var audioCodecMap = {
-    FLAC: "audio/x-flac",
-    MP3: "audio/mpeg,mpegversion=(int)1,layer=(int)3",
-    MP4: "audio/mpeg,mpegversion=(int)4",
-    OPUS: "audio/x-opus",
-    VORBIS: "audio/x-vorbis"
+    FLAC: 'audio/x-flac',
+    MP3: 'audio/mpeg,mpegversion=(int)1,layer=(int)3',
+    MP4: 'audio/mpeg,mpegversion=(int)4',
+    OPUS: 'audio/x-opus',
+    VORBIS: 'audio/x-vorbis',
 };
 
 var AudioProfile = class AudioProfile {
     profile(profileName) {
-        if (profileName) {
+        if (profileName)
             this._profileName = profileName;
-        } else {
+        else
             this._profileName = comboBoxMap.OGG_VORBIS;
-        }
 
-        switch(this._profileName) {
+
+        switch (this._profileName) {
 
         case comboBoxMap.OGG_VORBIS:
             this._values = { container: containerProfileMap.OGG, audio: audioCodecMap.VORBIS };
@@ -92,7 +92,7 @@ var AudioProfile = class AudioProfile {
         this._containerProfile = null;
         if (this._values.audio && this._values.container) {
             let caps = Gst.Caps.from_string(this._values.container);
-            this._containerProfile = GstPbutils.EncodingContainerProfile.new("record", null, caps, null);
+            this._containerProfile = GstPbutils.EncodingContainerProfile.new('record', null, caps, null);
             audioCaps = Gst.Caps.from_string(this._values.audio);
             this.encodingProfile = GstPbutils.EncodingAudioProfile.new(audioCaps, null, null, 1);
             this._containerProfile.add_profile(this.encodingProfile);
@@ -117,7 +117,7 @@ var AudioProfile = class AudioProfile {
                 suffixName = this.encodingProfile.get_file_extension();
         }
 
-        this.audioSuffix = ("." + suffixName);
+        this.audioSuffix = `.${suffixName}`;
         return this.audioSuffix;
     }
-}
+};

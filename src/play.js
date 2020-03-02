@@ -35,13 +35,13 @@ const PipelineStates = {
     PLAYING: 0,
     PAUSED: 1,
     STOPPED: 2,
-    NULL: 3
+    NULL: 3,
 };
 
 const ErrState = {
     OFF: 0,
-    ON: 1
-}
+    ON: 1,
+};
 
 let errorDialogState;
 
@@ -51,26 +51,26 @@ var Play = class Play {
     _playPipeline() {
         errorDialogState = ErrState.OFF;
         let uri = this._fileToPlay.get_uri();
-        this.play = Gst.ElementFactory.make("playbin", "play");
-        this.play.set_property("uri", uri);
-        this.sink = Gst.ElementFactory.make("pulsesink", "sink");
-        this.play.set_property("audio-sink", this.sink);
+        this.play = Gst.ElementFactory.make('playbin', 'play');
+        this.play.set_property('uri', uri);
+        this.sink = Gst.ElementFactory.make('pulsesink', 'sink');
+        this.play.set_property('audio-sink', this.sink);
         this.clock = this.play.get_clock();
         this.playBus = this.play.get_bus();
         this.playBus.add_signal_watch();
-        this.playBus.connect("message", (playBus, message) => {
-            if (message != null) {
+        this.playBus.connect('message', (playBus, message) => {
+            if (message != null)
                 this._onMessageReceived(message);
-            }
+
         });
     }
 
     startPlaying() {
         this.baseTime = 0;
 
-        if (!this.play || this.playState == PipelineStates.STOPPED ) {
+        if (!this.play || this.playState == PipelineStates.STOPPED)
             this._playPipeline();
-        }
+
 
         if (this.playState == PipelineStates.PAUSED) {
             this.updatePosition();
@@ -102,9 +102,9 @@ var Play = class Play {
     }
 
     stopPlaying() {
-        if (this.playState != PipelineStates.STOPPED) {
+        if (this.playState != PipelineStates.STOPPED)
             this.onEnd();
-        }
+
     }
 
     onEnd() {
@@ -131,7 +131,7 @@ var Play = class Play {
     _onMessageReceived(message) {
         this.localMsg = message;
         let msg = message.type;
-        switch(msg) {
+        switch (msg) {
 
         case Gst.MessageType.EOS:
             this.onEndOfStream();
@@ -174,45 +174,45 @@ var Play = class Play {
     }
 
     _updateTime() {
-        let time = this.play.query_position(Gst.Format.TIME)[1]/Gst.SECOND;
+        let time = this.play.query_position(Gst.Format.TIME)[1] / Gst.SECOND;
         this.trackDuration = this.play.query_duration(Gst.Format.TIME)[1];
-        this.trackDurationSecs = this.trackDuration/Gst.SECOND;
+        this.trackDurationSecs = this.trackDuration / Gst.SECOND;
 
-        if (time >= 0 && this.playState != PipelineStates.STOPPED) {
+        if (time >= 0 && this.playState != PipelineStates.STOPPED)
             MainWindow.view.setLabel(time);
-        } else if (time >= 0 && this.playState == PipelineStates.STOPPED) {
+        else if (time >= 0 && this.playState == PipelineStates.STOPPED)
             MainWindow.view.setLabel(0);
-        }
+
 
         let absoluteTime = 0;
 
-        if  (this.clock == null) {
+        if  (this.clock == null)
             this.clock = this.play.get_clock();
-        }
+
         try {
             absoluteTime = this.clock.get_time();
-        } catch(error) {
+        } catch (error) {
             // no-op
         }
 
         if (this.baseTime == 0)
             this.baseTime = absoluteTime;
 
-        this.runTime = absoluteTime- this.baseTime;
-        let approxTime = Math.round(this.runTime/_TENTH_SEC);
+        this.runTime = absoluteTime - this.baseTime;
+        let approxTime = Math.round(this.runTime / _TENTH_SEC);
 
-        if (MainWindow.wave != null) {
+        if (MainWindow.wave != null)
             MainWindow.wave._drawEvent(approxTime);
-        }
+
 
         return true;
     }
 
     queryPosition() {
         let position = 0;
-        while (position == 0) {
-            position = this.play.query_position(Gst.Format.TIME)[1]/Gst.SECOND;
-        }
+        while (position == 0)
+            position = this.play.query_position(Gst.Format.TIME)[1] / Gst.SECOND;
+
 
         return position;
     }
@@ -235,9 +235,9 @@ var Play = class Play {
 
     _showErrorDialog(errorStrOne, errorStrTwo) {
         if (errorDialogState == ErrState.OFF) {
-            let errorDialog = new Gtk.MessageDialog ({ destroy_with_parent: true,
-                                                       buttons: Gtk.ButtonsType.OK,
-                                                       message_type: Gtk.MessageType.WARNING });
+            let errorDialog = new Gtk.MessageDialog({ destroy_with_parent: true,
+                buttons: Gtk.ButtonsType.OK,
+                message_type: Gtk.MessageType.WARNING });
 
             if (errorStrOne != null)
                 errorDialog.set_property('text', errorStrOne);
@@ -246,11 +246,11 @@ var Play = class Play {
                 errorDialog.set_property('secondary-text', errorStrTwo);
 
             errorDialog.set_transient_for(Gio.Application.get_default().get_active_window());
-            errorDialog.connect ('response', () => {
+            errorDialog.connect('response', () => {
                 errorDialog.destroy();
                 this.onEndOfStream();
             });
             errorDialog.show();
         }
     }
-}
+};

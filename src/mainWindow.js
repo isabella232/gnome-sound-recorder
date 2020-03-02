@@ -65,34 +65,34 @@ var wave = null;
 
 var ActiveArea = {
     RECORD: 0,
-    PLAY: 1
+    PLAY: 1,
 };
 
 const ListColumns = {
     NAME: 0,
-    MENU: 1
+    MENU: 1,
 };
 
 const PipelineStates = {
     PLAYING: 0,
     PAUSED: 1,
-    STOPPED: 2
+    STOPPED: 2,
 };
 
 var RecordPipelineStates = {
     PLAYING: 0,
     PAUSED: 1,
-    STOPPED: 2
+    STOPPED: 2,
 };
 
 const _TIME_DIVISOR = 60;
 var _SEC_TIMEOUT = 100;
 
 var MainWindow = GObject.registerClass(class MainWindow extends Gtk.ApplicationWindow {
-     _init(params) {
+    _init(params) {
         audioProfile = new AudioProfile.AudioProfile();
-        offsetController = new FileUtil.OffsetController;
-        displayTime = new FileUtil.DisplayTime;
+        offsetController = new FileUtil.OffsetController();
+        displayTime = new FileUtil.DisplayTime();
         view = new MainView();
         play = new Play.Play();
 
@@ -104,15 +104,15 @@ var MainWindow = GObject.registerClass(class MainWindow extends Gtk.ApplicationW
             width_request: 640,
             hexpand: true,
             vexpand: true,
-            icon_name: pkg.name
+            icon_name: pkg.name,
         }, params));
 
         header = new Gtk.HeaderBar({ hexpand: true,
-                                     show_close_button: true });
+            show_close_button: true });
         this.set_titlebar(header);
         header.get_style_context().add_class('titlebar');
 
-        recordButton = new RecordButton({ label: _("Record") });
+        recordButton = new RecordButton({ label: _('Record') });
         recordButton.get_style_context().add_class('suggested-action');
         header.pack_start(recordButton);
 
@@ -124,12 +124,12 @@ var MainWindow = GObject.registerClass(class MainWindow extends Gtk.ApplicationW
 
     _addAppMenu() {
         let menu = new Gio.Menu();
-        menu.append(_("Preferences"), 'app.preferences');
-        menu.append(_("About Sound Recorder"), 'app.about');
+        menu.append(_('Preferences'), 'app.preferences');
+        menu.append(_('About Sound Recorder'), 'app.about');
 
         appMenuButton = new Gtk.MenuButton({
-          image: new Gtk.Image({ icon_name: 'open-menu-symbolic' }),
-          menu_model: menu
+            image: new Gtk.Image({ icon_name: 'open-menu-symbolic' }),
+            menu_model: menu,
         });
         header.pack_end(appMenuButton);
     }
@@ -141,7 +141,7 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
             vexpand: true,
             transition_type: Gtk.StackTransitionType.CROSSFADE,
             transition_duration: 100,
-            visible: true
+            visible: true,
         }, params));
 
         this._addListviewPage('listviewPage');
@@ -150,26 +150,26 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
 
     _addEmptyPage() {
         this.emptyGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
-                                        hexpand: true,
-                                        vexpand: true,
-                                        halign: Gtk.Align.CENTER,
-                                        valign: Gtk.Align.CENTER });
+            hexpand: true,
+            vexpand: true,
+            halign: Gtk.Align.CENTER,
+            valign: Gtk.Align.CENTER });
         this._scrolledWin.add(this.emptyGrid);
 
         let emptyPageImage = new Gtk.Image({ icon_name: 'audio-input-microphone-symbolic',
-                                             icon_size: Gtk.IconSize.DIALOG });
+            icon_size: Gtk.IconSize.DIALOG });
         emptyPageImage.get_style_context().add_class('dim-label');
         this.emptyGrid.add(emptyPageImage);
-        let emptyPageTitle = new Gtk.Label({ label: _("Add Recordings"),
-                                             halign: Gtk.Align.CENTER,
-                                             valign: Gtk.Align.CENTER });
+        let emptyPageTitle = new Gtk.Label({ label: _('Add Recordings'),
+            halign: Gtk.Align.CENTER,
+            valign: Gtk.Align.CENTER });
         emptyPageTitle.get_style_context().add_class('dim-label');
         this.emptyGrid.add(emptyPageTitle);
-        let emptyPageDirections = new Gtk.Label({ label: _("Use the <b>Record</b> button to make sound recordings"),
-                                                  use_markup: true,
-                                                  max_width_chars: 30,
-                                                  halign: Gtk.Align.CENTER,
-                                                  valign: Gtk.Align.CENTER });
+        let emptyPageDirections = new Gtk.Label({ label: _('Use the <b>Record</b> button to make sound recordings'),
+            use_markup: true,
+            max_width_chars: 30,
+            halign: Gtk.Align.CENTER,
+            valign: Gtk.Align.CENTER });
         emptyPageDirections.get_style_context().add_class('dim-label');
         this.emptyGrid.add(emptyPageDirections);
         this.emptyGrid.show_all();
@@ -182,9 +182,9 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
         this._record = new Record.Record(audioProfile);
 
         groupGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
-                                   hexpand: true,
-                                   vexpand: true });
-        this.add_titled(groupGrid, name, "View");
+            hexpand: true,
+            vexpand: true });
+        this.add_titled(groupGrid, name, 'View');
     }
 
     onPlayStopClicked() {
@@ -192,24 +192,22 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
             play.stopPlaying();
             let listRow = this.listBox.get_selected_row();
             let rowGrid = listRow.get_child();
-            rowGrid.foreach((child) => {
-                if (child.name == "PauseButton") {
+            rowGrid.foreach(child => {
+                if (child.name == 'PauseButton') {
                     child.hide();
                     child.sensitive = false;
-                }
-                else if (child.name == "PlayLabelBox") {
+                } else if (child.name == 'PlayLabelBox') {
                     child.show();
-                    child.foreach((grandchild) => {
-                        if (grandchild.name == "PlayTimeLabel") {
+                    child.foreach(grandchild => {
+                        if (grandchild.name == 'PlayTimeLabel')
                             grandchild.hide();
-                        }
 
-                        if (grandchild.name == "DividerLabel") {
+
+                        if (grandchild.name == 'DividerLabel')
                             grandchild.hide();
-                        }
+
                     });
-                }
-                else {
+                } else {
                     child.show();
                     child.sensitive = true;
                 }
@@ -230,20 +228,20 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
         this.unformattedTime = unformattedTime;
         let seconds = Math.floor(this.unformattedTime);
         let hours = parseInt(seconds / Math.pow(_TIME_DIVISOR, 2));
-        let hoursString = ""
+        let hoursString = '';
 
         if (hours > 10)
-            hoursString = hours + ":"
+            hoursString = `${hours}:`;
         else if (hours < 10 && hours > 0)
-            hoursString = "0" + hours + ":"
+            hoursString = `0${hours}:`;
 
         let minuteString = parseInt(seconds / _TIME_DIVISOR) % _TIME_DIVISOR;
         let secondString = parseInt(seconds % _TIME_DIVISOR);
         let timeString =
-            hoursString +
-            (minuteString < 10 ? "0" + minuteString : minuteString)+
-            ":" +
-            (secondString < 10 ? "0" + secondString : secondString);
+            `${hoursString +
+            (minuteString < 10 ? `0${minuteString}` : minuteString)
+            }:${
+                secondString < 10 ? `0${secondString}` : secondString}`;
 
         return timeString;
     }
@@ -251,9 +249,9 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
     _updatePositionCallback() {
         let position = MainWindow.play.queryPosition();
 
-        if (position >= 0) {
+        if (position >= 0)
             this.progressScale.set_value(position);
-        }
+
         return true;
     }
 
@@ -268,11 +266,11 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
     }
 
     setVolume() {
-        if (setVisibleID == ActiveArea.PLAY) {
+        if (setVisibleID == ActiveArea.PLAY)
             play.setVolume(volumeValue[0].play);
-        } else if (setVisibleID == ActiveArea.RECORD) {
-           this._record.setVolume(volumeValue[0].record);
-        }
+        else if (setVisibleID == ActiveArea.RECORD)
+            this._record.setVolume(volumeValue[0].record);
+
     }
 
     getVolume() {
@@ -289,15 +287,15 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
         volumeValue.push({ record: micVolume, play: playVolume });
         activeProfile = Application.application.getPreferences();
 
-        this.recordGrid = new Gtk.Grid({ name: "recordGrid",
-                                         orientation: Gtk.Orientation.HORIZONTAL });
+        this.recordGrid = new Gtk.Grid({ name: 'recordGrid',
+            orientation: Gtk.Orientation.HORIZONTAL });
         this.groupGrid.add(this.recordGrid);
 
         this.widgetRecord = new Gtk.Toolbar({ show_arrow: false,
-                                              halign: Gtk.Align.END,
-                                              valign: Gtk.Align.FILL,
-                                              icon_size: Gtk.IconSize.BUTTON,
-                                              opacity: 1 });
+            halign: Gtk.Align.END,
+            valign: Gtk.Align.FILL,
+            icon_size: Gtk.IconSize.BUTTON,
+            opacity: 1 });
         this.recordGrid.attach(this.widgetRecord, 0, 0, 2, 2);
 
         this._boxRecord = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
@@ -305,16 +303,16 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
         this.widgetRecord.insert(this._groupRecord, -1);
 
         this.recordTextLabel = new Gtk.Label({ margin_bottom: 4,
-                                               margin_end: 6,
-                                               margin_start: 6,
-                                               margin_top: 6 });
-        this.recordTextLabel.label = _("Recording…");
+            margin_end: 6,
+            margin_start: 6,
+            margin_top: 6 });
+        this.recordTextLabel.label = _('Recording…');
         this._boxRecord.pack_start(this.recordTextLabel, false, true, 0);
 
         this.recordTimeLabel = new Gtk.Label({ margin_bottom: 4,
-                                               margin_end: 6,
-                                               margin_start: 6,
-                                               margin_top: 6});
+            margin_end: 6,
+            margin_start: 6,
+            margin_top: 6 });
 
         this._boxRecord.pack_start(this.recordTimeLabel, false, true, 0);
 
@@ -322,16 +320,16 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
         this.toolbarStart.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
 
         // finish button (stop recording)
-        let stopRecord = new Gtk.Button({ label: _("Done"),
-                                          halign: Gtk.Align.FILL,
-                                          valign: Gtk.Align.CENTER,
-                                          hexpand: true,
-                                          margin_bottom: 4,
-                                          margin_end: 6,
-                                          margin_start: 6,
-                                          margin_top: 6 });
+        let stopRecord = new Gtk.Button({ label: _('Done'),
+            halign: Gtk.Align.FILL,
+            valign: Gtk.Align.CENTER,
+            hexpand: true,
+            margin_bottom: 4,
+            margin_end: 6,
+            margin_start: 6,
+            margin_top: 6 });
         stopRecord.get_style_context().add_class('text-button');
-        stopRecord.connect("clicked", () => this.onRecordStopClicked());
+        stopRecord.connect('clicked', () => this.onRecordStopClicked());
         this.toolbarStart.pack_start(stopRecord, true, true, 0);
         this.recordGrid.attach(this.toolbarStart, 5, 1, 2, 2);
     }
@@ -341,16 +339,16 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
         this._scrolledWin.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
         this.scrollbar = this._scrolledWin.get_vadjustment();
 
-        this.scrollbar.connect("value_changed", () => {
-                this.currentBound = this.scrollbar.get_value();
-                UpperBoundVal = this.scrollbar.upper - this.scrollbar.page_size;
-                if (UpperBoundVal == this.currentBound && loadMoreButton == null) {
-                    this.addLoadMoreButton();
-                } else if (UpperBoundVal != this.currentBound && loadMoreButton) {
-                    loadMoreButton.destroy();
-                    loadMoreButton = null;
-                }
-            });
+        this.scrollbar.connect('value_changed', () => {
+            this.currentBound = this.scrollbar.get_value();
+            UpperBoundVal = this.scrollbar.upper - this.scrollbar.page_size;
+            if (UpperBoundVal == this.currentBound && loadMoreButton == null) {
+                this.addLoadMoreButton();
+            } else if (UpperBoundVal != this.currentBound && loadMoreButton) {
+                loadMoreButton.destroy();
+                loadMoreButton = null;
+            }
+        });
 
         this.groupGrid.add(this._scrolledWin);
         this._scrolledWin.show();
@@ -369,8 +367,8 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
             this.listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);
             this.listBox.set_header_func(null);
             this.listBox.set_activate_on_single_click(true);
-            this.listBox.connect("row-selected", () => {
-                this.rowGridCallback()
+            this.listBox.connect('row-selected', () => {
+                this.rowGridCallback();
             });
             this.listBox.show();
 
@@ -379,25 +377,25 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
 
             for (let i = this._startIdx; i <= this._endIdx; i++) {
                 this.rowGrid = new Gtk.Grid({ name: i.toString(),
-                                              height_request: 45,
-                                              orientation: Gtk.Orientation.VERTICAL,
-                                              hexpand: true,
-                                              vexpand: true });
+                    height_request: 45,
+                    orientation: Gtk.Orientation.VERTICAL,
+                    hexpand: true,
+                    vexpand: true });
                 this.rowGrid.set_orientation(Gtk.Orientation.HORIZONTAL);
                 this.listBox.add(this.rowGrid);
                 this.rowGrid.show();
 
                 // play button
-                this.playImage = new Gtk.Image({ name: "PlayImage" });
+                this.playImage = new Gtk.Image({ name: 'PlayImage' });
                 this.playImage.set_from_icon_name('media-playback-start-symbolic', Gtk.IconSize.BUTTON);
-                this._playListButton = new Gtk.Button({ name: "PlayButton",
-                                                        hexpand: false,
-                                                        vexpand: true });
+                this._playListButton = new Gtk.Button({ name: 'PlayButton',
+                    hexpand: false,
+                    vexpand: true });
                 this._playListButton.set_image(this.playImage);
-                this._playListButton.set_tooltip_text(_("Play"));
+                this._playListButton.set_tooltip_text(_('Play'));
                 this.rowGrid.attach(this._playListButton, 0, 0, 2, 2);
                 this._playListButton.show();
-                this._playListButton.connect('clicked', (button) => {
+                this._playListButton.connect('clicked', button => {
                     let row = button.get_parent().get_parent();
                     this.listBox.select_row(row);
                     play.passSelected(row);
@@ -410,94 +408,94 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
                 // pause button
                 this.pauseImage = Gtk.Image.new();
                 this.pauseImage.set_from_icon_name('media-playback-pause-symbolic', Gtk.IconSize.BUTTON);
-                this._pauseListButton = new Gtk.Button({ name: "PauseButton",
-                                                         hexpand: false,
-                                                         vexpand: true });
+                this._pauseListButton = new Gtk.Button({ name: 'PauseButton',
+                    hexpand: false,
+                    vexpand: true });
                 this._pauseListButton.set_image(this.pauseImage);
-                this._pauseListButton.set_tooltip_text(_("Pause"));
+                this._pauseListButton.set_tooltip_text(_('Pause'));
                 this.rowGrid.attach(this._pauseListButton, 0, 0, 2, 2);
                 this._pauseListButton.hide();
-                this._pauseListButton.connect('clicked', (button) => {
+                this._pauseListButton.connect('clicked', button => {
                     let row = button.get_parent().get_parent();
                     this.listBox.select_row(row);
                     this.onPause(row);
                 });
 
-                this._fileName = new Gtk.Label({ name: "FileNameLabel",
-                                                 ellipsize: Pango.EllipsizeMode.END,
-                                                 halign: Gtk.Align.START,
-                                                 valign: Gtk.Align.START,
-                                                 margin_start: 15,
-                                                 margin_top: 5,
-                                                 use_markup: true,
-                                                 width_chars: 35,
-                                                 xalign: 0 });
-                let markup = ('<b>'+ this._files[i].fileName + '</b>');
+                this._fileName = new Gtk.Label({ name: 'FileNameLabel',
+                    ellipsize: Pango.EllipsizeMode.END,
+                    halign: Gtk.Align.START,
+                    valign: Gtk.Align.START,
+                    margin_start: 15,
+                    margin_top: 5,
+                    use_markup: true,
+                    width_chars: 35,
+                    xalign: 0 });
+                let markup = `<b>${this._files[i].fileName}</b>`;
                 this._fileName.label = markup;
                 this._fileName.set_no_show_all(true);
                 this.rowGrid.attach(this._fileName, 3, 0, 10, 3);
                 this._fileName.show();
 
-                this._playLabelBox = new Gtk.Box({ name: "PlayLabelBox",
-                                                   orientation: Gtk.Orientation.HORIZONTAL,
-                                                   height_request: 45 });
+                this._playLabelBox = new Gtk.Box({ name: 'PlayLabelBox',
+                    orientation: Gtk.Orientation.HORIZONTAL,
+                    height_request: 45 });
                 this.rowGrid.attach(this._playLabelBox, 3, 1, 5, 1);
                 this._playLabelBox.show();
-                this.playDurationLabel = new Gtk.Label({ name: "PlayDurationLabel",
-                                                         halign: Gtk.Align.END,
-                                                         valign: Gtk.Align.END,
-                                                         margin_start: 15,
-                                                         margin_top: 5 });
-                this.fileDuration = this._formatTime(this._files[i].duration/Gst.SECOND);
+                this.playDurationLabel = new Gtk.Label({ name: 'PlayDurationLabel',
+                    halign: Gtk.Align.END,
+                    valign: Gtk.Align.END,
+                    margin_start: 15,
+                    margin_top: 5 });
+                this.fileDuration = this._formatTime(this._files[i].duration / Gst.SECOND);
                 this.playDurationLabel.label = this.fileDuration;
                 this._playLabelBox.pack_start(this.playDurationLabel, false, true, 0);
                 this.playDurationLabel.show();
 
-                this.dividerLabel = new Gtk.Label({ name: "DividerLabel",
-                                                    halign: Gtk.Align.START,
-                                                    valign: Gtk.Align.END,
-                                                    margin_top: 5 });
-                this.dividerLabel.label = "/";
+                this.dividerLabel = new Gtk.Label({ name: 'DividerLabel',
+                    halign: Gtk.Align.START,
+                    valign: Gtk.Align.END,
+                    margin_top: 5 });
+                this.dividerLabel.label = '/';
                 this._playLabelBox.pack_start(this.dividerLabel, false, true, 0);
                 this.dividerLabel.hide();
 
-                this.playTimeLabel = new Gtk.Label({ name: "PlayTimeLabel",
-                                                     halign: Gtk.Align.START,
-                                                     valign: Gtk.Align.END,
-                                                     margin_end: 15,
-                                                     margin_top: 5 });
-                this.playTimeLabel.label = "0:00";
+                this.playTimeLabel = new Gtk.Label({ name: 'PlayTimeLabel',
+                    halign: Gtk.Align.START,
+                    valign: Gtk.Align.END,
+                    margin_end: 15,
+                    margin_top: 5 });
+                this.playTimeLabel.label = '0:00';
                 this._playLabelBox.pack_start(this.playTimeLabel, false, true, 0);
                 this.playTimeLabel.hide();
 
-                //Date Modified label
-                this.dateModifiedLabel = new Gtk.Label({ name: "DateModifiedLabel",
-                                                         halign: Gtk.Align.END,
-                                                         valign: Gtk.Align.END,
-                                                         margin_start: 15,
-                                                         margin_top: 5 });
+                // Date Modified label
+                this.dateModifiedLabel = new Gtk.Label({ name: 'DateModifiedLabel',
+                    halign: Gtk.Align.END,
+                    valign: Gtk.Align.END,
+                    margin_start: 15,
+                    margin_top: 5 });
                 this.dateModifiedLabel.label = this._files[i].dateModified;
                 this.dateModifiedLabel.get_style_context().add_class('dim-label');
                 this.dateModifiedLabel.set_no_show_all(true);
                 this.rowGrid.attach(this.dateModifiedLabel, 3, 1, 6, 1);
                 this.dateModifiedLabel.show();
 
-                this.waveFormGrid = new Gtk.Grid({ name: "WaveFormGrid",
-                                                   hexpand: true,
-                                                   vexpand: true,
-                                                   orientation: Gtk.Orientation.VERTICAL,
-                                                   valign: Gtk.Align.FILL });
+                this.waveFormGrid = new Gtk.Grid({ name: 'WaveFormGrid',
+                    hexpand: true,
+                    vexpand: true,
+                    orientation: Gtk.Orientation.VERTICAL,
+                    valign: Gtk.Align.FILL });
                 this.waveFormGrid.set_no_show_all(true);
                 this.rowGrid.attach(this.waveFormGrid, 12, 1, 17, 2);
                 this.waveFormGrid.show();
 
                 // info button
-                this._info = new Gtk.Button({ name: "InfoButton",
-                                              hexpand: false,
-                                              vexpand: true,
-                                              margin_end: 2 });
-                this._info.image = Gtk.Image.new_from_icon_name("dialog-information-symbolic", Gtk.IconSize.BUTTON);
-                this._info.connect("clicked", (button) => {
+                this._info = new Gtk.Button({ name: 'InfoButton',
+                    hexpand: false,
+                    vexpand: true,
+                    margin_end: 2 });
+                this._info.image = Gtk.Image.new_from_icon_name('dialog-information-symbolic', Gtk.IconSize.BUTTON);
+                this._info.connect('clicked', button => {
                     let row = button.get_parent().get_parent();
                     this.listBox.select_row(row);
                     let gridForName = row.get_child();
@@ -505,21 +503,21 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
                     let file = this._files[idx];
                     this._onInfoButton(file);
                 });
-                this._info.set_tooltip_text(_("Info"));
+                this._info.set_tooltip_text(_('Info'));
                 this.rowGrid.attach(this._info, 27, 0, 1, 2);
                 this._info.hide();
 
                 // delete button
-                this._delete = new Gtk.Button({ name: "DeleteButton",
-                                                hexpand: false,
-                                                margin_start: 2, });
-                this._delete.image = Gtk.Image.new_from_icon_name("user-trash-symbolic", Gtk.IconSize.BUTTON);
-                this._delete.connect("clicked", (button) => {
+                this._delete = new Gtk.Button({ name: 'DeleteButton',
+                    hexpand: false,
+                    margin_start: 2 });
+                this._delete.image = Gtk.Image.new_from_icon_name('user-trash-symbolic', Gtk.IconSize.BUTTON);
+                this._delete.connect('clicked', button => {
                     let row = button.get_parent().get_parent();
                     this.listBox.select_row(row);
                     this._deleteFile(row);
                 });
-                this._delete.set_tooltip_text(_("Delete"));
+                this._delete.set_tooltip_text(_('Delete'));
                 this.rowGrid.attach(this._delete, 28, 0, 1, 2);
                 this._delete.hide();
             }
@@ -528,10 +526,10 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
     }
 
     addLoadMoreButton() {
-       loadMoreButton = new LoadMoreButton();
-       loadMoreButton.connect('clicked', () => loadMoreButton.onLoadMore());
-       this.groupGrid.add(loadMoreButton);
-       loadMoreButton.show();
+        loadMoreButton = new LoadMoreButton();
+        loadMoreButton.connect('clicked', () => loadMoreButton.onLoadMore());
+        this.groupGrid.add(loadMoreButton);
+        loadMoreButton.show();
     }
 
     destroyLoadMoreButton() {
@@ -545,21 +543,21 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
         this.destroyLoadMoreButton();
         previousSelRow = null;
 
-        if (this.listBox) {
+        if (this.listBox)
             this.listBox.set_selection_mode(Gtk.SelectionMode.NONE);
-        }
+
 
         list.setListTypeRefresh();
         list.enumerateDirectory();
     }
 
     listBoxLoadMore() {
-       this.destroyLoadMoreButton();
-       previousSelRow = null;
-       this.listBox.set_selection_mode(Gtk.SelectionMode.NONE);
-       offsetController.increaseEndIdxStep();
-       list.setListTypeRefresh();
-       list._setDiscover();
+        this.destroyLoadMoreButton();
+        previousSelRow = null;
+        this.listBox.set_selection_mode(Gtk.SelectionMode.NONE);
+        offsetController.increaseEndIdxStep();
+        list.setListTypeRefresh();
+        list._setDiscover();
     }
 
     scrolledWinDelete() {
@@ -571,38 +569,38 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
         this.destroyLoadMoreButton();
         if (previousSelRow != null) {
             let rowGrid = previousSelRow.get_child();
-            rowGrid.foreach((child) => {
+            rowGrid.foreach(child => {
                 let alwaysShow = child.get_no_show_all();
 
                 if (!alwaysShow)
                     child.hide();
 
-                if (child.name == "PauseButton") {
+                if (child.name == 'PauseButton') {
                     child.hide();
                     child.sensitive = false;
                 }
-                if (child.name == "PlayButton") {
+                if (child.name == 'PlayButton') {
                     child.show();
                     child.sensitive = true;
                 }
 
-                if (child.name == "PlayLabelBox") {
+                if (child.name == 'PlayLabelBox') {
                     child.show();
-                    child.foreach((grandchild) => {
-                        if (grandchild.name == "PlayTimeLabel") {
+                    child.foreach(grandchild => {
+                        if (grandchild.name == 'PlayTimeLabel')
                             grandchild.hide();
-                        }
 
-                        if (grandchild.name == "DividerLabel") {
+
+                        if (grandchild.name == 'DividerLabel')
                             grandchild.hide();
-                        }
+
                     });
                 }
             });
 
-            if (play.getPipeStates() == PipelineStates.PLAYING || play.getPipeStates()== PipelineStates.PAUSED) {
+            if (play.getPipeStates() == PipelineStates.PLAYING || play.getPipeStates() == PipelineStates.PAUSED)
                 play.stopPlaying();
-            }
+
         }
         previousSelRow = null;
     }
@@ -612,25 +610,25 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
         this.destroyLoadMoreButton();
 
         if (selectedRow) {
-            if (previousSelRow != null) {
+            if (previousSelRow != null)
                 this.hasPreviousSelRow();
-            }
+
 
             previousSelRow = selectedRow;
             let selectedRowGrid = previousSelRow.get_child();
             selectedRowGrid.show_all();
-            selectedRowGrid.foreach((child) => {
+            selectedRowGrid.foreach(child => {
                 let alwaysShow = child.get_no_show_all();
 
                 if (!alwaysShow)
                     child.sensitive = true;
 
-                if (child.name == "PauseButton") {
+                if (child.name == 'PauseButton') {
                     child.hide();
                     child.sensitive = false;
                 }
 
-                if (child.name == "WaveFormGrid")
+                if (child.name == 'WaveFormGrid')
                     child.sensitive = true;
             });
         }
@@ -639,8 +637,8 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
     _getFileFromRow(selected) {
         let fileForAction = null;
         let rowGrid = selected.get_child();
-        rowGrid.foreach((child) => {
-            if (child.name == "FileNameLabel") {
+        rowGrid.foreach(child => {
+            if (child.name == 'FileNameLabel') {
                 let name = child.get_text();
                 let application = Gio.Application.get_default();
                 fileForAction = application.saveDir.get_child_for_display_name(name);
@@ -670,7 +668,7 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
     }
 
     setLabel(time) {
-        this.time = time
+        this.time = time;
 
         this.timeLabelString = this._formatTime(time);
 
@@ -686,10 +684,10 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
 
         let selected = this.listBox.get_row_at_index(index);
         let rowGrid = selected.get_child();
-        rowGrid.foreach((child) => {
-            if (child.name == "FileNameLabel") {
+        rowGrid.foreach(child => {
+            if (child.name == 'FileNameLabel') {
                 let name = child.get_text();
-                let markup = ('<b>'+ newName + '</b>');
+                let markup = `<b>${newName}</b>`;
                 child.label = markup;
             }
         });
@@ -703,13 +701,13 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
             play.pausePlaying();
 
             let rowGrid = listRow.get_child();
-            rowGrid.foreach((child) => {
-                if (child.name == "PauseButton") {
+            rowGrid.foreach(child => {
+                if (child.name == 'PauseButton') {
                     child.hide();
                     child.sensitive = false;
                 }
 
-                if (child.name == "PlayButton") {
+                if (child.name == 'PlayButton') {
                     child.show();
                     child.sensitive = true;
                 }
@@ -726,39 +724,39 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
 
 
             let rowGrid = listRow.get_child();
-            rowGrid.foreach((child) => {
-                if (child.name == "InfoButton" || child.name == "DeleteButton" ||
-                    child.name == "PlayButton") {
+            rowGrid.foreach(child => {
+                if (child.name == 'InfoButton' || child.name == 'DeleteButton' ||
+                    child.name == 'PlayButton') {
                     child.hide();
                     child.sensitive = false;
                 }
 
-                if (child.name == "PauseButton") {
+                if (child.name == 'PauseButton') {
                     child.show();
                     child.sensitive = true;
                 }
 
-                if (child.name == "PlayLabelBox") {
-                    child.foreach((grandchild) => {
-                        if (grandchild.name == "PlayTimeLabel") {
+                if (child.name == 'PlayLabelBox') {
+                    child.foreach(grandchild => {
+                        if (grandchild.name == 'PlayTimeLabel')
                             view.playTimeLabel = grandchild;
-                        }
 
-                        if (grandchild.name == "DividerLabel") {
+
+                        if (grandchild.name == 'DividerLabel')
                             grandchild.show();
-                        }
+
                     });
                 }
 
-                if (child.name == "WaveFormGrid") {
+                if (child.name == 'WaveFormGrid') {
                     this.wFGrid = child;
                     child.sensitive = true;
                 }
             });
 
-            if (activeState != PipelineStates.PAUSED) {
+            if (activeState != PipelineStates.PAUSED)
                 wave = new Waveform.WaveForm(this.wFGrid, selFile);
-            }
+
         }
     }
 });
@@ -769,20 +767,20 @@ const RecordButton = GObject.registerClass(class RecordButton extends Gtk.Button
         this.image = Gtk.Image.new_from_icon_name('media-record-symbolic', Gtk.IconSize.BUTTON);
         this.set_always_show_image(true);
         this.set_valign(Gtk.Align.CENTER);
-        this.set_label(_("Record"));
+        this.set_label(_('Record'));
         this.get_style_context().add_class('text-button');
-        this.connect("clicked", () => this._onRecord());
+        this.connect('clicked', () => this._onRecord());
     }
 
     _onRecord() {
         view.destroyLoadMoreButton();
         view.hasPreviousSelRow();
 
-        if (view.listBox) {
+        if (view.listBox)
             view.listBox.set_selection_mode(Gtk.SelectionMode.NONE);
-        } else {
+        else
             view.emptyGrid.destroy();
-        }
+
 
         this.set_sensitive(false);
         setVisibleID = ActiveArea.RECORD;
@@ -801,7 +799,7 @@ var EncoderComboBox = GObject.registerClass(class EncoderComboBox extends Gtk.Co
     // encoding setting labels in combobox
     _init() {
         super._init();
-        let combo = [_("Ogg Vorbis"), _("Opus"), _("FLAC"), _("MP3"), _("MOV")];
+        let combo = [_('Ogg Vorbis'), _('Opus'), _('FLAC'), _('MP3'), _('MOV')];
 
         for (let i = 0; i < combo.length; i++)
             this.append_text(combo[i]);
@@ -809,7 +807,7 @@ var EncoderComboBox = GObject.registerClass(class EncoderComboBox extends Gtk.Co
         this.set_sensitive(true);
         activeProfile = Application.application.getPreferences();
         this.set_active(activeProfile);
-        this.connect("changed", () => this._onComboBoxTextChanged());
+        this.connect('changed', () => this._onComboBoxTextChanged());
     }
 
     _onComboBoxTextChanged() {
@@ -822,7 +820,7 @@ var ChannelsComboBox = GObject.registerClass(class ChannelsComboBox extends Gtk.
     // channel setting labels in combobox
     _init() {
         super._init();
-        let combo = [_("Mono"), _("Stereo")];
+        let combo = [_('Mono'), _('Stereo')];
 
         for (let i = 0; i < combo.length; i++)
             this.append_text(combo[i]);
@@ -830,7 +828,7 @@ var ChannelsComboBox = GObject.registerClass(class ChannelsComboBox extends Gtk.
         this.set_sensitive(true);
         let chanProfile = Application.application.getChannelsPreferences();
         this.set_active(chanProfile);
-        this.connect("changed", () => this._onChannelComboBoxTextChanged());
+        this.connect('changed', () => this._onChannelComboBoxTextChanged());
     }
 
     _onChannelComboBoxTextChanged() {
@@ -843,7 +841,7 @@ const LoadMoreButton = GObject.registerClass(class LoadMoreButton extends Gtk.Bu
     _init() {
         super._init();
         this._block = false;
-        this.label = _("Load More");
+        this.label = _('Load More');
         this.get_style_context().add_class('documents-load-more');
     }
 

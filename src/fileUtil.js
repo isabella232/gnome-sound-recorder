@@ -49,11 +49,11 @@ var OffsetController = class OffsetController {
 
     getEndIdx() {
         totItems = MainWindow.list.getItemCount();
-        if (CurrentEndIdx < totItems) {
-            this.endIdx = CurrentEndIdx -1;
-        } else {
+        if (CurrentEndIdx < totItems)
+            this.endIdx = CurrentEndIdx - 1;
+        else
             this.endIdx = totItems - 1;
-        }
+
 
         return this.endIdx;
     }
@@ -65,11 +65,11 @@ var OffsetController = class OffsetController {
     getcidx() {
         return CurrentEndIdx;
     }
-}
+};
 
 var DisplayTime = class DisplayTime {
     getDisplayTime(mtime) {
-        let text = "";
+        let text = '';
         let DAY = 86400000000;
         let now = GLib.DateTime.new_now_local();
         let difference = now.difference(mtime);
@@ -81,30 +81,30 @@ var DisplayTime = class DisplayTime {
         if (difference < DAY) {
             text = mtime.format('%X');
         } else if (difference < 2 * DAY) {
-            text = _("Yesterday");
+            text = _('Yesterday');
         } else if (difference < 7 * DAY) {
-            text = Gettext.ngettext("%d day ago",
-                                    "%d days ago",
-                                     days).format(days);
+            text = Gettext.ngettext('%d day ago',
+                '%d days ago',
+                days).format(days);
         } else if (difference < 14 * DAY) {
-            text = _("Last week");
+            text = _('Last week');
         } else if (difference < 28 * DAY) {
-            text = Gettext.ngettext("%d week ago",
-                                     "%d weeks ago",
-                                     weeks).format(weeks);
+            text = Gettext.ngettext('%d week ago',
+                '%d weeks ago',
+                weeks).format(weeks);
         } else if (difference < 60 * DAY) {
-            text = _("Last month");
+            text = _('Last month');
         } else if (difference < 360 * DAY) {
-            text = Gettext.ngettext("%d month ago",
-                                     "%d months ago",
-                                     months).format(months);
+            text = Gettext.ngettext('%d month ago',
+                '%d months ago',
+                months).format(months);
         } else if (difference < 730 * DAY) {
-            text = _("Last year");
+            text = _('Last year');
         } else {
-            text = Gettext.ngettext("%d year ago",
-                                    "%d years ago",
-                                    years).format(years);
+            text = Gettext.ngettext('%d year ago',
+                '%d years ago',
+                years).format(years);
         }
         return text;
     }
-}
+};

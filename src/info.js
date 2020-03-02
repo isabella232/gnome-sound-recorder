@@ -34,23 +34,23 @@ var InfoDialog = class InfoDialog {
 
         this._file = Gio.File.new_for_uri(fileNav.uri);
 
-        this.widget = new Gtk.Dialog ({ resizable: false,
-                                        modal: true,
-                                        destroy_with_parent: true,
-                                        default_width: 400 });
+        this.widget = new Gtk.Dialog({ resizable: false,
+            modal: true,
+            destroy_with_parent: true,
+            default_width: 400 });
         this.widget.set_transient_for(Gio.Application.get_default().get_active_window());
-        let header = new Gtk.HeaderBar({ title: _("Info") });
+        let header = new Gtk.HeaderBar({ title: _('Info') });
         header.set_show_close_button(false);
         this.widget.set_titlebar(header);
 
 
-        let cancelButton = new Gtk.Button({ label: _("Cancel") });
-        cancelButton.connect("clicked", () => this.onCancelClicked());
+        let cancelButton = new Gtk.Button({ label: _('Cancel') });
+        cancelButton.connect('clicked', () => this.onCancelClicked());
 
         header.pack_start(cancelButton);
 
-        let doneButton = new Gtk.Button({ label: _("Done") });
-        doneButton.connect("clicked", () => this.onDoneClicked());
+        let doneButton = new Gtk.Button({ label: _('Done') });
+        doneButton.connect('clicked', () => this.onDoneClicked());
 
         header.pack_end(doneButton);
 
@@ -59,16 +59,16 @@ var InfoDialog = class InfoDialog {
         headerBarSizeGroup.add_widget(cancelButton);
         headerBarSizeGroup.add_widget(doneButton);
 
-        let grid = new Gtk.Grid ({ orientation: Gtk.Orientation.VERTICAL,
-                                   row_homogeneous: true,
-                                   column_homogeneous: true,
-                                   halign: Gtk.Align.CENTER,
-                                   row_spacing: 6,
-                                   column_spacing: 12,
-                                   margin_bottom: 18,
-                                   margin_end: 18,
-                                   margin_start: 18,
-                                   margin_top: 18 });
+        let grid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
+            row_homogeneous: true,
+            column_homogeneous: true,
+            halign: Gtk.Align.CENTER,
+            row_spacing: 6,
+            column_spacing: 12,
+            margin_bottom: 18,
+            margin_end: 18,
+            margin_start: 18,
+            margin_top: 18 });
 
         let contentArea = this.widget.get_content_area();
         contentArea.pack_start(grid, true, true, 2);
@@ -76,51 +76,51 @@ var InfoDialog = class InfoDialog {
         // File Name item
         // Translators: "File Name" is the label next to the file name
         // in the info dialog
-        this._name = new Gtk.Label({ label: C_("File Name", "Name"),
-                                     halign: Gtk.Align.END });
-        this._name.get_style_context ().add_class('dim-label');
+        this._name = new Gtk.Label({ label: C_('File Name', 'Name'),
+            halign: Gtk.Align.END });
+        this._name.get_style_context().add_class('dim-label');
         grid.add(this._name);
 
 
         // Source item
-        this._source = new Gtk.Label({ label: _("Source"),
-                                       halign: Gtk.Align.END });
-        this._source.get_style_context ().add_class('dim-label');
+        this._source = new Gtk.Label({ label: _('Source'),
+            halign: Gtk.Align.END });
+        this._source.get_style_context().add_class('dim-label');
 
-        if (fileName.appName != null) {
+        if (fileName.appName != null)
             grid.add(this._source);
-        }
+
 
         // Date Modified item
-        this._dateModifiedLabel = new Gtk.Label({ label: _("Date Modified"),
-                                                  halign: Gtk.Align.END });
-        this._dateModifiedLabel.get_style_context ().add_class('dim-label');
+        this._dateModifiedLabel = new Gtk.Label({ label: _('Date Modified'),
+            halign: Gtk.Align.END });
+        this._dateModifiedLabel.get_style_context().add_class('dim-label');
         grid.add(this._dateModifiedLabel);
 
         // Date Created item
-        this._dateCreatedLabel = new Gtk.Label({ label: _("Date Created"),
-                                                 halign: Gtk.Align.END });
-        this._dateCreatedLabel.get_style_context ().add_class('dim-label');
+        this._dateCreatedLabel = new Gtk.Label({ label: _('Date Created'),
+            halign: Gtk.Align.END });
+        this._dateCreatedLabel.get_style_context().add_class('dim-label');
 
-        if (fileName.dateCreated != null) {
+        if (fileName.dateCreated != null)
             grid.add(this._dateCreatedLabel);
-        }
+
 
         // Media type item
         // Translators: "Type" is the label next to the media type
         // (Ogg Vorbis, AAC, ...) in the info dialog
-        this._mediaType = new Gtk.Label({ label: C_("Media Type", "Type"),
-                                          halign: Gtk.Align.END });
-        this._mediaType.get_style_context ().add_class('dim-label');
+        this._mediaType = new Gtk.Label({ label: C_('Media Type', 'Type'),
+            halign: Gtk.Align.END });
+        this._mediaType.get_style_context().add_class('dim-label');
         grid.add(this._mediaType);
 
         // File name value
         this._fileNameEntry = new Gtk.Entry({ activates_default: true,
-                                              text: fileName.fileName,
-                                              editable: true,
-                                              hexpand: true,
-                                              width_chars: 40,
-                                              halign: Gtk.Align.START });
+            text: fileName.fileName,
+            editable: true,
+            hexpand: true,
+            width_chars: 40,
+            halign: Gtk.Align.START });
         grid.attach_next_to(this._fileNameEntry, this._name, Gtk.PositionType.RIGHT, 2, 1);
 
         // Source value
@@ -128,28 +128,28 @@ var InfoDialog = class InfoDialog {
         let sourcePath = sourceLink.get_path();
 
         this._sourceData = new Gtk.LinkButton({ label: sourcePath,
-                                                uri: sourceLink.get_uri(),
-                                                halign: Gtk.Align.START });
+            uri: sourceLink.get_uri(),
+            halign: Gtk.Align.START });
         if (fileName.appName != null)
             grid.attach_next_to(this._sourceData, this._source, Gtk.PositionType.RIGHT, 2, 1);
 
         // Date Modified value
         if (fileName.dateModified != null) {
             this._dateModifiedData = new Gtk.Label({ label: fileName.dateModified,
-                                                     halign: Gtk.Align.START });
+                halign: Gtk.Align.START });
             grid.attach_next_to(this._dateModifiedData, this._dateModifiedLabel, Gtk.PositionType.RIGHT, 2, 1);
         }
 
         // Date Created value
         if (fileName.dateCreated) {
             this._dateCreatedData = new Gtk.Label({ label: fileName.dateCreated,
-                                                    halign: Gtk.Align.START });
+                halign: Gtk.Align.START });
             grid.attach_next_to(this._dateCreatedData, this._dateCreatedLabel, Gtk.PositionType.RIGHT, 2, 1);
         }
 
         // Media type data
-        this._mediaTypeData = new Gtk.Label({ label: fileName.mediaType || _("Unknown"),
-                                              halign: Gtk.Align.START });
+        this._mediaTypeData = new Gtk.Label({ label: fileName.mediaType || _('Unknown'),
+            halign: Gtk.Align.START });
         grid.attach_next_to(this._mediaTypeData, this._mediaType, Gtk.PositionType.RIGHT, 2, 1);
 
         this.widget.show_all();
@@ -164,4 +164,4 @@ var InfoDialog = class InfoDialog {
     onCancelClicked() {
         this.widget.destroy();
     }
-}
+};
