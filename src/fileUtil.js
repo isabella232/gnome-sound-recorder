@@ -19,17 +19,9 @@
  */
 
 const Gettext = imports.gettext;
-const _ = imports.gettext.gettext;
-const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
-const GObject = imports.gi.GObject;
-const Gst = imports.gi.Gst;
-const GstPbutils = imports.gi.GstPbutils;
-const Signals = imports.signals;
 
-const Listview = imports.listview;
 const MainWindow = imports.mainWindow;
-const Record = imports.record;
 
 const _OFFSET_STEP = 20;
 let CurrentEndIdx;
