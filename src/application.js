@@ -85,10 +85,10 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
         this._initAppMenu();
         application = this;
         settings = new Gio.Settings({ schema: pkg.name });
-        this.ensure_directory();
+        this.ensureDirectory();
     }
 
-    ensure_directory() {
+    ensureDirectory() {
         /* Translators: "Recordings" here refers to the name of the directory where the application places files */
         let path = GLib.build_filenamev([GLib.get_home_dir(), _('Recordings')]);
 
@@ -116,7 +116,7 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
     _showPreferences() {
         let preferencesDialog = new Preferences.Preferences();
 
-        preferencesDialog.widget.connect('response', (widget, response) => {
+        preferencesDialog.widget.connect('response', () => {
             preferencesDialog.widget.destroy();
         });
     }
