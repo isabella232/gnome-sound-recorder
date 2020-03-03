@@ -354,17 +354,7 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
 
         this.groupGrid.add(this._scrolledWin);
         this._scrolledWin.show();
-        let sounds = list.getItemCount();
-        let title;
-        if (sounds > 0) {
-            // Translators: This is the title in the headerbar
-            title = Gettext.ngettext("%d Recorded Sound",
-                                     "%d Recorded Sounds",
-                                      sounds).format(sounds);
-        } else {
-            title = _("No Recorded Sounds");
-        }
-        header.set_title(title);
+        header.set_title(_('Sound Recorder'));
 
         this.listBox = null;
         this._startIdx = 0;
