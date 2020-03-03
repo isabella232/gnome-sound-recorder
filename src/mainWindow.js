@@ -21,10 +21,6 @@
 *
 */
 
-const Gettext = imports.gettext;
-const _ = imports.gettext.gettext;
-const Gdk = imports.gi.Gdk;
-const GdkPixbuf = imports.gi.GdkPixbuf;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
@@ -38,14 +34,12 @@ const FileUtil = imports.fileUtil;
 const Info = imports.info;
 const Listview = imports.listview;
 const Play = imports.play;
-const Preferences = imports.preferences;
 const Record = imports.record;
 const Waveform = imports.waveform;
 
 let activeProfile = null;
 var audioProfile = null;
 var displayTime = null;
-let grid = null;
 let groupGrid;
 let header;
 var list = null;
@@ -56,7 +50,6 @@ let previousSelRow = null;
 var recordPipeline = null;
 let recordButton = null;
 let appMenuButton = null;
-let selectable = null;
 let setVisibleID = null;
 let UpperBoundVal = 182;
 var view = null;
@@ -68,10 +61,6 @@ var ActiveArea = {
     PLAY: 1,
 };
 
-const ListColumns = {
-    NAME: 0,
-    MENU: 1,
-};
 
 const PipelineStates = {
     PLAYING: 0,
@@ -188,22 +177,22 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
     }
 
     onPlayStopClicked() {
-        if (play.getPipeStates() == PipelineStates.PLAYING) {
+        if (play.getPipeStates() === PipelineStates.PLAYING) {
             play.stopPlaying();
             let listRow = this.listBox.get_selected_row();
             let rowGrid = listRow.get_child();
             rowGrid.foreach(child => {
-                if (child.name == 'PauseButton') {
+                if (child.name === 'PauseButton') {
                     child.hide();
                     child.sensitive = false;
-                } else if (child.name == 'PlayLabelBox') {
+                } else if (child.name === 'PlayLabelBox') {
                     child.show();
                     child.foreach(grandchild => {
-                        if (grandchild.name == 'PlayTimeLabel')
+                        if (grandchild.name === 'PlayTimeLabel')
                             grandchild.hide();
 
 
-                        if (grandchild.name == 'DividerLabel')
+                        if (grandchild.name === 'DividerLabel')
                             grandchild.hide();
 
                     });
@@ -220,7 +209,7 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
         this.recordGrid.hide();
         recordPipeline = RecordPipelineStates.STOPPED;
         recordButton.set_sensitive(true);
-        if (this.listBox != null)
+        if (this.listBox !== null)
             this.listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);
     }
 
@@ -256,7 +245,7 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
     }
 
     presetVolume(source, vol) {
-        if (source == ActiveArea.PLAY) {
+        if (source === ActiveArea.PLAY) {
             volumeValue[0].play = vol;
             Application.application.setSpeakerVolume(vol);
         } else {
@@ -266,21 +255,18 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
     }
 
     setVolume() {
-        if (setVisibleID == ActiveArea.PLAY)
+        if (setVisibleID === ActiveArea.PLAY)
             play.setVolume(volumeValue[0].play);
-        else if (setVisibleID == ActiveArea.RECORD)
+        else if (setVisibleID === ActiveArea.RECORD)
             this._record.setVolume(volumeValue[0].record);
 
     }
 
     getVolume() {
-        let volumeValue = this.playVolume.get_value();
-
-        return volumeValue;
+        return this.playVolume.get_value();
     }
 
     listBoxAdd() {
-        selectable = true;
         this.groupGrid = groupGrid;
         let playVolume = Application.application.getSpeakerVolume();
         let micVolume = Application.application.getMicVolume();
@@ -342,9 +328,9 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
         this.scrollbar.connect('value_changed', () => {
             this.currentBound = this.scrollbar.get_value();
             UpperBoundVal = this.scrollbar.upper - this.scrollbar.page_size;
-            if (UpperBoundVal == this.currentBound && loadMoreButton == null) {
+            if (UpperBoundVal === this.currentBound && loadMoreButton === null) {
                 this.addLoadMoreButton();
-            } else if (UpperBoundVal != this.currentBound && loadMoreButton) {
+            } else if (UpperBoundVal !== this.currentBound && loadMoreButton) {
                 loadMoreButton.destroy();
                 loadMoreButton = null;
             }
@@ -358,7 +344,7 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
         this._startIdx = 0;
         this._endIdx = offsetController.getEndIdx();
 
-        if (this._endIdx == -1) {
+        if (this._endIdx === -1) {
             this._scrolledWin.get_style_context().add_class('emptyGrid');
             this._addEmptyPage();
         } else {
@@ -533,7 +519,7 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
     }
 
     destroyLoadMoreButton() {
-        if (loadMoreButton != null) {
+        if (loadMoreButton !== null) {
             loadMoreButton.destroy();
             loadMoreButton = null;
         }
@@ -567,7 +553,7 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
 
     hasPreviousSelRow() {
         this.destroyLoadMoreButton();
-        if (previousSelRow != null) {
+        if (previousSelRow !== null) {
             let rowGrid = previousSelRow.get_child();
             rowGrid.foreach(child => {
                 let alwaysShow = child.get_no_show_all();
@@ -575,30 +561,30 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
                 if (!alwaysShow)
                     child.hide();
 
-                if (child.name == 'PauseButton') {
+                if (child.name === 'PauseButton') {
                     child.hide();
                     child.sensitive = false;
                 }
-                if (child.name == 'PlayButton') {
+                if (child.name === 'PlayButton') {
                     child.show();
                     child.sensitive = true;
                 }
 
-                if (child.name == 'PlayLabelBox') {
+                if (child.name === 'PlayLabelBox') {
                     child.show();
                     child.foreach(grandchild => {
-                        if (grandchild.name == 'PlayTimeLabel')
+                        if (grandchild.name === 'PlayTimeLabel')
                             grandchild.hide();
 
 
-                        if (grandchild.name == 'DividerLabel')
+                        if (grandchild.name === 'DividerLabel')
                             grandchild.hide();
 
                     });
                 }
             });
 
-            if (play.getPipeStates() == PipelineStates.PLAYING || play.getPipeStates() == PipelineStates.PAUSED)
+            if (play.getPipeStates() === PipelineStates.PLAYING || play.getPipeStates() === PipelineStates.PAUSED)
                 play.stopPlaying();
 
         }
@@ -610,7 +596,7 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
         this.destroyLoadMoreButton();
 
         if (selectedRow) {
-            if (previousSelRow != null)
+            if (previousSelRow !== null)
                 this.hasPreviousSelRow();
 
 
@@ -623,12 +609,12 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
                 if (!alwaysShow)
                     child.sensitive = true;
 
-                if (child.name == 'PauseButton') {
+                if (child.name === 'PauseButton') {
                     child.hide();
                     child.sensitive = false;
                 }
 
-                if (child.name == 'WaveFormGrid')
+                if (child.name === 'WaveFormGrid')
                     child.sensitive = true;
             });
         }
@@ -638,7 +624,7 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
         let fileForAction = null;
         let rowGrid = selected.get_child();
         rowGrid.foreach(child => {
-            if (child.name == 'FileNameLabel') {
+            if (child.name === 'FileNameLabel') {
                 let name = child.get_text();
                 let application = Gio.Application.get_default();
                 fileForAction = application.saveDir.get_child_for_display_name(name);
@@ -662,7 +648,7 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
     _onInfoButton(selected) {
         let infoDialog = new Info.InfoDialog(selected);
 
-        infoDialog.widget.connect('response', (widget, response) => {
+        infoDialog.widget.connect('response', () => {
             infoDialog.widget.destroy();
         });
     }
@@ -672,10 +658,10 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
 
         this.timeLabelString = this._formatTime(time);
 
-        if (setVisibleID == ActiveArea.RECORD) {
+        if (setVisibleID === ActiveArea.RECORD) {
             this.recordTimeLabel.label = this.timeLabelString;
             this.recordTimeLabel.get_style_context().add_class('dim-label');
-        } else if (setVisibleID == ActiveArea.PLAY) {
+        } else if (setVisibleID === ActiveArea.PLAY) {
             this.playTimeLabel.label = this.timeLabelString;
         }
     }
@@ -685,8 +671,7 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
         let selected = this.listBox.get_row_at_index(index);
         let rowGrid = selected.get_child();
         rowGrid.foreach(child => {
-            if (child.name == 'FileNameLabel') {
-                let name = child.get_text();
+            if (child.name === 'FileNameLabel') {
                 let markup = `<b>${newName}</b>`;
                 child.label = markup;
             }
@@ -697,17 +682,17 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
     onPause(listRow) {
         let activeState = play.getPipeStates();
 
-        if (activeState == PipelineStates.PLAYING) {
+        if (activeState === PipelineStates.PLAYING) {
             play.pausePlaying();
 
             let rowGrid = listRow.get_child();
             rowGrid.foreach(child => {
-                if (child.name == 'PauseButton') {
+                if (child.name === 'PauseButton') {
                     child.hide();
                     child.sensitive = false;
                 }
 
-                if (child.name == 'PlayButton') {
+                if (child.name === 'PlayButton') {
                     child.show();
                     child.sensitive = true;
                 }
@@ -719,42 +704,42 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
         setVisibleID = ActiveArea.PLAY;
         let activeState = play.getPipeStates();
 
-        if (activeState != PipelineStates.PLAYING) {
+        if (activeState !== PipelineStates.PLAYING) {
             play.startPlaying();
 
 
             let rowGrid = listRow.get_child();
             rowGrid.foreach(child => {
-                if (child.name == 'InfoButton' || child.name == 'DeleteButton' ||
-                    child.name == 'PlayButton') {
+                if (child.name === 'InfoButton' || child.name === 'DeleteButton' ||
+                    child.name === 'PlayButton') {
                     child.hide();
                     child.sensitive = false;
                 }
 
-                if (child.name == 'PauseButton') {
+                if (child.name === 'PauseButton') {
                     child.show();
                     child.sensitive = true;
                 }
 
-                if (child.name == 'PlayLabelBox') {
+                if (child.name === 'PlayLabelBox') {
                     child.foreach(grandchild => {
-                        if (grandchild.name == 'PlayTimeLabel')
+                        if (grandchild.name === 'PlayTimeLabel')
                             view.playTimeLabel = grandchild;
 
 
-                        if (grandchild.name == 'DividerLabel')
+                        if (grandchild.name === 'DividerLabel')
                             grandchild.show();
 
                     });
                 }
 
-                if (child.name == 'WaveFormGrid') {
+                if (child.name === 'WaveFormGrid') {
                     this.wFGrid = child;
                     child.sensitive = true;
                 }
             });
 
-            if (activeState != PipelineStates.PAUSED)
+            if (activeState !== PipelineStates.PAUSED)
                 wave = new Waveform.WaveForm(this.wFGrid, selFile);
 
         }
@@ -762,7 +747,7 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
 });
 
 const RecordButton = GObject.registerClass(class RecordButton extends Gtk.Button {
-    _init(activeProfile) {
+    _init() {
         super._init();
         this.image = Gtk.Image.new_from_icon_name('media-record-symbolic', Gtk.IconSize.BUTTON);
         this.set_always_show_image(true);
@@ -786,7 +771,7 @@ const RecordButton = GObject.registerClass(class RecordButton extends Gtk.Button
         setVisibleID = ActiveArea.RECORD;
         view.recordGrid.show_all();
 
-        if (activeProfile == null)
+        if (activeProfile === null)
             activeProfile = 0;
 
         audioProfile.profile(activeProfile);
