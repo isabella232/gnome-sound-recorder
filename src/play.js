@@ -18,18 +18,14 @@
  *
  */
 
-const _ = imports.gettext.gettext;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gst = imports.gi.Gst;
 const GstAudio = imports.gi.GstAudio;
-const GstPbutils = imports.gi.GstPbutils;
 const Gtk = imports.gi.Gtk;
-const Mainloop = imports.mainloop;
 
 const Application = imports.application;
 const MainWindow = imports.mainWindow;
-const Waveform = imports.waveform;
 
 const PipelineStates = {
     PLAYING: 0,
@@ -59,7 +55,7 @@ var Play = class Play {
         this.playBus = this.play.get_bus();
         this.playBus.add_signal_watch();
         this.playBus.connect('message', (playBus, message) => {
-            if (message != null)
+            if (message !== null)
                 this._onMessageReceived(message);
 
         });
@@ -68,11 +64,11 @@ var Play = class Play {
     startPlaying() {
         this.baseTime = 0;
 
-        if (!this.play || this.playState == PipelineStates.STOPPED)
+        if (!this.play || this.playState === PipelineStates.STOPPED)
             this._playPipeline();
 
 
-        if (this.playState == PipelineStates.PAUSED) {
+        if (this.playState === PipelineStates.PAUSED) {
             this.updatePosition();
             this.play.set_base_time(this.clock.get_time());
             this.baseTime = this.play.get_base_time() - this.runTime;
@@ -81,10 +77,10 @@ var Play = class Play {
         this.ret = this.play.set_state(Gst.State.PLAYING);
         this.playState = PipelineStates.PLAYING;
 
-        if (this.ret == Gst.StateChangeReturn.FAILURE) {
+        if (this.ret === Gst.StateChangeReturn.FAILURE) {
             this._showErrorDialog(_('Unable to play recording'));
             errorDialogState = ErrState.ON;
-        } else if (this.ret == Gst.StateChangeReturn.SUCCESS) {
+        } else if (this.ret === Gst.StateChangeReturn.SUCCESS) {
             MainWindow.view.setVolume();
         }
         GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGINT, Application.application.onWindowDestroy);
@@ -102,7 +98,7 @@ var Play = class Play {
     }
 
     stopPlaying() {
-        if (this.playState != PipelineStates.STOPPED)
+        if (this.playState !== PipelineStates.STOPPED)
             this.onEnd();
 
     }
@@ -118,7 +114,7 @@ var Play = class Play {
             this.timeout = null;
         }
 
-        if (MainWindow.wave != null)
+        if (MainWindow.wave !== null)
             MainWindow.wave.endDrawing();
 
         errorDialogState = ErrState.OFF;
@@ -133,39 +129,46 @@ var Play = class Play {
         let msg = message.type;
         switch (msg) {
 
-        case Gst.MessageType.EOS:
+        case Gst.MessageType.EOS: {
             this.onEndOfStream();
             break;
+        }
 
-        case Gst.MessageType.WARNING:
+        case Gst.MessageType.WARNING: {
             let warningMessage = message.parse_warning()[0];
             log(warningMessage.toString());
             break;
+        }
 
-        case Gst.MessageType.ERROR:
+        case Gst.MessageType.ERROR: {
             let errorMessage = message.parse_error()[0];
             this._showErrorDialog(errorMessage.toString());
             errorDialogState = ErrState.ON;
             break;
+        }
 
-        case Gst.MessageType.ASYNC_DONE:
+        case Gst.MessageType.ASYNC_DONE: {
             if (this.sought) {
                 this.play.set_state(this._lastState);
                 MainWindow.view.setProgressScaleSensitive();
             }
             this.updatePosition();
             break;
+        }
 
-        case Gst.MessageType.CLOCK_LOST:
+        case Gst.MessageType.CLOCK_LOST: {
             this.pausePlaying();
             break;
+        }
 
-        case Gst.MessageType.NEW_CLOCK:
-            if (this.playState == PipelineStates.PAUSED) {
+        case Gst.MessageType.NEW_CLOCK: {
+            if (this.playState === PipelineStates.PAUSED) {
                 this.clock = this.play.get_clock();
                 this.startPlaying();
             }
             break;
+        }
+
         }
     }
 
@@ -178,15 +181,15 @@ var Play = class Play {
         this.trackDuration = this.play.query_duration(Gst.Format.TIME)[1];
         this.trackDurationSecs = this.trackDuration / Gst.SECOND;
 
-        if (time >= 0 && this.playState != PipelineStates.STOPPED)
+        if (time >= 0 && this.playState !== PipelineStates.STOPPED)
             MainWindow.view.setLabel(time);
-        else if (time >= 0 && this.playState == PipelineStates.STOPPED)
+        else if (time >= 0 && this.playState === PipelineStates.STOPPED)
             MainWindow.view.setLabel(0);
 
 
         let absoluteTime = 0;
 
-        if  (this.clock == null)
+        if  (this.clock === null)
             this.clock = this.play.get_clock();
 
         try {
@@ -195,13 +198,13 @@ var Play = class Play {
             // no-op
         }
 
-        if (this.baseTime == 0)
+        if (this.baseTime === 0)
             this.baseTime = absoluteTime;
 
         this.runTime = absoluteTime - this.baseTime;
         let approxTime = Math.round(this.runTime / _TENTH_SEC);
 
-        if (MainWindow.wave != null)
+        if (MainWindow.wave !== null)
             MainWindow.wave._drawEvent(approxTime);
 
 
@@ -210,7 +213,7 @@ var Play = class Play {
 
     queryPosition() {
         let position = 0;
-        while (position == 0)
+        while (position === 0)
             position = this.play.query_position(Gst.Format.TIME)[1] / Gst.SECOND;
 
 
@@ -234,15 +237,15 @@ var Play = class Play {
     }
 
     _showErrorDialog(errorStrOne, errorStrTwo) {
-        if (errorDialogState == ErrState.OFF) {
+        if (errorDialogState === ErrState.OFF) {
             let errorDialog = new Gtk.MessageDialog({ destroy_with_parent: true,
                 buttons: Gtk.ButtonsType.OK,
                 message_type: Gtk.MessageType.WARNING });
 
-            if (errorStrOne != null)
+            if (errorStrOne !== null)
                 errorDialog.set_property('text', errorStrOne);
 
-            if (errorStrTwo != null)
+            if (errorStrTwo !== null)
                 errorDialog.set_property('secondary-text', errorStrTwo);
 
             errorDialog.set_transient_for(Gio.Application.get_default().get_active_window());
