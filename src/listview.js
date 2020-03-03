@@ -19,17 +19,13 @@
  *
  */
 
-const _ = imports.gettext.gettext;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
-const GObject = imports.gi.GObject;
 const Gst = imports.gi.Gst;
 const GstPbutils = imports.gi.GstPbutils;
-const Signals = imports.signals;
 
 const AudioProfile = imports.audioProfile;
 const MainWindow = imports.mainWindow;
-const Record = imports.record;
 
 const EnumeratorState = {
     ACTIVE: 0,
@@ -58,7 +54,6 @@ let allFilesInfo = null;
 let currentlyEnumerating = null;
 let fileInfo = null;
 let listType = null;
-let startRecording = false;
 let stopVal = null;
 var trackNumber = 0;
 
@@ -87,7 +82,7 @@ var Listview = class Listview {
     _onEnumerator(obj, res) {
         this._enumerator = obj.enumerate_children_finish(res);
 
-        if (this._enumerator == null)
+        if (this._enumerator === null)
             log('The contents of the Recordings directory were not indexed.');
         else
             this._onNextFileComplete();
@@ -108,7 +103,7 @@ var Listview = class Listview {
                                 trackNumber = returnedNumber;
 
                         }  catch (e) {
-                            if (!e instanceof TypeError)
+                            if (!(e instanceof TypeError))
                                 throw e;
 
                             log('Tracknumber not returned');
@@ -117,16 +112,14 @@ var Listview = class Listview {
                         let finalFileName = GLib.build_filenamev([this._saveDir.get_path(),
                             returnedName]);
                         let fileUri = GLib.filename_to_uri(finalFileName, null);
-                        let timeVal = file.get_modification_date_time();
-                        let timeModified = file.get_attribute_uint64("time::modified");
+                        let timeModified = file.get_attribute_uint64('time::modified');
                         let date = GLib.DateTime.new_from_unix_local(timeModified);
-                        let dateModifiedSortString = date.format("%Y%m%d%H%M%S");
+                        let dateModifiedSortString = date.format('%Y%m%d%H%M%S');
                         let dateTime = GLib.DateTime.new_from_unix_local(timeModified);
                         let dateModifiedDisplayString = MainWindow.displayTime.getDisplayTime(dateTime);
-                        let dateCreatedYes = file.has_attribute('time::created');
                         let dateCreatedString = null;
                         if (this.dateCreatedYes) {
-                            let dateCreatedVal = file.get_attribute_uint64("time::created");
+                            let dateCreatedVal = file.get_attribute_uint64('time::created');
                             let dateCreated = GLib.DateTime.new_from_unix_local(dateCreatedVal);
                             dateCreatedString = MainWindow.displayTime.getDisplayTime(dateCreated);
                         }
@@ -147,11 +140,11 @@ var Listview = class Listview {
                     stopVal = EnumeratorState.CLOSED;
                     this._enumerator.close(null);
 
-                    if (MainWindow.offsetController.getEndIdx() == -1) {
-                        if (listType == ListType.NEW) {
+                    if (MainWindow.offsetController.getEndIdx() === -1) {
+                        if (listType === ListType.NEW) {
                             MainWindow.view.listBoxAdd();
                             MainWindow.view.scrolledWinAdd();
-                        } else if (listType == ListType.REFRESH) {
+                        } else if (listType === ListType.REFRESH) {
                             MainWindow.view.scrolledWinDelete();
                         }
                         currentlyEnumerating = CurrentlyEnumerating.FALSE;
@@ -172,7 +165,7 @@ var Listview = class Listview {
             return b.dateForSort - a.dateForSort;
         });
 
-        if (stopVal == EnumeratorState.ACTIVE)
+        if (stopVal === EnumeratorState.ACTIVE)
             this._onNextFileComplete();
 
     }
@@ -196,15 +189,15 @@ var Listview = class Listview {
     }
 
     _runDiscover() {
-        this._discoverer.connect('discovered', (_discoverer, info, error) => {
+        this._discoverer.connect('discovered', (_discoverer, info) => {
             let result = info.get_result();
-            this._onDiscovererFinished(result, info, error);
+            this._onDiscovererFinished(result, info);
         });
     }
 
-    _onDiscovererFinished(res, info, err) {
+    _onDiscovererFinished(res, info) {
         this.result = res;
-        if (this.result == GstPbutils.DiscovererResult.OK && allFilesInfo[this.idx]) {
+        if (this.result === GstPbutils.DiscovererResult.OK && allFilesInfo[this.idx]) {
             this.tagInfo = info.get_tags();
             let appString = '';
             appString = this.tagInfo.get_value_index(Gst.TAG_APPLICATION_NAME, 0);
@@ -214,7 +207,7 @@ var Listview = class Listview {
 
             /* this.file.dateCreated will usually be null since time::created it doesn't usually exist.
                Therefore, we prefer to set it with tags */
-            if (dateTimeTag != null) {
+            if (dateTimeTag !== null) {
                 let dateTimeCreatedString = dateTimeTag.to_g_date_time();
 
                 if (dateTimeCreatedString)
@@ -222,7 +215,7 @@ var Listview = class Listview {
 
             }
 
-            if (appString == GLib.get_application_name())
+            if (appString === GLib.get_application_name())
                 allFilesInfo[this.idx].appName = appString;
 
 
@@ -233,13 +226,13 @@ var Listview = class Listview {
             log('File cannot be played');
         }
 
-        if (this.idx == this.endIdx) {
+        if (this.idx === this.endIdx) {
             this._discoverer.stop();
-            if (listType == ListType.NEW) {
+            if (listType === ListType.NEW) {
                 MainWindow.view.listBoxAdd();
                 MainWindow.view.scrolledWinAdd();
                 currentlyEnumerating = CurrentlyEnumerating.FALSE;
-            } else if (listType == ListType.REFRESH) {
+            } else if (listType === ListType.REFRESH) {
                 MainWindow.view.scrolledWinDelete();
                 currentlyEnumerating = CurrentlyEnumerating.FALSE;
             }
@@ -257,55 +250,50 @@ var Listview = class Listview {
     }
 
     _onDirChanged(dirMonitor, file1, file2, eventType) {
-        if (eventType == Gio.FileMonitorEvent.DELETED && Gio.Application.get_default().saveDir.equal(file1)) {
+        if (eventType === Gio.FileMonitorEvent.DELETED && Gio.Application.get_default().saveDir.equal(file1)) {
             Gio.Application.get_default().ensure_directory();
             this._saveDir = Gio.Application.get_default().saveDir;
         }
-        if (eventType == Gio.FileMonitorEvent.MOVED_OUT ||
-            eventType == Gio.FileMonitorEvent.CHANGES_DONE_HINT &&
-                MainWindow.recordPipeline == MainWindow.RecordPipelineStates.STOPPED || eventType == Gio.FileMonitorEvent.RENAMED) {
+        if (eventType === Gio.FileMonitorEvent.MOVED_OUT ||
+            eventType === Gio.FileMonitorEvent.CHANGES_DONE_HINT &&
+                MainWindow.recordPipeline === MainWindow.RecordPipelineStates.STOPPED || eventType === Gio.FileMonitorEvent.RENAMED) {
             stopVal = EnumeratorState.ACTIVE;
             allFilesInfo.length = 0;
             fileInfo.length = 0;
             this.idx = 0;
             listType = ListType.REFRESH;
 
-            if (currentlyEnumerating == CurrentlyEnumerating.FALSE) {
+            if (currentlyEnumerating === CurrentlyEnumerating.FALSE) {
                 currentlyEnumerating = CurrentlyEnumerating.TRUE;
                 MainWindow.view.listBoxRefresh();
             }
-        } else if (eventType == Gio.FileMonitorEvent.CREATED) {
-            startRecording = true;
         }
     }
 
     _onDirChangedDeb(dirMonitor, file1, file2, eventType) {
         /* Workaround for Debian and Tails not recognizing Gio.FileMointor.WATCH_MOVES */
-        if (eventType == Gio.FileMonitorEvent.DELETED && Gio.Application.get_default().saveDir.equal(file1)) {
+        if (eventType === Gio.FileMonitorEvent.DELETED && Gio.Application.get_default().saveDir.equal(file1)) {
             Gio.Application.get_default().ensure_directory();
             this._saveDir = Gio.Application.get_default().saveDir;
         }
-        if (eventType == Gio.FileMonitorEvent.DELETED ||
-            eventType == Gio.FileMonitorEvent.CHANGES_DONE_HINT && MainWindow.recordPipeline == MainWindow.RecordPipelineStates.STOPPED) {
+        if (eventType === Gio.FileMonitorEvent.DELETED ||
+            eventType === Gio.FileMonitorEvent.CHANGES_DONE_HINT && MainWindow.recordPipeline === MainWindow.RecordPipelineStates.STOPPED) {
             stopVal = EnumeratorState.ACTIVE;
             allFilesInfo.length = 0;
             fileInfo.length = 0;
             this.idx = 0;
             listType = ListType.REFRESH;
 
-            if (currentlyEnumerating == CurrentlyEnumerating.FALSE) {
+            if (currentlyEnumerating === CurrentlyEnumerating.FALSE) {
                 currentlyEnumerating = CurrentlyEnumerating.TRUE;
                 MainWindow.view.listBoxRefresh();
             }
-        } else if (eventType == Gio.FileMonitorEvent.CREATED) {
-            startRecording = true;
         }
     }
 
     _getCapsForList(info) {
         let discovererStreamInfo = null;
         discovererStreamInfo = info.get_stream_info();
-        let containerStreams = info.get_container_streams()[0];
         let containerCaps = discovererStreamInfo.get_caps();
         let audioStreams = info.get_audio_streams()[0];
         let audioCaps =  audioStreams.get_caps();
@@ -332,7 +320,7 @@ var Listview = class Listview {
 
         }
 
-        if (allFilesInfo[this.idx].mediaType == null) {
+        if (allFilesInfo[this.idx].mediaType === null) {
             // Remove the file from the array if we don't recognize it
             allFilesInfo.splice(this.idx, 1);
         }
