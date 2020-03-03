@@ -18,22 +18,15 @@
  *
  */
 
-const _ = imports.gettext.gettext;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
-const GObject = imports.gi.GObject;
 const Gst = imports.gi.Gst;
 const GstAudio = imports.gi.GstAudio;
 const GstPbutils = imports.gi.GstPbutils;
 const Gtk = imports.gi.Gtk;
-const Pango = imports.gi.Pango;
-const Mainloop = imports.mainloop;
-const Signals = imports.signals;
 
 const Application = imports.application;
-const AudioProfile = imports.audioProfile;
 const MainWindow = imports.mainWindow;
-const Listview = imports.listview;
 
 const PipelineStates = {
     PLAYING: 0,
@@ -65,7 +58,7 @@ var Record = class Record {
         let localDateTime = this._buildFileName.getOrigin();
         this.gstreamerDateTime = Gst.DateTime.new_from_g_date_time(localDateTime);
 
-        if (this.initialFileName == -1) {
+        if (this.initialFileName === -1) {
             this._showErrorDialog(_('Unable to create Recordings directory.'));
             errorDialogState = ErrState.ON;
             this.onEndOfStream();
@@ -74,11 +67,11 @@ var Record = class Record {
         this.pipeline = new Gst.Pipeline({ name: 'pipe' });
         this.srcElement = Gst.ElementFactory.make('pulsesrc', 'srcElement');
 
-        if (this.srcElement == null) {
+        if (this.srcElement === null) {
             let inspect = 'gst-inspect-1.0 pulseaudio';
-            let [res, out, err, status] =  GLib.spawn_command_line_sync(inspect);
-            let err_str = String(err);
-            if (err_str.replace(/\W/g, ''))
+            let err =  GLib.spawn_command_line_sync(inspect)[2];
+            let errStr = String(err);
+            if (errStr.replace(/\W/g, ''))
                 this._showErrorDialog(_('Please install the GStreamer 1.0 PulseAudio plugin.'));
             else
                 this._showErrorDialog(_('Your audio capture settings are invalid.'));
@@ -96,7 +89,7 @@ var Record = class Record {
         this.recordBus = this.pipeline.get_bus();
         this.recordBus.add_signal_watch();
         this.recordBus.connect('message', (recordBus, message) => {
-            if (message != null)
+            if (message !== null)
                 this._onMessageReceived(message);
 
         });
@@ -108,9 +101,9 @@ var Record = class Record {
         this.ebin.connect('element-added', (ebin, element) => {
             let factory = element.get_factory();
 
-            if (factory != null) {
+            if (factory !== null) {
                 this.hasTagSetter = factory.has_interface('GstTagSetter');
-                if (this.hasTagSetter == true) {
+                if (this.hasTagSetter === true) {
                     this.taglist = Gst.TagList.new_empty();
                     this.taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_APPLICATION_NAME, _('Sound Recorder'));
                     element.merge_tags(this.taglist, Gst.TagMergeMode.REPLACE);
@@ -122,8 +115,7 @@ var Record = class Record {
             }
         });
         this.pipeline.add(this.ebin);
-        let ebinProfile = this.ebin.set_property('profile', this._mediaProfile);
-        let srcpad = this.ebin.get_static_pad('src');
+        this.ebin.set_property('profile', this._mediaProfile);
         this.filesink = Gst.ElementFactory.make('filesink', 'filesink');
         this.filesink.set_property('location', this.initialFileName);
         this.pipeline.add(this.filesink);
@@ -137,7 +129,7 @@ var Record = class Record {
         let srcLink = this.srcElement.link(this.audioConvert);
         let audioConvertLink = this.audioConvert.link_filtered(this.level, this.caps);
         let levelLink = this.level.link(this.volume);
-        let volLink = this.volume.link(this.ebin);
+        this.volume.link(this.ebin);
         let ebinLink = this.ebin.link(this.filesink);
 
         if (!srcLink || !audioConvertLink || !levelLink || !ebinLink) {
@@ -165,18 +157,18 @@ var Record = class Record {
         this._audioProfile = MainWindow.audioProfile;
         this._mediaProfile = this._audioProfile.mediaProfile();
 
-        if (this._mediaProfile == -1) {
+        if (this._mediaProfile === -1) {
             this._showErrorDialog(_('No Media Profile was set.'));
             errorDialogState = ErrState.ON;
         }
 
-        if (!this.pipeline || this.pipeState == PipelineStates.STOPPED)
+        if (!this.pipeline || this.pipeState === PipelineStates.STOPPED)
             this._recordPipeline();
 
         let ret = this.pipeline.set_state(Gst.State.PLAYING);
         this.pipeState = PipelineStates.PLAYING;
 
-        if (ret == Gst.StateChangeReturn.FAILURE) {
+        if (ret === Gst.StateChangeReturn.FAILURE) {
             this._showErrorDialog(_('Unable to set the pipeline \n to the recording state.'));
             errorDialogState = ErrState.ON;
             this._buildFileName.getTitle().delete_async(GLib.PRIORITY_DEFAULT, null, null);
@@ -190,14 +182,14 @@ var Record = class Record {
     }
 
     stopRecording() {
-        let sent = this.pipeline.send_event(Gst.Event.new_eos());
+        this.pipeline.send_event(Gst.Event.new_eos());
 
         if (this.timeout) {
             GLib.source_remove(this.timeout);
             this.timeout = null;
         }
 
-        if (MainWindow.wave != null)
+        if (MainWindow.wave !== null)
             MainWindow.wave.endDrawing();
     }
 
@@ -206,7 +198,8 @@ var Record = class Record {
         this.pipeState = PipelineStates.STOPPED;
 
         if (this.recordBus)
-	        this.recordBus.remove_signal_watch();
+            this.recordBus.remove_signal_watch();
+
 
         this._updateTime();
         errorDialogState = ErrState.OFF;
@@ -217,18 +210,18 @@ var Record = class Record {
         let msg = message.type;
         switch (msg) {
 
-        case Gst.MessageType.ELEMENT:
+        case Gst.MessageType.ELEMENT: {
             if (GstPbutils.is_missing_plugin_message(this.localMsg)) {
                 let errorOne = null;
                 let errorTwo = null;
                 let detail = GstPbutils.missing_plugin_message_get_installer_detail(this.localMsg);
 
-                if (detail != null)
+                if (detail !== null)
                     errorOne = detail;
 
                 let description = GstPbutils.missing_plugin_message_get_description(this.localMsg);
 
-                if (description != null)
+                if (description !== null)
                     errorTwo = description;
 
                 this._showErrorDialog(errorOne, errorTwo);
@@ -239,24 +232,20 @@ var Record = class Record {
             let s = message.get_structure();
             if (s) {
                 if (s.has_name('level')) {
-                    let p = null;
                     let peakVal = 0;
-                    let val = 0;
-                    let st = s.get_value('timestamp');
-                    let dur = s.get_value('duration');
-                    let runTime = s.get_value('running-time');
                     peakVal = s.get_value('peak');
 
                     if (peakVal) {
                         let val = peakVal.get_nth(0);
 
                         if (val > 0)
-			                    val = 0;
+                            val = 0;
+
                         let value = Math.pow(10, val / 20);
                         this.peak = value;
 
 
-                        if  (this.clock == null)
+                        if  (this.clock === null)
                             this.clock = this.pipeline.get_clock();
 
                         try {
@@ -266,7 +255,7 @@ var Record = class Record {
                         }
 
 
-                        if (this.baseTime == 0)
+                        if (this.baseTime === 0)
                             this.baseTime = this.absoluteTime;
 
                         this.runTime = this.absoluteTime - this.baseTime;
@@ -276,21 +265,25 @@ var Record = class Record {
                 }
             }
             break;
+        }
 
-        case Gst.MessageType.EOS:
+        case Gst.MessageType.EOS: {
             this.onEndOfStream();
             break;
+        }
 
-        case Gst.MessageType.WARNING:
+        case Gst.MessageType.WARNING: {
             let warningMessage = message.parse_warning()[0];
             log(warningMessage.toString());
             break;
+        }
 
-        case Gst.MessageType.ERROR:
+        case Gst.MessageType.ERROR: {
             let errorMessage = message.parse_error();
             this._showErrorDialog(errorMessage.toString());
             errorDialogState = ErrState.ON;
             break;
+        }
         }
     }
 
@@ -322,16 +315,16 @@ var Record = class Record {
     }
 
     _showErrorDialog(errorStrOne, errorStrTwo) {
-        if (errorDialogState == ErrState.OFF) {
+        if (errorDialogState === ErrState.OFF) {
             let errorDialog = new Gtk.MessageDialog({ modal: true,
                 destroy_with_parent: true,
                 buttons: Gtk.ButtonsType.OK,
                 message_type: Gtk.MessageType.WARNING });
-            if (errorStrOne != null)
+            if (errorStrOne !== null)
                 errorDialog.set_property('text', errorStrOne);
 
 
-            if (errorStrTwo != null)
+            if (errorStrTwo !== null)
                 errorDialog.set_property('secondary-text', errorStrTwo);
 
             errorDialog.set_transient_for(Gio.Application.get_default().get_active_window());
@@ -347,7 +340,6 @@ var Record = class Record {
 
 const BuildFileName = class BuildFileName {
     buildInitialFilename() {
-        var fileExtensionName = MainWindow.audioProfile.fileExtensionReturner();
         var dir = Gio.Application.get_default().saveDir;
         this.dateTime = GLib.DateTime.new_now_local();
         /* Translators: ""Recording from %R on %A %F "" is the default name assigned to a file created
