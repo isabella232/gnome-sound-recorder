@@ -21,18 +21,11 @@
 // based on code from Pitivi
 
 const Cairo = imports.cairo;
-const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
-const GObject = imports.gi.GObject;
 const Gst = imports.gi.Gst;
-const GstAudio = imports.gi.GstAudio;
 const Gtk = imports.gi.Gtk;
-const Mainloop = imports.mainloop;
 
-const _ = imports.gettext.gettext;
-const C_ = imports.gettext.pgettext;
 
-const MainWindow = imports.mainWindow;
 const Application = imports.application;
 
 const INTERVAL = 100000000;
@@ -61,11 +54,10 @@ var WaveForm = class WaveForm {
             this.waveType = WaveType.RECORD;
         }
 
-        let gridWidth = 0;
-        let drawingWidth = 0;
-        let drawingHeight = 0;
+
+
         this.drawing = Gtk.DrawingArea.new();
-        if (this.waveType == WaveType.RECORD) {
+        if (this.waveType === WaveType.RECORD) {
             this.drawing.set_property('valign', Gtk.Align.FILL);
             this.drawing.set_property('hexpand', true);
             this._grid.attach(this.drawing, 2, 0, 3, 2);
@@ -80,7 +72,7 @@ var WaveForm = class WaveForm {
         this.drawing.show_all();
         this._grid.show_all();
 
-        if (this.waveType == WaveType.PLAY) {
+        if (this.waveType === WaveType.PLAY) {
             this._launchPipeline();
             this.startGeneration();
         }
@@ -90,7 +82,6 @@ var WaveForm = class WaveForm {
         this.pipeline =
             Gst.parse_launch(`uridecodebin name=decode uri=${this._uri} ! audioconvert ! audio/x-raw,channels=2 ! level name=level interval=100000000 post-messages=true ! fakesink qos=false`);
         this._level = this.pipeline.get_by_name('level');
-        let decode = this.pipeline.get_by_name('decode');
         let bus = this.pipeline.get_bus();
         bus.add_signal_watch();
         GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGINT, Application.application.onWindowDestroy);
@@ -98,9 +89,10 @@ var WaveForm = class WaveForm {
 
         this.nSamples = Math.ceil(this.duration / INTERVAL);
 
-        bus.connect('message', (bus, message) => {
-            if (message != null)
+        bus.connect('message', message => {
+            if (message !== null)
                 this._messageCb(message);
+
 
         });
     }
@@ -109,16 +101,12 @@ var WaveForm = class WaveForm {
         let msg = message.type;
 
         switch (msg) {
-        case Gst.MessageType.ELEMENT:
+        case Gst.MessageType.ELEMENT: {
             let s = message.get_structure();
 
             if (s) {
 
                 if (s.has_name('level')) {
-                    let peaknumber = 0;
-                    let st = s.get_value('timestamp');
-                    let dur = s.get_value('duration');
-                    let runTime = s.get_value('running-time');
                     let peakVal = s.get_value('peak');
 
                     if (peakVal) {
@@ -133,18 +121,20 @@ var WaveForm = class WaveForm {
                 }
             }
 
-            if (peaks.length == this.playTime)
+            if (peaks.length === this.playTime)
                 this.pipeline.set_state(Gst.State.PAUSED);
 
 
-            if (peaks.length == pauseVal)
+            if (peaks.length === pauseVal)
                 this.pipeline.set_state(Gst.State.PAUSED);
 
             break;
+        }
 
-        case Gst.MessageType.EOS:
+        case Gst.MessageType.EOS: {
             this.stopGeneration();
             break;
+        }
         }
     }
 
@@ -159,9 +149,9 @@ var WaveForm = class WaveForm {
     fillSurface(drawing, cr) {
         let start = 0;
 
-        if (this.waveType == WaveType.PLAY) {
+        if (this.waveType === WaveType.PLAY) {
 
-            if (peaks.length != this.playTime)
+            if (peaks.length !== this.playTime)
                 this.pipeline.set_state(Gst.State.PLAYING);
 
             start = Math.floor(this.playTime);
@@ -174,10 +164,9 @@ var WaveForm = class WaveForm {
         let end = start + 40;
         let width = this.drawing.get_allocated_width();
         let waveheight = this.drawing.get_allocated_height();
-        let length = this.nSamples;
         let pixelsPerSample = width / waveSamples;
         let gradient = new Cairo.LinearGradient(0, 0, width, waveheight);
-        if (this.waveType == WaveType.PLAY) {
+        if (this.waveType === WaveType.PLAY) {
             gradient.addColorStopRGBA(0.75, 0.94, 1.0, 0.94, 0.75);
             gradient.addColorStopRGBA(0.0, 0.94, 1.0, 0.94, 0.22);
             cr.setLineWidth(1);
@@ -197,10 +186,9 @@ var WaveForm = class WaveForm {
 
 
             // Start drawing when we reach the first non-null array member
-            if (peaks[i] != null && peaks[i] >= 0) {
-                let idx = i - 1;
+            if (peaks[i] !== null && peaks[i] >= 0) {
 
-                if (start >= 40 && xAxis == 0)
+                if (start >= 40 && xAxis === 0)
                     cr.moveTo(xAxis * pixelsPerSample, waveheight);
 
 
@@ -220,7 +208,7 @@ var WaveForm = class WaveForm {
     _drawEvent(playTime, recPeaks) {
         let lastTime;
 
-        if (this.waveType == WaveType.PLAY) {
+        if (this.waveType === WaveType.PLAY) {
             lastTime = this.playTime;
             this.playTime = playTime;
 
@@ -228,7 +216,7 @@ var WaveForm = class WaveForm {
                 this.pipeline.set_state(Gst.State.PLAYING);
 
 
-            if (lastTime != this.playTime)
+            if (lastTime !== this.playTime)
                 this.drawing.queue_draw();
 
 
