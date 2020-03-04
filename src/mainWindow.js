@@ -381,7 +381,7 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
                 this._playListButton.set_tooltip_text(_('Play'));
                 this.rowGrid.attach(this._playListButton, 0, 0, 2, 2);
                 this._playListButton.show();
-                this._playListButton.connect('clicked', button => {
+                this._playListButton.connect('clicked', button => { // eslint-disable-line
                     let row = button.get_parent().get_parent();
                     this.listBox.select_row(row);
                     play.passSelected(row);
