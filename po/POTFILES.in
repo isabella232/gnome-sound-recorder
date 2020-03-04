@@ -11,5 +11,4 @@ src/mainWindow.js
 src/play.js
 src/preferences.js
 src/record.js
-src/util.js
 src/waveform.js
