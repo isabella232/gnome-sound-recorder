@@ -46,5 +46,5 @@
   <project_group>GNOME</project_group>
   <developer_name>The GNOME Project</developer_name>
   <update_contact>meg387_at_gmail.com</update_contact>
-  <translation type="gettext">gnome-sound-recorder</translation>
+  <translation type="gettext">@gettext-package@</translation>
 </component>

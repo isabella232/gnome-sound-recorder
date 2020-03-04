@@ -40,6 +40,7 @@ endif
 
 gsettings_conf = configuration_data()
 gsettings_conf.set('app-id', application_id)
+gsettings_conf.set('gettext-package', gettext_package)
 configure_file(
   input: 'org.gnome.SoundRecorder.gschema.xml.in',
   output: '@0@.gschema.xml'.format(application_id),

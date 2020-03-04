@@ -22,7 +22,7 @@ endif
 application_id = 'org.gnome.SoundRecorder@0@'.format(profile)
 
 
-
+gettext_package = application_id
 sound_recorder_prefix = get_option('prefix')
 sound_recorder_bindir = join_paths(sound_recorder_prefix, get_option('bindir'))
 sound_recorder_libdir = join_paths(sound_recorder_prefix, get_option('libdir'))
