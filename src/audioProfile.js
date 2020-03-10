@@ -66,7 +66,7 @@ var AudioProfile = class AudioProfile {
             break;
 
         case comboBoxMap.FLAC:
-            this._values = { audio: audioCodecMap.FLAC };
+            this._values = { container: containerProfileMap.FLAC, audio: audioCodecMap.FLAC };
             break;
 
         case comboBoxMap.MP3:
