@@ -31,6 +31,7 @@ const comboBoxMap = {
 };
 
 var containerProfileMap = {
+    FLAC: 'audio/x-flac',
     OGG: 'application/ogg',
     ID3: 'application/x-id3',
     MP4: 'video/quicktime,variant=(string)iso',
