@@ -342,9 +342,9 @@ const BuildFileName = class BuildFileName {
     buildInitialFilename() {
         var dir = Gio.Application.get_default().saveDir;
         this.dateTime = GLib.DateTime.new_now_local();
-        /* Translators: ""Recording from %R on %A %F "" is the default name assigned to a file created
-            by the application (for example, "Recording from 14:40:30 on Tuesday 2020-02-25"). */
-        var clipName = this.dateTime.format(_('Recording from %R on %A %F'));
+        /* Translators: ""Recording from %F %A at %T"" is the default name assigned to a file created
+            by the application (for example, "Recording from 2020-03-11 Wednesday at 19:43:05"). */
+        var clipName = this.dateTime.format(_('Recording from %F %A at %T'));
         this.clip = dir.get_child_for_display_name(clipName);
         var file = this.clip.get_path();
         return file;
