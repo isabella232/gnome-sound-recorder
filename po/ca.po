@@ -29,7 +29,7 @@ msgstr "Enregistradora de so"
 
 #: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:6
 msgid "A simple, modern sound recorder for GNOME"
-msgstr "Un enregistrador de so simple i modern pel GNOME"
+msgstr "Una enregistradora de so simple i moderna pel GNOME"
 
 #: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:10
 msgid ""
@@ -37,7 +37,7 @@ msgid ""
 "straight-forward way to record and play audio. It allows you to do basic "
 "editing, and create voice memos."
 msgstr ""
-"L'enregistrador de so proporciona una interfície simple i moderna que permet "
+"L'Enregistradora de so proporciona una interfície simple i moderna que permet "
 "enregistrar i reproduir àudios. Us permet fer edicions bàsiques a més a més "
 "de crear notes de veu."
 
@@ -46,9 +46,8 @@ msgid ""
 "Sound Recorder automatically handles the saving process so that you do not "
 "need to worry about accidentally discarding the previous recording."
 msgstr ""
-"L'enregistrador de so gestiona automàticament el procés de desat de manera "
-"que no us hàgiu de preocupar de suprimir accidentalment algun enregistrament "
-"anterior."
+"L'Enregistradora de so gestiona automàticament el procés de desat de manera "
+"que no us heu de preocupar si heu suprimit accidentalment algun enregistrament."
 
 #: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:19
 msgid "Supported audio formats:"
@@ -56,7 +55,7 @@ msgstr "Formats d'àudio admesos:"
 
 #: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:21
 msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
-msgstr "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
+msgstr "Ogg Vorbis, Opus, FLAC, MP3 i MOV"
 
 #: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:42
 msgid "The GNOME Project"
@@ -139,7 +138,7 @@ msgstr "Enregistradora de so"
 
 #: src/application.js:68
 msgid "Sound Recorder started"
-msgstr "S'ha iniciat l'enregistradora de so"
+msgstr "S'ha iniciat l'Enregistradora de so"
 
 #. Translators: "Recordings" here refers to the name of the directory where the application places files
 #: src/application.js:78
@@ -262,7 +261,7 @@ msgstr "Afegeix enregistraments"
 
 #: src/mainWindow.js:168
 msgid "Use the <b>Record</b> button to make sound recordings"
-msgstr "Utilitzeu el botó <b>Enregistra</b> per crear enregistraments d'àudio"
+msgstr "Utilitzeu el botó <b>Enregistra</b> per a crear enregistraments d'àudio"
 
 #: src/mainWindow.js:311
 msgid "Recording…"
