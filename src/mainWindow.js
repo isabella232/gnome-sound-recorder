@@ -40,16 +40,12 @@ const Waveform = imports.waveform;
 let activeProfile = null;
 var audioProfile = null;
 var displayTime = null;
-let groupGrid;
-let header;
 var list = null;
 let loadMoreButton = null;
 var offsetController = null;
 var play = null;
 let previousSelRow = null;
 var recordPipeline = null;
-let recordButton = null;
-let appMenuButton = null;
 let setVisibleID = null;
 let UpperBoundVal = 182;
 var view = null;
@@ -77,37 +73,26 @@ var RecordPipelineStates = {
 const _TIME_DIVISOR = 60;
 var _SEC_TIMEOUT = 100;
 
-var MainWindow = GObject.registerClass(class MainWindow extends Gtk.ApplicationWindow {
+var MainWindow = GObject.registerClass({
+    Template: 'resource:///org/gnome/SoundRecorder/ui/window.ui',
+    InternalChildren: ['recordButton', 'appMenuButton', 'mainStack', 'mainView', 'emptyView'],
+}, class MainWindow extends Gtk.ApplicationWindow {
+
     _init(params) {
         audioProfile = new AudioProfile.AudioProfile();
         offsetController = new FileUtil.OffsetController();
         displayTime = new FileUtil.DisplayTime();
-        view = new MainView();
+        view = this;
+        this._addListviewPage();
+        this.labelID = null;
         play = new Play.Play();
 
         super._init(Object.assign({
-            title: GLib.get_application_name(),
-            default_height: 480,
-            default_width: 780,
-            height_request: 480,
-            width_request: 640,
-            hexpand: true,
-            vexpand: true,
             icon_name: pkg.name,
         }, params));
 
-        header = new Gtk.HeaderBar({ hexpand: true,
-            show_close_button: true });
-        this.set_titlebar(header);
-        header.get_style_context().add_class('titlebar');
-
-        recordButton = new RecordButton({ label: _('Record') });
-        recordButton.get_style_context().add_class('suggested-action');
-        header.pack_start(recordButton);
-
+        this._recordButton.connect('clicked', () => this._onRecord());
         this._addAppMenu();
-
-        this.add(view);
         this.show_all();
     }
 
@@ -115,65 +100,39 @@ var MainWindow = GObject.registerClass(class MainWindow extends Gtk.ApplicationW
         let menu = new Gio.Menu();
         menu.append(_('Preferences'), 'app.preferences');
         menu.append(_('About Sound Recorder'), 'app.about');
-
-        appMenuButton = new Gtk.MenuButton({
-            image: new Gtk.Image({ icon_name: 'open-menu-symbolic' }),
-            menu_model: menu,
-        });
-        header.pack_end(appMenuButton);
+        this._appMenuButton.set_menu_model(menu);
     }
-});
 
-const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
-    _init(params) {
-        super._init(Object.assign({
-            vexpand: true,
-            transition_type: Gtk.StackTransitionType.CROSSFADE,
-            transition_duration: 100,
-            visible: true,
-        }, params));
+    _onRecord() {
+        view.destroyLoadMoreButton();
+        view.hasPreviousSelRow();
 
-        this._addListviewPage('listviewPage');
-        this.labelID = null;
+        if (view.listBox)
+            view.listBox.set_selection_mode(Gtk.SelectionMode.NONE);
+        else
+            this._mainStack.set_visible_child(this._mainView);
+
+        this._recordButton.set_sensitive(false);
+        setVisibleID = ActiveArea.RECORD;
+        view.recordGrid.show_all();
+
+        if (activeProfile === null)
+            activeProfile = 0;
+
+        audioProfile.profile(activeProfile);
+        view._record.startRecording(activeProfile);
+        wave = new Waveform.WaveForm(view.recordGrid, null);
     }
 
     _addEmptyPage() {
-        this.emptyGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
-            hexpand: true,
-            vexpand: true,
-            halign: Gtk.Align.CENTER,
-            valign: Gtk.Align.CENTER });
-        this._scrolledWin.add(this.emptyGrid);
-
-        let emptyPageImage = new Gtk.Image({ icon_name: 'audio-input-microphone-symbolic',
-            icon_size: Gtk.IconSize.DIALOG });
-        emptyPageImage.get_style_context().add_class('dim-label');
-        this.emptyGrid.add(emptyPageImage);
-        let emptyPageTitle = new Gtk.Label({ label: _('Add Recordings'),
-            halign: Gtk.Align.CENTER,
-            valign: Gtk.Align.CENTER });
-        emptyPageTitle.get_style_context().add_class('dim-label');
-        this.emptyGrid.add(emptyPageTitle);
-        let emptyPageDirections = new Gtk.Label({ label: _('Use the <b>Record</b> button to make sound recordings'),
-            use_markup: true,
-            max_width_chars: 30,
-            halign: Gtk.Align.CENTER,
-            valign: Gtk.Align.CENTER });
-        emptyPageDirections.get_style_context().add_class('dim-label');
-        this.emptyGrid.add(emptyPageDirections);
-        this.emptyGrid.show_all();
+        this._mainStack.set_visible_child(this._emptyView);
     }
 
-    _addListviewPage(name) {
+    _addListviewPage() {
         list = new Listview.Listview();
         list.setListTypeNew();
         list.enumerateDirectory();
         this._record = new Record.Record(audioProfile);
-
-        groupGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
-            hexpand: true,
-            vexpand: true });
-        this.add_titled(groupGrid, name, 'View');
     }
 
     onPlayStopClicked() {
@@ -208,7 +167,7 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
         this._record.stopRecording();
         this.recordGrid.hide();
         recordPipeline = RecordPipelineStates.STOPPED;
-        recordButton.set_sensitive(true);
+        this._recordButton.set_sensitive(true);
         if (this.listBox !== null)
             this.listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);
     }
@@ -267,7 +226,6 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
     }
 
     listBoxAdd() {
-        this.groupGrid = groupGrid;
         let playVolume = Application.application.getSpeakerVolume();
         let micVolume = Application.application.getMicVolume();
         volumeValue.push({ record: micVolume, play: playVolume });
@@ -275,7 +233,7 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
 
         this.recordGrid = new Gtk.Grid({ name: 'recordGrid',
             orientation: Gtk.Orientation.HORIZONTAL });
-        this.groupGrid.add(this.recordGrid);
+        this._mainView.add(this.recordGrid);
 
         this.widgetRecord = new Gtk.Toolbar({ show_arrow: false,
             halign: Gtk.Align.END,
@@ -336,9 +294,8 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
             }
         });
 
-        this.groupGrid.add(this._scrolledWin);
+        this._mainView.add(this._scrolledWin);
         this._scrolledWin.show();
-        header.set_title(_('Sound Recorder'));
 
         this.listBox = null;
         this._startIdx = 0;
@@ -514,7 +471,7 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
     addLoadMoreButton() {
         loadMoreButton = new LoadMoreButton();
         loadMoreButton.connect('clicked', () => loadMoreButton.onLoadMore());
-        this.groupGrid.add(loadMoreButton);
+        this._mainView.add(loadMoreButton);
         loadMoreButton.show();
     }
 
@@ -743,40 +700,6 @@ const MainView = GObject.registerClass(class MainView extends Gtk.Stack {
                 wave = new Waveform.WaveForm(this.wFGrid, selFile);
 
         }
-    }
-});
-
-const RecordButton = GObject.registerClass(class RecordButton extends Gtk.Button {
-    _init() {
-        super._init();
-        this.image = Gtk.Image.new_from_icon_name('media-record-symbolic', Gtk.IconSize.BUTTON);
-        this.set_always_show_image(true);
-        this.set_valign(Gtk.Align.CENTER);
-        this.set_label(_('Record'));
-        this.get_style_context().add_class('text-button');
-        this.connect('clicked', () => this._onRecord());
-    }
-
-    _onRecord() {
-        view.destroyLoadMoreButton();
-        view.hasPreviousSelRow();
-
-        if (view.listBox)
-            view.listBox.set_selection_mode(Gtk.SelectionMode.NONE);
-        else
-            view.emptyGrid.destroy();
-
-
-        this.set_sensitive(false);
-        setVisibleID = ActiveArea.RECORD;
-        view.recordGrid.show_all();
-
-        if (activeProfile === null)
-            activeProfile = 0;
-
-        audioProfile.profile(activeProfile);
-        view._record.startRecording(activeProfile);
-        wave = new Waveform.WaveForm(view.recordGrid, null);
     }
 });
 

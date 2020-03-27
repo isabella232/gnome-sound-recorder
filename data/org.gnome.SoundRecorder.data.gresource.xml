@@ -2,6 +2,7 @@
 <gresources>
   <gresource prefix="/org/gnome/SoundRecorder">
     <file>application.css</file>
+    <file>ui/window.ui</file>
   </gresource>
 </gresources>
 

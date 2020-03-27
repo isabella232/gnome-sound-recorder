@@ -1,6 +1,7 @@
 data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in
 data/org.gnome.SoundRecorder.gschema.xml.in
 data/org.gnome.SoundRecorder.desktop.in.in
+data/ui/window.ui
 src/audioProfile.js
 src/application.js
 src/fileUtil.js
