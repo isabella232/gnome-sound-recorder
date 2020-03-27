@@ -21,44 +21,6 @@
 const Gettext = imports.gettext;
 const GLib = imports.gi.GLib;
 
-const MainWindow = imports.mainWindow;
-
-const _OFFSET_STEP = 20;
-let CurrentEndIdx;
-let totItems;
-
-var OffsetController = class OffsetController {
-    constructor(context) {
-        this._offset = 0;
-        this._itemCount = 0;
-        this._context = context;
-        CurrentEndIdx = _OFFSET_STEP;
-    }
-
-    getOffset() {
-        return this._offset;
-    }
-
-    getEndIdx() {
-        totItems = MainWindow.list.getItemCount();
-        if (CurrentEndIdx < totItems)
-            this.endIdx = CurrentEndIdx - 1;
-        else
-            this.endIdx = totItems - 1;
-
-
-        return this.endIdx;
-    }
-
-    increaseEndIdxStep() {
-        CurrentEndIdx += _OFFSET_STEP;
-    }
-
-    getcidx() {
-        return CurrentEndIdx;
-    }
-};
-
 var DisplayTime = class DisplayTime {
     getDisplayTime(mtime) {
         let text = '';

@@ -140,7 +140,7 @@ var Listview = class Listview {
                     stopVal = EnumeratorState.CLOSED;
                     this._enumerator.close(null);
 
-                    if (MainWindow.offsetController.getEndIdx() === -1) {
+                    if (this.getItemCount() === 0) {
                         if (listType === ListType.NEW) {
                             MainWindow.view.listBoxAdd();
                             MainWindow.view.scrolledWinAdd();
@@ -176,7 +176,7 @@ var Listview = class Listview {
 
     _setDiscover() {
         this._controller = MainWindow.offsetController;
-        this.endIdx = this._controller.getEndIdx();
+        this.endIdx = this.getItemCount() - 1;
         this.idx = 0;
         this._discoverer = new GstPbutils.Discoverer();
         this._discoverer.start();

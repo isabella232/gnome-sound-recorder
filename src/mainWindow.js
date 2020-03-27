@@ -41,13 +41,10 @@ let activeProfile = null;
 var audioProfile = null;
 var displayTime = null;
 var list = null;
-let loadMoreButton = null;
-var offsetController = null;
 var play = null;
 let previousSelRow = null;
 var recordPipeline = null;
 let setVisibleID = null;
-let UpperBoundVal = 182;
 var view = null;
 var volumeValue = [];
 var wave = null;
@@ -56,7 +53,6 @@ var ActiveArea = {
     RECORD: 0,
     PLAY: 1,
 };
-
 
 const PipelineStates = {
     PLAYING: 0,
@@ -80,7 +76,6 @@ var MainWindow = GObject.registerClass({
 
     _init(params) {
         audioProfile = new AudioProfile.AudioProfile();
-        offsetController = new FileUtil.OffsetController();
         displayTime = new FileUtil.DisplayTime();
         view = this;
         this._addListviewPage();
@@ -104,7 +99,6 @@ var MainWindow = GObject.registerClass({
     }
 
     _onRecord() {
-        view.destroyLoadMoreButton();
         view.hasPreviousSelRow();
 
         if (view.listBox)
@@ -283,25 +277,12 @@ var MainWindow = GObject.registerClass({
         this._scrolledWin.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
         this.scrollbar = this._scrolledWin.get_vadjustment();
 
-        this.scrollbar.connect('value_changed', () => {
-            this.currentBound = this.scrollbar.get_value();
-            UpperBoundVal = this.scrollbar.upper - this.scrollbar.page_size;
-            if (UpperBoundVal === this.currentBound && loadMoreButton === null) {
-                this.addLoadMoreButton();
-            } else if (UpperBoundVal !== this.currentBound && loadMoreButton) {
-                loadMoreButton.destroy();
-                loadMoreButton = null;
-            }
-        });
-
         this._mainView.add(this._scrolledWin);
         this._scrolledWin.show();
 
         this.listBox = null;
-        this._startIdx = 0;
-        this._endIdx = offsetController.getEndIdx();
 
-        if (this._endIdx === -1) {
+        if (list.getItemCount() === 0) {
             this._scrolledWin.get_style_context().add_class('emptyGrid');
             this._addEmptyPage();
         } else {
@@ -318,8 +299,9 @@ var MainWindow = GObject.registerClass({
             this._files = [];
             this._files = list.getFilesInfoForList();
 
-            for (let i = this._startIdx; i <= this._endIdx; i++) {
-                this.rowGrid = new Gtk.Grid({ name: i.toString(),
+            this._files.forEach((file, index) => {
+
+                this.rowGrid = new Gtk.Grid({ name: index.toString(),
                     height_request: 45,
                     orientation: Gtk.Orientation.VERTICAL,
                     hexpand: true,
@@ -342,9 +324,6 @@ var MainWindow = GObject.registerClass({
                     let row = button.get_parent().get_parent();
                     this.listBox.select_row(row);
                     play.passSelected(row);
-                    let gridForName = row.get_child();
-                    let idx = parseInt(gridForName.name);
-                    let file = this._files[idx];
                     this.onPlayPauseToggled(row, file);
                 });
 
@@ -373,7 +352,7 @@ var MainWindow = GObject.registerClass({
                     use_markup: true,
                     width_chars: 35,
                     xalign: 0 });
-                let markup = `<b>${this._files[i].fileName}</b>`;
+                let markup = `<b>${file.fileName}</b>`;
                 this._fileName.label = markup;
                 this._fileName.set_no_show_all(true);
                 this.rowGrid.attach(this._fileName, 3, 0, 10, 3);
@@ -389,7 +368,7 @@ var MainWindow = GObject.registerClass({
                     valign: Gtk.Align.END,
                     margin_start: 15,
                     margin_top: 5 });
-                this.fileDuration = this._formatTime(this._files[i].duration / Gst.SECOND);
+                this.fileDuration = this._formatTime(file.duration / Gst.SECOND);
                 this.playDurationLabel.label = this.fileDuration;
                 this._playLabelBox.pack_start(this.playDurationLabel, false, true, 0);
                 this.playDurationLabel.show();
@@ -417,7 +396,7 @@ var MainWindow = GObject.registerClass({
                     valign: Gtk.Align.END,
                     margin_start: 15,
                     margin_top: 5 });
-                this.dateModifiedLabel.label = this._files[i].dateModified;
+                this.dateModifiedLabel.label = file.dateModified;
                 this.dateModifiedLabel.get_style_context().add_class('dim-label');
                 this.dateModifiedLabel.set_no_show_all(true);
                 this.rowGrid.attach(this.dateModifiedLabel, 3, 1, 6, 1);
@@ -441,9 +420,6 @@ var MainWindow = GObject.registerClass({
                 this._info.connect('clicked', button => {
                     let row = button.get_parent().get_parent();
                     this.listBox.select_row(row);
-                    let gridForName = row.get_child();
-                    let idx = parseInt(gridForName.name);
-                    let file = this._files[idx];
                     this._onInfoButton(file);
                 });
                 this._info.set_tooltip_text(_('Info'));
@@ -463,27 +439,13 @@ var MainWindow = GObject.registerClass({
                 this._delete.set_tooltip_text(_('Delete'));
                 this.rowGrid.attach(this._delete, 28, 0, 1, 2);
                 this._delete.hide();
-            }
+
+            });
         }
         list.monitorListview();
     }
 
-    addLoadMoreButton() {
-        loadMoreButton = new LoadMoreButton();
-        loadMoreButton.connect('clicked', () => loadMoreButton.onLoadMore());
-        this._mainView.add(loadMoreButton);
-        loadMoreButton.show();
-    }
-
-    destroyLoadMoreButton() {
-        if (loadMoreButton !== null) {
-            loadMoreButton.destroy();
-            loadMoreButton = null;
-        }
-    }
-
     listBoxRefresh() {
-        this.destroyLoadMoreButton();
         previousSelRow = null;
 
         if (this.listBox)
@@ -494,22 +456,12 @@ var MainWindow = GObject.registerClass({
         list.enumerateDirectory();
     }
 
-    listBoxLoadMore() {
-        this.destroyLoadMoreButton();
-        previousSelRow = null;
-        this.listBox.set_selection_mode(Gtk.SelectionMode.NONE);
-        offsetController.increaseEndIdxStep();
-        list.setListTypeRefresh();
-        list._setDiscover();
-    }
-
     scrolledWinDelete() {
         this._scrolledWin.destroy();
         this.scrolledWinAdd();
     }
 
     hasPreviousSelRow() {
-        this.destroyLoadMoreButton();
         if (previousSelRow !== null) {
             let rowGrid = previousSelRow.get_child();
             rowGrid.foreach(child => {
@@ -550,7 +502,6 @@ var MainWindow = GObject.registerClass({
 
     rowGridCallback() {
         let selectedRow = this.listBox.get_selected_row();
-        this.destroyLoadMoreButton();
 
         if (selectedRow) {
             if (previousSelRow !== null)
@@ -742,18 +693,5 @@ var ChannelsComboBox = GObject.registerClass(class ChannelsComboBox extends Gtk.
     _onChannelComboBoxTextChanged() {
         let channelProfile = this.get_active();
         Application.application.setChannelsPreferences(channelProfile);
-    }
-});
-
-const LoadMoreButton = GObject.registerClass(class LoadMoreButton extends Gtk.Button {
-    _init() {
-        super._init();
-        this._block = false;
-        this.label = _('Load More');
-        this.get_style_context().add_class('documents-load-more');
-    }
-
-    onLoadMore() {
-        view.listBoxLoadMore();
     }
 });
