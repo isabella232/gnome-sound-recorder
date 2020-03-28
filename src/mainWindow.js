@@ -28,7 +28,7 @@ const Gst = imports.gi.Gst;
 const Gtk = imports.gi.Gtk;
 const Pango = imports.gi.Pango;
 
-const Application = imports.application;
+const Settings = imports.preferences.settings;
 const AudioProfile = imports.audioProfile;
 const FileUtil = imports.fileUtil;
 const Info = imports.info;
@@ -197,16 +197,6 @@ var MainWindow = GObject.registerClass({
         return true;
     }
 
-    presetVolume(source, vol) {
-        if (source === ActiveArea.PLAY) {
-            volumeValue[0].play = vol;
-            Application.application.setSpeakerVolume(vol);
-        } else {
-            volumeValue[0].record = vol;
-            Application.application.setMicVolume(vol);
-        }
-    }
-
     setVolume() {
         if (setVisibleID === ActiveArea.PLAY)
             play.setVolume(volumeValue[0].play);
@@ -220,10 +210,10 @@ var MainWindow = GObject.registerClass({
     }
 
     listBoxAdd() {
-        let playVolume = Application.application.getSpeakerVolume();
-        let micVolume = Application.application.getMicVolume();
+        let playVolume = Settings.speakerVolume;
+        let micVolume = Settings.micVolume;
         volumeValue.push({ record: micVolume, play: playVolume });
-        activeProfile = Application.application.getPreferences();
+        activeProfile = Settings.mediaCodec;
 
         this.recordGrid = new Gtk.Grid({ name: 'recordGrid',
             orientation: Gtk.Orientation.HORIZONTAL });
@@ -651,47 +641,5 @@ var MainWindow = GObject.registerClass({
                 wave = new Waveform.WaveForm(this.wFGrid, selFile);
 
         }
-    }
-});
-
-var EncoderComboBox = GObject.registerClass(class EncoderComboBox extends Gtk.ComboBoxText {
-    // encoding setting labels in combobox
-    _init() {
-        super._init();
-        let combo = [_('Ogg Vorbis'), _('Opus'), _('FLAC'), _('MP3'), _('MOV')];
-
-        for (let i = 0; i < combo.length; i++)
-            this.append_text(combo[i]);
-        this.set_property('valign', Gtk.Align.CENTER);
-        this.set_sensitive(true);
-        activeProfile = Application.application.getPreferences();
-        this.set_active(activeProfile);
-        this.connect('changed', () => this._onComboBoxTextChanged());
-    }
-
-    _onComboBoxTextChanged() {
-        activeProfile = this.get_active();
-        Application.application.setPreferences(activeProfile);
-    }
-});
-
-var ChannelsComboBox = GObject.registerClass(class ChannelsComboBox extends Gtk.ComboBoxText {
-    // channel setting labels in combobox
-    _init() {
-        super._init();
-        let combo = [_('Mono'), _('Stereo')];
-
-        for (let i = 0; i < combo.length; i++)
-            this.append_text(combo[i]);
-        this.set_property('valign', Gtk.Align.CENTER);
-        this.set_sensitive(true);
-        let chanProfile = Application.application.getChannelsPreferences();
-        this.set_active(chanProfile);
-        this.connect('changed', () => this._onChannelComboBoxTextChanged());
-    }
-
-    _onChannelComboBoxTextChanged() {
-        let channelProfile = this.get_active();
-        Application.application.setChannelsPreferences(channelProfile);
     }
 });

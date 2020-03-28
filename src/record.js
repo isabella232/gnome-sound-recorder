@@ -26,6 +26,7 @@ const GstPbutils = imports.gi.GstPbutils;
 const Gtk = imports.gi.Gtk;
 
 const Application = imports.application;
+const Settings = imports.preferences.settings;
 const MainWindow = imports.mainWindow;
 
 const PipelineStates = {
@@ -296,7 +297,7 @@ var Record = class Record {
     _getChannels() {
 
         let channels = null;
-        let channelsPref = Application.application.getChannelsPreferences();
+        let channelsPref = Settings.channel;
 
         switch (channelsPref) {
         case Channels.MONO:

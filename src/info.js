@@ -24,8 +24,6 @@ const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 
 
-
-
 var InfoDialog = class InfoDialog {
     constructor(fileNav) {
         let fileName = fileNav;

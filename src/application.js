@@ -26,13 +26,12 @@ const Gtk = imports.gi.Gtk;
 const Gdk = imports.gi.Gdk;
 
 const MainWindow = imports.mainWindow;
-const Preferences = imports.preferences;
+const Settings = imports.preferences;
 
 var SIGINT = 2;
 var SIGTERM = 15;
 
 var application = null;
-let settings = null;
 
 var Application = GObject.registerClass(class Application extends Gtk.Application {
     _init() {
@@ -58,7 +57,7 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
     _initAppMenu() {
         let preferences = new Gio.SimpleAction({ name: 'preferences' });
         preferences.connect('activate', () => {
-            this._showPreferences();
+            (new Settings.SettingsDialog()).show();
         });
         this.add_action(preferences);
 
@@ -84,7 +83,6 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
         Gst.init(null);
         this._initAppMenu();
         application = this;
-        settings = new Gio.Settings({ schema: pkg.name });
         this.ensureDirectory();
     }
 
@@ -111,50 +109,6 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
 
         if (MainWindow.play.play)
             MainWindow.play.play.set_state(Gst.State.NULL);
-    }
-
-    _showPreferences() {
-        let preferencesDialog = new Preferences.Preferences();
-
-        preferencesDialog.widget.connect('response', () => {
-            preferencesDialog.widget.destroy();
-        });
-    }
-
-    getPreferences() {
-        let set = settings.get_int('media-type-preset');
-        return set;
-    }
-
-    setPreferences(profileName) {
-        settings.set_int('media-type-preset', profileName);
-    }
-
-    getChannelsPreferences() {
-        let set = settings.get_int('channel');
-        return set;
-    }
-
-    setChannelsPreferences(channel) {
-        settings.set_int('channel', channel);
-    }
-
-    getMicVolume() {
-        let micVolLevel = settings.get_double('mic-volume');
-        return micVolLevel;
-    }
-
-    setMicVolume(level) {
-        settings.set_double('mic-volume', level);
-    }
-
-    getSpeakerVolume() {
-        let speakerVolLevel = settings.get_double('speaker-volume');
-        return speakerVolLevel;
-    }
-
-    setSpeakerVolume(level) {
-        settings.set_double('speaker-volume', level);
     }
 
     _loadStyleSheet() {

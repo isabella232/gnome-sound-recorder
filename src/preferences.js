@@ -20,89 +20,80 @@
 
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
-
+const GObject = imports.gi.GObject;
 
 const MainWindow = imports.mainWindow;
 
-let formatComboBoxText = null;
-let channelsComboBoxText = null;
-let recordVolume = null;
-let playVolume = null;
+let _settings = new Gio.Settings({ schema: pkg.name });
 
-var Preferences = class Preferences {
-    constructor() {
-        this.widget = new Gtk.Dialog({ title: _('Preferences'),
-            resizable: false,
-            modal: true,
-            destroy_with_parent: true,
-            default_width: 400,
-            margin_top: 5,
-            use_header_bar: 1,
-            hexpand: true });
+var settings = {
+    get mediaCodec() {
+        return _settings.get_int('media-type-preset');
+    },
 
-        this.widget.set_transient_for(Gio.Application.get_default().get_active_window());
+    set mediaCodec(profileName) {
+        _settings.set_int('media-type-preset', profileName);
+    },
 
-        let grid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
-            row_homogeneous: true,
-            column_homogeneous: true,
-            halign: Gtk.Align.CENTER,
-            row_spacing: 6,
-            column_spacing: 24,
-            margin_bottom: 12,
-            margin_end: 24,
-            margin_start: 24,
-            margin_top: 12 });
-        let contentArea = this.widget.get_content_area();
-        contentArea.pack_start(grid, true, true, 2);
+    get channel() {
+        return _settings.get_int('channel');
+    },
 
-        let formatLabel = new Gtk.Label({ label: _('Preferred format'),
-            halign: Gtk.Align.END });
-        formatLabel.get_style_context().add_class('dim-label');
-        grid.attach(formatLabel, 0, 0, 2, 1);
+    set channel(channel) {
+        _settings.set_int('channel', channel);
+    },
 
-        formatComboBoxText = new MainWindow.EncoderComboBox();
-        grid.attach(formatComboBoxText, 2, 0, 2, 1);
+    get micVolume() {
+        return _settings.get_double('mic-volume');
+    },
 
-        let channelsLabel = new Gtk.Label({ label: _('Default mode'),
-            halign: Gtk.Align.END });
-        channelsLabel.get_style_context().add_class('dim-label');
-        grid.attach(channelsLabel, 0, 1, 2, 1);
+    set micVolume(level) {
+        _settings.set_double('mic-volume', level);
+    },
 
-        channelsComboBoxText = new MainWindow.ChannelsComboBox();
-        grid.attach(channelsComboBoxText, 2, 1, 2, 1);
+    get speakerVolume() {
+        return _settings.get_double('speaker-volume');
+    },
 
-        let volumeLabel = new Gtk.Label({ label: _('Volume'),
-            halign: Gtk.Align.END });
-        volumeLabel.get_style_context().add_class('dim-label');
-        grid.attach(volumeLabel, 0, 2, 2, 1);
-
-        playVolume = new Gtk.Scale({ orientation: Gtk.Orientation.HORIZONTAL });
-        this.playRange = Gtk.Adjustment.new(MainWindow.volumeValue[0].play, 0, 1.0, 0.05, 0.0, 0.0);
-        playVolume.set_adjustment(this.playRange);
-        playVolume.set_sensitive(true);
-        playVolume.connect('value-changed', () => {
-            MainWindow.view.presetVolume(MainWindow.ActiveArea.PLAY, playVolume.get_value());
-        });
-        grid.attach(playVolume, 2, 2, 2, 1);
-
-        let micVolLabel = new Gtk.Label({ label: _('Microphone'),
-            halign: Gtk.Align.END });
-        micVolLabel.get_style_context().add_class('dim-label');
-        grid.attach(micVolLabel, 0, 3, 2, 1);
-
-        recordVolume = new Gtk.Scale({ orientation: Gtk.Orientation.HORIZONTAL });
-        this.recordRange = Gtk.Adjustment.new(MainWindow.volumeValue[0].record, 0, 1.0, 0.05, 0.0, 0.0);
-        recordVolume.set_adjustment(this.recordRange);
-        recordVolume.set_sensitive(true);
-        recordVolume.connect('value-changed', () => {
-            MainWindow.view.presetVolume(MainWindow.ActiveArea.RECORD, recordVolume.get_value());
-        });
-        grid.attach(recordVolume, 2, 3, 2, 1);
-
-        this.widget.show_all();
-    }
-
-    onDoneClicked() {
-        this.widget.destroy();
-    }
+    set speakerVolume(level) {
+        _settings.set_double('speaker-volume', level);
+    },
 };
+
+var SettingsDialog = GObject.registerClass({ // eslint-disable-line no-unused-vars
+    Template: 'resource:///org/gnome/SoundRecorder/ui/preferences.ui',
+    InternalChildren: ['formateComboBox', 'channelsComboBox', 'volumeScale', 'microphoneScale'],
+}, class SettingsDialog extends Gtk.Dialog {
+    _init() {
+        super._init({ transient_for: Gio.Application.get_default().get_active_window() });
+
+        this.connect('response', () => {
+            this.destroy();
+        });
+
+        this._formateComboBox.set_active(settings.mediaCodec);
+        this._formateComboBox.connect('changed', () => {
+            settings.mediaCodec = this._formateComboBox.get_active();
+        });
+
+        this._channelsComboBox.set_active(settings.channel);
+        this._channelsComboBox.connect('changed', () => {
+            settings.channel = this._channelsComboBox.get_active();
+        });
+
+        let volumeValue = MainWindow.volumeValue[0];
+        this._volumeScale.set_value(volumeValue.play);
+        this._volumeScale.connect('value-changed', () => {
+            let vol = this._volumeScale.get_value();
+            volumeValue.play = vol;
+            settings.speakerVolume = vol;
+        });
+
+        this._microphoneScale.set_value(volumeValue.record);
+        this._microphoneScale.connect('value-changed', () => {
+            let vol = this._microphoneScale.get_value();
+            volumeValue.record = vol;
+            settings.micVolume = vol;
+        });
+    }
+});
