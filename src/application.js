@@ -36,7 +36,7 @@ var application = null;
 var Application = GObject.registerClass(class Application extends Gtk.Application {
     _init() {
         super._init({ application_id: pkg.name });
-        GLib.set_application_name(_('SoundRecorder'));
+        GLib.set_application_name(_('Sound Recorder'));
         GLib.set_prgname('gnome-sound-recorder');
 
         this.add_main_option('version', 'v'.charCodeAt(0), GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
@@ -120,24 +120,25 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
     }
 
     _showAbout() {
-        let aboutDialog = new Gtk.AboutDialog();
-        aboutDialog.artists = ['Reda Lazri <the.red.shortcut@gmail.com>',
-            'Garrett LeSage <garrettl@gmail.com>',
-            'Hylke Bons <hylkebons@gmail.com>',
-            'Sam Hewitt <hewittsamuel@gmail.com>'];
-        aboutDialog.authors = ['Meg Ford <megford@gnome.org>'];
-        /* Translators: Replace "translator-credits" with your names, one name per line */
-        aboutDialog.translator_credits = _('translator-credits');
-        aboutDialog.program_name = _('Sound Recorder');
-        aboutDialog.copyright = `Copyright ${String.fromCharCode(0x00A9)} 2013${String.fromCharCode(0x2013)}Meg Ford`;
-        aboutDialog.license_type = Gtk.License.GPL_2_0;
-        aboutDialog.logo_icon_name = pkg.name;
-        aboutDialog.version = pkg.version;
-        aboutDialog.website = 'https://wiki.gnome.org/Apps/SoundRecorder';
-        aboutDialog.wrap_license = true;
-        aboutDialog.modal = true;
-        aboutDialog.transient_for = this.window;
-
+        let aboutDialog = new Gtk.AboutDialog({
+            artists: ['Reda Lazri <the.red.shortcut@gmail.com>',
+                'Garrett LeSage <garrettl@gmail.com>',
+                'Hylke Bons <hylkebons@gmail.com>',
+                'Sam Hewitt <hewittsamuel@gmail.com>'],
+            authors: ['Meg Ford <megford@gnome.org>'],
+            translator_credits: _('translator-credits'),
+            program_name: GLib.get_application_name(),
+            comments: _('A Sound Recording Application for GNOME'),
+            license_type: Gtk.License.GPL_2_0,
+            logo_icon_name: pkg.name,
+            version: pkg.version,
+            website: 'https://wiki.gnome.org/Apps/SoundRecorder',
+            copyright: `Copyright 2013-${new Gtk.Calendar().get_date()[0]} Meg Ford`,
+            wrap_license: true,
+            modal: true,
+            transient_for: this.window,
+            use_header_bar: true,
+        });
         aboutDialog.show();
         aboutDialog.connect('response', () => {
             aboutDialog.destroy();
