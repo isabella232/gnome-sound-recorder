@@ -2,34 +2,35 @@
 # Copyright (C) 2013 THE gnome-sound-recorder'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-sound-recorder package.
 # יוסף אור בוצ׳קו <yoseforb@gmail.com>, 2013.
-# Yosef Or Boczko <yoseforb@gnome.org>, 2013, 2014, 2016.
+# Yosef Or Boczko <yoseforb@gmail.com>, 2013-2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder 3.9.91\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-09 18:33+0300\n"
-"PO-Revision-Date: 2016-08-09 18:33+0300\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
+"issues\n"
+"POT-Creation-Date: 2020-03-28 21:14+0000\n"
+"PO-Revision-Date: 2020-03-30 22:24+0300\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
-"Language-Team: עברית <>\n"
+"Language-Team: Hebrew <yoseforb@gmail.com>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n>2||n==0) ? 1 : 2;\n"
-"X-Generator: Gtranslator 2.91.7\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n>2||n==0) ? 1 : 2\n"
+"X-Generator: Gtranslator 3.36.0\n"
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
-#: ../src/record.js:113
+#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in:5
+#: data/org.gnome.SoundRecorder.desktop.in.in:4 src/application.js:177
+#: src/record.js:115
 msgid "Sound Recorder"
 msgstr "רשמקול"
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
+#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in:6
 msgid "A simple, modern sound recorder for GNOME"
 msgstr "רשמקול פשוט וחדיש עבור GNOME"
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
+#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in:10
 msgid ""
 "Sound Recorder provides a simple and modern interface that provides a "
 "straight-forward way to record and play audio. It allows you to do basic "
@@ -38,7 +39,7 @@ msgstr ""
 "רשמקול מספק ממשק פשוט וחדיש המספק דרך פשוטה להקלטת ולהאזנה לשמע. הוא מאפשר "
 "לך עריכה בסיסית ויצירת תזכירים קוליים."
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:4
+#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in:15
 msgid ""
 "Sound Recorder automatically handles the saving process so that you do not "
 "need to worry about accidentally discarding the previous recording."
@@ -46,35 +47,39 @@ msgstr ""
 "רשמקול מטפל באופן אוטומטי בתהליך השמירה כך שלא נדרש לדאוג על השלכה בטעות של "
 "הקלטה קודמת."
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:5
+#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in:19
 msgid "Supported audio formats:"
 msgstr "Supported audio formats:"
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:6
+#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in:21
 msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
 msgstr "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
+#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in:47
+msgid "The GNOME Project"
+msgstr "מיזם GNOME"
+
+#: data/org.gnome.SoundRecorder.gschema.xml.in:5
 msgid "Window size"
 msgstr "Window size"
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:2
+#: data/org.gnome.SoundRecorder.gschema.xml.in:6
 msgid "Window size (width and height)."
 msgstr "Window size (width and height)."
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:3
+#: data/org.gnome.SoundRecorder.gschema.xml.in:10
 msgid "Window position"
 msgstr "Window position"
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:4
+#: data/org.gnome.SoundRecorder.gschema.xml.in:11
 msgid "Window position (x and y)."
 msgstr "Window position (x and y)."
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
+#: data/org.gnome.SoundRecorder.gschema.xml.in:15
 msgid "Maps media types to audio encoder preset names."
 msgstr "Maps media types to audio encoder preset names."
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
+#: data/org.gnome.SoundRecorder.gschema.xml.in:16
 msgid ""
 "Maps media types to audio encoder preset names. If there is no mapping set, "
 "the default encoder settings will be used."
@@ -82,11 +87,11 @@ msgstr ""
 "Maps media types to audio encoder preset names. If there is no mapping set, "
 "the default encoder settings will be used."
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+#: data/org.gnome.SoundRecorder.gschema.xml.in:20
 msgid "Available channels"
 msgstr "Available channels"
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+#: data/org.gnome.SoundRecorder.gschema.xml.in:21
 msgid ""
 "Maps available channels. If there is not no mapping set, stereo channel will "
 "be used by default."
@@ -94,65 +99,54 @@ msgstr ""
 "Maps available channels. If there is not no mapping set, stereo channel will "
 "be used by default."
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+#: data/org.gnome.SoundRecorder.gschema.xml.in:25
 msgid "Microphone volume level"
 msgstr "Microphone volume level"
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+#: data/org.gnome.SoundRecorder.gschema.xml.in:26
 msgid "Microphone volume level."
 msgstr "Microphone volume level."
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:11
+#: data/org.gnome.SoundRecorder.gschema.xml.in:30
 msgid "Speaker volume level"
 msgstr "Speaker volume level"
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:12
+#: data/org.gnome.SoundRecorder.gschema.xml.in:31
 msgid "Speaker volume level."
 msgstr "Speaker volume level."
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
+#: data/org.gnome.SoundRecorder.desktop.in.in:5
 msgid "Record sound via the microphone and play it back"
 msgstr "להקליט קול באמצעות המיקרופון ולנגן שוב"
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.SoundRecorder.desktop.in.in:10
 msgid "Audio;Application;Record;"
 msgstr "שמע;אודיו;יישום;הקלטה;"
 
-#: ../src/application.js:43
+#: src/application.js:40
 msgid "SoundRecorder"
 msgstr "רשמקול"
 
-#: ../src/application.js:50 ../src/preferences.js:40
-msgid "Preferences"
-msgstr "העדפות"
-
-#: ../src/application.js:53
-msgid "About"
-msgstr "על אודות"
-
-#: ../src/application.js:54
-msgid "Quit"
-msgstr "יציאה"
-
-#: ../src/application.js:83
+#: src/application.js:83
 msgid "Sound Recorder started"
 msgstr "הקלטת שמע התחילה"
 
 #. Translators: "Recordings" here refers to the name of the directory where the application places files
-#: ../src/application.js:93
+#: src/application.js:93
 msgid "Recordings"
 msgstr "הקלטות"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: ../src/application.js:167
+#: src/application.js:176
 msgid "translator-credits"
 msgstr "יוסף אור בוצ׳קו <yoseforb@gnome.org>"
 
-#: ../src/fileUtil.js:88
+#: src/fileUtil.js:84
 msgid "Yesterday"
 msgstr "אתמול"
 
-#: ../src/fileUtil.js:90
+#: src/fileUtil.js:86
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -160,11 +154,11 @@ msgstr[0] "אתמול"
 msgstr[1] "לפני %d ימים"
 msgstr[2] "שלשום"
 
-#: ../src/fileUtil.js:94
+#: src/fileUtil.js:90
 msgid "Last week"
 msgstr "לפני שבוע"
 
-#: ../src/fileUtil.js:96
+#: src/fileUtil.js:92
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -172,11 +166,11 @@ msgstr[0] "לפני שבוע"
 msgstr[1] "לפני %d שבועות"
 msgstr[2] "לפני שבועיים"
 
-#: ../src/fileUtil.js:100
+#: src/fileUtil.js:96
 msgid "Last month"
 msgstr "לפני חודש"
 
-#: ../src/fileUtil.js:102
+#: src/fileUtil.js:98
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
@@ -184,11 +178,11 @@ msgstr[0] "לפני חודש"
 msgstr[1] "לפני %d חודשים"
 msgstr[2] "לפני חודשיים"
 
-#: ../src/fileUtil.js:106
+#: src/fileUtil.js:102
 msgid "Last year"
 msgstr "לפני שנה"
 
-#: ../src/fileUtil.js:108
+#: src/fileUtil.js:104
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
@@ -196,72 +190,81 @@ msgstr[0] "לפני שנה"
 msgstr[1] "לפני %d שנים"
 msgstr[2] "לפני שנתיים"
 
-#: ../src/info.js:44 ../src/mainWindow.js:515
+#: src/info.js:42 src/mainWindow.js:518
 msgid "Info"
 msgstr "מידע"
 
-#: ../src/info.js:48
+#: src/info.js:47
 msgid "Cancel"
 msgstr "ביטול"
 
 #. finish button (stop recording)
-#: ../src/info.js:53 ../src/mainWindow.js:314
+#: src/info.js:52 src/mainWindow.js:325
 msgid "Done"
 msgstr "בוצע"
 
 #. File Name item
 #. Translators: "File Name" is the label next to the file name
 #. in the info dialog
-#: ../src/info.js:80
+#: src/info.js:79
 msgctxt "File Name"
 msgid "Name"
 msgstr "שם"
 
 #. Source item
-#: ../src/info.js:87
+#: src/info.js:86
 msgid "Source"
 msgstr "מקור"
 
 #. Date Modified item
-#: ../src/info.js:96
+#: src/info.js:95
 msgid "Date Modified"
 msgstr "תאריך שינוי"
 
 #. Date Created item
-#: ../src/info.js:102
+#: src/info.js:101
 msgid "Date Created"
 msgstr "תאריך יצירה"
 
 #. Media type item
 #. Translators: "Type" is the label next to the media type
 #. (Ogg Vorbis, AAC, ...) in the info dialog
-#: ../src/info.js:113
+#: src/info.js:112
 msgctxt "Media Type"
 msgid "Type"
 msgstr "סוג"
 
 #. Media type data
-#: ../src/info.js:152
+#: src/info.js:151
 msgid "Unknown"
 msgstr "לא ידוע"
 
-#: ../src/mainWindow.js:113 ../src/mainWindow.js:794
+#: src/mainWindow.js:115 src/mainWindow.js:782
 msgid "Record"
 msgstr "הקלטה"
 
-#: ../src/mainWindow.js:149
+#: src/mainWindow.js:127 src/preferences.js:38
+msgid "Preferences"
+msgstr "העדפות"
+
+#: src/mainWindow.js:128
+msgid "About Sound Recorder"
+msgstr "על אודות רשמקול"
+
+#: src/mainWindow.js:163
 msgid "Add Recordings"
 msgstr "הוספת הקלטות"
 
-#: ../src/mainWindow.js:154
+#: src/mainWindow.js:168
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "יש להשתמש בכפתור <b>הקלטה</b> כדי להקליט צלילים"
 
-#: ../src/mainWindow.js:300
+#: src/mainWindow.js:311
 msgid "Recording…"
 msgstr "מקליט…"
 
-#: ../src/mainWindow.js:352
+#. Translators: This is the title in the headerbar
+#: src/mainWindow.js:361
 #, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
@@ -269,91 +272,101 @@ msgstr[0] "הקלטת שמע אחת"
 msgstr[1] "%d הקלטות שמע"
 msgstr[2] "שתי הקלטות שמע"
 
-#: ../src/mainWindow.js:401
+#: src/mainWindow.js:365
+#| msgid "%d Recorded Sound"
+#| msgid_plural "%d Recorded Sounds"
+msgid "No Recorded Sounds"
+msgstr "אין הקלטות שמע"
+
+#: src/mainWindow.js:407
 msgid "Play"
 msgstr "ניגון"
 
-#: ../src/mainWindow.js:422
+#: src/mainWindow.js:427
 msgid "Pause"
 msgstr "עצירה"
 
-#: ../src/mainWindow.js:530
+#: src/mainWindow.js:532
 msgid "Delete"
 msgstr "מחיקה"
 
-#: ../src/mainWindow.js:829
+#: src/mainWindow.js:814
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:829
+#: src/mainWindow.js:814
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:829
+#: src/mainWindow.js:814
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:829
+#: src/mainWindow.js:814
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:829
+#: src/mainWindow.js:814
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:853
+#: src/mainWindow.js:835
 msgid "Mono"
 msgstr "הקלטה חד ערוצית (מונו)"
 
-#: ../src/mainWindow.js:853
+#: src/mainWindow.js:835
 msgid "Stereo"
 msgstr "הקלטה דו ערוצית (סטריאו)"
 
-#: ../src/mainWindow.js:877
+#: src/mainWindow.js:856
 msgid "Load More"
 msgstr "טעינת עוד"
 
-#: ../src/play.js:89
+#: src/play.js:85
 msgid "Unable to play recording"
 msgstr "לא ניתן לנגן הקלטה"
 
-#: ../src/preferences.js:64
+#: src/preferences.js:62
 msgid "Preferred format"
 msgstr "תבנית מועדפת"
 
-#: ../src/preferences.js:72
+#: src/preferences.js:70
 msgid "Default mode"
 msgstr "מצב ברירת מחדל"
 
-#: ../src/preferences.js:80
+#: src/preferences.js:78
 msgid "Volume"
 msgstr "עצמת שמע"
 
-#: ../src/preferences.js:95
+#: src/preferences.js:92
 msgid "Microphone"
 msgstr "מיקרופון"
 
-#: ../src/record.js:71
+#: src/record.js:69
 msgid "Unable to create Recordings directory."
 msgstr "לא ניתן ליצור תיקיית הקלטות."
 
-#: ../src/record.js:80
+#: src/record.js:82
+msgid "Please install the GStreamer 1.0 PulseAudio plugin."
+msgstr "נא להתקין את תוסף PulseAudio עבור GStreamer 1.0."
+
+#: src/record.js:84
 msgid "Your audio capture settings are invalid."
 msgstr "הגדרות לכידת השמע שלך אינן תקפות."
 
-#: ../src/record.js:130
+#: src/record.js:132
 msgid "Not all elements could be created."
 msgstr "לא כל הרכיבים ניתנים ליצירה."
 
-#: ../src/record.js:142
+#: src/record.js:144
 msgid "Not all of the elements were linked."
 msgstr "לא כל הרכיבים קושרו."
 
-#: ../src/record.js:167
+#: src/record.js:169
 msgid "No Media Profile was set."
 msgstr "לא הוגדר פרופיל מדיה."
 
-#: ../src/record.js:178
+#: src/record.js:180
 msgid ""
 "Unable to set the pipeline \n"
 " to the recording state."
@@ -361,10 +374,16 @@ msgstr "לא ניתן להגדיר את הצינור למצב הקלטה."
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
 #. by the application (for example, "Clip 1").
-#: ../src/record.js:357
+#: src/record.js:356
 #, javascript-format
 msgid "Clip %d"
 msgstr "הקלטה %d"
+
+#~ msgid "About"
+#~ msgstr "על אודות"
+
+#~ msgid "Quit"
+#~ msgstr "יציאה"
 
 #~ msgid "%Y-%m-%d %H:%M:%S"
 #~ msgstr "%Y-%m-%d %H:%M:%S"
@@ -389,9 +408,6 @@ msgstr "הקלטה %d"
 
 #~ msgid "Unable to set the playbin to the playing state."
 #~ msgstr "לא ניתן להגדיר את playbin למצב פעיל."
-
-#~ msgid "About Sound Recorder"
-#~ msgstr "על אודות רשמקול"
 
 #~ msgid "Error: "
 #~ msgstr "שגיאה:"
