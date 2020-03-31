@@ -26,10 +26,10 @@ const GstPbutils = imports.gi.GstPbutils;
 const Gtk = imports.gi.Gtk;
 
 const Application = imports.application;
-const Settings = imports.preferences.settings;
+const Settings = imports.preferences;
 const MainWindow = imports.mainWindow;
 
-const PipelineStates = {
+var PipelineStates = {
     PLAYING: 0,
     PAUSED: 1,
     STOPPED: 2,
@@ -46,6 +46,7 @@ const Channels = {
 };
 
 const _TENTH_SEC = 100000000;
+const _SEC_TIMEOUT = 100;
 
 let errorDialogState;
 
@@ -147,7 +148,7 @@ var Record = class Record {
         let time = this.pipeline.query_position(Gst.Format.TIME)[1] / Gst.SECOND;
 
         if (time >= 0)
-            this._view.setLabel(time, 0);
+            this._view.setRecordTimeLabel(time, 0);
 
 
         return true;
@@ -174,11 +175,11 @@ var Record = class Record {
             errorDialogState = ErrState.ON;
             this._buildFileName.getTitle().delete_async(GLib.PRIORITY_DEFAULT, null, null);
         } else {
-            MainWindow.view.setVolume();
+            this.volume.set_volume(GstAudio.StreamVolumeFormat.CUBIC, Settings.settings.micVolume);
         }
 
         if (!this.timeout)
-            this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, MainWindow._SEC_TIMEOUT, () => this._updateTime());
+            this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, _SEC_TIMEOUT, () => this._updateTime());
 
     }
 
@@ -242,8 +243,7 @@ var Record = class Record {
                         if (val > 0)
                             val = 0;
 
-                        let value = Math.pow(10, val / 20);
-                        this.peak = value;
+                        this.peak = Math.pow(10, val / 20);
 
 
                         if  (this.clock === null)
@@ -261,7 +261,9 @@ var Record = class Record {
 
                         this.runTime = this.absoluteTime - this.baseTime;
                         let approxTime = Math.round(this.runTime / _TENTH_SEC);
-                        MainWindow.wave._drawEvent(approxTime, this.peak);
+
+                        if (MainWindow.wave !== null)
+                            MainWindow.wave._drawEvent(approxTime, this.peak);
                     }
                 }
             }
@@ -286,12 +288,6 @@ var Record = class Record {
             break;
         }
         }
-    }
-
-    setVolume(value) {
-        if (this.volume)
-            this.volume.set_volume(GstAudio.StreamVolumeFormat.CUBIC, value);
-
     }
 
     _getChannels() {

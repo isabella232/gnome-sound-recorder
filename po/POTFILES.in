@@ -4,14 +4,16 @@ data/org.gnome.SoundRecorder.desktop.in.in
 data/ui/window.ui
 data/ui/preferences.ui
 data/ui/infodialog.ui
+data/ui/row.ui
 src/audioProfile.js
 src/application.js
 src/utils.js
 src/info.js
 src/listview.js
+src/row.js
 src/main.js
 src/mainWindow.js
-src/play.js
+src/player.js
 src/preferences.js
 src/record.js
 src/waveform.js

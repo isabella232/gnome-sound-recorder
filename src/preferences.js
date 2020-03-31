@@ -22,8 +22,6 @@ const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const GObject = imports.gi.GObject;
 
-const MainWindow = imports.mainWindow;
-
 let _settings = new Gio.Settings({ schema: pkg.name });
 
 var settings = {
@@ -81,18 +79,15 @@ var SettingsDialog = GObject.registerClass({ // eslint-disable-line no-unused-va
             settings.channel = this._channelsComboBox.get_active();
         });
 
-        let volumeValue = MainWindow.volumeValue[0];
-        this._volumeScale.set_value(volumeValue.play);
+        this._volumeScale.set_value(settings.speakerVolume);
         this._volumeScale.connect('value-changed', () => {
             let vol = this._volumeScale.get_value();
-            volumeValue.play = vol;
             settings.speakerVolume = vol;
         });
 
-        this._microphoneScale.set_value(volumeValue.record);
+        this._microphoneScale.set_value(settings.micVolume);
         this._microphoneScale.connect('value-changed', () => {
             let vol = this._microphoneScale.get_value();
-            volumeValue.record = vol;
             settings.micVolume = vol;
         });
     }

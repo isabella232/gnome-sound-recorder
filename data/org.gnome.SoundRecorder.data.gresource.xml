@@ -5,6 +5,7 @@
     <file>ui/window.ui</file>
     <file>ui/preferences.ui</file>
     <file>ui/infodialog.ui</file>
+    <file>ui/row.ui</file>
   </gresource>
 </gresources>
 

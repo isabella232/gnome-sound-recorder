@@ -26,8 +26,9 @@ const Gtk = imports.gi.Gtk;
 
 const Application = imports.application;
 const MainWindow = imports.mainWindow;
+const Settings = imports.preferences;
 
-const PipelineStates = {
+var PipelineStates = {
     PLAYING: 0,
     PAUSED: 1,
     STOPPED: 2,
@@ -43,17 +44,17 @@ let errorDialogState;
 
 const _TENTH_SEC = 100000000;
 
-var Play = class Play {
-    _playPipeline() {
+var Player = class Player { // eslint-disable-line no-unused-vars
+    _playPipeline(fileUri) {
         errorDialogState = ErrState.OFF;
-        let uri = this._fileToPlay.get_uri();
-        this.play = Gst.ElementFactory.make('playbin', 'play');
-        this.play.set_property('uri', uri);
+        this.player = Gst.ElementFactory.make('playbin', 'play');
+        this.player.set_property('uri', fileUri);
         this.sink = Gst.ElementFactory.make('pulsesink', 'sink');
-        this.play.set_property('audio-sink', this.sink);
-        this.clock = this.play.get_clock();
-        this.playBus = this.play.get_bus();
+        this.player.set_property('audio-sink', this.sink);
+        this.clock = this.player.get_clock();
+        this.playBus = this.player.get_bus();
         this.playBus.add_signal_watch();
+        this.playState = PipelineStates.NULL;
         this.playBus.connect('message', (playBus, message) => {
             if (message !== null)
                 this._onMessageReceived(message);
@@ -61,34 +62,39 @@ var Play = class Play {
         });
     }
 
-    startPlaying() {
+    startPlaying(fileUri) {
+        this.stopPlaying();
+
+        log(`[Player] Playing ${fileUri}`);
         this.baseTime = 0;
 
-        if (!this.play || this.playState === PipelineStates.STOPPED)
-            this._playPipeline();
+        if (!this.player || this.playState === PipelineStates.STOPPED)
+            this._playPipeline(fileUri);
 
 
         if (this.playState === PipelineStates.PAUSED) {
             this.updatePosition();
-            this.play.set_base_time(this.clock.get_time());
-            this.baseTime = this.play.get_base_time() - this.runTime;
+            this.player.set_base_time(this.clock.get_time());
+            this.baseTime = this.player.get_base_time() - this.runTime;
         }
 
-        this.ret = this.play.set_state(Gst.State.PLAYING);
+        this.ret = this.player.set_state(Gst.State.PLAYING);
         this.playState = PipelineStates.PLAYING;
 
         if (this.ret === Gst.StateChangeReturn.FAILURE) {
             this._showErrorDialog(_('Unable to play recording'));
             errorDialogState = ErrState.ON;
         } else if (this.ret === Gst.StateChangeReturn.SUCCESS) {
-            MainWindow.view.setVolume();
+            let value = Settings.settings.speakerVolume;
+            this.player.set_volume(GstAudio.StreamVolumeFormat.CUBIC, value);
         }
         GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGINT, Application.application.onWindowDestroy);
         GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGTERM, Application.application.onWindowDestroy);
     }
 
     pausePlaying() {
-        this.play.set_state(Gst.State.PAUSED);
+        log('[Player] Paused');
+        this.player.set_state(Gst.State.PAUSED);
         this.playState = PipelineStates.PAUSED;
 
         if (this.timeout) {
@@ -98,14 +104,14 @@ var Play = class Play {
     }
 
     stopPlaying() {
-        if (this.playState !== PipelineStates.STOPPED)
+        log('[Player] Stopped');
+        if (this.player !== undefined)
             this.onEnd();
-
     }
 
     onEnd() {
-        this.play.set_state(Gst.State.NULL);
         this.playState = PipelineStates.STOPPED;
+        this.player.set_state(Gst.State.NULL);
         this.playBus.remove_signal_watch();
         this._updateTime();
 
@@ -120,17 +126,13 @@ var Play = class Play {
         errorDialogState = ErrState.OFF;
     }
 
-    onEndOfStream() {
-        MainWindow.view.onPlayStopClicked();
-    }
-
     _onMessageReceived(message) {
         this.localMsg = message;
         let msg = message.type;
         switch (msg) {
 
         case Gst.MessageType.EOS: {
-            this.onEndOfStream();
+            this.stopPlaying();
             break;
         }
 
@@ -149,7 +151,7 @@ var Play = class Play {
 
         case Gst.MessageType.ASYNC_DONE: {
             if (this.sought) {
-                this.play.set_state(this._lastState);
+                this.player.set_state(this._lastState);
                 MainWindow.view.setProgressScaleSensitive();
             }
             this.updatePosition();
@@ -163,7 +165,7 @@ var Play = class Play {
 
         case Gst.MessageType.NEW_CLOCK: {
             if (this.playState === PipelineStates.PAUSED) {
-                this.clock = this.play.get_clock();
+                this.clock = this.player.get_clock();
                 this.startPlaying();
             }
             break;
@@ -177,20 +179,20 @@ var Play = class Play {
     }
 
     _updateTime() {
-        let time = this.play.query_position(Gst.Format.TIME)[1] / Gst.SECOND;
-        this.trackDuration = this.play.query_duration(Gst.Format.TIME)[1];
+        // let time = this.player.query_position(Gst.Format.TIME)[1] / Gst.SECOND;
+        this.trackDuration = this.player.query_duration(Gst.Format.TIME)[1];
         this.trackDurationSecs = this.trackDuration / Gst.SECOND;
 
-        if (time >= 0 && this.playState !== PipelineStates.STOPPED)
-            MainWindow.view.setLabel(time);
-        else if (time >= 0 && this.playState === PipelineStates.STOPPED)
-            MainWindow.view.setLabel(0);
+        // if (time >= 0 && this.playState !== PipelineStates.STOPPED)
+        //       this._timeCallbackFn(time);
+        // else if (time >= 0 && this.playState === PipelineStates.STOPPED)
+        //       this._timeCallbackFn(0);
 
 
         let absoluteTime = 0;
 
         if  (this.clock === null)
-            this.clock = this.play.get_clock();
+            this.clock = this.player.get_clock();
 
         try {
             absoluteTime = this.clock.get_time();
@@ -214,7 +216,7 @@ var Play = class Play {
     queryPosition() {
         let position = 0;
         while (position === 0)
-            position = this.play.query_position(Gst.Format.TIME)[1] / Gst.SECOND;
+            position = this.player.query_position(Gst.Format.TIME)[1] / Gst.SECOND;
 
 
         return position;
@@ -225,15 +227,6 @@ var Play = class Play {
             this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 10, () =>
                 this._updateTime());
         }
-    }
-
-    setVolume(value) {
-        this.play.set_volume(GstAudio.StreamVolumeFormat.CUBIC, value);
-    }
-
-    passSelected(selected) {
-        this._selected = selected;
-        this._fileToPlay = MainWindow.view.loadPlay(this._selected);
     }
 
     _showErrorDialog(errorStrOne, errorStrTwo) {
@@ -251,7 +244,7 @@ var Play = class Play {
             errorDialog.set_transient_for(Gio.Application.get_default().get_active_window());
             errorDialog.connect('response', () => {
                 errorDialog.destroy();
-                this.onEndOfStream();
+                this.stopPlaying();
             });
             errorDialog.show();
         }

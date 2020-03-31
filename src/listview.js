@@ -26,6 +26,7 @@ const GstPbutils = imports.gi.GstPbutils;
 
 const AudioProfile = imports.audioProfile;
 const MainWindow = imports.mainWindow;
+const Record = imports.record;
 
 const EnumeratorState = {
     ACTIVE: 0,
@@ -256,7 +257,7 @@ var Listview = class Listview {
         }
         if (eventType === Gio.FileMonitorEvent.MOVED_OUT ||
             eventType === Gio.FileMonitorEvent.CHANGES_DONE_HINT &&
-                MainWindow.recordPipeline === MainWindow.RecordPipelineStates.STOPPED || eventType === Gio.FileMonitorEvent.RENAMED) {
+                Record.pipeState === Record.PipelineStates.STOPPED || eventType === Gio.FileMonitorEvent.RENAMED) {
             stopVal = EnumeratorState.ACTIVE;
             allFilesInfo.length = 0;
             fileInfo.length = 0;
@@ -277,7 +278,7 @@ var Listview = class Listview {
             this._saveDir = Gio.Application.get_default().saveDir;
         }
         if (eventType === Gio.FileMonitorEvent.DELETED ||
-            eventType === Gio.FileMonitorEvent.CHANGES_DONE_HINT && MainWindow.recordPipeline === MainWindow.RecordPipelineStates.STOPPED) {
+            eventType === Gio.FileMonitorEvent.CHANGES_DONE_HINT && Record.pipeState === Record.PipelineStates.STOPPED) {
             stopVal = EnumeratorState.ACTIVE;
             allFilesInfo.length = 0;
             fileInfo.length = 0;
