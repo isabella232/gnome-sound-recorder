@@ -30,7 +30,7 @@ const Pango = imports.gi.Pango;
 
 const Settings = imports.preferences.settings;
 const AudioProfile = imports.audioProfile;
-const FileUtil = imports.fileUtil;
+const Utils = imports.utils;
 const Info = imports.info;
 const Listview = imports.listview;
 const Play = imports.play;
@@ -76,7 +76,7 @@ var MainWindow = GObject.registerClass({
 
     _init(params) {
         audioProfile = new AudioProfile.AudioProfile();
-        displayTime = new FileUtil.DisplayTime();
+        displayTime = new Utils.DisplayTime();
         view = this;
         this._addListviewPage();
         this.labelID = null;
@@ -410,7 +410,7 @@ var MainWindow = GObject.registerClass({
                 this._info.connect('clicked', button => {
                     let row = button.get_parent().get_parent();
                     this.listBox.select_row(row);
-                    this._onInfoButton(file);
+                    (new Info.InfoDialog(file)).show();
                 });
                 this._info.set_tooltip_text(_('Info'));
                 this.rowGrid.attach(this._info, 27, 0, 1, 2);
@@ -541,14 +541,6 @@ var MainWindow = GObject.registerClass({
         let fileToPlay = this._getFileFromRow(selected);
 
         return fileToPlay;
-    }
-
-    _onInfoButton(selected) {
-        let infoDialog = new Info.InfoDialog(selected);
-
-        infoDialog.widget.connect('response', () => {
-            infoDialog.widget.destroy();
-        });
     }
 
     setLabel(time) {

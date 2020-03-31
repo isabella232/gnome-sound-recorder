@@ -4,6 +4,7 @@
     <file>application.css</file>
     <file>ui/window.ui</file>
     <file>ui/preferences.ui</file>
+    <file>ui/infodialog.ui</file>
   </gresource>
 </gresources>
 

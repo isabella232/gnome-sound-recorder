@@ -3,7 +3,7 @@
   <gresource prefix="/org/gnome/SoundRecorder@profile@/js">
     <file>application.js</file>
     <file>audioProfile.js</file>
-    <file>fileUtil.js</file>
+    <file>utils.js</file>
     <file>info.js</file>
     <file>listview.js</file>
     <file>main.js</file>

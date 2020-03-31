@@ -3,9 +3,10 @@ data/org.gnome.SoundRecorder.gschema.xml.in
 data/org.gnome.SoundRecorder.desktop.in.in
 data/ui/window.ui
 data/ui/preferences.ui
+data/ui/infodialog.ui
 src/audioProfile.js
 src/application.js
-src/fileUtil.js
+src/utils.js
 src/info.js
 src/listview.js
 src/main.js
