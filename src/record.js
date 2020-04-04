@@ -293,7 +293,7 @@ var Record = class Record {
     _getChannels() {
 
         let channels = null;
-        let channelsPref = Settings.channel;
+        let channelsPref = Settings.settings.channel;
 
         switch (channelsPref) {
         case Channels.MONO:
