@@ -54,7 +54,6 @@ var Record = class Record {
     _recordPipeline() {
         errorDialogState = ErrState.OFF;
         this.baseTime = 0;
-        this._view = MainWindow.view;
         this._buildFileName = new BuildFileName();
         this.initialFileName = this._buildFileName.buildInitialFilename();
         let localDateTime = this._buildFileName.getOrigin();
@@ -148,7 +147,7 @@ var Record = class Record {
         let time = this.pipeline.query_position(Gst.Format.TIME)[1] / Gst.SECOND;
 
         if (time >= 0)
-            this._view.setRecordTimeLabel(time, 0);
+            MainWindow.view.setRecordTimeLabel(time, 0);
 
 
         return true;

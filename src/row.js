@@ -1,8 +1,5 @@
-const Gst = imports.gi.Gst;
 const Gtk = imports.gi.Gtk;
 const GObject = imports.gi.GObject;
-const GLib = imports.gi.GLib;
-const Gio = imports.gi.Gio;
 
 var Info = imports.info;
 var Utils = imports.utils;
@@ -18,18 +15,21 @@ var Row = GObject.registerClass({ // eslint-disable-line no-unused-vars
     Signals: {
         'play': { param_types: [GObject.TYPE_STRING] },
         'pause': {},
+        'deleted': {},
     },
 }, class Row extends Gtk.ListBoxRow {
-    _init(file) {
+    _init(recording) {
         super._init({});
-        this.file = file;
 
-        this._fileNameLabel.label = file.fileName;
-        this._fileDurationLabel.label = Utils.StringUtils.formatTime(file.duration / Gst.SECOND);
+        this._fileNameLabel.label = recording.name;
+
+        recording.connect('notify::duration', () => {
+            this._fileDurationLabel.label = Utils.Time.formatTime(recording.duration);
+        });
 
         this._playButton.connect('clicked', () => {
             this.setState(RowState.PLAYING);
-            this.emit('play', this.file.uri);
+            this.emit('play', recording.uri);
         });
 
         this._pauseButton.connect('clicked', () => {
@@ -37,10 +37,10 @@ var Row = GObject.registerClass({ // eslint-disable-line no-unused-vars
             this.emit('pause');
         });
 
-        this._infoButton.connect('clicked', () => (new Info.InfoDialog(file)).show());
+        this._infoButton.connect('clicked', () => (new Info.InfoDialog(recording)).show());
         this._deleteButton.connect('clicked', () => {
-            let gioFile = Gio.File.new_for_uri(file.uri);
-            gioFile.trash_async(GLib.PRIORITY_DEFAULT, null, null);
+            recording.delete();
+            this.emit('deleted');
         });
     }
 

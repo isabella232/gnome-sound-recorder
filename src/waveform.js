@@ -54,13 +54,10 @@ var WaveForm = class WaveForm {
             this.waveType = WaveType.RECORD;
         }
 
-
-
         this.drawing = Gtk.DrawingArea.new();
         if (this.waveType === WaveType.RECORD) {
-            this.drawing.set_property('valign', Gtk.Align.FILL);
             this.drawing.set_property('hexpand', true);
-            this._grid.attach(this.drawing, 2, 0, 3, 2);
+            this._grid.attach(this.drawing, 1, 0, 1, 1);
         } else {
             this.drawing.set_property('valign', Gtk.Align.FILL);
             this.drawing.set_property('hexpand', true);

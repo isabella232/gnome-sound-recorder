@@ -24,8 +24,26 @@ const GLib = imports.gi.GLib;
 const _TIME_DIVISOR = 60;
 
 
-var DisplayTime = class DisplayTime {
-    getDisplayTime(mtime) {
+var Time = { // eslint-disable-line no-unused-vars
+    formatTime: unformattedTime => {
+        this.unformattedTime = unformattedTime;
+        let seconds = Math.floor(this.unformattedTime);
+        let hours = parseInt(seconds / Math.pow(_TIME_DIVISOR, 2));
+        let hoursString = '';
+
+        if (hours > 10)
+            hoursString = `${hours}:`;
+        else if (hours < 10 && hours > 0)
+            hoursString = `0${hours}:`;
+
+        let minuteString = parseInt(seconds / _TIME_DIVISOR) % _TIME_DIVISOR;
+        let secondString = parseInt(seconds % _TIME_DIVISOR);
+        let timeString = `${hoursString + (minuteString < 10 ? `0${minuteString}` : minuteString)}:${secondString < 10 ? `0${secondString}` : secondString}`;
+
+        return timeString;
+    },
+
+    getDisplayTime: mtime => {
         let text = '';
         let DAY = 86400000000;
         let now = GLib.DateTime.new_now_local();
@@ -63,27 +81,5 @@ var DisplayTime = class DisplayTime {
                 years).format(years);
         }
         return text;
-    }
-
-};
-
-
-var StringUtils = { // eslint-disable-line no-unused-vars
-    formatTime: unformattedTime => {
-        this.unformattedTime = unformattedTime;
-        let seconds = Math.floor(this.unformattedTime);
-        let hours = parseInt(seconds / Math.pow(_TIME_DIVISOR, 2));
-        let hoursString = '';
-
-        if (hours > 10)
-            hoursString = `${hours}:`;
-        else if (hours < 10 && hours > 0)
-            hoursString = `0${hours}:`;
-
-        let minuteString = parseInt(seconds / _TIME_DIVISOR) % _TIME_DIVISOR;
-        let secondString = parseInt(seconds % _TIME_DIVISOR);
-        let timeString = `${hoursString + (minuteString < 10 ? `0${minuteString}` : minuteString)}:${secondString < 10 ? `0${secondString}` : secondString}`;
-
-        return timeString;
     },
 };

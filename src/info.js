@@ -23,31 +23,32 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const GObject = imports.gi.GObject;
+const Utils = imports.utils;
 
 
 var InfoDialog = GObject.registerClass({ // eslint-disable-line no-unused-vars
     Template: 'resource:///org/gnome/SoundRecorder/ui/infodialog.ui',
-    InternalChildren: ['cancelBtn', 'doneBtn', 'fileNameEntry', 'sourceLabel', 'dateModifiedLabel', 'dateModifiedValueLabel', 'dateCreatedLabel', 'mediaTypeLabel'],
+    InternalChildren: ['cancelBtn', 'doneBtn', 'fileNameEntry', 'sourceLabel', 'dateModifiedValueLabel', 'dateCreatedLabel', 'dateCreatedValueLabel', 'mediaTypeLabel'],
 }, class InfoDialog extends Gtk.Window {
-    _init(file) {
-        this._file = Gio.File.new_for_uri(file.uri);
+    _init(recording) {
+        this._file = Gio.File.new_for_uri(recording.uri);
 
         super._init({ transient_for: Gio.Application.get_default().get_active_window() });
 
-        this._fileNameEntry.text = file.fileName;
+        this._fileNameEntry.text = recording.name;
 
         // Source value
         this._sourceLabel.label = this._file.get_parent().get_path();
 
-        if (file.dateModified !== null) {
-            this._dateModifiedValueLabel.label = file.dateModified;
+        if (recording.timeCreated > 0) {
+            this._dateCreatedValueLabel.label = Utils.Time.getDisplayTime(recording.timeCreated);
         } else {
-            this._dateModifiedValueLabel.destroy();
-            this._dateModifiedLabel.destroy();
+            this._dateCreatedValueLabel.destroy();
+            this._dateCreatedLabel.destroy();
         }
 
-        this._dateCreatedLabel.label = file.dateCreated;
-        this._mediaTypeLabel.label = file.mediaType || _('Unknown');
+        this._dateModifiedValueLabel.label = Utils.Time.getDisplayTime(recording.timeModified);
+        this._mediaTypeLabel.label = recording.mimeType || _('Unknown');
 
         this._cancelBtn.connect('clicked', () => {
             this.destroy();

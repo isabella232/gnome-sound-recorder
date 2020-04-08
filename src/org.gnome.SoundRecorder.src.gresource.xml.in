@@ -5,7 +5,8 @@
     <file>audioProfile.js</file>
     <file>utils.js</file>
     <file>info.js</file>
-    <file>listview.js</file>
+    <file>recordingList.js</file>
+    <file>recording.js</file>
     <file>row.js</file>
     <file>main.js</file>
     <file>mainWindow.js</file>
