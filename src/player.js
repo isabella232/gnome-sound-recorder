@@ -112,7 +112,7 @@ var Player = class Player { // eslint-disable-line no-unused-vars
     onEnd() {
         this.playState = PipelineStates.STOPPED;
         this.player.set_state(Gst.State.NULL);
-        this.playBus.remove_signal_watch();
+        this.playBus.remove_watch();
         this._updateTime();
 
         if (this.timeout) {
