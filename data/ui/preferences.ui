@@ -73,13 +73,6 @@
                 <property name="halign">start</property>
                 <property name="valign">center</property>
                 <property name="active">0</property>
-                <items>
-                  <item translatable="yes">Ogg Vorbis</item>
-                  <item translatable="yes">Opus</item>
-                  <item translatable="yes">FLAC</item>
-                  <item translatable="yes">MP3</item>
-                  <item translatable="yes">MOV</item>
-                </items>
               </object>
               <packing>
                 <property name="left_attach">1</property>

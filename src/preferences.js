@@ -22,15 +22,18 @@ const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const GObject = imports.gi.GObject;
 
+var EncodingProfile = imports.encodingProfile.EncodingProfile;
+
+
 let _settings = new Gio.Settings({ schema: pkg.name });
 
 var settings = {
-    get mediaCodec() {
+    get encodingProfile() {
         return _settings.get_int('media-type-preset');
     },
 
-    set mediaCodec(profileName) {
-        _settings.set_int('media-type-preset', profileName);
+    set encodingProfile(profile) {
+        _settings.get_int('media-type-preset', profile);
     },
 
     get channel() {
@@ -69,9 +72,16 @@ var SettingsDialog = GObject.registerClass({ // eslint-disable-line no-unused-va
             this.destroy();
         });
 
-        this._formateComboBox.set_active(settings.mediaCodec);
+
+
+
+        Object.values(EncodingProfile.Profiles).forEach(profile => {
+            let index = profile.index.toString();
+            this._formateComboBox.append(index, profile.name);
+        });
+        this._formateComboBox.set_active(settings.encodingProfile);
         this._formateComboBox.connect('changed', () => {
-            settings.mediaCodec = this._formateComboBox.get_active();
+            settings.encodingProfile = this._formateComboBox.get_active();
         });
 
         this._channelsComboBox.set_active(settings.channel);

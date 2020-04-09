@@ -5,7 +5,6 @@ data/ui/window.ui
 data/ui/preferences.ui
 data/ui/infodialog.ui
 data/ui/row.ui
-src/audioProfile.js
 src/application.js
 src/utils.js
 src/info.js

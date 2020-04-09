@@ -25,7 +25,6 @@ const Gio = imports.gi.Gio;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
 
-const AudioProfile = imports.audioProfile;
 const Utils = imports.utils;
 const RecordingList = imports.recordingList.RecordingList;
 const Recording = imports.recording.Recording;
@@ -35,8 +34,6 @@ const Player = imports.player.Player;
 const Record = imports.record;
 const Waveform = imports.waveform;
 
-let activeProfile = null;
-var audioProfile = null;
 var displayTime = null;
 var player = null;
 var recordPipeline = null;
@@ -58,8 +55,7 @@ var MainWindow = GObject.registerClass({
             icon_name: pkg.name,
         }, params));
 
-        audioProfile = new AudioProfile.AudioProfile();
-        this._record = new Record.Record(audioProfile);
+        this._record = new Record.Record();
         player = new Player();
         view = this;
 
@@ -100,12 +96,7 @@ var MainWindow = GObject.registerClass({
         player.stopPlaying();
         this._mainStack.set_visible_child_name('mainView');
         this._recordGrid.show();
-
-        if (activeProfile === null)
-            activeProfile = 0;
-
-        audioProfile.profile(activeProfile);
-        this._record.startRecording(activeProfile);
+        this._record.startRecording();
 
         wave = new Waveform.WaveForm(this._recordGrid, null);
     }

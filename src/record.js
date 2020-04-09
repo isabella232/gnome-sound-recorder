@@ -28,6 +28,7 @@ const Gtk = imports.gi.Gtk;
 const Application = imports.application;
 const Settings = imports.preferences;
 const MainWindow = imports.mainWindow;
+const EncodingProfile = imports.encodingProfile.EncodingProfile;
 
 var PipelineStates = {
     PLAYING: 0,
@@ -116,7 +117,8 @@ var Record = class Record {
             }
         });
         this.pipeline.add(this.ebin);
-        this.ebin.set_property('profile', this._mediaProfile);
+        let audioProfile = EncodingProfile.fromSettings(Settings.settings.encodingProfile);
+        this.ebin.set_property('profile', audioProfile);
         this.filesink = Gst.ElementFactory.make('filesink', 'filesink');
         this.filesink.set_property('location', this.initialFileName);
         this.pipeline.add(this.filesink);
@@ -153,16 +155,7 @@ var Record = class Record {
         return true;
     }
 
-    startRecording(profile) {
-        this.profile = profile;
-        this._audioProfile = MainWindow.audioProfile;
-        this._mediaProfile = this._audioProfile.mediaProfile();
-
-        if (this._mediaProfile === -1) {
-            this._showErrorDialog(_('No Media Profile was set.'));
-            errorDialogState = ErrState.ON;
-        }
-
+    startRecording() {
         if (!this.pipeline || this.pipeState === PipelineStates.STOPPED)
             this._recordPipeline();
 
@@ -354,3 +347,4 @@ const BuildFileName = class BuildFileName {
         return this.dateTime;
     }
 };
+

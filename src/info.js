@@ -23,7 +23,9 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const GObject = imports.gi.GObject;
+
 const Utils = imports.utils;
+const EncodingProfile = imports.encodingProfile.EncodingProfile;
 
 
 var InfoDialog = GObject.registerClass({ // eslint-disable-line no-unused-vars
@@ -48,7 +50,10 @@ var InfoDialog = GObject.registerClass({ // eslint-disable-line no-unused-vars
         }
 
         this._dateModifiedValueLabel.label = Utils.Time.getDisplayTime(recording.timeModified);
-        this._mediaTypeLabel.label = recording.mimeType || _('Unknown');
+        Object.values(EncodingProfile.Profiles).forEach(profile => {
+            if (profile.mimeType === recording.mimeType)
+                this._mediaTypeLabel.label = profile.name;
+        });
 
         this._cancelBtn.connect('clicked', () => {
             this.destroy();
