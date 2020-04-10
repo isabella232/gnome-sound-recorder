@@ -29,11 +29,11 @@ let _settings = new Gio.Settings({ schema: pkg.name });
 
 var settings = {
     get encodingProfile() {
-        return _settings.get_int('media-type-preset');
+        return _settings.get_enum('media-type-preset');
     },
 
     set encodingProfile(profile) {
-        _settings.get_int('media-type-preset', profile);
+        _settings.set_enum('media-type-preset', profile);
     },
 
     get channel() {

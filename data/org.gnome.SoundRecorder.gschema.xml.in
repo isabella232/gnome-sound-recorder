@@ -1,4 +1,11 @@
 <schemalist>
+  <enum id="@app-id@.EncodingProfile">
+    <value nick='VORBIS' value='0'/>
+    <value nick='OPUS' value='1'/>
+    <value nick='FLAC' value='2'/>
+    <value nick='MP3' value='3'/>
+    <value nick='M4A' value='4'/>
+  </enum>
   <schema id="@app-id@" path="/org/gnome/SoundRecorder/" gettext-domain="@gettext-package@">
     <key name="window-size" type="ai">
       <default>[780, 480]</default>
@@ -10,8 +17,8 @@
       <summary>Window position</summary>
       <description>Window position (x and y).</description>
     </key>
-    <key name="media-type-preset" type="i">
-      <default>0</default>
+    <key name="media-type-preset" enum="@app-id@.EncodingProfile">
+      <default>'VORBIS'</default>
       <summary>Maps media types to audio encoder preset names.</summary>
       <description>Maps media types to audio encoder preset names. If there is no mapping set, the default encoder settings will be used.</description>
     </key>
