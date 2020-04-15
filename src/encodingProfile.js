@@ -2,7 +2,7 @@ const Gst = imports.gi.Gst;
 const GstPbutils = imports.gi.GstPbutils;
 
 
-const EncodingProfile = {
+var EncodingProfile = {
     Profiles: {
         VORBIS: { index: 0,
             name: 'VORBIS',
