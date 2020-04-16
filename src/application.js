@@ -38,6 +38,8 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
         super._init({ application_id: pkg.name });
         GLib.set_application_name(_('Sound Recorder'));
         GLib.set_prgname('gnome-sound-recorder');
+        GLib.setenv('PULSE_PROP_media.role', 'production', 1);
+        GLib.setenv('PULSE_PROP_application.icon_name', pkg.name, 1);
 
         this.add_main_option('version', 'v'.charCodeAt(0), GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
             'Print version information and exit', null);
