@@ -59,6 +59,8 @@ var MainWindow = GObject.registerClass({
         player = new Player();
         view = this;
 
+        this.connect('destroy', () => player.stop());
+
         this._recordingList = new RecordingList();
         this._refreshView();
         this._recordingList.connect('items-changed', this._refreshView.bind(this));
@@ -70,10 +72,10 @@ var MainWindow = GObject.registerClass({
                     if (_row !== currentRow)
                         _row.setState(RowState.PAUSED);
                 });
-                player.startPlaying(recording.uri);
+                player.play(recording.uri);
             });
 
-            row.connect('pause', () => player.pausePlaying());
+            row.connect('pause', () => player.pause());
             row.connect('deleted', () => this._recordingList.remove(row.get_index()));
 
             return row;
@@ -93,7 +95,7 @@ var MainWindow = GObject.registerClass({
     }
 
     _onRecordStart() {
-        player.stopPlaying();
+        player.stop();
         this._mainStack.set_visible_child_name('mainView');
         this._recordGrid.show();
         this._record.startRecording();

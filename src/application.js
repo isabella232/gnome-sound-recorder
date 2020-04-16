@@ -108,9 +108,6 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
             MainWindow.wave.pipeline.set_state(Gst.State.NULL);
         if (MainWindow._record.pipeline)
             MainWindow._record.pipeline.set_state(Gst.State.NULL);
-
-        if (MainWindow.play.play)
-            MainWindow.play.play.set_state(Gst.State.NULL);
     }
 
     _loadStyleSheet() {

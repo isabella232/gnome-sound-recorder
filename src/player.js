@@ -17,236 +17,63 @@
  * Author: Meg Ford <megford@gnome.org>
  *
  */
-
-const Gio = imports.gi.Gio;
-const GLib = imports.gi.GLib;
 const Gst = imports.gi.Gst;
-const GstAudio = imports.gi.GstAudio;
+const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 
-const Application = imports.application;
-const MainWindow = imports.mainWindow;
-const Settings = imports.preferences;
 
-var PipelineStates = {
-    PLAYING: 0,
-    PAUSED: 1,
-    STOPPED: 2,
-    NULL: 3,
-};
-
-const ErrState = {
-    OFF: 0,
-    ON: 1,
-};
-
-let errorDialogState;
-
-const _TENTH_SEC = 100000000;
-
-var Player = class Player { // eslint-disable-line no-unused-vars
-    _playPipeline(fileUri) {
-        errorDialogState = ErrState.OFF;
+var Player = class Player {  // eslint-disable-line no-unused-vars
+    constructor() {
         this.player = Gst.ElementFactory.make('playbin', 'play');
-        this.player.set_property('uri', fileUri);
-        this.sink = Gst.ElementFactory.make('pulsesink', 'sink');
-        this.player.set_property('audio-sink', this.sink);
-        this.clock = this.player.get_clock();
-        this.playBus = this.player.get_bus();
-        this.playBus.add_signal_watch();
-        this.playState = PipelineStates.NULL;
-        this.playBus.connect('message', (playBus, message) => {
+        let sink = Gst.ElementFactory.make('pulsesink', 'sink');
+        this.player.set_property('audio-sink', sink);
+
+        this.playerBus = this.player.get_bus();
+        this.playerBus.connect('message', (playerBus, message) => {
             if (message !== null)
                 this._onMessageReceived(message);
-
         });
     }
 
-    startPlaying(fileUri) {
-        this.stopPlaying();
-
-        log(`[Player] Playing ${fileUri}`);
-        this.baseTime = 0;
-
-        if (!this.player || this.playState === PipelineStates.STOPPED)
-            this._playPipeline(fileUri);
-
-
-        if (this.playState === PipelineStates.PAUSED) {
-            this.updatePosition();
-            this.player.set_base_time(this.clock.get_time());
-            this.baseTime = this.player.get_base_time() - this.runTime;
-        }
-
-        this.ret = this.player.set_state(Gst.State.PLAYING);
-        this.playState = PipelineStates.PLAYING;
-
-        if (this.ret === Gst.StateChangeReturn.FAILURE) {
-            this._showErrorDialog(_('Unable to play recording'));
-            errorDialogState = ErrState.ON;
-        } else if (this.ret === Gst.StateChangeReturn.SUCCESS) {
-            let value = Settings.settings.speakerVolume;
-            this.player.set_volume(GstAudio.StreamVolumeFormat.CUBIC, value);
-        }
-        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGINT, Application.application.onWindowDestroy);
-        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGTERM, Application.application.onWindowDestroy);
-    }
-
-    pausePlaying() {
-        log('[Player] Paused');
-        this.player.set_state(Gst.State.PAUSED);
-        this.playState = PipelineStates.PAUSED;
-
-        if (this.timeout) {
-            GLib.source_remove(this.timeout);
-            this.timeout = null;
-        }
-    }
-
-    stopPlaying() {
-        log('[Player] Stopped');
-        if (this.player !== undefined)
-            this.onEnd();
-    }
-
-    onEnd() {
-        this.playState = PipelineStates.STOPPED;
+    play(uri) {
         this.player.set_state(Gst.State.NULL);
-        this.playBus.remove_watch();
-        this._updateTime();
+        this.playerBus.add_signal_watch();
+        this.player.set_property('uri', uri);
+        this.player.set_state(Gst.State.PLAYING);
+    }
 
-        if (this.timeout) {
-            GLib.source_remove(this.timeout);
-            this.timeout = null;
-        }
+    pause() {
+        this.player.set_state(Gst.State.PAUSED);
+    }
 
-        if (MainWindow.wave !== null)
-            MainWindow.wave.endDrawing();
-
-        errorDialogState = ErrState.OFF;
+    stop() {
+        this.player.set_state(Gst.State.NULL);
+        this.playerBus.remove_watch();
     }
 
     _onMessageReceived(message) {
-        this.localMsg = message;
-        let msg = message.type;
-        switch (msg) {
-
-        case Gst.MessageType.EOS: {
-            this.stopPlaying();
+        switch (message.type) {
+        case Gst.MessageType.EOS:
+            this.stop();
             break;
-        }
-
-        case Gst.MessageType.WARNING: {
-            let warningMessage = message.parse_warning()[0];
-            log(warningMessage.toString());
+        case Gst.MessageType.WARNING:
+            log(message.parse_warning()[0].toString());
             break;
-        }
-
-        case Gst.MessageType.ERROR: {
-            let errorMessage = message.parse_error()[0];
-            this._showErrorDialog(errorMessage.toString());
-            errorDialogState = ErrState.ON;
+        case Gst.MessageType.ERROR:
+            this.stop();
+            this._showErrorDialog(message.parse_error()[0].toString());
             break;
-        }
-
-        case Gst.MessageType.ASYNC_DONE: {
-            if (this.sought) {
-                this.player.set_state(this._lastState);
-                MainWindow.view.setProgressScaleSensitive();
-            }
-            this.updatePosition();
-            break;
-        }
-
-        case Gst.MessageType.CLOCK_LOST: {
-            this.pausePlaying();
-            break;
-        }
-
-        case Gst.MessageType.NEW_CLOCK: {
-            if (this.playState === PipelineStates.PAUSED) {
-                this.clock = this.player.get_clock();
-                this.startPlaying();
-            }
-            break;
-        }
-
         }
     }
 
-    getPipeStates() {
-        return this.playState;
-    }
+    _showErrorDialog(errorMessage) {
+        let errorDialog = new Gtk.MessageDialog({ destroy_with_parent: true,
+            buttons: Gtk.ButtonsType.OK,
+            message_type: Gtk.MessageType.WARNING,
+            text: errorMessage });
 
-    _updateTime() {
-        // let time = this.player.query_position(Gst.Format.TIME)[1] / Gst.SECOND;
-        this.trackDuration = this.player.query_duration(Gst.Format.TIME)[1];
-        this.trackDurationSecs = this.trackDuration / Gst.SECOND;
-
-        // if (time >= 0 && this.playState !== PipelineStates.STOPPED)
-        //       this._timeCallbackFn(time);
-        // else if (time >= 0 && this.playState === PipelineStates.STOPPED)
-        //       this._timeCallbackFn(0);
-
-
-        let absoluteTime = 0;
-
-        if  (this.clock === null)
-            this.clock = this.player.get_clock();
-
-        try {
-            absoluteTime = this.clock.get_time();
-        } catch (error) {
-            // no-op
-        }
-
-        if (this.baseTime === 0)
-            this.baseTime = absoluteTime;
-
-        this.runTime = absoluteTime - this.baseTime;
-        let approxTime = Math.round(this.runTime / _TENTH_SEC);
-
-        if (MainWindow.wave !== null)
-            MainWindow.wave._drawEvent(approxTime);
-
-
-        return true;
-    }
-
-    queryPosition() {
-        let position = 0;
-        while (position === 0)
-            position = this.player.query_position(Gst.Format.TIME)[1] / Gst.SECOND;
-
-
-        return position;
-    }
-
-    updatePosition() {
-        if (!this.timeout) {
-            this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 10, () =>
-                this._updateTime());
-        }
-    }
-
-    _showErrorDialog(errorStrOne, errorStrTwo) {
-        if (errorDialogState === ErrState.OFF) {
-            let errorDialog = new Gtk.MessageDialog({ destroy_with_parent: true,
-                buttons: Gtk.ButtonsType.OK,
-                message_type: Gtk.MessageType.WARNING });
-
-            if (errorStrOne !== null)
-                errorDialog.set_property('text', errorStrOne);
-
-            if (errorStrTwo !== null)
-                errorDialog.set_property('secondary-text', errorStrTwo);
-
-            errorDialog.set_transient_for(Gio.Application.get_default().get_active_window());
-            errorDialog.connect('response', () => {
-                errorDialog.destroy();
-                this.stopPlaying();
-            });
-            errorDialog.show();
-        }
+        errorDialog.set_transient_for(Gio.Application.get_default().get_active_window());
+        errorDialog.connect('response', () => errorDialog.destroy());
+        errorDialog.show();
     }
 };
