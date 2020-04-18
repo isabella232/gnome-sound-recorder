@@ -10,7 +10,7 @@ var Recording = new GObject.registerClass({  // eslint-disable-line no-unused-va
             'duration',
             'Recording Duration', 'Recording duration in seconds',
             GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
-            0, GLib.MAXINT, 0),
+            0, GLib.MAXINT16, 0),
 
         'mime-type': GObject.ParamSpec.string(
             'mime-type',
