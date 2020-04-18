@@ -60,7 +60,10 @@ var Recording = new GObject.registerClass({  // eslint-disable-line no-unused-va
     }
 
     get duration() {
-        return this._duration;
+        if (this._duration)
+            return this._duration;
+        else
+            return undefined;
     }
 
     get mimeType() {
