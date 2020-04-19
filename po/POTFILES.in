@@ -8,7 +8,6 @@ data/ui/row.ui
 src/application.js
 src/utils.js
 src/info.js
-src/listview.js
 src/row.js
 src/main.js
 src/mainWindow.js
