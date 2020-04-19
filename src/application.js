@@ -125,6 +125,7 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
                 'Hylke Bons <hylkebons@gmail.com>',
                 'Sam Hewitt <hewittsamuel@gmail.com>'],
             authors: ['Meg Ford <megford@gnome.org>'],
+            /* Translators: Replace "translator-credits" with your names, one name per line */
             translator_credits: _('translator-credits'),
             program_name: GLib.get_application_name(),
             comments: _('A Sound Recording Application for GNOME'),
