@@ -131,6 +131,7 @@
             <property name="can_focus">False</property>
             <property name="hexpand">True</property>
             <property name="vexpand">True</property>
+            <property name="margin">18</property>
             <child>
               <object class="GtkGrid">
                 <property name="visible">True</property>
@@ -139,6 +140,7 @@
                 <property name="valign">center</property>
                 <property name="hexpand">True</property>
                 <property name="vexpand">True</property>
+                <property name="row_spacing">6</property>
                 <child>
                   <object class="GtkImage">
                     <property name="visible">True</property>
@@ -162,7 +164,9 @@
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Use the &lt;b&gt;Record&lt;/b&gt; button to make sound recordings</property>
                     <property name="use_markup">True</property>
-                    <property name="max_width_chars">30</property>
+                    <property name="justify">center</property>
+                    <property name="wrap">True</property>
+                    <property name="max_width_chars">50</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
