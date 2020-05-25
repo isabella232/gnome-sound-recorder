@@ -1,5 +1,6 @@
 const Gtk = imports.gi.Gtk;
 const GObject = imports.gi.GObject;
+const Handy = imports.gi.Handy;
 
 var Info = imports.info;
 var Utils = imports.utils;
@@ -11,20 +12,20 @@ var RowState = {
 
 var Row = GObject.registerClass({ // eslint-disable-line no-unused-vars
     Template: 'resource:///org/gnome/SoundRecorder/ui/row.ui',
-    InternalChildren: ['playbackStack', 'fileNameLabel', 'fileDurationLabel', 'playButton', 'pauseButton', 'infoButton', 'deleteButton'],
+    InternalChildren: ['playbackStack', 'action_row', 'playButton', 'pauseButton', 'infoButton', 'deleteButton'],
     Signals: {
         'play': { param_types: [GObject.TYPE_STRING] },
         'pause': {},
         'deleted': {},
     },
-}, class Row extends Gtk.ListBoxRow {
+}, class Row extends Handy.PreferencesRow {
     _init(recording) {
         super._init({});
 
-        this._fileNameLabel.label = recording.name;
+        this._action_row.title = recording.name;
 
         recording.connect('notify::duration', () => {
-            this._fileDurationLabel.label = Utils.Time.formatTime(recording.duration);
+            this._action_row.subtitle = Utils.Time.formatTime(recording.duration);
         });
 
         this._playButton.connect('clicked', () => {
