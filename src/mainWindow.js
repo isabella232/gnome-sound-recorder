@@ -23,7 +23,6 @@
 
 const Gio = imports.gi.Gio;
 const GObject = imports.gi.GObject;
-const Gtk = imports.gi.Gtk;
 const Handy = imports.gi.Handy;
 
 const Utils = imports.utils;

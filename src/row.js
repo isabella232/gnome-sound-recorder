@@ -1,4 +1,3 @@
-const Gtk = imports.gi.Gtk;
 const GObject = imports.gi.GObject;
 const Handy = imports.gi.Handy;
 
