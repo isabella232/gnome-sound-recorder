@@ -24,6 +24,7 @@
 const Gio = imports.gi.Gio;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
+const Handy = imports.gi.Handy;
 
 const Utils = imports.utils;
 const RecordingList = imports.recordingList.RecordingList;
@@ -48,7 +49,7 @@ var ActiveArea = {
 var MainWindow = GObject.registerClass({
     Template: 'resource:///org/gnome/SoundRecorder/ui/window.ui',
     InternalChildren: ['recordStartButton', 'recordStopButton', 'recordTimeLabel', 'appMenuButton', 'mainStack', 'recordGrid', 'listBox'],
-}, class MainWindow extends Gtk.ApplicationWindow {
+}, class MainWindow extends Handy.ApplicationWindow {
 
     _init(params) {
         super._init(Object.assign({
