@@ -22,7 +22,7 @@ var Row = GObject.registerClass({ // eslint-disable-line no-unused-vars
 
         this._action_row.title = recording.name;
         const recordTime = Utils.Time.getDisplayTime(
-                (recording.timeCreated > 0) ? recording.timeCreated : recording.timeModified);
+            recording.timeCreated > 0 ? recording.timeCreated : recording.timeModified);
 
         recording.connect('notify::duration', () => {
             this._action_row.subtitle = `${Utils.Time.formatTime(recording.duration)} • ${recordTime}`;

@@ -11,11 +11,6 @@ var Recording = new GObject.registerClass({  // eslint-disable-line no-unused-va
             'Recording Duration', 'Recording duration in seconds',
             GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
             0, GLib.MAXINT16, 0),
-
-        'mime-type': GObject.ParamSpec.string(
-            'mime-type',
-            'Recording Audio Codec', 'Recording audio codec type',
-            GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT, ''),
     },
 }, class Recording extends GObject.Object {
     _init(file) {
@@ -36,12 +31,6 @@ var Recording = new GObject.registerClass({  // eslint-disable-line no-unused-va
         discoverer.connect('discovered', (_discoverer, audioInfo) => {
             this._duration = audioInfo.get_duration()  / Gst.SECOND;
             this.notify('duration');
-
-            let stream = audioInfo.get_audio_streams()[0];
-            if (stream) {
-                this._mimeType = stream.get_caps().to_string().split(', ')[0];
-                this.notify('mime-type');
-            }
         });
 
         discoverer.discover_uri_async(this.uri);
@@ -64,10 +53,6 @@ var Recording = new GObject.registerClass({  // eslint-disable-line no-unused-va
             return this._duration;
         else
             return undefined;
-    }
-
-    get mimeType() {
-        return this._mimeType;
     }
 
     get file() {
