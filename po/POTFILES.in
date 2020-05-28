@@ -3,11 +3,9 @@ data/org.gnome.SoundRecorder.gschema.xml.in
 data/org.gnome.SoundRecorder.desktop.in.in
 data/ui/window.ui
 data/ui/preferences.ui
-data/ui/infodialog.ui
 data/ui/row.ui
 src/application.js
 src/utils.js
-src/info.js
 src/row.js
 src/main.js
 src/mainWindow.js

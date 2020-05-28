@@ -4,7 +4,6 @@
     <file>application.js</file>
     <file>encodingProfile.js</file>
     <file>utils.js</file>
-    <file>info.js</file>
     <file>recordingList.js</file>
     <file>recording.js</file>
     <file>row.js</file>

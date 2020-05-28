@@ -1,7 +1,6 @@
 const GObject = imports.gi.GObject;
 const Handy = imports.gi.Handy;
 
-var Info = imports.info;
 var Utils = imports.utils;
 
 var RowState = {
@@ -11,7 +10,7 @@ var RowState = {
 
 var Row = GObject.registerClass({ // eslint-disable-line no-unused-vars
     Template: 'resource:///org/gnome/SoundRecorder/ui/row.ui',
-    InternalChildren: ['playbackStack', 'action_row', 'playButton', 'pauseButton', 'infoButton', 'deleteButton'],
+    InternalChildren: ['playbackStack', 'action_row', 'playButton', 'pauseButton', 'deleteButton'],
     Signals: {
         'play': { param_types: [GObject.TYPE_STRING] },
         'pause': {},
@@ -22,9 +21,11 @@ var Row = GObject.registerClass({ // eslint-disable-line no-unused-vars
         super._init({});
 
         this._action_row.title = recording.name;
+        const recordTime = Utils.Time.getDisplayTime(
+                (recording.timeCreated > 0) ? recording.timeCreated : recording.timeModified);
 
         recording.connect('notify::duration', () => {
-            this._action_row.subtitle = Utils.Time.formatTime(recording.duration);
+            this._action_row.subtitle = `${Utils.Time.formatTime(recording.duration)} • ${recordTime}`;
         });
 
         this._playButton.connect('clicked', () => {
@@ -37,7 +38,6 @@ var Row = GObject.registerClass({ // eslint-disable-line no-unused-vars
             this.emit('pause');
         });
 
-        this._infoButton.connect('clicked', () => (new Info.InfoDialog(recording)).show());
         this._deleteButton.connect('clicked', () => {
             recording.delete();
             this.emit('deleted');
