@@ -127,22 +127,6 @@ var Record = class Record {
         this.volume = Gst.ElementFactory.make('volume', 'volume');
         this.pipeline.add(this.volume);
         this.ebin = Gst.ElementFactory.make('encodebin', 'ebin');
-        this.ebin.connect('element-added', (ebin, element) => {
-            let factory = element.get_factory();
-
-            if (factory !== null) {
-                this.hasTagSetter = factory.has_interface('GstTagSetter');
-                if (this.hasTagSetter === true) {
-                    this.taglist = Gst.TagList.new_empty();
-                    this.taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_APPLICATION_NAME, _('Sound Recorder'));
-                    element.merge_tags(this.taglist, Gst.TagMergeMode.REPLACE);
-                    this.taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_TITLE, this.initialFileName);
-                    element.merge_tags(this.taglist, Gst.TagMergeMode.REPLACE);
-                    this.taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_DATE_TIME, this.gstreamerDateTime);
-                    element.merge_tags(this.taglist, Gst.TagMergeMode.REPLACE);
-                }
-            }
-        });
         this.pipeline.add(this.ebin);
         this.ebin.set_property('profile', this._getProfile());
         this.filesink = Gst.ElementFactory.make('filesink', 'filesink');
