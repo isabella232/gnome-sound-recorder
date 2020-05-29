@@ -10,7 +10,7 @@ var RowState = {
 
 var Row = GObject.registerClass({ // eslint-disable-line no-unused-vars
     Template: 'resource:///org/gnome/SoundRecorder/ui/row.ui',
-    InternalChildren: ['playbackStack', 'action_row', 'playButton', 'pauseButton', 'deleteButton'],
+    InternalChildren: ['playbackStack', 'action_row', 'playButton', 'pauseButton'],
     Signals: {
         'play': { param_types: [GObject.TYPE_STRING] },
         'pause': {},
@@ -38,19 +38,16 @@ var Row = GObject.registerClass({ // eslint-disable-line no-unused-vars
             this.emit('pause');
         });
 
-        this._deleteButton.connect('clicked', () => {
-            recording.delete();
-            this.emit('deleted');
-        });
+        // this._deleteButton.connect('clicked', () => {
+        //     recording.delete();
+        //     this.emit('deleted');
+        // });
     }
 
     setState(rowState) {
-        if (rowState === RowState.PLAYING) {
+        if (rowState === RowState.PLAYING)
             this._playbackStack.set_visible_child_name('pause');
-            this._deleteButton.set_sensitive(false);
-        } else if (rowState === RowState.PAUSED) {
+        else if (rowState === RowState.PAUSED)
             this._playbackStack.set_visible_child_name('play');
-            this._deleteButton.set_sensitive(true);
-        }
     }
 });

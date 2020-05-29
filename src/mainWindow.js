@@ -81,7 +81,7 @@ var MainWindow = GObject.registerClass({
             return row;
         });
 
-        this._emptyIcon.icon_name = `${pkg.name}-symbolic`
+        this._emptyIcon.icon_name = `${pkg.name}-symbolic`;
 
         this._recordStartButton.connect('clicked', () => this._onRecordStart());
         this._recordStopButton.connect('clicked', () => this._onRecordStop());
