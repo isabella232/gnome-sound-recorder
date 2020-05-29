@@ -2,7 +2,6 @@
 <gresources>
   <gresource prefix="/org/gnome/SoundRecorder@profile@/js">
     <file>application.js</file>
-    <file>encodingProfile.js</file>
     <file>utils.js</file>
     <file>recordingList.js</file>
     <file>recording.js</file>

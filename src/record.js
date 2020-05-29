@@ -1,4 +1,4 @@
-/* exported Record */
+/* exported Record EncodingProfiles */
 /*
  * Copyright 2013 Meg Ford
  * This library is free software; you can redistribute it and/or
@@ -28,7 +28,6 @@ const Gtk = imports.gi.Gtk;
 const Application = imports.application;
 const Settings = imports.preferences;
 const MainWindow = imports.mainWindow;
-const EncodingProfile = imports.encodingProfile.EncodingProfile;
 
 var PipelineStates = {
     PLAYING: 0,
@@ -50,6 +49,34 @@ const _TENTH_SEC = 100000000;
 const _SEC_TIMEOUT = 100;
 
 let errorDialogState;
+
+// All supported encoding profiles.
+var EncodingProfiles = [
+    { name: 'VORBIS',
+        containerCaps: 'application/ogg;audio/ogg;video/ogg',
+        audioCaps: 'audio/x-vorbis',
+        mimeType: 'audio/x-vorbis' },
+
+    { name: 'OPUS',
+        containerCaps: 'application/ogg',
+        audioCaps: 'audio/x-opus',
+        mimeType: 'audio/x-opus' },
+
+    { name: 'FLAC',
+        containerCaps: 'audio/x-flac',
+        audioCaps: 'audio/x-flac',
+        mimeType: 'audio/x-flac' },
+
+    { name: 'MP3',
+        containerCaps: 'application/x-id3',
+        audioCaps: 'audio/mpeg,mpegversion=(int)1,layer=(int)3',
+        mimeType: 'audio/mpeg' },
+
+    { name: 'M4A',
+        containerCaps: 'video/quicktime,variant=(string)iso',
+        audioCaps: 'audio/mpeg,mpegversion=(int)4',
+        mimeType: 'audio/mpeg' },
+];
 
 var Record = class Record {
     _recordPipeline() {
@@ -117,8 +144,7 @@ var Record = class Record {
             }
         });
         this.pipeline.add(this.ebin);
-        let audioProfile = EncodingProfile.fromSettings(Settings.settings.encodingProfile);
-        this.ebin.set_property('profile', audioProfile);
+        this.ebin.set_property('profile', this._getProfile());
         this.filesink = Gst.ElementFactory.make('filesink', 'filesink');
         this.filesink.set_property('location', this.initialFileName);
         this.pipeline.add(this.filesink);
@@ -325,6 +351,22 @@ var Record = class Record {
             errorDialog.show();
         }
     }
+
+    _getProfile() {
+        let profileIndex = Settings.settings.encodingProfile;
+        const profile = EncodingProfiles[profileIndex];
+
+        let audioCaps = Gst.Caps.from_string(profile.audioCaps);
+        audioCaps.set_value('channels', this._getChannels());
+
+        let encodingProfile = GstPbutils.EncodingAudioProfile.new(audioCaps, null, null, 1);
+        let containerCaps = Gst.Caps.from_string(profile.containerCaps);
+        let containerProfile = GstPbutils.EncodingContainerProfile.new('record', null, containerCaps, null);
+        containerProfile.add_profile(encodingProfile);
+
+        return containerProfile;
+    }
+
 };
 
 const BuildFileName = class BuildFileName {

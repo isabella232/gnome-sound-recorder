@@ -22,7 +22,7 @@ const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const GObject = imports.gi.GObject;
 
-var EncodingProfile = imports.encodingProfile.EncodingProfile;
+var Record = imports.record;
 
 
 let _settings = new Gio.Settings({ schema: pkg.name });
@@ -75,9 +75,8 @@ var SettingsDialog = GObject.registerClass({
 
 
 
-        Object.values(EncodingProfile.Profiles).forEach(profile => {
-            let index = profile.index.toString();
-            this._formateComboBox.append(index, profile.name);
+        Object.values(Record.EncodingProfiles).forEach((profile, index) => {
+            this._formateComboBox.append(`${index}`, profile.name);
         });
         this._formateComboBox.set_active(settings.encodingProfile);
         this._formateComboBox.connect('changed', () => {
