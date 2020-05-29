@@ -10,7 +10,7 @@ var RowState = {
 
 var Row = GObject.registerClass({ // eslint-disable-line no-unused-vars
     Template: 'resource:///org/gnome/SoundRecorder/ui/row.ui',
-    InternalChildren: ['playbackStack', 'action_row', 'playButton', 'pauseButton'],
+    InternalChildren: ['playbackStack', 'action_row', 'playButton', 'pauseButton', 'duration'],
     Signals: {
         'play': { param_types: [GObject.TYPE_STRING] },
         'pause': {},
@@ -21,11 +21,11 @@ var Row = GObject.registerClass({ // eslint-disable-line no-unused-vars
         super._init({});
 
         this._action_row.title = recording.name;
-        const recordTime = Utils.Time.getDisplayTime(
+        this._action_row.subtitle = Utils.Time.getDisplayTime(
             recording.timeCreated > 0 ? recording.timeCreated : recording.timeModified);
 
         recording.connect('notify::duration', () => {
-            this._action_row.subtitle = `${Utils.Time.formatTime(recording.duration)} • ${recordTime}`;
+            this._duration.label = Utils.Time.formatTime(recording.duration);
         });
 
         this._playButton.connect('clicked', () => {
