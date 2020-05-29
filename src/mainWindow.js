@@ -31,16 +31,8 @@ const Player = imports.player.Player;
 const Record = imports.record;
 const Waveform = imports.waveform;
 
-var displayTime = null;
-var player = null;
-var recordPipeline = null;
 var view = null;
 var wave = null;
-
-var ActiveArea = {
-    RECORD: 0,
-    PLAY: 1,
-};
 
 var MainWindow = GObject.registerClass({
     Template: 'resource:///org/gnome/SoundRecorder/ui/window.ui',
@@ -53,10 +45,10 @@ var MainWindow = GObject.registerClass({
         }, params));
 
         this._record = new Record.Record();
-        player = new Player();
+        this.player = new Player();
         view = this;
 
-        this.connect('destroy', () => player.stop());
+        this.connect('destroy', () => this.player.stop());
 
         this._recordingList = new RecordingList();
         this._refreshView();
@@ -69,10 +61,10 @@ var MainWindow = GObject.registerClass({
                     if (_row !== currentRow)
                         _row.setState(RowState.PAUSED);
                 });
-                player.play(recording.uri);
+                this.player.play(recording.uri);
             });
 
-            row.connect('pause', () => player.pause());
+            row.connect('pause', () => this.player.pause());
             row.connect('deleted', () => this._recordingList.remove(row.get_index()));
 
             return row;
@@ -94,7 +86,7 @@ var MainWindow = GObject.registerClass({
     }
 
     _onRecordStart() {
-        player.stop();
+        this.player.stop();
         this._mainStack.set_visible_child_name('mainView');
         this._recordGrid.show();
         this._record.startRecording();
