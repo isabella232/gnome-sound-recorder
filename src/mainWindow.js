@@ -1,4 +1,4 @@
-/* exported MainWindow */
+/* exported MainWindow view wave */
 /*
 * Copyright 2013 Meg Ford
 * This library is free software; you can redistribute it and/or
