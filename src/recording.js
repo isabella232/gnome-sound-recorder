@@ -1,10 +1,11 @@
+/* exported Recording */
 const GLib = imports.gi.GLib;
 const Gst = imports.gi.Gst;
 const GObject = imports.gi.GObject;
 const GstPbutils = imports.gi.GstPbutils;
 
 
-var Recording = new GObject.registerClass({  // eslint-disable-line no-unused-vars
+var Recording = new GObject.registerClass({
     Properties: {
         'duration': GObject.ParamSpec.int(
             'duration',

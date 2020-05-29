@@ -1,3 +1,4 @@
+/* exported RecordingList */
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
@@ -5,7 +6,7 @@ const GObject = imports.gi.GObject;
 const Recording = imports.recording.Recording;
 
 
-var RecordingList = new GObject.registerClass(class RecordingList extends Gio.ListStore {  // eslint-disable-line no-unused-vars
+var RecordingList = new GObject.registerClass(class RecordingList extends Gio.ListStore {
     _init() {
         super._init({ });
         this._saveDir = Gio.Application.get_default().saveDir;

@@ -1,4 +1,4 @@
-/* exported Preferences */
+/* exported settings SettingsDialog */
 /*
 * Copyright 2013 Meg Ford
 * This library is free software; you can redistribute it and/or
@@ -61,7 +61,7 @@ var settings = {
     },
 };
 
-var SettingsDialog = GObject.registerClass({ // eslint-disable-line no-unused-vars
+var SettingsDialog = GObject.registerClass({
     Template: 'resource:///org/gnome/SoundRecorder/ui/preferences.ui',
     InternalChildren: ['formateComboBox', 'channelsComboBox', 'volumeScale', 'microphoneScale'],
 }, class SettingsDialog extends Gtk.Dialog {

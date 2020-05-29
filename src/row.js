@@ -1,3 +1,4 @@
+/* exported Row */
 const GObject = imports.gi.GObject;
 const Handy = imports.gi.Handy;
 
@@ -8,7 +9,7 @@ var RowState = {
     PAUSED: 1,
 };
 
-var Row = GObject.registerClass({ // eslint-disable-line no-unused-vars
+var Row = GObject.registerClass({
     Template: 'resource:///org/gnome/SoundRecorder/ui/row.ui',
     InternalChildren: ['playbackStack', 'action_row', 'playButton', 'pauseButton', 'duration'],
     Signals: {

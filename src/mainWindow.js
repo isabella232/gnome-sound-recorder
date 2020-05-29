@@ -1,7 +1,4 @@
-/* exported audioProfile displayTime list offsetController
-            play recordPipeline view volumeValue wave ActiveArea
-            RecordPipelineStates _SEC_TIMEOUT MainWindow
-            EncoderComboBox ChannelsComboBox */
+/* exported MainWindow */
 /*
 * Copyright 2013 Meg Ford
 * This library is free software; you can redistribute it and/or

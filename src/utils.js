@@ -1,4 +1,4 @@
-/* exported OffsetController DisplayTime */
+/* exported Time */
 /*
  * Copyright 2013 Meg Ford
  * This library is free software; you can redistribute it and/or
@@ -24,7 +24,7 @@ const GLib = imports.gi.GLib;
 const _TIME_DIVISOR = 60;
 
 
-var Time = { // eslint-disable-line no-unused-vars
+var Time = {
     formatTime: unformattedTime => {
         this.unformattedTime = unformattedTime;
         let seconds = Math.floor(this.unformattedTime);

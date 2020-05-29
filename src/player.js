@@ -1,4 +1,4 @@
-/* exported Play */
+/* exported Player */
 /*
  * Copyright 2013 Meg Ford
  * This library is free software; you can redistribute it and/or
@@ -22,7 +22,7 @@ const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 
 
-var Player = class Player {  // eslint-disable-line no-unused-vars
+var Player = class Player {
     constructor() {
         this.player = Gst.ElementFactory.make('playbin', 'play');
         let sink = Gst.ElementFactory.make('pulsesink', 'sink');
