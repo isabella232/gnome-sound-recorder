@@ -24,10 +24,9 @@ const Gst = imports.gi.Gst;
 const GstAudio = imports.gi.GstAudio;
 const GstPbutils = imports.gi.GstPbutils;
 const Gtk = imports.gi.Gtk;
+const GObject = imports.gi.GObject;
 
-const Application = imports.application;
 const Settings = imports.preferences;
-const MainWindow = imports.mainWindow;
 
 var PipelineStates = {
     PLAYING: 0,
@@ -78,7 +77,18 @@ var EncodingProfiles = [
         mimeType: 'audio/mpeg' },
 ];
 
-var Record = class Record {
+var Record = new GObject.registerClass({
+    Properties: {
+        'duration': GObject.ParamSpec.int(
+            'duration',
+            'Recording Duration', 'Recording duration in seconds',
+            GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
+            0, GLib.MAXINT16, 0),
+    },
+    Signals: {
+        'waveform': { param_types: [GObject.TYPE_INT, GObject.TYPE_FLOAT] },
+    },
+}, class Record extends GObject.Object {
     _recordPipeline() {
         errorDialogState = ErrState.OFF;
         this.baseTime = 0;
@@ -120,7 +130,6 @@ var Record = class Record {
         this.recordBus.connect('message', (recordBus, message) => {
             if (message !== null)
                 this._onMessageReceived(message);
-
         });
         this.level = Gst.ElementFactory.make('level', 'level');
         this.pipeline.add(this.level);
@@ -150,19 +159,6 @@ var Record = class Record {
             errorDialogState = ErrState.ON;
             this.onEndOfStream();
         }
-
-        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGINT, Application.application.onWindowDestroy);
-        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGTERM, Application.application.onWindowDestroy);
-    }
-
-    _updateTime() {
-        let time = this.pipeline.query_position(Gst.Format.TIME)[1] / Gst.SECOND;
-
-        if (time >= 0)
-            MainWindow.view.setRecordTimeLabel(time, 0);
-
-
-        return true;
     }
 
     startRecording() {
@@ -180,9 +176,12 @@ var Record = class Record {
             this.volume.set_volume(GstAudio.StreamVolumeFormat.CUBIC, Settings.settings.micVolume);
         }
 
-        if (!this.timeout)
-            this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, _SEC_TIMEOUT, () => this._updateTime());
-
+        this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, _SEC_TIMEOUT, () => {
+            const pos = this.pipeline.query_position(Gst.Format.TIME)[1];
+            if (pos > 0)
+                this.duration = pos / Gst.SECOND;
+            return true;
+        });
     }
 
     stopRecording() {
@@ -193,8 +192,7 @@ var Record = class Record {
             this.timeout = null;
         }
 
-        if (MainWindow.wave !== null)
-            MainWindow.wave.endDrawing();
+        this.duration = 0;
     }
 
     onEndOfStream() {
@@ -204,8 +202,6 @@ var Record = class Record {
         if (this.recordBus)
             this.recordBus.remove_signal_watch();
 
-
-        this._updateTime();
         errorDialogState = ErrState.OFF;
     }
 
@@ -263,9 +259,7 @@ var Record = class Record {
 
                         this.runTime = this.absoluteTime - this.baseTime;
                         let approxTime = Math.round(this.runTime / _TENTH_SEC);
-
-                        if (MainWindow.wave !== null)
-                            MainWindow.wave._drawEvent(approxTime, this.peak);
+                        this.emit('waveform', approxTime, this.peak);
                     }
                 }
             }
@@ -329,7 +323,6 @@ var Record = class Record {
             errorDialog.set_transient_for(Gio.Application.get_default().get_active_window());
             errorDialog.connect('response', () => {
                 errorDialog.destroy();
-                MainWindow.view.onRecordStopClicked();
                 this.onEndOfStream();
             });
             errorDialog.show();
@@ -351,7 +344,16 @@ var Record = class Record {
         return containerProfile;
     }
 
-};
+    get duration() {
+        return this._duration;
+    }
+
+    set duration(val) {
+        this._duration = val;
+        this.notify('duration');
+    }
+
+});
 
 const BuildFileName = class BuildFileName {
     buildInitialFilename() {

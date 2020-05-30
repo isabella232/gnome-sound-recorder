@@ -1,4 +1,4 @@
-/* exported MainWindow view wave */
+/* exported MainWindow view */
 /*
 * Copyright 2013 Meg Ford
 * This library is free software; you can redistribute it and/or
@@ -32,7 +32,6 @@ const Record = imports.record;
 const Waveform = imports.waveform;
 
 var view = null;
-var wave = null;
 
 var MainWindow = GObject.registerClass({
     Template: 'resource:///org/gnome/SoundRecorder/ui/window.ui',
@@ -48,7 +47,21 @@ var MainWindow = GObject.registerClass({
         this.player = new Player();
         view = this;
 
-        this.connect('destroy', () => this.player.stop());
+        this._record.connect('waveform', (_, time, peak) => {
+            if (this.wave)
+                this.wave._drawEvent(time, peak);
+        });
+
+        this._record.connect('notify::duration', _record => {
+            this._recordTimeLabel.label = Utils.Time.formatTime(_record.duration);
+        });
+
+        this.connect('destroy', () => {
+            if (this.wave)
+                this.wave.endDrawing();
+            this.player.stop();
+            this._record.stopRecording();
+        });
 
         this._recordingList = new RecordingList();
         this._refreshView();
@@ -91,7 +104,7 @@ var MainWindow = GObject.registerClass({
         this._recordGrid.show();
         this._record.startRecording();
 
-        wave = new Waveform.WaveForm(this._recordGrid, null);
+        this.wave = new Waveform.WaveForm(this._recordGrid, null);
     }
 
     _onRecordStop() {
@@ -104,7 +117,8 @@ var MainWindow = GObject.registerClass({
         let recording = new Recording(recordedFile);
         this._recordingList.insert(0, recording);
 
-        wave = null;
+        this.wave.endDrawing();
+        this.wave = null;
     }
 
     _refreshView() {
@@ -112,10 +126,5 @@ var MainWindow = GObject.registerClass({
             this._mainStack.set_visible_child_name('emptyView');
         else
             this._mainStack.set_visible_child_name('mainView');
-    }
-
-    setRecordTimeLabel(time) {
-        let timeLabelString = Utils.Time.formatTime(time);
-        this._recordTimeLabel.label = timeLabelString;
     }
 });

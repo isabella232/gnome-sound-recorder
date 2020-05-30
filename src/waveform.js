@@ -21,12 +21,8 @@
 // based on code from Pitivi
 
 const Cairo = imports.cairo;
-const GLib = imports.gi.GLib;
 const Gst = imports.gi.Gst;
 const Gtk = imports.gi.Gtk;
-
-
-const Application = imports.application;
 
 const INTERVAL = 100000000;
 const peaks = [];
@@ -81,16 +77,12 @@ var WaveForm = class WaveForm {
         this._level = this.pipeline.get_by_name('level');
         let bus = this.pipeline.get_bus();
         bus.add_signal_watch();
-        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGINT, Application.application.onWindowDestroy);
-        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGTERM, Application.application.onWindowDestroy);
 
         this.nSamples = Math.ceil(this.duration / INTERVAL);
 
         bus.connect('message', message => {
             if (message !== null)
                 this._messageCb(message);
-
-
         });
     }
 
@@ -188,12 +180,12 @@ var WaveForm = class WaveForm {
                 if (start >= 40 && xAxis === 0)
                     cr.moveTo(xAxis * pixelsPerSample, waveheight);
 
-
                 cr.lineTo(xAxis * pixelsPerSample, waveheight - peaks[i] * waveheight);
             }
 
             xAxis += 1;
         }
+
         cr.lineTo(xAxis * pixelsPerSample, waveheight);
         cr.closePath();
         cr.strokePreserve();
