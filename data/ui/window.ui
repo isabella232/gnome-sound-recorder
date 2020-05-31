@@ -99,130 +99,120 @@
           <object class="GtkStack" id="mainStack">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="hexpand">True</property>
+            <property name="vexpand">True</property>
+            <child>
+              <object class="GtkScrolledWindow" id="scrolledWindow">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="hexpand">True</property>
+                <property name="vexpand">True</property>
+                <child>
+                  <object class="GtkViewport">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="HdyColumn">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="maximum_width">650</property>
+                        <property name="linear_growth_width">400</property>
+                        <child>
+                          <object class="GtkListBox" id="listBox">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="margin_left">8</property>
+                            <property name="margin_right">8</property>
+                            <property name="margin_top">18</property>
+                            <property name="margin_bottom">18</property>
+                            <property name="selection_mode">none</property>
+                            <style>
+                              <class name="preferences"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="name">mainView</property>
+              </packing>
+            </child>
             <child>
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="margin_left">8</property>
+                <property name="margin_right">8</property>
+                <property name="margin_top">24</property>
+                <property name="margin_bottom">24</property>
                 <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkBox" id="recordGrid">
-                    <property name="visible">False</property>
-                    <property name="can_focus">False</property>
-                    <property name="margin_left">18</property>
-                    <property name="margin_right">18</property>
-                    <property name="margin_top">18</property>
-                    <property name="margin_bottom">18</property>
+                  <object class="GtkButton" id="recordStopButton">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="halign">center</property>
+                    <property name="valign">end</property>
+                    <property name="margin_top">8</property>
                     <child>
-                      <object class="GtkBox" id="box-record">
+                      <object class="GtkImage">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="valign">center</property>
-                        <property name="margin_right">18</property>
-                        <property name="margin_end">18</property>
-                        <property name="orientation">vertical</property>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="margin_bottom">8</property>
-                            <property name="label" translatable="yes">Recording</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="recordTimeLabel">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <style>
-                              <class name="dim-label"/>
-                            </style>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
+                        <property name="icon_name">media-playback-stop-symbolic</property>
+                        <property name="icon_size">3</property>
                       </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
                     </child>
+                    <style>
+                      <class name="pill-button"/>
+                      <class name="destructive-action"/>
+                      <class name="large-button"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="pack_type">end</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkBox" id="recordGrid">
+                    <property name="height_request">230</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="valign">center</property>
+                    <property name="orientation">vertical</property>
                     <child>
-                      <object class="GtkButton" id="recordStopButton">
-                        <property name="label" translatable="yes">Done</property>
+                      <object class="GtkLabel" id="recordTimeLabel">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="halign">center</property>
-                        <property name="valign">center</property>
-                        <property name="margin_left">18</property>
-                        <property name="margin_start">18</property>
-                        <property name="margin_top">6</property>
-                        <property name="margin_bottom">4</property>
+                        <property name="can_focus">False</property>
+                        <property name="margin_top">18</property>
+                        <style>
+                          <class name="dim-label"/>
+                          <class name="recording-time-label"/>
+                        </style>
                       </object>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
                         <property name="pack_type">end</property>
-                        <property name="position">1</property>
+                        <property name="position">0</property>
                       </packing>
                     </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkScrolledWindow" id="scrolledWindow">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="hexpand">True</property>
-                    <property name="vexpand">True</property>
-                    <child>
-                      <object class="GtkViewport">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <child>
-                          <object class="HdyColumn">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="maximum_width">650</property>
-                            <property name="linear_growth_width">400</property>
-                            <child>
-                              <object class="GtkListBox" id="listBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="margin_top">18</property>
-                                <property name="margin_bottom">18</property>
-                                <property name="selection_mode">none</property>
-                                <style>
-                                  <class name="preferences"/>
-                                </style>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
+                    <property name="position">2</property>
                   </packing>
                 </child>
               </object>
               <packing>
-                <property name="name">mainView</property>
+                <property name="name">recorderView</property>
+                <property name="position">1</property>
               </packing>
             </child>
             <child>
@@ -289,7 +279,7 @@
               </object>
               <packing>
                 <property name="name">emptyView</property>
-                <property name="position">1</property>
+                <property name="position">2</property>
               </packing>
             </child>
           </object>

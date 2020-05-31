@@ -51,19 +51,11 @@ var WaveForm = class WaveForm {
         }
 
         this.drawing = Gtk.DrawingArea.new();
-        if (this.waveType === WaveType.RECORD) {
-            this.drawing.set_property('hexpand', true);
-            this._grid.add(this.drawing);
-        } else {
-            this.drawing.set_property('valign', Gtk.Align.FILL);
-            this.drawing.set_property('hexpand', true);
-            this.drawing.set_property('vexpand', true);
-            this._grid.add(this.drawing);
-        }
-
+        this.drawing.set_property('vexpand', true);
+        this.drawing.set_property('valign', Gtk.Align.FILL);
+        this._grid.add(this.drawing);
         this.drawing.connect('draw', (drawing, cr) => this.fillSurface(drawing, cr));
-        this.drawing.show_all();
-        this._grid.show_all();
+        this.drawing.show();
 
         if (this.waveType === WaveType.PLAY) {
             this._launchPipeline();
