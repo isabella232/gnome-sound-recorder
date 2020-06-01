@@ -2,7 +2,6 @@ data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in
 data/org.gnome.SoundRecorder.gschema.xml.in
 data/org.gnome.SoundRecorder.desktop.in.in
 data/ui/window.ui
-data/ui/preferences.ui
 data/ui/row.ui
 src/application.js
 src/utils.js
@@ -10,6 +9,5 @@ src/row.js
 src/main.js
 src/mainWindow.js
 src/player.js
-src/preferences.js
 src/record.js
 src/waveform.js

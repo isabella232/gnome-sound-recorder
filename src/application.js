@@ -1,4 +1,4 @@
-/* exported SIGINT SIGTERM application Application */
+/* exported SIGINT SIGTERM application settings Application */
 /*
 * Copyright 2013 Meg Ford
 * This library is free software; you can redistribute it and/or
@@ -26,12 +26,13 @@ const Gtk = imports.gi.Gtk;
 const Gdk = imports.gi.Gdk;
 
 const MainWindow = imports.mainWindow;
-const Settings = imports.preferences;
 
 var SIGINT = 2;
 var SIGTERM = 15;
 
 var application = null;
+
+var settings = new Gio.Settings({ schema: pkg.name });
 
 var Application = GObject.registerClass(class Application extends Gtk.Application {
     _init() {
@@ -57,11 +58,38 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
     }
 
     _initAppMenu() {
-        let preferences = new Gio.SimpleAction({ name: 'preferences' });
-        preferences.connect('activate', () => {
-            (new Settings.SettingsDialog()).show();
+        function getDefaultProfile() {
+            switch (settings.get_enum('audio-profile')) {
+            case 0:
+                return new GLib.Variant('s', 'vorbis');
+            case 1:
+                return new GLib.Variant('s', 'opus');
+            case 2:
+                return new GLib.Variant('s', 'flac');
+            case 3:
+                return new GLib.Variant('s', 'mp3');
+            case 4:
+                return new GLib.Variant('s', 'm4a');
+            }
+        }
+
+        let profileAction = new Gio.SimpleAction({
+            enabled: true,
+            name: 'audio-profile',
+            state: getDefaultProfile(),
+            parameter_type: new GLib.VariantType('s'),
         });
-        this.add_action(preferences);
+        profileAction.connect('activate', (action, parameter) => {
+            action.change_state(parameter);
+        });
+        profileAction.connect('change-state', (action, state) => {
+            settings.set_value('audio-profile', state);
+        });
+        settings.connect('changed::audio-profile', () => {
+            profileAction.state = getDefaultProfile();
+        });
+        this.add_action(profileAction);
+
 
         let aboutAction = new Gio.SimpleAction({ name: 'about' });
         aboutAction.connect('activate', () => {

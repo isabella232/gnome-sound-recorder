@@ -9,7 +9,6 @@
     <file>main.js</file>
     <file>mainWindow.js</file>
     <file>player.js</file>
-    <file>preferences.js</file>
     <file>record.js</file>
     <file>waveform.js</file>
   </gresource>

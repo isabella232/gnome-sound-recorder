@@ -21,12 +21,11 @@
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gst = imports.gi.Gst;
-const GstAudio = imports.gi.GstAudio;
 const GstPbutils = imports.gi.GstPbutils;
 const Gtk = imports.gi.Gtk;
 const GObject = imports.gi.GObject;
 
-const Settings = imports.preferences;
+const Application = imports.application;
 
 var PipelineStates = {
     PLAYING: 0,
@@ -37,11 +36,6 @@ var PipelineStates = {
 const ErrState = {
     OFF: 0,
     ON: 1,
-};
-
-const Channels = {
-    MONO: 0,
-    STEREO: 1,
 };
 
 const _TENTH_SEC = 100000000;
@@ -123,7 +117,7 @@ var Record = new GObject.registerClass({
         this.pipeline.add(this.srcElement);
         this.audioConvert = Gst.ElementFactory.make('audioconvert', 'audioConvert');
         this.pipeline.add(this.audioConvert);
-        this.caps = Gst.Caps.from_string(`audio/x-raw, channels=${this._getChannels()}`);
+        this.caps = Gst.Caps.from_string('audio/x-raw');
         this.clock = this.pipeline.get_clock();
         this.recordBus = this.pipeline.get_bus();
         this.recordBus.add_signal_watch();
@@ -172,8 +166,6 @@ var Record = new GObject.registerClass({
             this._showErrorDialog(_('Unable to set the pipeline \n to the recording state.'));
             errorDialogState = ErrState.ON;
             this._buildFileName.getTitle().delete_async(GLib.PRIORITY_DEFAULT, null, null);
-        } else {
-            this.volume.set_volume(GstAudio.StreamVolumeFormat.CUBIC, Settings.settings.micVolume);
         }
 
         this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, _SEC_TIMEOUT, () => {
@@ -286,27 +278,6 @@ var Record = new GObject.registerClass({
         }
     }
 
-    _getChannels() {
-
-        let channels = null;
-        let channelsPref = Settings.settings.channel;
-
-        switch (channelsPref) {
-        case Channels.MONO:
-            channels = 1;
-            break;
-
-        case Channels.STEREO:
-            channels = 2;
-            break;
-
-        default:
-            channels = 2;
-        }
-
-        return channels;
-    }
-
     _showErrorDialog(errorStrOne, errorStrTwo) {
         if (errorDialogState === ErrState.OFF) {
             let errorDialog = new Gtk.MessageDialog({ modal: true,
@@ -330,11 +301,11 @@ var Record = new GObject.registerClass({
     }
 
     _getProfile() {
-        let profileIndex = Settings.settings.encodingProfile;
+        let profileIndex = Application.settings.get_enum('audio-profile');
         const profile = EncodingProfiles[profileIndex];
 
         let audioCaps = Gst.Caps.from_string(profile.audioCaps);
-        audioCaps.set_value('channels', this._getChannels());
+        audioCaps.set_value('channels', 2);
 
         let encodingProfile = GstPbutils.EncodingAudioProfile.new(audioCaps, null, null, 1);
         let containerCaps = Gst.Caps.from_string(profile.containerCaps);

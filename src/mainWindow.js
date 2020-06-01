@@ -35,7 +35,7 @@ var view = null;
 
 var MainWindow = GObject.registerClass({
     Template: 'resource:///org/gnome/SoundRecorder/ui/window.ui',
-    InternalChildren: ['recordStartButton', 'recordStopButton', 'recordTimeLabel', 'appMenuButton', 'mainStack', 'recordGrid', 'listBox', 'emptyIcon'],
+    InternalChildren: ['recordStartButton', 'recordStopButton', 'recordTimeLabel', 'mainStack', 'recordGrid', 'listBox', 'emptyIcon'],
 }, class MainWindow extends Handy.ApplicationWindow {
 
     _init(params) {
@@ -87,15 +87,7 @@ var MainWindow = GObject.registerClass({
 
         this._recordStartButton.connect('clicked', () => this._onRecordStart());
         this._recordStopButton.connect('clicked', () => this._onRecordStop());
-        this._addAppMenu();
         this.show();
-    }
-
-    _addAppMenu() {
-        let menu = new Gio.Menu();
-        menu.append(_('Preferences'), 'app.preferences');
-        menu.append(_('About Sound Recorder'), 'app.about');
-        this._appMenuButton.set_menu_model(menu);
     }
 
     _onRecordStart() {

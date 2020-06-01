@@ -3,7 +3,6 @@
   <gresource prefix="/org/gnome/SoundRecorder">
     <file>application.css</file>
     <file>ui/window.ui</file>
-    <file>ui/preferences.ui</file>
     <file>ui/row.ui</file>
   </gresource>
 </gresources>

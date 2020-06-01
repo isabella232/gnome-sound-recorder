@@ -71,6 +71,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
                 <property name="valign">center</property>
+                <property name="menu_model">primaryMenu</property>
                 <child>
                   <object class="GtkImage">
                     <property name="visible">True</property>
@@ -292,4 +293,40 @@
       </object>
     </child>
   </template>
+  <menu id="primaryMenu">
+    <submenu>
+      <attribute translatable="yes" name="label">Preferred Format</attribute>
+      <item>
+        <attribute translatable="yes" name="label">VORBIS</attribute>
+        <attribute name="action">app.audio-profile</attribute>
+        <attribute name="target">vorbis</attribute>
+      </item>
+      <item>
+        <attribute translatable="yes" name="label">OPUS</attribute>
+        <attribute name="action">app.audio-profile</attribute>
+        <attribute name="target">opus</attribute>
+      </item>
+      <item>
+        <attribute translatable="yes" name="label">FLAC</attribute>
+        <attribute name="action">app.audio-profile</attribute>
+        <attribute name="target">flac</attribute>
+      </item>
+      <item>
+        <attribute translatable="yes" name="label">MP3</attribute>
+        <attribute name="action">app.audio-profile</attribute>
+        <attribute name="target">mp3</attribute>
+      </item>
+      <item>
+        <attribute translatable="yes" name="label">M4A</attribute>
+        <attribute name="action">app.audio-profile</attribute>
+        <attribute name="target">m4a</attribute>
+      </item>
+    </submenu>
+    <section>
+      <item>
+        <attribute name="action">app.about</attribute>
+        <attribute name="label" translatable="yes">About Sound Recorder</attribute>
+      </item>
+    </section>
+  </menu>
 </interface>
