@@ -103,17 +103,6 @@ var Record = new GObject.registerClass({
             if (this.initialFileName === -1)
                 this.throwError(101);
 
-            if (this.srcElement === null) {
-                let inspect = 'gst-inspect-1.0 pulseaudio';
-                let err =  GLib.spawn_command_line_sync(inspect)[2];
-                let errStr = String(err);
-                if (errStr.replace(/\W/g, ''))
-                    this.throwError(102);
-                else
-                    this.throwError(103);
-                return;
-            }
-
             try {
                 this.pipeline = new Gst.Pipeline({ name: 'pipe' });
                 this.srcElement = Gst.ElementFactory.make('pulsesrc', 'srcElement');
