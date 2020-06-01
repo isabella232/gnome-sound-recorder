@@ -83,81 +83,68 @@ var Record = new GObject.registerClass({
         'waveform': { param_types: [GObject.TYPE_INT, GObject.TYPE_FLOAT] },
     },
 }, class Record extends GObject.Object {
-    _recordPipeline() {
-        errorDialogState = ErrState.OFF;
-        this.baseTime = 0;
-        this._buildFileName = new BuildFileName();
-        this.initialFileName = this._buildFileName.buildInitialFilename();
-        let localDateTime = this._buildFileName.getOrigin();
-        this.gstreamerDateTime = Gst.DateTime.new_from_g_date_time(localDateTime);
-
-        if (this.initialFileName === -1) {
-            this._showErrorDialog(_('Unable to create Recordings directory.'));
-            errorDialogState = ErrState.ON;
-            this.onEndOfStream();
-        }
-
-        this.pipeline = new Gst.Pipeline({ name: 'pipe' });
-        this.srcElement = Gst.ElementFactory.make('pulsesrc', 'srcElement');
-
-        if (this.srcElement === null) {
-            let inspect = 'gst-inspect-1.0 pulseaudio';
-            let err =  GLib.spawn_command_line_sync(inspect)[2];
-            let errStr = String(err);
-            if (errStr.replace(/\W/g, ''))
-                this._showErrorDialog(_('Please install the GStreamer 1.0 PulseAudio plugin.'));
-            else
-                this._showErrorDialog(_('Your audio capture settings are invalid.'));
-
-            errorDialogState = ErrState.ON;
-            this.onEndOfStream();
-            return;
-        }
-
-        this.pipeline.add(this.srcElement);
-        this.audioConvert = Gst.ElementFactory.make('audioconvert', 'audioConvert');
-        this.pipeline.add(this.audioConvert);
-        this.caps = Gst.Caps.from_string('audio/x-raw');
-        this.clock = this.pipeline.get_clock();
-        this.recordBus = this.pipeline.get_bus();
-        this.recordBus.add_signal_watch();
-        this.recordBus.connect('message', (recordBus, message) => {
-            if (message !== null)
-                this._onMessageReceived(message);
-        });
-        this.level = Gst.ElementFactory.make('level', 'level');
-        this.pipeline.add(this.level);
-        this.volume = Gst.ElementFactory.make('volume', 'volume');
-        this.pipeline.add(this.volume);
-        this.ebin = Gst.ElementFactory.make('encodebin', 'ebin');
-        this.pipeline.add(this.ebin);
-        this.ebin.set_property('profile', this._getProfile());
-        this.filesink = Gst.ElementFactory.make('filesink', 'filesink');
-        this.filesink.set_property('location', this.initialFileName);
-        this.pipeline.add(this.filesink);
-
-        if (!this.pipeline || !this.filesink) {
-            this._showErrorDialog(_('Not all elements could be created.'));
-            errorDialogState = ErrState.ON;
-            this.onEndOfStream();
-        }
-
-        let srcLink = this.srcElement.link(this.audioConvert);
-        let audioConvertLink = this.audioConvert.link_filtered(this.level, this.caps);
-        let levelLink = this.level.link(this.volume);
-        this.volume.link(this.ebin);
-        let ebinLink = this.ebin.link(this.filesink);
-
-        if (!srcLink || !audioConvertLink || !levelLink || !ebinLink) {
-            this._showErrorDialog(_('Not all of the elements were linked.'));
-            errorDialogState = ErrState.ON;
-            this.onEndOfStream();
-        }
-    }
 
     startRecording() {
-        if (!this.pipeline || this.pipeState === PipelineStates.STOPPED)
-            this._recordPipeline();
+        if (!this.pipeline || this.pipeState === PipelineStates.STOPPED){
+            errorDialogState = ErrState.OFF;
+            this.baseTime = 0;
+            this._buildFileName = new BuildFileName();
+            this.initialFileName = this._buildFileName.buildInitialFilename();
+            let localDateTime = this._buildFileName.getOrigin();
+            this.gstreamerDateTime = Gst.DateTime.new_from_g_date_time(localDateTime);
+
+            if (this.initialFileName === -1) {
+                this._showErrorDialog(_('Unable to create Recordings directory.'));
+                errorDialogState = ErrState.ON;
+                this.onEndOfStream();
+            }
+
+            try {
+                this.pipeline = new Gst.Pipeline({ name: 'pipe' });
+                this.srcElement = Gst.ElementFactory.make('pulsesrc', 'srcElement');
+                this.audioConvert = Gst.ElementFactory.make('audioconvert', 'audioConvert');
+                this.caps = Gst.Caps.from_string(`audio/x-raw`);
+                this.level = Gst.ElementFactory.make('level', 'level');
+                this.volume = Gst.ElementFactory.make('volume', 'volume');
+                this.ebin = Gst.ElementFactory.make('encodebin', 'ebin');
+                this.filesink = Gst.ElementFactory.make('filesink', 'filesink');
+            } catch (error) {
+                this._showErrorDialog(_('Not all elements could be created.'));
+                errorDialogState = ErrState.ON;
+                this.onEndOfStream();
+            }
+
+            this.clock = this.pipeline.get_clock();
+            this.recordBus = this.pipeline.get_bus();
+            this.recordBus.add_signal_watch();
+            this.recordBus.connect('message', (recordBus, message) => {
+                if (message !== null)
+                    this._onMessageReceived(message);
+            });
+
+            try {
+                this.pipeline.add(this.srcElement);
+                this.pipeline.add(this.audioConvert);
+                this.pipeline.add(this.level);
+                this.pipeline.add(this.volume);
+                this.pipeline.add(this.ebin);
+                this.pipeline.add(this.filesink);
+            } catch (error) {
+                this._showErrorDialog(_('Not all elements could be addded.'));
+                errorDialogState = ErrState.ON;
+                this.onEndOfStream();
+            }
+
+
+            this.srcElement.link(this.audioConvert);
+            this.audioConvert.link_filtered(this.level, this.caps);
+            this.level.link(this.volume);
+
+            this.ebin.set_property('profile', this._getProfile());
+            this.filesink.set_property('location', this.initialFileName);
+            this.volume.link(this.ebin);
+            this.ebin.link(this.filesink);
+        }
 
         let ret = this.pipeline.set_state(Gst.State.PLAYING);
         this.pipeState = PipelineStates.PLAYING;
