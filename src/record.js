@@ -33,15 +33,23 @@ var PipelineStates = {
     STOPPED: 2,
 };
 
-const ErrState = {
-    OFF: 0,
-    ON: 1,
+const Channels = {
+    MONO: 0,
+    STEREO: 1,
 };
+
+const ErrorType = {
+    101: 'Unable to create Recordings directory.',
+    102: 'Please install the GStreamer 1.0 PulseAudio plugin.',
+    103: 'Your audio capture settings are invalid.',
+    104: 'Not all elements could be created.',
+    105: 'Not all elements could be addded.',
+    106: 'Unable to set the pipeline \n to the recording state.'
+}
 
 const _TENTH_SEC = 100000000;
 const _SEC_TIMEOUT = 100;
 
-let errorDialogState;
 
 // All supported encoding profiles.
 var EncodingProfiles = [
@@ -86,17 +94,24 @@ var Record = new GObject.registerClass({
 
     startRecording() {
         if (!this.pipeline || this.state == Gst.State.NULL){
-            errorDialogState = ErrState.OFF;
             this.baseTime = 0;
             this._buildFileName = new BuildFileName();
             this.initialFileName = this._buildFileName.buildInitialFilename();
             let localDateTime = this._buildFileName.getOrigin();
             this.gstreamerDateTime = Gst.DateTime.new_from_g_date_time(localDateTime);
 
-            if (this.initialFileName === -1) {
-                this._showErrorDialog(_('Unable to create Recordings directory.'));
-                errorDialogState = ErrState.ON;
-                this.onEndOfStream();
+            if (this.initialFileName === -1)
+                this.throwError(101);
+
+            if (this.srcElement === null) {
+                let inspect = 'gst-inspect-1.0 pulseaudio';
+                let err =  GLib.spawn_command_line_sync(inspect)[2];
+                let errStr = String(err);
+                if (errStr.replace(/\W/g, ''))
+                    this.throwError(102);
+                else
+                    this.throwError(103);
+                return;
             }
 
             try {
@@ -109,9 +124,7 @@ var Record = new GObject.registerClass({
                 this.ebin = Gst.ElementFactory.make('encodebin', 'ebin');
                 this.filesink = Gst.ElementFactory.make('filesink', 'filesink');
             } catch (error) {
-                this._showErrorDialog(_('Not all elements could be created.'));
-                errorDialogState = ErrState.ON;
-                this.onEndOfStream();
+                this.throwError(104);
             }
 
             this.clock = this.pipeline.get_clock();
@@ -130,9 +143,7 @@ var Record = new GObject.registerClass({
                 this.pipeline.add(this.ebin);
                 this.pipeline.add(this.filesink);
             } catch (error) {
-                this._showErrorDialog(_('Not all elements could be addded.'));
-                errorDialogState = ErrState.ON;
-                this.onEndOfStream();
+                this.throwError(105);
             }
 
 
@@ -167,15 +178,6 @@ var Record = new GObject.registerClass({
         this.duration = 0;
     }
 
-    onEndOfStream() {
-        this.state = Gst.State.NULL;
-
-        if (this.recordBus)
-            this.recordBus.remove_signal_watch();
-
-        errorDialogState = ErrState.OFF;
-    }
-
     _onMessageReceived(message) {
         this.localMsg = message;
         let msg = message.type;
@@ -183,20 +185,9 @@ var Record = new GObject.registerClass({
 
         case Gst.MessageType.ELEMENT: {
             if (GstPbutils.is_missing_plugin_message(this.localMsg)) {
-                let errorOne = null;
-                let errorTwo = null;
                 let detail = GstPbutils.missing_plugin_message_get_installer_detail(this.localMsg);
-
-                if (detail !== null)
-                    errorOne = detail;
-
                 let description = GstPbutils.missing_plugin_message_get_description(this.localMsg);
-
-                if (description !== null)
-                    errorTwo = description;
-
-                this._showErrorDialog(errorOne, errorTwo);
-                errorDialogState = ErrState.ON;
+                this.showErrorDialog(detail, description);
                 break;
             }
 
@@ -237,46 +228,64 @@ var Record = new GObject.registerClass({
             break;
         }
 
-        case Gst.MessageType.EOS: {
-            this.onEndOfStream();
+        case Gst.MessageType.EOS:
+            this.throwError();
             break;
-        }
-
-        case Gst.MessageType.WARNING: {
-            let warningMessage = message.parse_warning()[0];
-            log(warningMessage.toString());
+        case Gst.MessageType.WARNING:
+            log(message.parse_warning()[0].toString());
             break;
-        }
-
-        case Gst.MessageType.ERROR: {
-            let errorMessage = message.parse_error();
-            this._showErrorDialog(errorMessage.toString());
-            errorDialogState = ErrState.ON;
+        case Gst.MessageType.ERROR:
+            this.showErrorDialog(message.parse_error().toString())
             break;
-        }
         }
     }
 
-    _showErrorDialog(errorStrOne, errorStrTwo) {
-        if (errorDialogState === ErrState.OFF) {
-            let errorDialog = new Gtk.MessageDialog({ modal: true,
-                destroy_with_parent: true,
-                buttons: Gtk.ButtonsType.OK,
-                message_type: Gtk.MessageType.WARNING });
-            if (errorStrOne !== null)
-                errorDialog.set_property('text', errorStrOne);
+    _getChannels() {
 
+        let channels = null;
+        let channelsPref = Settings.settings.channel;
 
-            if (errorStrTwo !== null)
-                errorDialog.set_property('secondary-text', errorStrTwo);
+        switch (channelsPref) {
+        case Channels.MONO:
+            channels = 1;
+            break;
 
-            errorDialog.set_transient_for(Gio.Application.get_default().get_active_window());
-            errorDialog.connect('response', () => {
-                errorDialog.destroy();
-                this.onEndOfStream();
-            });
-            errorDialog.show();
+        case Channels.STEREO:
+            channels = 2;
+            break;
+
+        default:
+            channels = 2;
         }
+
+        return channels;
+    }
+
+    throwError(type) {
+        this.state = Gst.State.NULL;
+
+        if (this.recordBus)
+            this.recordBus.remove_signal_watch();
+
+        if (type)
+            this.showErrorDialog(ErrorType[type]);
+    }
+
+    showErrorDialog(str, desc) {
+        let errorDialog = new Gtk.MessageDialog({ modal: true,
+            destroy_with_parent: true,
+            buttons: Gtk.ButtonsType.OK,
+            message_type: Gtk.MessageType.WARNING });
+
+        if (str)
+            errorDialog.set_property('text', str);
+
+        if (desc)
+            errorDialog.set_property('secondary-text', desc);
+
+        errorDialog.set_transient_for(Gio.Application.get_default().get_active_window());
+        errorDialog.connect('response', () => errorDialog.destroy());
+        errorDialog.show();
     }
 
     _getProfile() {
@@ -311,13 +320,8 @@ var Record = new GObject.registerClass({
         this._pipeState = s
         const ret = this.pipeline.set_state(this._pipeState);
 
-        if (ret === Gst.StateChangeReturn.FAILURE) {
-            this._showErrorDialog(_('Unable to set the pipeline \n to the recording state.'));
-            errorDialogState = ErrState.ON;
-            this._buildFileName.getTitle().delete_async(GLib.PRIORITY_DEFAULT, null, null);
-        } else {
-            this.volume.set_volume(GstAudio.StreamVolumeFormat.CUBIC, Settings.settings.micVolume);
-        }
+        if (ret === Gst.StateChangeReturn.FAILURE)
+            this.throwError(106);
     }
 
 });
