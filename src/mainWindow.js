@@ -35,7 +35,7 @@ var view = null;
 
 var MainWindow = GObject.registerClass({
     Template: 'resource:///org/gnome/SoundRecorder/ui/window.ui',
-    InternalChildren: ['recordStartButton', 'recordStopButton', 'recordTimeLabel', 'mainStack', 'recordGrid', 'listBox', 'emptyIcon'],
+    InternalChildren: ['recordTimeLabel', 'mainStack', 'recordGrid', 'listBox', 'emptyIcon'],
 }, class MainWindow extends Handy.ApplicationWindow {
 
     _init(params) {
@@ -84,13 +84,10 @@ var MainWindow = GObject.registerClass({
         });
 
         this._emptyIcon.icon_name = `${pkg.name}-symbolic`;
-
-        this._recordStartButton.connect('clicked', () => this._onRecordStart());
-        this._recordStopButton.connect('clicked', () => this._onRecordStop());
         this.show();
     }
 
-    _onRecordStart() {
+    onRecordStart() {
         this.player.stop();
         this._mainStack.set_visible_child_name('recorderView');
         this._record.startRecording();
@@ -98,7 +95,7 @@ var MainWindow = GObject.registerClass({
         this.wave = new Waveform.WaveForm(this._recordGrid, null);
     }
 
-    _onRecordStop() {
+    onRecordStop() {
         Record.pipeState = Record.PipelineStates.STOPPED;
         this._record.stopRecording();
 

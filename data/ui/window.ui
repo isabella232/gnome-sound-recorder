@@ -28,6 +28,7 @@
                 <property name="receives_default">False</property>
                 <property name="valign">center</property>
                 <property name="always_show_image">True</property>
+                <signal name="clicked" handler="onRecordStart" swapped="no"/>
                 <child>
                   <object class="GtkBox">
                     <property name="visible">True</property>
@@ -158,6 +159,7 @@
                     <property name="halign">center</property>
                     <property name="valign">end</property>
                     <property name="margin_top">8</property>
+                    <signal name="clicked" handler="onRecordStop" swapped="no"/>
                     <child>
                       <object class="GtkImage">
                         <property name="visible">True</property>
