@@ -91,60 +91,62 @@ var Record = new GObject.registerClass({
         'waveform': { param_types: [GObject.TYPE_INT, GObject.TYPE_FLOAT] },
     },
 }, class Record extends GObject.Object {
+    _init() {
+        super._init({});
+        try {
+            this.pipeline = new Gst.Pipeline({ name: 'pipe' });
+            this.srcElement = Gst.ElementFactory.make('pulsesrc', 'srcElement');
+            this.audioConvert = Gst.ElementFactory.make('audioconvert', 'audioConvert');
+            this.caps = Gst.Caps.from_string(`audio/x-raw, channels=${this._getChannels()}`);
+            this.level = Gst.ElementFactory.make('level', 'level');
+            this.volume = Gst.ElementFactory.make('volume', 'volume');
+            this.ebin = Gst.ElementFactory.make('encodebin', 'ebin');
+            this.filesink = Gst.ElementFactory.make('filesink', 'filesink');
+        } catch (error) {
+            this.throwError(104);
+        }
+
+        try {
+            this.pipeline.add(this.srcElement);
+            this.pipeline.add(this.audioConvert);
+            this.pipeline.add(this.level);
+            this.pipeline.add(this.volume);
+            this.pipeline.add(this.ebin);
+            this.pipeline.add(this.filesink);
+        } catch (error) {
+            this.throwError(105);
+        }
+
+        this.clock = this.pipeline.get_clock();
+
+        this.srcElement.link(this.audioConvert);
+        this.audioConvert.link_filtered(this.level, this.caps);
+        this.level.link(this.volume);
+    }
 
     startRecording() {
-        if (!this.pipeline || this.state == Gst.State.NULL){
-            this.baseTime = 0;
-            this._buildFileName = new BuildFileName();
-            this.initialFileName = this._buildFileName.buildInitialFilename();
-            let localDateTime = this._buildFileName.getOrigin();
-            this.gstreamerDateTime = Gst.DateTime.new_from_g_date_time(localDateTime);
+        this.baseTime = 0;
+        this._buildFileName = new BuildFileName();
+        this.initialFileName = this._buildFileName.buildInitialFilename();
+        let localDateTime = this._buildFileName.getOrigin();
+        this.gstreamerDateTime = Gst.DateTime.new_from_g_date_time(localDateTime);
 
-            if (this.initialFileName === -1)
-                this.throwError(101);
-
-            try {
-                this.pipeline = new Gst.Pipeline({ name: 'pipe' });
-                this.srcElement = Gst.ElementFactory.make('pulsesrc', 'srcElement');
-                this.audioConvert = Gst.ElementFactory.make('audioconvert', 'audioConvert');
-                this.caps = Gst.Caps.from_string(`audio/x-raw`);
-                this.level = Gst.ElementFactory.make('level', 'level');
-                this.volume = Gst.ElementFactory.make('volume', 'volume');
-                this.ebin = Gst.ElementFactory.make('encodebin', 'ebin');
-                this.filesink = Gst.ElementFactory.make('filesink', 'filesink');
-            } catch (error) {
-                this.throwError(104);
-            }
-
-            this.clock = this.pipeline.get_clock();
-            this.recordBus = this.pipeline.get_bus();
-            this.recordBus.add_signal_watch();
-            this.recordBus.connect('message', (recordBus, message) => {
-                if (message !== null)
-                    this._onMessageReceived(message);
-            });
-
-            try {
-                this.pipeline.add(this.srcElement);
-                this.pipeline.add(this.audioConvert);
-                this.pipeline.add(this.level);
-                this.pipeline.add(this.volume);
-                this.pipeline.add(this.ebin);
-                this.pipeline.add(this.filesink);
-            } catch (error) {
-                this.throwError(105);
-            }
+        if (this.initialFileName === -1)
+            this.throwError(101);
 
 
-            this.srcElement.link(this.audioConvert);
-            this.audioConvert.link_filtered(this.level, this.caps);
-            this.level.link(this.volume);
+        this.recordBus = this.pipeline.get_bus();
+        this.recordBus.add_signal_watch();
+        this.recordBus.connect('message', (recordBus, message) => {
+            if (message !== null)
+                this._onMessageReceived(message);
+        });
 
-            this.ebin.set_property('profile', this._getProfile());
-            this.filesink.set_property('location', this.initialFileName);
-            this.volume.link(this.ebin);
-            this.ebin.link(this.filesink);
-        }
+
+        this.ebin.set_property('profile', this._getProfile());
+        this.filesink.set_property('location', this.initialFileName);
+        this.volume.link(this.ebin);
+        this.ebin.link(this.filesink);
 
         this.state = Gst.State.PLAYING;
 
@@ -163,6 +165,9 @@ var Record = new GObject.registerClass({
             GLib.source_remove(this.timeout);
             this.timeout = null;
         }
+
+        this.recordBus.remove_watch();
+        this.recordBus = null;
 
         this.duration = 0;
     }
