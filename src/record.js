@@ -85,7 +85,7 @@ var Record = new GObject.registerClass({
 }, class Record extends GObject.Object {
 
     startRecording() {
-        if (!this.pipeline || this.pipeState === PipelineStates.STOPPED){
+        if (!this.pipeline || this.state == Gst.State.NULL){
             errorDialogState = ErrState.OFF;
             this.baseTime = 0;
             this._buildFileName = new BuildFileName();
@@ -146,14 +146,7 @@ var Record = new GObject.registerClass({
             this.ebin.link(this.filesink);
         }
 
-        let ret = this.pipeline.set_state(Gst.State.PLAYING);
-        this.pipeState = PipelineStates.PLAYING;
-
-        if (ret === Gst.StateChangeReturn.FAILURE) {
-            this._showErrorDialog(_('Unable to set the pipeline \n to the recording state.'));
-            errorDialogState = ErrState.ON;
-            this._buildFileName.getTitle().delete_async(GLib.PRIORITY_DEFAULT, null, null);
-        }
+        this.state = Gst.State.PLAYING;
 
         this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, _SEC_TIMEOUT, () => {
             const pos = this.pipeline.query_position(Gst.Format.TIME)[1];
@@ -175,8 +168,7 @@ var Record = new GObject.registerClass({
     }
 
     onEndOfStream() {
-        this.pipeline.set_state(Gst.State.NULL);
-        this.pipeState = PipelineStates.STOPPED;
+        this.state = Gst.State.NULL;
 
         if (this.recordBus)
             this.recordBus.remove_signal_watch();
@@ -309,6 +301,23 @@ var Record = new GObject.registerClass({
     set duration(val) {
         this._duration = val;
         this.notify('duration');
+    }
+
+    get state() {
+        return this._pipeState;
+    }
+
+    set state(s) {
+        this._pipeState = s
+        const ret = this.pipeline.set_state(this._pipeState);
+
+        if (ret === Gst.StateChangeReturn.FAILURE) {
+            this._showErrorDialog(_('Unable to set the pipeline \n to the recording state.'));
+            errorDialogState = ErrState.ON;
+            this._buildFileName.getTitle().delete_async(GLib.PRIORITY_DEFAULT, null, null);
+        } else {
+            this.volume.set_volume(GstAudio.StreamVolumeFormat.CUBIC, Settings.settings.micVolume);
+        }
     }
 
 });
