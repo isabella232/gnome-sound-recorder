@@ -17,7 +17,7 @@ Donate: http://www.gnome.org/friends/
 
 Translate: https://wiki.gnome.org/TranslationProject
 
-You can also join us in [#gnome-sound-recorder:disroot.org on Matrix](https://matrix.to/#/#gnome-sound-recorder:disroot.org) 
+You can also join us in [#sound-recorder:gnome.org on Matrix](https://matrix.to/#/#sound-recorder:gnome.org)
 
 ### Hacking on Sound Recorder
 
