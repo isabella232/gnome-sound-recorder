@@ -1,39 +1,28 @@
-include: 'https://gitlab.gnome.org/GNOME/citemplates/raw/master/flatpak/flatpak_ci_initiative.yml'
-
-variables:
-    BUNDLE: "sound-recorder-dev.flatpak"
-    LINT_LOG: "eslint-report.txt"
-
-
-eslint:
-    image: registry.gitlab.gnome.org/gnome/gjs:fedora.static-analysis
-    script:
-        - eslint -o $LINT_LOG --no-color src || { cat $LINT_LOG; false; }
-    artifacts:
-        paths:
-            - ${LINT_LOG}
-        when: on_failure
-
+include:
+  - project: "gnome/citemplates"
+    file: "flatpak/flatpak_ci_initiative.yml"
 
 flatpak:
-    image: 'registry.gitlab.gnome.org/gnome/gnome-runtime-images/gnome:master'
-    variables:
-        MANIFEST_PATH: "org.gnome.SoundRecorder.json"
-        FLATPAK_MODULE: "gnome-sound-recorder"
-        MESON_ARGS: "-Dprofile=development"
-        RUNTIME_REPO: "https://sdk.gnome.org/gnome-nightly.flatpakrepo"
-        APP_ID: "org.gnome.SoundRecorderDevel"
-    extends: .flatpak
-
-review:
-    stage: deploy
-    dependencies:
-        - 'flatpak'
-    extends: '.review'
-
-stop_review:
-    stage: deploy
-    extends: '.stop_review'
+  image: "registry.gitlab.gnome.org/gnome/gnome-runtime-images/gnome:master"
+  variables:
+    MANIFEST_PATH: "org.gnome.SoundRecorder.json"
+    BUNDLE: "sound-recorder-dev.flatpak"
+    FLATPAK_MODULE: "gnome-sound-recorder"
+    RUNTIME_REPO: "https://sdk.gnome.org/gnome-nightly.flatpakrepo"
+    APP_ID: "org.gnome.SoundRecorderDevel"
+  extends: .flatpak
 
 nightly:
-  extends: '.publish_nightly'
+  extends: ".publish_nightly"
+
+eslint:
+  image: registry.gitlab.gnome.org/gnome/gjs:fedora.static-analysis
+
+  variables:
+    LINT_LOG: "eslint-report.txt"
+  script:
+    - eslint -o $LINT_LOG --no-color src || { cat $LINT_LOG; false; }
+  artifacts:
+    paths:
+      - ${LINT_LOG}
+    when: on_failure
