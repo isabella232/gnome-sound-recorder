@@ -1,4 +1,4 @@
-/* exported SIGINT SIGTERM application settings Application */
+/* exported application settings Application */
 /*
 * Copyright 2013 Meg Ford
 * This library is free software; you can redistribute it and/or
@@ -26,9 +26,6 @@ const Gtk = imports.gi.Gtk;
 const Gdk = imports.gi.Gdk;
 
 const MainWindow = imports.mainWindow;
-
-var SIGINT = 2;
-var SIGTERM = 15;
 
 var application = null;
 

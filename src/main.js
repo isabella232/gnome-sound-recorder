@@ -28,7 +28,8 @@
 
 pkg.initGettext();
 pkg.initFormat();
-pkg.require({ 'Gdk': '3.0',
+pkg.require({
+    'Gdk': '3.0',
     'GdkPixbuf': '2.0',
     'GLib': '2.0',
     'GObject': '2.0',
@@ -36,10 +37,11 @@ pkg.require({ 'Gdk': '3.0',
     'Gst': '1.0',
     'GstAudio': '1.0',
     'GstPbutils': '1.0',
-    'Handy': '1' });
+    'Handy': '1'
+});
 
-const Application = imports.application;
+const Application = imports.application.Application;
 
 function main(argv) {
-    return new Application.Application().run(argv);
+    return new Application().run(argv);
 }
