@@ -1,13 +1,12 @@
 icon_dir = join_paths('icons', 'hicolor', 'scalable', 'apps')
 install_data(
-  join_paths(icon_dir, 'org.gnome.SoundRecorder.svg'),
-  rename: '@0@.svg'.format(application_id),
+  join_paths('icons', '@0@.svg'.format(application_id)),
   install_dir: join_paths(sound_recorder_datadir, icon_dir)
 )
 
 icon_dir = join_paths('icons', 'hicolor', 'symbolic', 'apps')
 install_data(
-  join_paths(icon_dir, 'org.gnome.SoundRecorder-symbolic.svg'),
+  join_paths('icons', 'org.gnome.SoundRecorder-symbolic.svg'),
   rename: '@0@-symbolic.svg'.format(application_id),
   install_dir: join_paths(sound_recorder_datadir, icon_dir)
 )
