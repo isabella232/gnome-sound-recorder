@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/issu"
 "es\n"
-"POT-Creation-Date: 2020-04-19 08:00+0000\n"
-"PO-Revision-Date: 2020-04-25 10:18+0300\n"
+"POT-Creation-Date: 2020-06-02 09:42+0000\n"
+"PO-Revision-Date: 2020-06-02 13:27+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -18,12 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<"
 "=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 20.07.70\n"
+"X-Generator: Lokalize 20.03.70\n"
 "X-Project-Style: gnome\n"
 
 #: data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in:5
-#: data/org.gnome.SoundRecorder.desktop.in.in:4 data/ui/window.ui:207
-#: src/application.js:39 src/record.js:110
+#: data/org.gnome.SoundRecorder.desktop.in.in:4 src/application.js:40
 msgid "Sound Recorder"
 msgstr "Записувач звуку"
 
@@ -89,34 +88,6 @@ msgstr ""
 "Показує типи для попередньо заданих назв кодування звуку. Якщо нічого не "
 "вказано, буде використано типові параметри кодування."
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:27
-msgid "Available channels"
-msgstr "Доступні канали"
-
-#: data/org.gnome.SoundRecorder.gschema.xml.in:28
-msgid ""
-"Maps available channels. If there is not no mapping set, stereo channel will "
-"be used by default."
-msgstr ""
-"Показує доступні канали. Якщо не вказано, типово використовується "
-"стереоканал."
-
-#: data/org.gnome.SoundRecorder.gschema.xml.in:32
-msgid "Microphone volume level"
-msgstr "Рівень гучності мікрофона"
-
-#: data/org.gnome.SoundRecorder.gschema.xml.in:33
-msgid "Microphone volume level."
-msgstr "Рівень гучності мікрофона."
-
-#: data/org.gnome.SoundRecorder.gschema.xml.in:37
-msgid "Speaker volume level"
-msgstr "Рівень гучності гучномовця"
-
-#: data/org.gnome.SoundRecorder.gschema.xml.in:38
-msgid "Speaker volume level."
-msgstr "Рівень гучності гучномовця."
-
 #: data/org.gnome.SoundRecorder.desktop.in.in:5
 msgid "Record sound via the microphone and play it back"
 msgstr "Записати звук через мікрофон і програти його"
@@ -126,117 +97,70 @@ msgstr "Записати звук через мікрофон і програт�
 msgid "Audio;Application;Record;"
 msgstr "Звук;Програма;Запис;"
 
-#: data/ui/window.ui:58 data/ui/infodialog.ui:188
-msgid "Done"
-msgstr "Зроблено"
-
-#: data/ui/window.ui:86
-#| msgid "Recordings"
-msgid "Recording"
-msgstr "Записування"
-
-#: data/ui/window.ui:163
-msgid "Use the <b>Record</b> button to make sound recordings"
-msgstr "Натисніть кнопку <b>Записати</b>, щоб зробити записи звуку"
-
-#: data/ui/window.ui:179
-msgid "Add Recordings"
-msgstr "Додати записи"
-
-#: data/ui/window.ui:238
+#: data/ui/window.ui:54
 msgid "Record"
 msgstr "Записати"
 
-#: data/ui/preferences.ui:17 src/mainWindow.js:92
-msgid "Preferences"
-msgstr "Параметри"
+#: data/ui/window.ui:250
+msgid "Add Recordings"
+msgstr "Додати записи"
 
-#: data/ui/preferences.ui:62
-msgid "Preferred format"
+#: data/ui/window.ui:267
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "Натисніть кнопку <b>Записати</b>, щоб зробити записи звуку"
+
+#: data/ui/window.ui:300
+#| msgid "Preferred format"
+msgid "Preferred Format"
 msgstr "Бажаний формат"
 
-#: data/ui/preferences.ui:88
-msgid "Default mode"
-msgstr "Типовий режим"
+#: data/ui/window.ui:302
+msgid "VORBIS"
+msgstr "VORBIS"
 
-#: data/ui/preferences.ui:103
-msgid "Stereo"
-msgstr "Стерео"
+#: data/ui/window.ui:307
+msgid "OPUS"
+msgstr "OPUS"
 
-#: data/ui/preferences.ui:104
-msgid "Mono"
-msgstr "Моно"
+#: data/ui/window.ui:312
+msgid "FLAC"
+msgstr "FLAC"
 
-#: data/ui/preferences.ui:118
-msgid "Volume"
-msgstr "Гучність"
+#: data/ui/window.ui:317
+msgid "MP3"
+msgstr "MP3"
 
-#: data/ui/preferences.ui:131
-msgid "Microphone"
-msgstr "Мікрофон"
+#: data/ui/window.ui:322
+msgid "M4A"
+msgstr "M4A"
 
-#: data/ui/infodialog.ui:34
-msgid "File Name"
-msgstr "Назва файла"
+#: data/ui/window.ui:330
+msgid "About Sound Recorder"
+msgstr "Про «Записувач звуку»"
 
-#: data/ui/infodialog.ui:49
-msgid "Source"
-msgstr "Джерело"
-
-#: data/ui/infodialog.ui:64
-msgid "Date Modified"
-msgstr "Дата зміни"
-
-#: data/ui/infodialog.ui:79
-msgid "Date Created"
-msgstr "Дата створення"
-
-#: data/ui/infodialog.ui:94
-msgid "Media Type"
-msgstr "Тип носія"
-
-#: data/ui/infodialog.ui:154
-msgid "Unknown"
-msgstr "Невідомий"
-
-#: data/ui/infodialog.ui:177
-msgid "Info"
-msgstr "Відомості"
-
-#: data/ui/infodialog.ui:180
-msgid "Cancel"
-msgstr "Скасувати"
-
-#: data/ui/row.ui:127
-msgid "Delete"
-msgstr "Вилучити"
-
-#: data/ui/row.ui:153
-msgid "Details"
-msgstr "Подробиці"
-
-#: src/application.js:84
+#: src/application.js:112
 msgid "Sound Recorder started"
 msgstr "Запущено записувача звуку"
 
 #. Translators: "Recordings" here refers to the name of the directory where the application places files
-#: src/application.js:93
+#: src/application.js:121
 msgid "Recordings"
 msgstr "Записи"
 
-#: src/application.js:128
+#. Translators: Replace "translator-credits" with your names, one name per line
+#: src/application.js:150
 msgid "translator-credits"
 msgstr "Daniel Korostil <ted.korostiled@gmail.com>"
 
-#: src/application.js:130
+#: src/application.js:152
 msgid "A Sound Recording Application for GNOME"
 msgstr "Програма для запису звуку для GNOME"
 
-#: src/utils.js:59
+#: src/utils.js:52
 msgid "Yesterday"
 msgstr "Вчора"
 
-#: src/utils.js:61
+#: src/utils.js:54
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -244,11 +168,11 @@ msgstr[0] "%d день тому"
 msgstr[1] "%d дні тому"
 msgstr[2] "%d днів тому"
 
-#: src/utils.js:65
+#: src/utils.js:58
 msgid "Last week"
 msgstr "Минулого тижня"
 
-#: src/utils.js:67
+#: src/utils.js:60
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -256,11 +180,11 @@ msgstr[0] "%d тиждень тому"
 msgstr[1] "%d тижні тому"
 msgstr[2] "%d тижнів тому"
 
-#: src/utils.js:71
+#: src/utils.js:64
 msgid "Last month"
 msgstr "Минулого місяця"
 
-#: src/utils.js:73
+#: src/utils.js:66
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
@@ -268,11 +192,11 @@ msgstr[0] "%d місяць тому"
 msgstr[1] "%d місяці тому"
 msgstr[2] "%d місяців тому"
 
-#: src/utils.js:77
+#: src/utils.js:70
 msgid "Last year"
 msgstr "Минулого року"
 
-#: src/utils.js:79
+#: src/utils.js:72
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
@@ -280,27 +204,23 @@ msgstr[0] "%d рік тому"
 msgstr[1] "%d роки тому"
 msgstr[2] "%d років тому"
 
-#: src/mainWindow.js:93
-msgid "About Sound Recorder"
-msgstr "Про «Записувач звуку»"
-
-#: src/record.js:64
+#: src/record.js:95
 msgid "Unable to create Recordings directory."
 msgstr "Неможливо створити каталог записів."
 
-#: src/record.js:77
+#: src/record.js:108
 msgid "Please install the GStreamer 1.0 PulseAudio plugin."
 msgstr "Встановіть додаток GStreamer 1.0 PulseAudio."
 
-#: src/record.js:79
+#: src/record.js:110
 msgid "Your audio capture settings are invalid."
 msgstr "Параметри захоплення звуку — хибні."
 
-#: src/record.js:127
+#: src/record.js:140
 msgid "Not all elements could be created."
 msgstr "Не всі елементи можливо створити."
 
-#: src/record.js:139
+#: src/record.js:152
 msgid "Not all of the elements were linked."
 msgstr "Не всі елементи сполучено."
 
@@ -314,21 +234,92 @@ msgstr ""
 
 #. Translators: ""Recording from %F %A at %T"" is the default name assigned to a file created
 #. by the application (for example, "Recording from 2020-03-11 Wednesday at 19:43:05").
-#: src/record.js:336
+#: src/record.js:335
 msgid "Recording from %F %A at %T"
 msgstr "Запис %F %A о %T"
+
+#~ msgid "Available channels"
+#~ msgstr "Доступні канали"
+
+#~ msgid ""
+#~ "Maps available channels. If there is not no mapping set, stereo channel "
+#~ "will be used by default."
+#~ msgstr ""
+#~ "Показує доступні канали. Якщо не вказано, типово використовується "
+#~ "стереоканал."
+
+#~ msgid "Microphone volume level"
+#~ msgstr "Рівень гучності мікрофона"
+
+#~ msgid "Microphone volume level."
+#~ msgstr "Рівень гучності мікрофона."
+
+#~ msgid "Speaker volume level"
+#~ msgstr "Рівень гучності гучномовця"
+
+#~ msgid "Speaker volume level."
+#~ msgstr "Рівень гучності гучномовця."
+
+#~ msgid "Done"
+#~ msgstr "Зроблено"
+
+#~| msgid "Recordings"
+#~ msgid "Recording"
+#~ msgstr "Записування"
+
+#~ msgid "Preferences"
+#~ msgstr "Параметри"
+
+#~ msgid "Default mode"
+#~ msgstr "Типовий режим"
+
+#~ msgid "Stereo"
+#~ msgstr "Стерео"
+
+#~ msgid "Mono"
+#~ msgstr "Моно"
+
+#~ msgid "Volume"
+#~ msgstr "Гучність"
+
+#~ msgid "Microphone"
+#~ msgstr "Мікрофон"
+
+#~ msgid "File Name"
+#~ msgstr "Назва файла"
+
+#~ msgid "Source"
+#~ msgstr "Джерело"
+
+#~ msgid "Date Modified"
+#~ msgstr "Дата зміни"
+
+#~ msgid "Date Created"
+#~ msgstr "Дата створення"
+
+#~ msgid "Media Type"
+#~ msgstr "Тип носія"
+
+#~ msgid "Unknown"
+#~ msgstr "Невідомий"
+
+#~ msgid "Info"
+#~ msgstr "Відомості"
+
+#~ msgid "Cancel"
+#~ msgstr "Скасувати"
+
+#~ msgid "Delete"
+#~ msgstr "Вилучити"
+
+#~ msgid "Details"
+#~ msgstr "Подробиці"
 
 #~ msgid "Ogg Vorbis"
 #~ msgstr "Ogg Vorbis"
 
 #~ msgid "Opus"
 #~ msgstr "Opus"
-
-#~ msgid "FLAC"
-#~ msgstr "FLAC"
-
-#~ msgid "MP3"
-#~ msgstr "MP3"
 
 #~ msgid "MOV"
 #~ msgstr "MOV"
