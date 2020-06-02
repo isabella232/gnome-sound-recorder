@@ -1,15 +1,15 @@
-appdata_conf = configuration_data()
-appdata_conf.set('app-id', application_id)
-appdata_conf.set('gettext-package', gettext_package)
+metainfo_conf = configuration_data()
+metainfo_conf.set('app-id', application_id)
+metainfo_conf.set('gettext-package', gettext_package)
 
-appdata_file = i18n.merge_file(
-  'appdata-file',
+metainfo_file = i18n.merge_file(
+  'metainfo-file',
   input: configure_file(
-  	input: 'org.gnome.SoundRecorder.appdata.xml.in.in',
+  	input: 'org.gnome.SoundRecorder.metainfo.xml.in.in',
   	output: '@BASENAME@',
-  	configuration: appdata_conf
+  	configuration: metainfo_conf
 	),
-  output: '@0@.appdata.xml'.format(application_id),
+  output: '@0@.metainfo.xml'.format(application_id),
   po_dir: po_dir,
   install: true,
   install_dir:  sound_recorder_datadir / 'metainfo'
@@ -18,9 +18,9 @@ appdata_file = i18n.merge_file(
 appstream_util = find_program('appstream-util', required: false)
 if appstream_util.found()
   test(
-    'validate-appdata', appstream_util,
+    'validate-metainfo', appstream_util,
     args: [
-      'validate-relax', '--nonet', appdata_file.full_path()
+      'validate-relax', '--nonet', metainfo_file.full_path()
     ]
   )
 endif
