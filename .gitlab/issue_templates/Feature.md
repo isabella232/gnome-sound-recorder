@@ -6,7 +6,7 @@ understanding the feature or for implementation.
 Also add links when needed, for instance for implementation standards
 or other relevant resources.
 
-Proposed Mockups: 
+Proposed Mockups:
 
 ## Design Tasks
 
