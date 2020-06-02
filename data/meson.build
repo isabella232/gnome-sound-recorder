@@ -1,14 +1,14 @@
-icon_dir = join_paths('icons', 'hicolor', 'scalable', 'apps')
+icon_dir = 'icons' / 'hicolor' / 'scalable' / 'apps'
 install_data(
-  join_paths('icons', '@0@.svg'.format(application_id)),
-  install_dir: join_paths(sound_recorder_datadir, icon_dir)
+  'icons' / '@0@.svg'.format(application_id),
+  install_dir:  sound_recorder_datadir / icon_dir
 )
 
-icon_dir = join_paths('icons', 'hicolor', 'symbolic', 'apps')
+icon_dir = 'icons' / 'hicolor' / 'symbolic' / 'apps'
 install_data(
-  join_paths('icons', 'org.gnome.SoundRecorder-symbolic.svg'),
+  'icons' / 'org.gnome.SoundRecorder-symbolic.svg',
   rename: '@0@-symbolic.svg'.format(application_id),
-  install_dir: join_paths(sound_recorder_datadir, icon_dir)
+  install_dir: sound_recorder_datadir / icon_dir
 )
 
 desktop_conf = configuration_data()
@@ -22,7 +22,7 @@ desktop_file = i18n.merge_file(
   ),
   output: '@0@.desktop'.format(application_id),
   install: true,
-  install_dir: join_paths(sound_recorder_datadir, 'applications'),
+  install_dir: sound_recorder_datadir / 'applications',
   po_dir: po_dir,
   type: 'desktop'
 )

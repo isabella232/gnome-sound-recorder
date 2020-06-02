@@ -12,7 +12,7 @@ appdata_file = i18n.merge_file(
   output: '@0@.appdata.xml'.format(application_id),
   po_dir: po_dir,
   install: true,
-  install_dir: join_paths(sound_recorder_datadir, 'metainfo')
+  install_dir:  sound_recorder_datadir / 'metainfo'
 )
 
 appstream_util = find_program('appstream-util', required: false)

@@ -24,12 +24,12 @@ application_id = 'org.gnome.SoundRecorder@0@'.format(profile)
 
 gettext_package = application_id
 sound_recorder_prefix = get_option('prefix')
-sound_recorder_bindir = join_paths(sound_recorder_prefix, get_option('bindir'))
-sound_recorder_libdir = join_paths(sound_recorder_prefix, get_option('libdir'))
-sound_recorder_datadir = join_paths(sound_recorder_prefix, get_option('datadir'))
-sound_recorder_pkgdatadir = join_paths(sound_recorder_datadir, application_id)
+sound_recorder_bindir = sound_recorder_prefix / get_option('bindir')
+sound_recorder_libdir = sound_recorder_prefix / get_option('libdir')
+sound_recorder_datadir = sound_recorder_prefix / get_option('datadir')
+sound_recorder_pkgdatadir = sound_recorder_datadir / application_id
 
-sound_recorder_schemadir = join_paths(sound_recorder_datadir, 'glib-2.0', 'schemas')
+sound_recorder_schemadir = sound_recorder_datadir / 'glib-2.0' / 'schemas'
 
 gjs_dep = dependency('gjs-1.0', version: '>= 1.48.0')
 gjs_console = gjs_dep.get_pkgconfig_variable('gjs_console')
@@ -44,14 +44,14 @@ dependency('gobject-introspection-1.0', version: '>= 1.31.6')
 gnome = import('gnome')
 i18n = import('i18n')
 
-po_dir = join_paths(meson.source_root(), 'po')
+po_dir = meson.source_root() / 'po'
 
 subdir('src')
 subdir('data')
 subdir('po')
 
 meson.add_install_script(
-  join_paths('build-aux', 'meson_post_install.py'),
+  'build-aux' / 'meson_post_install.py',
   sound_recorder_datadir,
   sound_recorder_bindir,
   sound_recorder_pkgdatadir,
