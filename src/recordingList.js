@@ -30,7 +30,7 @@ var RecordingList = new GObject.registerClass(class RecordingList extends Gio.Li
                 break;
             case Gio.FileMonitorEvent.MOVED_IN:
                 if (index === -1)
-                    this.insert(0, new Recording(file1));
+                    this.sortedInsert(new Recording(file1));
                 break;
             }
 
@@ -60,7 +60,7 @@ var RecordingList = new GObject.registerClass(class RecordingList extends Gio.Li
                         let path = GLib.build_filenamev([this._saveDir.get_path(), info.get_name()]);
                         let file = Gio.file_new_for_path(path);
                         let recording = new Recording(file);
-                        this.append(recording);
+                        this.sortedInsert(recording);
                     });
                 } else {
                     this._enumerator.close(null);
@@ -75,5 +75,21 @@ var RecordingList = new GObject.registerClass(class RecordingList extends Gio.Li
                 return i;
         }
         return -1;
+    }
+
+    sortedInsert(recording) {
+        let added = false;
+
+        for (let i = 0; i < this.get_n_items(); i++) {
+            const curr = this.get_item(i);
+            if (curr.timeModified.difference(recording.timeModified) <= 0) {
+                this.insert(i, recording);
+                added = true;
+                break;
+            }
+        }
+
+        if (!added)
+            this.append(recording);
     }
 });
