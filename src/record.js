@@ -97,7 +97,7 @@ var Record = new GObject.registerClass({
             this.pipeline = new Gst.Pipeline({ name: 'pipe' });
             this.srcElement = Gst.ElementFactory.make('pulsesrc', 'srcElement');
             this.audioConvert = Gst.ElementFactory.make('audioconvert', 'audioConvert');
-            this.caps = Gst.Caps.from_string(`audio/x-raw, channels=${this._getChannels()}`);
+            this.caps = Gst.Caps.from_string(`audio/x-raw`);
             this.level = Gst.ElementFactory.make('level', 'level');
             this.volume = Gst.ElementFactory.make('volume', 'volume');
             this.ebin = Gst.ElementFactory.make('encodebin', 'ebin');
@@ -166,8 +166,11 @@ var Record = new GObject.registerClass({
             this.timeout = null;
         }
 
-        this.recordBus.remove_watch();
-        this.recordBus = null;
+        if (this.recordBus) {
+            this.recordBus.remove_watch();
+            this.recordBus = null;
+        }
+
 
         this.duration = 0;
     }
