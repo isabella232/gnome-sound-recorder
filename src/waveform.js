@@ -20,165 +20,60 @@
 
 // based on code from Pitivi
 
-const Cairo = imports.cairo;
-const Gst = imports.gi.Gst;
+const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
+const Cairo = imports.cairo;
 
-const INTERVAL = 100000000;
-const peaks = [];
-const pauseVal = 10;
-const waveSamples = 40;
+const WAVE_SAMPLES = 40;
 
-const WaveType = {
-    RECORD: 0,
-    PLAY: 1,
-};
+var WaveForm = GObject.registerClass({
+    GTypeName: 'WaveForm',
+}, class WaveForm extends Gtk.DrawingArea {
 
-var WaveForm = class WaveForm {
-    constructor(grid, file) {
-        this._grid = grid;
+    _init() {
+        super._init({});
+        this.peaks = [];
 
-        let placeHolder = -100;
-        for (let i = 0; i < 40; i++)
-            peaks.push(placeHolder);
-        if (file) {
-            this.waveType = WaveType.PLAY;
-            this.file = file;
-            this.duration = this.file.duration;
-            this._uri = this.file.uri;
-        } else {
-            this.waveType = WaveType.RECORD;
-        }
-
-        this.drawing = Gtk.DrawingArea.new();
-        this.drawing.set_property('vexpand', true);
-        this.drawing.set_property('valign', Gtk.Align.FILL);
-        this._grid.add(this.drawing);
-        this.drawing.connect('draw', (drawing, cr) => this.fillSurface(drawing, cr));
-        this.drawing.show();
-
-        if (this.waveType === WaveType.PLAY) {
-            this._launchPipeline();
-            this.startGeneration();
-        }
+        this.set_property('vexpand', true);
+        this.set_property('valign', Gtk.Align.FILL);
+        this.show();
     }
 
-    _launchPipeline() {
-        this.pipeline =
-            Gst.parse_launch(`uridecodebin name=decode uri=${this._uri} ! audioconvert ! audio/x-raw,channels=2 ! level name=level interval=100000000 post-messages=true ! fakesink qos=false`);
-        this._level = this.pipeline.get_by_name('level');
-        let bus = this.pipeline.get_bus();
-        bus.add_signal_watch();
-
-        this.nSamples = Math.ceil(this.duration / INTERVAL);
-
-        bus.connect('message', message => {
-            if (message !== null)
-                this._messageCb(message);
-        });
-    }
-
-    _messageCb(message) {
-        let msg = message.type;
-
-        switch (msg) {
-        case Gst.MessageType.ELEMENT: {
-            let s = message.get_structure();
-
-            if (s) {
-
-                if (s.has_name('level')) {
-                    let peakVal = s.get_value('peak');
-
-                    if (peakVal) {
-                        let val = peakVal.get_nth(0);
-
-                        if (val > 0)
-                            val = 0;
-
-                        let value = Math.pow(10, val / 20);
-                        peaks.push(value);
-                    }
-                }
-            }
-
-            if (peaks.length === this.playTime)
-                this.pipeline.set_state(Gst.State.PAUSED);
-
-
-            if (peaks.length === pauseVal)
-                this.pipeline.set_state(Gst.State.PAUSED);
-
-            break;
-        }
-
-        case Gst.MessageType.EOS: {
-            this.stopGeneration();
-            break;
-        }
-        }
-    }
-
-    startGeneration() {
-        this.pipeline.set_state(Gst.State.PLAYING);
-    }
-
-    stopGeneration() {
-        this.pipeline.set_state(Gst.State.NULL);
-    }
-
-    fillSurface(drawing, cr) {
-        let start = 0;
-
-        if (this.waveType === WaveType.PLAY) {
-
-            if (peaks.length !== this.playTime)
-                this.pipeline.set_state(Gst.State.PLAYING);
-
-            start = Math.floor(this.playTime);
-        } else if (this.recordTime >= 0) {
-            start = this.recordTime;
-        }
-
-        let i = 0;
+    vfunc_draw(cr) {
         let xAxis = 0;
-        let end = start + 40;
-        let width = this.drawing.get_allocated_width();
-        let waveheight = this.drawing.get_allocated_height();
-        let pixelsPerSample = width / waveSamples;
-        let gradient = new Cairo.LinearGradient(0, 0, width, waveheight);
-        if (this.waveType === WaveType.PLAY) {
-            gradient.addColorStopRGBA(0.75, 0.94, 1.0, 0.94, 0.75);
-            gradient.addColorStopRGBA(0.0, 0.94, 1.0, 0.94, 0.22);
-            cr.setLineWidth(1);
-            cr.setSourceRGBA(0.0, 255, 255, 255);
-        } else {
-            gradient.addColorStopRGBA(0.75, 0.0, 0.72, 0.64, 0.35);
-            gradient.addColorStopRGBA(0.0, 0.2, 0.54, 0.47, 0.22);
-            cr.setLineWidth(1);
-            cr.setSourceRGBA(0.0, 185, 161, 255);
-        }
+        let start = this.recordedTime;
+        let end = start + WAVE_SAMPLES;
+        let width = this.get_allocated_width();
+        let height = this.get_allocated_height();
+        let pixelsPerSample = width / WAVE_SAMPLES;
+        let gradient = new Cairo.LinearGradient(0, 0, width, height);
 
-        for (i = start; i <= end; i++) {
+        gradient.addColorStopRGBA(0.75, 0.0, 0.72, 0.64, 0.35);
+        gradient.addColorStopRGBA(0.0, 0.2, 0.54, 0.47, 0.22);
+        cr.setLineWidth(1);
+        cr.setSourceRGBA(0.0, 185, 161, 255);
+
+        for (let i = start; i <= end; i++) {
 
             // Keep moving until we get to a non-null array member
-            if (peaks[i] < 0)
-                cr.moveTo(xAxis * pixelsPerSample, waveheight - peaks[i] * waveheight);
+            if (this.peaks[i] && this.peaks[i] < 0)
+                cr.moveTo(xAxis * pixelsPerSample, height - this.peaks[i] * height);
 
 
             // Start drawing when we reach the first non-null array member
-            if (peaks[i] !== null && peaks[i] >= 0) {
+            if (this.peaks[i] && this.peaks[i] >= 0) {
 
-                if (start >= 40 && xAxis === 0)
-                    cr.moveTo(xAxis * pixelsPerSample, waveheight);
+                if (start >= WAVE_SAMPLES && xAxis === 0)
+                    cr.moveTo(xAxis * pixelsPerSample, height);
 
-                cr.lineTo(xAxis * pixelsPerSample, waveheight - peaks[i] * waveheight);
+                cr.lineTo(xAxis * pixelsPerSample, height - this.peaks[i] * height);
             }
 
             xAxis += 1;
         }
 
-        cr.lineTo(xAxis * pixelsPerSample, waveheight);
+
+        cr.lineTo(xAxis * pixelsPerSample, height);
         cr.closePath();
         cr.strokePreserve();
         cr.setSource(gradient);
@@ -186,46 +81,20 @@ var WaveForm = class WaveForm {
         cr.$dispose();
     }
 
-    _drawEvent(playTime, recPeaks) {
-        let lastTime;
+    _drawEvent(time, peak) {
+        // Reset on Time = 0
+        if (time === 0)
+            this.peaks = Array(WAVE_SAMPLES).fill(-this.get_allocated_height());
 
-        if (this.waveType === WaveType.PLAY) {
-            lastTime = this.playTime;
-            this.playTime = playTime;
-
-            if (peaks.length < this.playTime)
-                this.pipeline.set_state(Gst.State.PLAYING);
-
-
-            if (lastTime !== this.playTime)
-                this.drawing.queue_draw();
-
-
-        } else {
-            peaks.push(recPeaks);
-            lastTime = this.recordTime;
-            this.recordTime = playTime;
-
-            if (peaks.length < this.recordTime) {
-                log('error');
-                return true;
-            }
-            if (this.drawing)
-                this.drawing.queue_draw();
-        }
-        return true;
+        this.peaks.push(peak);
+        this.recordedTime = time;
+        this.queue_draw();
     }
 
     endDrawing() {
-        if (this.pipeline)
-            this.stopGeneration();
-
-        this.count = 0;
-        peaks.length = 0;
-        try {
-            this.drawing.destroy();
-        } catch (e) {
-            log(e);
-        }
+        this.recordedTime = 0;
+        this.peaks.length = 0;
+        this.queue_draw();
     }
-};
+
+});

@@ -27,7 +27,7 @@ const Row = imports.row.Row;
 const RowState = imports.row.RowState;
 const Player = imports.player.Player;
 const Recorder = imports.recorder.Recorder;
-const Waveform = imports.waveform;
+const WaveForm = imports.waveform.WaveForm;
 
 var view = null;
 
@@ -43,11 +43,12 @@ var MainWindow = GObject.registerClass({
 
         this._recorder = new Recorder();
         this.player = new Player();
+        this.waveform = new WaveForm();
+        this._recordGrid.add(this.waveform);
         view = this;
 
         this._recorder.connect('waveform', (_, time, peak) => {
-            if (this.wave)
-                this.wave._drawEvent(time, peak);
+            this.waveform._drawEvent(time, peak);
         });
 
         this._recorder.connect('notify::duration', _recorder => {
@@ -55,8 +56,7 @@ var MainWindow = GObject.registerClass({
         });
 
         this.connect('destroy', () => {
-            if (this.wave)
-                this.wave.endDrawing();
+            this.waveform.endDrawing();
             this.player.stop();
             this._recorder.stop();
         });
@@ -89,16 +89,13 @@ var MainWindow = GObject.registerClass({
         this.player.stop();
         this._mainStack.set_visible_child_name('recorderView');
         this._recorder.start();
-
-        this.wave = new Waveform.WaveForm(this._recordGrid, null);
     }
 
     onRecordStop() {
         const recording = this._recorder.stop();
         this._recordingList.insert(0, recording);
 
-        this.wave.endDrawing();
-        this.wave = null;
+        this.waveform.endDrawing();
     }
 
     _refreshView() {
