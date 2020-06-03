@@ -27,25 +27,14 @@ const GObject = imports.gi.GObject;
 
 const Application = imports.application;
 
-var PipelineStates = {
-    PLAYING: 0,
-    PAUSED: 1,
-    STOPPED: 2,
-};
-
-const Channels = {
-    MONO: 0,
-    STEREO: 1,
-};
-
 const ErrorType = {
     101: 'Unable to create Recordings directory.',
     102: 'Please install the GStreamer 1.0 PulseAudio plugin.',
     103: 'Your audio capture settings are invalid.',
     104: 'Not all elements could be created.',
     105: 'Not all elements could be addded.',
-    106: 'Unable to set the pipeline \n to the recording state.'
-}
+    106: 'Unable to set the pipeline \n to the recording state.',
+};
 
 const _TENTH_SEC = 100000000;
 const _SEC_TIMEOUT = 100;
@@ -97,7 +86,7 @@ var Record = new GObject.registerClass({
             this.pipeline = new Gst.Pipeline({ name: 'pipe' });
             this.srcElement = Gst.ElementFactory.make('pulsesrc', 'srcElement');
             this.audioConvert = Gst.ElementFactory.make('audioconvert', 'audioConvert');
-            this.caps = Gst.Caps.from_string(`audio/x-raw`);
+            this.caps = Gst.Caps.from_string('audio/x-raw');
             this.level = Gst.ElementFactory.make('level', 'level');
             this.volume = Gst.ElementFactory.make('volume', 'volume');
             this.ebin = Gst.ElementFactory.make('encodebin', 'ebin');
@@ -232,30 +221,9 @@ var Record = new GObject.registerClass({
             log(message.parse_warning()[0].toString());
             break;
         case Gst.MessageType.ERROR:
-            this.showErrorDialog(message.parse_error().toString())
+            this.showErrorDialog(message.parse_error().toString());
             break;
         }
-    }
-
-    _getChannels() {
-
-        let channels = null;
-        let channelsPref = Settings.settings.channel;
-
-        switch (channelsPref) {
-        case Channels.MONO:
-            channels = 1;
-            break;
-
-        case Channels.STEREO:
-            channels = 2;
-            break;
-
-        default:
-            channels = 2;
-        }
-
-        return channels;
     }
 
     throwError(type) {
@@ -314,7 +282,7 @@ var Record = new GObject.registerClass({
     }
 
     set state(s) {
-        this._pipeState = s
+        this._pipeState = s;
         const ret = this.pipeline.set_state(this._pipeState);
 
         if (ret === Gst.StateChangeReturn.FAILURE)
