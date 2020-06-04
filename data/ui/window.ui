@@ -31,7 +31,7 @@
                 <property name="receives_default">False</property>
                 <property name="valign">center</property>
                 <property name="always_show_image">True</property>
-                <signal name="clicked" handler="onRecordStart" swapped="no"/>
+                <signal name="clicked" handler="onRecorderStart" swapped="no"/>
                 <child>
                   <object class="GtkBox">
                     <property name="visible">True</property>
@@ -155,27 +155,103 @@
                 <property name="margin_bottom">24</property>
                 <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkButton" id="recordStopButton">
+                  <object class="GtkBox">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
+                    <property name="can_focus">False</property>
                     <property name="halign">center</property>
-                    <property name="valign">end</property>
+                    <property name="valign">center</property>
                     <property name="margin_top">8</property>
-                    <signal name="clicked" handler="onRecordStop" swapped="no"/>
+                    <property name="spacing">18</property>
+                    <property name="width_request">150</property>
                     <child>
-                      <object class="GtkImage">
+                      <object class="GtkStack" id="playbackStack">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="icon_name">media-playback-stop-symbolic</property>
-                        <property name="icon_size">3</property>
+                        <property name="halign">start</property>
+                        <property name="valign">center</property>
+                        <child>
+                          <object class="GtkButton" id="playButton">
+                            <property name="name">playButton</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="halign">center</property>
+                            <property name="always_show_image">True</property>
+                            <signal name="clicked" handler="onRecorderResume" swapped="no"/>
+                            <child>
+                              <object class="GtkImage" id="playIcon">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="icon_name">media-playback-start-symbolic</property>
+                              </object>
+                            </child>
+                            <style>
+                              <class name="pill-button"/>
+                            </style>
+                          </object>
+                          <packing>
+                            <property name="name">recorder-start</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="pauseButton">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="halign">center</property>
+                            <property name="always_show_image">True</property>
+                            <signal name="clicked" handler="onRecorderPause" swapped="no"/>
+                            <child>
+                              <object class="GtkImage" id="pauseIcon">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="icon_name">media-playback-pause-symbolic</property>
+                              </object>
+                            </child>
+                            <style>
+                              <class name="pill-button"/>
+                            </style>
+                          </object>
+                          <packing>
+                            <property name="name">recorder-pause</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
                       </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
                     </child>
-                    <style>
-                      <class name="pill-button"/>
-                      <class name="destructive-action"/>
-                      <class name="large-button"/>
-                    </style>
+                    <child>
+                      <object class="GtkButton">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="halign">center</property>
+                        <property name="valign">center</property>
+                        <signal name="clicked" handler="onRecorderStop" swapped="no"/>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="icon_name">media-playback-stop-symbolic</property>
+                            <property name="icon_size">3</property>
+                          </object>
+                        </child>
+                        <style>
+                          <class name="pill-button"/>
+                          <class name="destructive-action"/>
+                          <class name="large-button"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>

@@ -18,6 +18,7 @@
 *
 */
 
+const Gst = imports.gi.Gst;
 const GObject = imports.gi.GObject;
 const Handy = imports.gi.Handy;
 
@@ -31,7 +32,7 @@ const WaveForm = imports.waveform.WaveForm;
 
 var MainWindow = GObject.registerClass({
     Template: 'resource:///org/gnome/SoundRecorder/ui/window.ui',
-    InternalChildren: ['recordTimeLabel', 'mainStack', 'recordGrid', 'listBox', 'emptyIcon'],
+    InternalChildren: ['recordTimeLabel', 'mainStack', 'recordGrid', 'listBox', 'emptyIcon', 'playbackStack'],
 }, class MainWindow extends Handy.ApplicationWindow {
 
     _init(params) {
@@ -82,17 +83,30 @@ var MainWindow = GObject.registerClass({
         this.show();
     }
 
-    onRecordStart() {
+    onRecorderPause() {
+        this._recorder.state = Gst.State.PAUSED;
+        this._playbackStack.set_visible_child_name('recorder-start');
+    }
+
+    onRecorderResume() {
+        this._recorder.state = Gst.State.PLAYING;
+        this._playbackStack.set_visible_child_name('recorder-pause');
+    }
+
+    onRecorderStart() {
         this.player.stop();
         this._mainStack.set_visible_child_name('recorderView');
         this._recorder.start();
+
+        this._playbackStack.set_visible_child_name('recorder-pause');
     }
 
-    onRecordStop() {
+    onRecorderStop() {
         const recording = this._recorder.stop();
         this._recordingList.insert(0, recording);
 
         this.waveform.endDrawing();
+        this._playbackStack.set_visible_child_name('recorder-start');
     }
 
     _refreshView() {
