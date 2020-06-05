@@ -157,13 +157,12 @@ var Record = new GObject.registerClass({
 
     _onMessageReceived(message) {
         this.localMsg = message;
-        let msg = message.type;
-        switch (msg) {
+        switch (message.type) {
         case Gst.MessageType.ELEMENT: {
             if (GstPbutils.is_missing_plugin_message(this.localMsg)) {
                 let detail = GstPbutils.missing_plugin_message_get_installer_detail(this.localMsg);
                 let description = GstPbutils.missing_plugin_message_get_description(this.localMsg);
-                this.showErrorDialog(detail, description);
+                log(`Detail: ${detail}\nDescription: ${description}`);
                 break;
             }
 
