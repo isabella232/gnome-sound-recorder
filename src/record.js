@@ -245,7 +245,7 @@ var Record = new GObject.registerClass({
         const ret = this.pipeline.set_state(this._pipeState);
 
         if (ret === Gst.StateChangeReturn.FAILURE)
-            log('Unable to set the pipeline \n to the recording state.');
+            log('Unable to update the recorder pipeline state');
     }
 
 });
