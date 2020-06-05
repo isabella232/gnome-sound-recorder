@@ -9,5 +9,5 @@ src/row.js
 src/main.js
 src/mainWindow.js
 src/player.js
-src/record.js
+src/recorder.js
 src/waveform.js
