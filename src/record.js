@@ -27,15 +27,6 @@ const GObject = imports.gi.GObject;
 
 const Application = imports.application;
 
-const ErrorType = {
-    101: 'Unable to create Recordings directory.',
-    102: 'Please install the GStreamer 1.0 PulseAudio plugin.',
-    103: 'Your audio capture settings are invalid.',
-    104: 'Not all elements could be created.',
-    105: 'Not all elements could be addded.',
-    106: 'Unable to set the pipeline \n to the recording state.',
-};
-
 const _TENTH_SEC = 100000000;
 const _SEC_TIMEOUT = 100;
 
@@ -92,7 +83,7 @@ var Record = new GObject.registerClass({
             this.ebin = Gst.ElementFactory.make('encodebin', 'ebin');
             this.filesink = Gst.ElementFactory.make('filesink', 'filesink');
         } catch (error) {
-            this.throwError(104);
+            log('Not all elements could be created.');
         }
 
         try {
@@ -103,7 +94,7 @@ var Record = new GObject.registerClass({
             this.pipeline.add(this.ebin);
             this.pipeline.add(this.filesink);
         } catch (error) {
-            this.throwError(105);
+            log('Not all elements could be addded.');
         }
 
         this.clock = this.pipeline.get_clock();
@@ -121,7 +112,7 @@ var Record = new GObject.registerClass({
         this.gstreamerDateTime = Gst.DateTime.new_from_g_date_time(localDateTime);
 
         if (this.initialFileName === -1)
-            this.throwError(101);
+            log('Unable to create Recordings directory.')
 
 
         this.recordBus = this.pipeline.get_bus();
@@ -168,7 +159,6 @@ var Record = new GObject.registerClass({
         this.localMsg = message;
         let msg = message.type;
         switch (msg) {
-
         case Gst.MessageType.ELEMENT: {
             if (GstPbutils.is_missing_plugin_message(this.localMsg)) {
                 let detail = GstPbutils.missing_plugin_message_get_installer_detail(this.localMsg);
@@ -221,36 +211,16 @@ var Record = new GObject.registerClass({
             log(message.parse_warning()[0].toString());
             break;
         case Gst.MessageType.ERROR:
-            this.showErrorDialog(message.parse_error().toString());
+            log(message.parse_error().toString());
             break;
         }
     }
 
-    throwError(type) {
+    throwError() {
         this.state = Gst.State.NULL;
 
         if (this.recordBus)
             this.recordBus.remove_signal_watch();
-
-        if (type)
-            this.showErrorDialog(ErrorType[type]);
-    }
-
-    showErrorDialog(str, desc) {
-        let errorDialog = new Gtk.MessageDialog({ modal: true,
-            destroy_with_parent: true,
-            buttons: Gtk.ButtonsType.OK,
-            message_type: Gtk.MessageType.WARNING });
-
-        if (str)
-            errorDialog.set_property('text', str);
-
-        if (desc)
-            errorDialog.set_property('secondary-text', desc);
-
-        errorDialog.set_transient_for(Gio.Application.get_default().get_active_window());
-        errorDialog.connect('response', () => errorDialog.destroy());
-        errorDialog.show();
     }
 
     _getProfile() {
@@ -286,7 +256,7 @@ var Record = new GObject.registerClass({
         const ret = this.pipeline.set_state(this._pipeState);
 
         if (ret === Gst.StateChangeReturn.FAILURE)
-            this.throwError(106);
+            log('Unable to set the pipeline \n to the recording state.');
     }
 
 });
