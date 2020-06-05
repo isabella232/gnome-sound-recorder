@@ -80,7 +80,7 @@ var Recorder = new GObject.registerClass({
             this.ebin = Gst.ElementFactory.make('encodebin', 'ebin');
             this.filesink = Gst.ElementFactory.make('filesink', 'filesink');
         } catch (error) {
-            log('Not all elements could be created.');
+            log(`Not all elements could be created.\n${error}`);
         }
 
         try {
@@ -90,7 +90,7 @@ var Recorder = new GObject.registerClass({
             this.pipeline.add(this.ebin);
             this.pipeline.add(this.filesink);
         } catch (error) {
-            log('Not all elements could be addded.');
+            log(`Not all elements could be addded.\n${error}`);
         }
 
         this.clock = this.pipeline.get_clock();
