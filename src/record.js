@@ -75,7 +75,6 @@ var Record = new GObject.registerClass({
             this.audioConvert = Gst.ElementFactory.make('audioconvert', 'audioConvert');
             this.caps = Gst.Caps.from_string('audio/x-raw');
             this.level = Gst.ElementFactory.make('level', 'level');
-            this.volume = Gst.ElementFactory.make('volume', 'volume');
             this.ebin = Gst.ElementFactory.make('encodebin', 'ebin');
             this.filesink = Gst.ElementFactory.make('filesink', 'filesink');
         } catch (error) {
@@ -86,7 +85,6 @@ var Record = new GObject.registerClass({
             this.pipeline.add(this.srcElement);
             this.pipeline.add(this.audioConvert);
             this.pipeline.add(this.level);
-            this.pipeline.add(this.volume);
             this.pipeline.add(this.ebin);
             this.pipeline.add(this.filesink);
         } catch (error) {
@@ -97,7 +95,6 @@ var Record = new GObject.registerClass({
 
         this.srcElement.link(this.audioConvert);
         this.audioConvert.link_filtered(this.level, this.caps);
-        this.level.link(this.volume);
     }
 
     start() {
@@ -121,7 +118,7 @@ var Record = new GObject.registerClass({
 
         this.ebin.set_property('profile', this._getProfile());
         this.filesink.set_property('location', this.initialFileName);
-        this.volume.link(this.ebin);
+        this.level.link(this.ebin);
         this.ebin.link(this.filesink);
 
         this.state = Gst.State.PLAYING;
