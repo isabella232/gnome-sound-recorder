@@ -139,7 +139,7 @@ var Record = new GObject.registerClass({
     }
 
     stopRecording() {
-        this.pipeline.send_event(Gst.Event.new_eos());
+        this.state = Gst.State.NULL;
 
         if (this.timeout) {
             GLib.source_remove(this.timeout);
@@ -150,9 +150,6 @@ var Record = new GObject.registerClass({
             this.recordBus.remove_watch();
             this.recordBus = null;
         }
-
-
-        this.duration = 0;
     }
 
     _onMessageReceived(message) {
@@ -204,7 +201,7 @@ var Record = new GObject.registerClass({
         }
 
         case Gst.MessageType.EOS:
-            this.throwError();
+            this.stopRecording();
             break;
         case Gst.MessageType.WARNING:
             log(message.parse_warning()[0].toString());
@@ -213,13 +210,6 @@ var Record = new GObject.registerClass({
             log(message.parse_error().toString());
             break;
         }
-    }
-
-    throwError() {
-        this.state = Gst.State.NULL;
-
-        if (this.recordBus)
-            this.recordBus.remove_signal_watch();
     }
 
     _getProfile() {
