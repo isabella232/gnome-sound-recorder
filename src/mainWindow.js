@@ -18,7 +18,6 @@
 *
 */
 
-const Gio = imports.gi.Gio;
 const GObject = imports.gi.GObject;
 const Handy = imports.gi.Handy;
 
@@ -95,8 +94,8 @@ var MainWindow = GObject.registerClass({
     }
 
     onRecordStop() {
-        this._recorder.stop();
-        this._recordingList.insert(0, this._recorder.recording);
+        const recording = this._recorder.stop();
+        this._recordingList.insert(0, recording);
 
         this.wave.endDrawing();
         this.wave = null;

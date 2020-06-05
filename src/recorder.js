@@ -1,4 +1,4 @@
-/* exported Record EncodingProfiles */
+/* exported EncodingProfiles Recorder */
 /*
  * Copyright 2013 Meg Ford
  * This library is free software; you can redistribute it and/or
@@ -23,7 +23,6 @@ const GLib = imports.gi.GLib;
 const Gst = imports.gi.Gst;
 const GstPbutils = imports.gi.GstPbutils;
 const Recording = imports.recording.Recording;
-const Gtk = imports.gi.Gtk;
 const GObject = imports.gi.GObject;
 
 const Application = imports.application;
@@ -111,7 +110,7 @@ var Recorder = new GObject.registerClass({
         this.file = Gio.file_new_for_path(fileUri);
 
         if (fileUri === -1)
-            log('Unable to create Recordings directory.')
+            log('Unable to create Recordings directory.');
 
 
         this.recordBus = this.pipeline.get_bus();
