@@ -96,7 +96,6 @@ var MainWindow = GObject.registerClass({
     }
 
     onRecordStop() {
-        Record.pipeState = Record.PipelineStates.STOPPED;
         this._record.stopRecording();
 
         let fileUri = this._record.initialFileName;
