@@ -28,7 +28,7 @@ const Recording = imports.recording.Recording;
 const Row = imports.row.Row;
 const RowState = imports.row.RowState;
 const Player = imports.player.Player;
-const Record = imports.record;
+const Recorder = imports.recorder.Recorder;
 const Waveform = imports.waveform;
 
 var view = null;
@@ -43,24 +43,24 @@ var MainWindow = GObject.registerClass({
             icon_name: pkg.name,
         }, params));
 
-        this._record = new Record.Record();
+        this._recorder = new Recorder();
         this.player = new Player();
         view = this;
 
-        this._record.connect('waveform', (_, time, peak) => {
+        this._recorder.connect('waveform', (_, time, peak) => {
             if (this.wave)
                 this.wave._drawEvent(time, peak);
         });
 
-        this._record.connect('notify::duration', _record => {
-            this._recordTimeLabel.label = Utils.Time.formatTime(_record.duration);
+        this._recorder.connect('notify::duration', _recorder => {
+            this._recordTimeLabel.label = Utils.Time.formatTime(_recorder.duration);
         });
 
         this.connect('destroy', () => {
             if (this.wave)
                 this.wave.endDrawing();
             this.player.stop();
-            this._record.stop();
+            this._recorder.stop();
         });
 
         this._recordingList = new RecordingList();
@@ -90,15 +90,15 @@ var MainWindow = GObject.registerClass({
     onRecordStart() {
         this.player.stop();
         this._mainStack.set_visible_child_name('recorderView');
-        this._record.start();
+        this._recorder.start();
 
         this.wave = new Waveform.WaveForm(this._recordGrid, null);
     }
 
     onRecordStop() {
-        this._record.stop();
+        this._recorder.stop();
 
-        let fileUri = this._record.initialFileName;
+        let fileUri = this._recorder.initialFileName;
         let recordedFile = Gio.file_new_for_path(fileUri);
         let recording = new Recording(recordedFile);
         this._recordingList.insert(0, recording);

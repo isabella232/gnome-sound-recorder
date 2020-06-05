@@ -55,7 +55,7 @@ var EncodingProfiles = [
         mimeType: 'audio/mpeg' },
 ];
 
-var Record = new GObject.registerClass({
+var Recorder = new GObject.registerClass({
     Properties: {
         'duration': GObject.ParamSpec.int(
             'duration',
@@ -66,7 +66,7 @@ var Record = new GObject.registerClass({
     Signals: {
         'waveform': { param_types: [GObject.TYPE_INT, GObject.TYPE_FLOAT] },
     },
-}, class Record extends GObject.Object {
+}, class Recorder extends GObject.Object {
     _init() {
         super._init({});
         try {
