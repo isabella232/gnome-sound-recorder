@@ -69,11 +69,13 @@ var Recorder = new GObject.registerClass({
 }, class Recorder extends GObject.Object {
     _init() {
         super._init({});
+
+        let srcElement, audioConvert, caps;
         try {
             this.pipeline = new Gst.Pipeline({ name: 'pipe' });
-            this.srcElement = Gst.ElementFactory.make('pulsesrc', 'srcElement');
-            this.audioConvert = Gst.ElementFactory.make('audioconvert', 'audioConvert');
-            this.caps = Gst.Caps.from_string('audio/x-raw');
+            srcElement = Gst.ElementFactory.make('pulsesrc', 'srcElement');
+            audioConvert = Gst.ElementFactory.make('audioconvert', 'audioConvert');
+            caps = Gst.Caps.from_string('audio/x-raw');
             this.level = Gst.ElementFactory.make('level', 'level');
             this.ebin = Gst.ElementFactory.make('encodebin', 'ebin');
             this.filesink = Gst.ElementFactory.make('filesink', 'filesink');
@@ -82,8 +84,8 @@ var Recorder = new GObject.registerClass({
         }
 
         try {
-            this.pipeline.add(this.srcElement);
-            this.pipeline.add(this.audioConvert);
+            this.pipeline.add(srcElement);
+            this.pipeline.add(audioConvert);
             this.pipeline.add(this.level);
             this.pipeline.add(this.ebin);
             this.pipeline.add(this.filesink);
@@ -93,8 +95,8 @@ var Recorder = new GObject.registerClass({
 
         this.clock = this.pipeline.get_clock();
 
-        this.srcElement.link(this.audioConvert);
-        this.audioConvert.link_filtered(this.level, this.caps);
+        srcElement.link(audioConvert);
+        audioConvert.link_filtered(this.level, caps);
     }
 
     start() {
