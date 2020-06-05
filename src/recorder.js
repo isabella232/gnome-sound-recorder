@@ -22,6 +22,7 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gst = imports.gi.Gst;
 const GstPbutils = imports.gi.GstPbutils;
+const Recording = imports.recording.Recording;
 const Gtk = imports.gi.Gtk;
 const GObject = imports.gi.GObject;
 
@@ -99,12 +100,17 @@ var Recorder = new GObject.registerClass({
 
     start() {
         this.baseTime = 0;
-        this._buildFileName = new BuildFileName();
-        this.initialFileName = this._buildFileName.buildInitialFilename();
-        let localDateTime = this._buildFileName.getOrigin();
-        this.gstreamerDateTime = Gst.DateTime.new_from_g_date_time(localDateTime);
 
-        if (this.initialFileName === -1)
+        const dir = Gio.Application.get_default().saveDir;
+        const dateTime = GLib.DateTime.new_now_local();
+        /* Translators: ""Recording from %F %A at %T"" is the default name assigned to a file created
+            by the application (for example, "Recording from 2020-03-11 Wednesday at 19:43:05"). */
+        const clipName = dateTime.format(_('Recording from %F %A at %T'));
+        const clip = dir.get_child_for_display_name(clipName);
+        const fileUri = clip.get_path();
+        this.file = Gio.file_new_for_path(fileUri);
+
+        if (fileUri === -1)
             log('Unable to create Recordings directory.')
 
 
@@ -117,7 +123,7 @@ var Recorder = new GObject.registerClass({
 
 
         this.ebin.set_property('profile', this._getProfile());
-        this.filesink.set_property('location', this.initialFileName);
+        this.filesink.set_property('location', fileUri);
         this.level.link(this.ebin);
         this.ebin.link(this.filesink);
 
@@ -143,6 +149,8 @@ var Recorder = new GObject.registerClass({
             this.recordBus.remove_watch();
             this.recordBus = null;
         }
+
+        return new Recording(this.file);
     }
 
     _onMessageReceived(message) {
@@ -241,25 +249,3 @@ var Recorder = new GObject.registerClass({
     }
 
 });
-
-const BuildFileName = class BuildFileName {
-    buildInitialFilename() {
-        var dir = Gio.Application.get_default().saveDir;
-        this.dateTime = GLib.DateTime.new_now_local();
-        /* Translators: ""Recording from %F %A at %T"" is the default name assigned to a file created
-            by the application (for example, "Recording from 2020-03-11 Wednesday at 19:43:05"). */
-        var clipName = this.dateTime.format(_('Recording from %F %A at %T'));
-        this.clip = dir.get_child_for_display_name(clipName);
-        var file = this.clip.get_path();
-        return file;
-    }
-
-    getTitle() {
-        return this.clip;
-    }
-
-    getOrigin() {
-        return this.dateTime;
-    }
-};
-

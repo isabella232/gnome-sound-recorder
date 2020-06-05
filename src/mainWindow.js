@@ -24,7 +24,6 @@ const Handy = imports.gi.Handy;
 
 const Utils = imports.utils;
 const RecordingList = imports.recordingList.RecordingList;
-const Recording = imports.recording.Recording;
 const Row = imports.row.Row;
 const RowState = imports.row.RowState;
 const Player = imports.player.Player;
@@ -97,11 +96,7 @@ var MainWindow = GObject.registerClass({
 
     onRecordStop() {
         this._recorder.stop();
-
-        let fileUri = this._recorder.initialFileName;
-        let recordedFile = Gio.file_new_for_path(fileUri);
-        let recording = new Recording(recordedFile);
-        this._recordingList.insert(0, recording);
+        this._recordingList.insert(0, this._recorder.recording);
 
         this.wave.endDrawing();
         this.wave = null;
