@@ -60,7 +60,7 @@ var MainWindow = GObject.registerClass({
             if (this.wave)
                 this.wave.endDrawing();
             this.player.stop();
-            this._record.stopRecording();
+            this._record.stop();
         });
 
         this._recordingList = new RecordingList();
@@ -90,13 +90,13 @@ var MainWindow = GObject.registerClass({
     onRecordStart() {
         this.player.stop();
         this._mainStack.set_visible_child_name('recorderView');
-        this._record.startRecording();
+        this._record.start();
 
         this.wave = new Waveform.WaveForm(this._recordGrid, null);
     }
 
     onRecordStop() {
-        this._record.stopRecording();
+        this._record.stop();
 
         let fileUri = this._record.initialFileName;
         let recordedFile = Gio.file_new_for_path(fileUri);

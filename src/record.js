@@ -104,7 +104,7 @@ var Record = new GObject.registerClass({
         this.level.link(this.volume);
     }
 
-    startRecording() {
+    start() {
         this.baseTime = 0;
         this._buildFileName = new BuildFileName();
         this.initialFileName = this._buildFileName.buildInitialFilename();
@@ -138,7 +138,7 @@ var Record = new GObject.registerClass({
         });
     }
 
-    stopRecording() {
+    stop() {
         this.state = Gst.State.NULL;
 
         if (this.timeout) {
@@ -201,7 +201,7 @@ var Record = new GObject.registerClass({
         }
 
         case Gst.MessageType.EOS:
-            this.stopRecording();
+            this.stop();
             break;
         case Gst.MessageType.WARNING:
             log(message.parse_warning()[0].toString());
