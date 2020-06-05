@@ -27,10 +27,6 @@ const GObject = imports.gi.GObject;
 
 const Application = imports.application;
 
-const _TENTH_SEC = 100000000;
-const _SEC_TIMEOUT = 100;
-
-
 // All supported encoding profiles.
 var EncodingProfiles = [
     { name: 'VORBIS',
@@ -130,7 +126,7 @@ var Record = new GObject.registerClass({
 
         this.state = Gst.State.PLAYING;
 
-        this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, _SEC_TIMEOUT, () => {
+        this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100, () => {
             const pos = this.pipeline.query_position(Gst.Format.TIME)[1];
             if (pos > 0)
                 this.duration = pos / Gst.SECOND;
@@ -191,7 +187,7 @@ var Record = new GObject.registerClass({
                             this.baseTime = this.absoluteTime;
 
                         this.runTime = this.absoluteTime - this.baseTime;
-                        let approxTime = Math.round(this.runTime / _TENTH_SEC);
+                        let approxTime = Math.round(this.runTime / 100000000);
                         this.emit('waveform', approxTime, this.peak);
                     }
                 }
