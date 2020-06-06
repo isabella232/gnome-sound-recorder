@@ -176,25 +176,26 @@ var Recorder = new GObject.registerClass({
                         if (val > 0)
                             val = 0;
 
-                        this.peak = Math.pow(10, val / 20);
+                        const peak = Math.pow(10, val / 20);
 
 
                         if  (this.clock === null)
                             this.clock = this.pipeline.get_clock();
 
+                        let absoluteTime;
                         try {
-                            this.absoluteTime = this.clock.get_time();
+                            absoluteTime = this.clock.get_time();
                         } catch (error) {
-                            this.absoluteTime = 0;
+                            absoluteTime = 0;
                         }
 
 
                         if (this.baseTime === 0)
-                            this.baseTime = this.absoluteTime;
+                            this.baseTime = absoluteTime;
 
-                        this.runTime = this.absoluteTime - this.baseTime;
-                        let approxTime = Math.round(this.runTime / 100000000);
-                        this.emit('waveform', approxTime, this.peak);
+                        const runTime = absoluteTime - this.baseTime;
+                        let approxTime = Math.round(runTime / 100000000);
+                        this.emit('waveform', approxTime, peak);
                     }
                 }
             }
