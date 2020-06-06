@@ -302,12 +302,12 @@
     <submenu>
       <attribute translatable="yes" name="label">Preferred Format</attribute>
       <item>
-        <attribute translatable="yes" name="label">VORBIS</attribute>
+        <attribute translatable="yes" name="label">Vorbis</attribute>
         <attribute name="action">app.audio-profile</attribute>
         <attribute name="target">vorbis</attribute>
       </item>
       <item>
-        <attribute translatable="yes" name="label">OPUS</attribute>
+        <attribute translatable="yes" name="label">Opus</attribute>
         <attribute name="action">app.audio-profile</attribute>
         <attribute name="target">opus</attribute>
       </item>
