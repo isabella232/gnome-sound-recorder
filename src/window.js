@@ -100,14 +100,23 @@ var Window = GObject.registerClass({
         this.recorder.start();
     }
 
+    onRecorderCancel() {
+        const recording = this.recorder.stop();
+        recording.delete();
+        this._setMainView();
+    }
+
     onRecorderStop() {
         const recording = this.recorder.stop();
         this._recordingList.insert(0, recording);
+        this._setMainView();
+    }
 
-        this._headerRevealer.reveal_child = true;
-        this._playbackStack.visible_child_name = 'recorder-start';
-
+    _setMainView() {
         this.waveform.destroy();
+        this._playbackStack.visible_child_name = 'recorder-start';
+        this._mainStack.visible_child_name = 'recordings';
+        this._headerRevealer.reveal_child = true;
     }
 
     _refreshView() {
