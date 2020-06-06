@@ -55,6 +55,11 @@ var EncodingProfiles = [
         mimeType: 'audio/mpeg' },
 ];
 
+var AudioChannels = {
+    0: { name: 'stereo', channels: 2 },
+    1: { name: 'mono', channels: 1 },
+};
+
 var Recorder = new GObject.registerClass({
     Properties: {
         'duration': GObject.ParamSpec.int(
@@ -214,12 +219,17 @@ var Recorder = new GObject.registerClass({
         }
     }
 
+    _getChannel() {
+        let channelIndex = Application.settings.get_enum('audio-channel');
+        return AudioChannels[channelIndex].channels;
+    }
+
     _getProfile() {
         let profileIndex = Application.settings.get_enum('audio-profile');
         const profile = EncodingProfiles[profileIndex];
 
         let audioCaps = Gst.Caps.from_string(profile.audioCaps);
-        audioCaps.set_value('channels', 2);
+        audioCaps.set_value('channels', this._getChannel());
 
         let encodingProfile = GstPbutils.EncodingAudioProfile.new(audioCaps, null, null, 1);
         let containerCaps = Gst.Caps.from_string(profile.containerCaps);

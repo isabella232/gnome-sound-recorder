@@ -88,6 +88,33 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
         this.add_action(profileAction);
 
 
+        function getDefaultChannel() {
+            switch (settings.get_enum('audio-channel')) {
+            case 0:
+                return new GLib.Variant('s', 'stereo');
+            case 1:
+                return new GLib.Variant('s', 'mono');
+            }
+        }
+
+        let channelAction = new Gio.SimpleAction({
+            enabled: true,
+            name: 'audio-channel',
+            state: getDefaultChannel(),
+            parameter_type: new GLib.VariantType('s'),
+        });
+        channelAction.connect('activate', (action, parameter) => {
+            action.change_state(parameter);
+        });
+        channelAction.connect('change-state', (action, state) => {
+            settings.set_value('audio-channel', state);
+        });
+        settings.connect('changed::audio-channel', () => {
+            channelAction.state = getDefaultChannel();
+        });
+        this.add_action(channelAction);
+
+
         let aboutAction = new Gio.SimpleAction({ name: 'about' });
         aboutAction.connect('activate', () => {
             this._showAbout();

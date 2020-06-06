@@ -403,6 +403,19 @@
         <attribute name="target">m4a</attribute>
       </item>
     </submenu>
+    <submenu>
+      <attribute translatable="yes" name="label">Audio Channel</attribute>
+      <item>
+        <attribute translatable="yes" name="label">Stereo</attribute>
+        <attribute name="action">app.audio-channel</attribute>
+        <attribute name="target">stereo</attribute>
+      </item>
+      <item>
+        <attribute translatable="yes" name="label">Mono</attribute>
+        <attribute name="action">app.audio-channel</attribute>
+        <attribute name="target">mono</attribute>
+      </item>
+    </submenu>
     <section>
       <item>
         <attribute name="action">app.about</attribute>
