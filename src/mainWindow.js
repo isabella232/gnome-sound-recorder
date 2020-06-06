@@ -1,4 +1,4 @@
-/* exported MainWindow view */
+/* exported MainWindow */
 /*
 * Copyright 2013 Meg Ford
 * This library is free software; you can redistribute it and/or
@@ -29,8 +29,6 @@ const Player = imports.player.Player;
 const Recorder = imports.recorder.Recorder;
 const WaveForm = imports.waveform.WaveForm;
 
-var view = null;
-
 var MainWindow = GObject.registerClass({
     Template: 'resource:///org/gnome/SoundRecorder/ui/window.ui',
     InternalChildren: ['recordTimeLabel', 'mainStack', 'recordGrid', 'listBox', 'emptyIcon'],
@@ -45,7 +43,6 @@ var MainWindow = GObject.registerClass({
         this.player = new Player();
         this.waveform = new WaveForm();
         this._recordGrid.add(this.waveform);
-        view = this;
 
         this._recorder.connect('waveform', (_, time, peak) => {
             this.waveform._drawEvent(time, peak);
