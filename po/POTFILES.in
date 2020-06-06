@@ -1,13 +1,15 @@
-data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in
-data/org.gnome.SoundRecorder.gschema.xml.in
+# List of source files containing translatable strings.
+# Please keep this file sorted alphabetically.
+data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in
 data/org.gnome.SoundRecorder.desktop.in.in
-data/ui/window.ui
+data/org.gnome.SoundRecorder.gschema.xml.in
 data/ui/row.ui
+data/ui/window.ui
 src/application.js
-src/utils.js
-src/row.js
 src/main.js
 src/mainWindow.js
 src/player.js
 src/recorder.js
+src/row.js
+src/utils.js
 src/waveform.js
