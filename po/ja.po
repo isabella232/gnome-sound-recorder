@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
 "issues\n"
-"POT-Creation-Date: 2020-02-26 16:43+0000\n"
+"POT-Creation-Date: 2020-06-06 12:28+0000\n"
 "PO-Revision-Date: 2020-02-29 20:39+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
@@ -22,17 +22,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in:5
-#: data/org.gnome.SoundRecorder.desktop.in.in:4 src/application.js:177
-#: src/record.js:115
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:5
+#: data/org.gnome.SoundRecorder.desktop.in.in:4 src/application.js:37
 msgid "Sound Recorder"
 msgstr "サウンドレコーダー"
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in:6
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:6
 msgid "A simple, modern sound recorder for GNOME"
 msgstr "GNOME 用のシンプルでモダンなサウンドレコーダー"
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in:10
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:10
 msgid ""
 "Sound Recorder provides a simple and modern interface that provides a "
 "straight-forward way to record and play audio. It allows you to do basic "
@@ -42,7 +41,7 @@ msgstr ""
 "音、再生を直感的に行うことができます。また、基本的な音声編集やボイスメモの作"
 "成もできます。"
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in:15
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:15
 msgid ""
 "Sound Recorder automatically handles the saving process so that you do not "
 "need to worry about accidentally discarding the previous recording."
@@ -50,73 +49,17 @@ msgstr ""
 "サウンドレコーダーは自動的に保存処理を行います。録音データをうっかり破棄して"
 "しまう心配はもうありません。"
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in:19
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:19
 msgid "Supported audio formats:"
 msgstr "サポートしている音声フォーマット:"
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in:21
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:21
 msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
 msgstr "Ogg Vorbis、Opus、FLAC、MP3、MOV"
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in:47
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:47
 msgid "The GNOME Project"
 msgstr "The GNOME Project"
-
-#: data/org.gnome.SoundRecorder.gschema.xml.in:5
-msgid "Window size"
-msgstr "ウィンドウの大きさ"
-
-#: data/org.gnome.SoundRecorder.gschema.xml.in:6
-msgid "Window size (width and height)."
-msgstr "ウィンドウの大きさ (幅と高さ) です。"
-
-#: data/org.gnome.SoundRecorder.gschema.xml.in:10
-msgid "Window position"
-msgstr "ウィンドウの位置"
-
-#: data/org.gnome.SoundRecorder.gschema.xml.in:11
-msgid "Window position (x and y)."
-msgstr "ウィンドウの位置 (X と Y) です。"
-
-#: data/org.gnome.SoundRecorder.gschema.xml.in:15
-msgid "Maps media types to audio encoder preset names."
-msgstr "メディアタイプを音声エンコーダーのプリセット名にマップする。"
-
-#: data/org.gnome.SoundRecorder.gschema.xml.in:16
-msgid ""
-"Maps media types to audio encoder preset names. If there is no mapping set, "
-"the default encoder settings will be used."
-msgstr ""
-"メディアタイプを音声エンコーダーのプリセット名にマップします。もしマッピング"
-"セットがなければ、デフォルトのエンコーダー設定を使用します。"
-
-#: data/org.gnome.SoundRecorder.gschema.xml.in:20
-msgid "Available channels"
-msgstr "利用可能なチャンネル"
-
-#: data/org.gnome.SoundRecorder.gschema.xml.in:21
-msgid ""
-"Maps available channels. If there is not no mapping set, stereo channel will "
-"be used by default."
-msgstr ""
-"利用可能なチャンネルをマップします。もしマッピングセットがなければ、デフォル"
-"トでステレオチャンネルを使用します。"
-
-#: data/org.gnome.SoundRecorder.gschema.xml.in:25
-msgid "Microphone volume level"
-msgstr "マイクの音量レベル"
-
-#: data/org.gnome.SoundRecorder.gschema.xml.in:26
-msgid "Microphone volume level."
-msgstr "マイクの音量レベルです。"
-
-#: data/org.gnome.SoundRecorder.gschema.xml.in:30
-msgid "Speaker volume level"
-msgstr "スピーカーの音量レベル"
-
-#: data/org.gnome.SoundRecorder.gschema.xml.in:31
-msgid "Speaker volume level."
-msgstr "スピーカーの音量レベルです。"
 
 #: data/org.gnome.SoundRecorder.desktop.in.in:5
 msgid "Record sound via the microphone and play it back"
@@ -128,21 +71,113 @@ msgid "Audio;Application;Record;"
 msgstr ""
 "Audio;Application;Record;オーディオ;音声;アプリケーション;録音;soundrecorder;"
 
-#: src/application.js:40
-msgid "SoundRecorder"
-msgstr "サウンドレコーダー"
+#: data/org.gnome.SoundRecorder.gschema.xml.in:16
+msgid "Window size"
+msgstr "ウィンドウの大きさ"
 
-#: src/application.js:83
+#: data/org.gnome.SoundRecorder.gschema.xml.in:17
+msgid "Window size (width and height)."
+msgstr "ウィンドウの大きさ (幅と高さ) です。"
+
+#: data/org.gnome.SoundRecorder.gschema.xml.in:21
+msgid "Window position"
+msgstr "ウィンドウの位置"
+
+#: data/org.gnome.SoundRecorder.gschema.xml.in:22
+msgid "Window position (x and y)."
+msgstr "ウィンドウの位置 (X と Y) です。"
+
+#: data/org.gnome.SoundRecorder.gschema.xml.in:26
+msgid "Maps media types to audio encoder preset names."
+msgstr "メディアタイプを音声エンコーダーのプリセット名にマップする。"
+
+#: data/org.gnome.SoundRecorder.gschema.xml.in:27
+msgid ""
+"Maps media types to audio encoder preset names. If there is no mapping set, "
+"the default encoder settings will be used."
+msgstr ""
+"メディアタイプを音声エンコーダーのプリセット名にマップします。もしマッピング"
+"セットがなければ、デフォルトのエンコーダー設定を使用します。"
+
+#: data/org.gnome.SoundRecorder.gschema.xml.in:31
+msgid "Available channels"
+msgstr "利用可能なチャンネル"
+
+#: data/org.gnome.SoundRecorder.gschema.xml.in:32
+msgid ""
+"Maps available channels. If there is not no mapping set, stereo channel will "
+"be used by default."
+msgstr ""
+"利用可能なチャンネルをマップします。もしマッピングセットがなければ、デフォル"
+"トでステレオチャンネルを使用します。"
+
+#: data/ui/window.ui:57
+msgid "Record"
+msgstr "録音"
+
+#: data/ui/window.ui:329
+msgid "Add Recordings"
+msgstr "録音してください"
+
+#: data/ui/window.ui:346
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "<b>録音</b>ボタンを押すと音声を録音します"
+
+#: data/ui/window.ui:379
+#, fuzzy
+#| msgid "Preferred format"
+msgid "Preferred Format"
+msgstr "フォーマット"
+
+#: data/ui/window.ui:381
+#, fuzzy
+#| msgid "Ogg Vorbis"
+msgid "Vorbis"
+msgstr "Ogg Vorbis"
+
+#: data/ui/window.ui:386
+msgid "Opus"
+msgstr "Opus"
+
+#: data/ui/window.ui:391
+msgid "FLAC"
+msgstr "FLAC"
+
+#: data/ui/window.ui:396
+msgid "MP3"
+msgstr "MP3"
+
+#: data/ui/window.ui:401
+msgid "M4A"
+msgstr ""
+
+#: data/ui/window.ui:407
+msgid "Audio Channel"
+msgstr ""
+
+#: data/ui/window.ui:409
+msgid "Stereo"
+msgstr "ステレオ"
+
+#: data/ui/window.ui:414
+msgid "Mono"
+msgstr "モノラル"
+
+#: data/ui/window.ui:422
+msgid "About Sound Recorder"
+msgstr "サウンドレコーダーについて"
+
+#: src/application.js:136
 msgid "Sound Recorder started"
 msgstr "サウンドレコーダーを開始しました"
 
 #. Translators: "Recordings" here refers to the name of the directory where the application places files
-#: src/application.js:93
+#: src/application.js:145
 msgid "Recordings"
 msgstr "レコーディング"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/application.js:176
+#: src/application.js:174
 msgid "translator-credits"
 msgstr ""
 "坂本 貴史 <o-takashi@sakamocchi.jp>\n"
@@ -151,232 +186,167 @@ msgstr ""
 "Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "sicklylife <translation@sicklylife.jp>"
 
-#: src/fileUtil.js:84
+#: src/application.js:176
+msgid "A Sound Recording Application for GNOME"
+msgstr ""
+
+#. Translators: ""Recording from %F %A at %T"" is the default name assigned to a file created
+#. by the application (for example, "Recording from 2020-03-11 Wednesday at 19:43:05").
+#: src/recorder.js:114
+msgid "Recording from %F %A at %T"
+msgstr ""
+
+#: src/utils.js:52
 msgid "Yesterday"
 msgstr "昨日"
 
-#: src/fileUtil.js:86
+#: src/utils.js:54
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d 日前"
 
-#: src/fileUtil.js:90
+#: src/utils.js:58
 msgid "Last week"
 msgstr "先週"
 
-#: src/fileUtil.js:92
+#: src/utils.js:60
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d 週前"
 
-#: src/fileUtil.js:96
+#: src/utils.js:64
 msgid "Last month"
 msgstr "先月"
 
-#: src/fileUtil.js:98
+#: src/utils.js:66
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d ヶ月前"
 
-#: src/fileUtil.js:102
+#: src/utils.js:70
 msgid "Last year"
 msgstr "昨年"
 
-#: src/fileUtil.js:104
+#: src/utils.js:72
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "%d 年前"
 
-#: src/info.js:42 src/mainWindow.js:518
-msgid "Info"
-msgstr "情報"
+#~ msgid "Microphone volume level"
+#~ msgstr "マイクの音量レベル"
 
-#: src/info.js:47
-msgid "Cancel"
-msgstr "キャンセル"
+#~ msgid "Microphone volume level."
+#~ msgstr "マイクの音量レベルです。"
 
-#. finish button (stop recording)
-#: src/info.js:52 src/mainWindow.js:325
-msgid "Done"
-msgstr "完了"
+#~ msgid "Speaker volume level"
+#~ msgstr "スピーカーの音量レベル"
 
-#. File Name item
-#. Translators: "File Name" is the label next to the file name
-#. in the info dialog
-#: src/info.js:79
-msgctxt "File Name"
-msgid "Name"
-msgstr "名前"
+#~ msgid "Speaker volume level."
+#~ msgstr "スピーカーの音量レベルです。"
 
-#. Source item
-#: src/info.js:86
-msgid "Source"
-msgstr "ソース"
+#~ msgid "SoundRecorder"
+#~ msgstr "サウンドレコーダー"
 
-#. Date Modified item
-#: src/info.js:95
-msgid "Date Modified"
-msgstr "更新日時"
+#~ msgid "Info"
+#~ msgstr "情報"
 
-#. Date Created item
-#: src/info.js:101
-msgid "Date Created"
-msgstr "作成日時"
+#~ msgid "Cancel"
+#~ msgstr "キャンセル"
 
-#. Media type item
-#. Translators: "Type" is the label next to the media type
-#. (Ogg Vorbis, AAC, ...) in the info dialog
-#: src/info.js:112
-msgctxt "Media Type"
-msgid "Type"
-msgstr "種類"
+#~ msgid "Done"
+#~ msgstr "完了"
 
-#. Media type data
-#: src/info.js:151
-msgid "Unknown"
-msgstr "不明"
+#~ msgctxt "File Name"
+#~ msgid "Name"
+#~ msgstr "名前"
 
-#: src/mainWindow.js:115 src/mainWindow.js:782
-msgid "Record"
-msgstr "録音"
+#~ msgid "Source"
+#~ msgstr "ソース"
 
-#: src/mainWindow.js:127 src/preferences.js:38
-msgid "Preferences"
-msgstr "設定"
+#~ msgid "Date Modified"
+#~ msgstr "更新日時"
 
-#: src/mainWindow.js:128
-msgid "About Sound Recorder"
-msgstr "サウンドレコーダーについて"
+#~ msgid "Date Created"
+#~ msgstr "作成日時"
 
-#: src/mainWindow.js:163
-msgid "Add Recordings"
-msgstr "録音してください"
+#~ msgctxt "Media Type"
+#~ msgid "Type"
+#~ msgstr "種類"
 
-#: src/mainWindow.js:168
-msgid "Use the <b>Record</b> button to make sound recordings"
-msgstr "<b>録音</b>ボタンを押すと音声を録音します"
+#~ msgid "Unknown"
+#~ msgstr "不明"
 
-#: src/mainWindow.js:311
-msgid "Recording…"
-msgstr "録音中…"
+#~ msgid "Preferences"
+#~ msgstr "設定"
 
-#. Translators: This is the title in the headerbar
-#: src/mainWindow.js:361
-#, javascript-format
-msgid "%d Recorded Sound"
-msgid_plural "%d Recorded Sounds"
-msgstr[0] "%d 件の録音済み音声"
+#~ msgid "Recording…"
+#~ msgstr "録音中…"
 
-#: src/mainWindow.js:365
-msgid "No Recorded Sounds"
-msgstr "録音済み音声がありません"
+#~ msgid "%d Recorded Sound"
+#~ msgid_plural "%d Recorded Sounds"
+#~ msgstr[0] "%d 件の録音済み音声"
 
-#: src/mainWindow.js:407
-msgid "Play"
-msgstr "再生"
+#~ msgid "No Recorded Sounds"
+#~ msgstr "録音済み音声がありません"
 
-#: src/mainWindow.js:427
-msgid "Pause"
-msgstr "一時停止"
+#~ msgid "Play"
+#~ msgstr "再生"
 
-#: src/mainWindow.js:532
-msgid "Delete"
-msgstr "削除"
+#~ msgid "Pause"
+#~ msgstr "一時停止"
 
-#: src/mainWindow.js:814
-msgid "Ogg Vorbis"
-msgstr "Ogg Vorbis"
+#~ msgid "Delete"
+#~ msgstr "削除"
 
-#: src/mainWindow.js:814
-msgid "Opus"
-msgstr "Opus"
+#~ msgid "MOV"
+#~ msgstr "MOV"
 
-#: src/mainWindow.js:814
-msgid "FLAC"
-msgstr "FLAC"
+#~ msgid "Load More"
+#~ msgstr "さらに読み込む"
 
-#: src/mainWindow.js:814
-msgid "MP3"
-msgstr "MP3"
+#~ msgid "Unable to play recording"
+#~ msgstr "録音を再生できません"
 
-#: src/mainWindow.js:814
-msgid "MOV"
-msgstr "MOV"
+#~ msgid "Default mode"
+#~ msgstr "デフォルトモード"
 
-#: src/mainWindow.js:835
-msgid "Mono"
-msgstr "モノラル"
+#~ msgid "Volume"
+#~ msgstr "音量"
 
-#: src/mainWindow.js:835
-msgid "Stereo"
-msgstr "ステレオ"
+#~ msgid "Microphone"
+#~ msgstr "マイク"
 
-#: src/mainWindow.js:856
-msgid "Load More"
-msgstr "さらに読み込む"
+#~ msgid "Unable to create Recordings directory."
+#~ msgstr "“レコーディング”ディレクトリを作成できません。"
 
-#: src/play.js:85
-msgid "Unable to play recording"
-msgstr "録音を再生できません"
+#~ msgid "Please install the GStreamer 1.0 PulseAudio plugin."
+#~ msgstr "GStreamer 1.0 PulseAudio プラグインをインストールしてください。"
 
-#: src/preferences.js:62
-msgid "Preferred format"
-msgstr "フォーマット"
+#~ msgid "Your audio capture settings are invalid."
+#~ msgstr "オーディオ録音設定が正しくありません。"
 
-#: src/preferences.js:70
-msgid "Default mode"
-msgstr "デフォルトモード"
+#~ msgid "Not all elements could be created."
+#~ msgstr "作成されていないエレメントがある可能性があります。"
 
-#: src/preferences.js:78
-msgid "Volume"
-msgstr "音量"
+#~ msgid "Not all of the elements were linked."
+#~ msgstr "リンクされていないエレメントがあります。"
 
-#: src/preferences.js:92
-msgid "Microphone"
-msgstr "マイク"
+#~ msgid "No Media Profile was set."
+#~ msgstr "メディアプロファイルがセットされていません。"
 
-#: src/record.js:69
-msgid "Unable to create Recordings directory."
-msgstr "“レコーディング”ディレクトリを作成できません。"
+#~ msgid ""
+#~ "Unable to set the pipeline \n"
+#~ " to the recording state."
+#~ msgstr ""
+#~ "パイプラインの状態を\n"
+#~ "録音中に設定できません。"
 
-#: src/record.js:82
-msgid "Please install the GStreamer 1.0 PulseAudio plugin."
-msgstr "GStreamer 1.0 PulseAudio プラグインをインストールしてください。"
-
-#: src/record.js:84
-msgid "Your audio capture settings are invalid."
-msgstr "オーディオ録音設定が正しくありません。"
-
-#: src/record.js:132
-msgid "Not all elements could be created."
-msgstr "作成されていないエレメントがある可能性があります。"
-
-#: src/record.js:144
-msgid "Not all of the elements were linked."
-msgstr "リンクされていないエレメントがあります。"
-
-#: src/record.js:169
-msgid "No Media Profile was set."
-msgstr "メディアプロファイルがセットされていません。"
-
-#: src/record.js:180
-msgid ""
-"Unable to set the pipeline \n"
-" to the recording state."
-msgstr ""
-"パイプラインの状態を\n"
-"録音中に設定できません。"
-
-#. Translators: ""Clip %d"" is the default name assigned to a file created
-#. by the application (for example, "Clip 1").
-#: src/record.js:356
-#, javascript-format
-msgid "Clip %d"
-msgstr "クリップ %d"
+#~ msgid "Clip %d"
+#~ msgstr "クリップ %d"
 
 #~ msgid "%Y-%m-%d %H:%M:%S"
 #~ msgstr "%Y年%m月%d日 %H時%M分%S秒"
