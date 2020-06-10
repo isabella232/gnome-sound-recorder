@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
 "issues\n"
 "POT-Creation-Date: 2020-06-06 12:28+0000\n"
-"PO-Revision-Date: 2020-02-29 20:39+0900\n"
+"PO-Revision-Date: 2020-06-10 18:45+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -124,16 +124,12 @@ msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "<b>録音</b>ボタンを押すと音声を録音します"
 
 #: data/ui/window.ui:379
-#, fuzzy
-#| msgid "Preferred format"
 msgid "Preferred Format"
 msgstr "フォーマット"
 
 #: data/ui/window.ui:381
-#, fuzzy
-#| msgid "Ogg Vorbis"
 msgid "Vorbis"
-msgstr "Ogg Vorbis"
+msgstr "Vorbis"
 
 #: data/ui/window.ui:386
 msgid "Opus"
@@ -149,11 +145,11 @@ msgstr "MP3"
 
 #: data/ui/window.ui:401
 msgid "M4A"
-msgstr ""
+msgstr "M4A"
 
 #: data/ui/window.ui:407
 msgid "Audio Channel"
-msgstr ""
+msgstr "音声チャンネル"
 
 #: data/ui/window.ui:409
 msgid "Stereo"
@@ -188,13 +184,13 @@ msgstr ""
 
 #: src/application.js:176
 msgid "A Sound Recording Application for GNOME"
-msgstr ""
+msgstr "GNOME 用の録音アプリケーション"
 
 #. Translators: ""Recording from %F %A at %T"" is the default name assigned to a file created
 #. by the application (for example, "Recording from 2020-03-11 Wednesday at 19:43:05").
 #: src/recorder.js:114
 msgid "Recording from %F %A at %T"
-msgstr ""
+msgstr "録音 %Y年%m月%d日 %A %H時%M分%S秒"
 
 #: src/utils.js:52
 msgid "Yesterday"
