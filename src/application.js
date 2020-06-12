@@ -1,4 +1,4 @@
-/* exported application settings Application */
+/* exported settings Application */
 /*
 * Copyright 2013 Meg Ford
 * This library is free software; you can redistribute it and/or
@@ -27,7 +27,6 @@ const Gdk = imports.gi.Gdk;
 
 const MainWindow = imports.mainWindow;
 
-var application = null;
 
 var settings = new Gio.Settings({ schema: pkg.name });
 
@@ -136,7 +135,6 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
         log(_('Sound Recorder started'));
         Gst.init(null);
         this._initAppMenu();
-        application = this;
         this.ensureDirectory();
     }
 
