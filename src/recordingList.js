@@ -35,42 +35,40 @@ var RecordingList = new GObject.registerClass(class RecordingList extends Gio.Li
             }
 
         });
-        this._watchDir();
-    }
 
-    _watchDir() {
         this._saveDir.enumerate_children_async('standard::name',
             Gio.FileQueryInfoFlags.NOFOLLOW_SYMLINKS,
             GLib.PRIORITY_LOW,
             null,
-            (obj, res) => this._enumerateDirectory(obj, res));
+            this._enumerateDirectory.bind(this));
     }
-
 
     _enumerateDirectory(obj, res) {
         this._enumerator = obj.enumerate_children_finish(res);
-
         if (this._enumerator === null) {
             log('The contents of the Recordings directory were not indexed.');
-        } else {
-            this._enumerator.next_files_async(20, GLib.PRIORITY_DEFAULT, null, (_obj, _res) => {
-                let fileInfos = _obj.next_files_finish(_res);
-                if (fileInfos.length > 0) {
-                    fileInfos.forEach(info => {
-                        let path = GLib.build_filenamev([this._saveDir.get_path(), info.get_name()]);
-                        let file = Gio.file_new_for_path(path);
-                        let recording = new Recording(file);
-                        this.sortedInsert(recording);
-                    });
-                } else {
-                    this._enumerator.close(null);
-                }
+            return;
+        }
+        this._enumerator.next_files_async(20, GLib.PRIORITY_LOW, null, this._onNextFiles.bind(this));
+    }
+
+    _onNextFiles(obj, res) {
+        let fileInfos = obj.next_files_finish(res);
+        if (fileInfos.length) {
+            fileInfos.forEach(info => {
+                const path = GLib.build_filenamev([this._saveDir.get_path(), info.get_name()]);
+                const file = Gio.file_new_for_path(path);
+                const recording = new Recording(file);
+                this.sortedInsert(recording);
             });
+            this._enumerator.next_files_async(20, GLib.PRIORITY_LOW, null, this._onNextFiles.bind(this));
+        } else {
+            this._enumerator.close(null);
         }
     }
 
     getIndex(file) {
-        for (var i = 0; i < this.get_n_items(); i++) {
+        for (let i = 0; i < this.get_n_items(); i++) {
             if (this.get_item(i).uri === file.get_uri())
                 return i;
         }
