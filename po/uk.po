@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/issu"
 "es\n"
-"POT-Creation-Date: 2020-06-06 12:28+0000\n"
-"PO-Revision-Date: 2020-06-06 15:50+0300\n"
+"POT-Creation-Date: 2020-06-14 16:31+0000\n"
+"PO-Revision-Date: 2020-06-14 20:26+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -22,7 +22,7 @@ msgstr ""
 "X-Project-Style: gnome\n"
 
 #: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:5
-#: data/org.gnome.SoundRecorder.desktop.in.in:4 src/application.js:37
+#: data/org.gnome.SoundRecorder.desktop.in.in:4 src/application.js:32
 msgid "Sound Recorder"
 msgstr "Записувач звуку"
 
@@ -109,82 +109,83 @@ msgstr ""
 "Показує доступні канали. Якщо не вказано, типово використовується "
 "стереоканал."
 
-#: data/ui/window.ui:57
+#: data/ui/window.ui:62
 msgid "Record"
 msgstr "Записати"
 
-#: data/ui/window.ui:329
+#: data/ui/window.ui:335
 msgid "Add Recordings"
 msgstr "Додати записи"
 
-#: data/ui/window.ui:346
+#: data/ui/window.ui:352
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Натисніть кнопку <b>Записати</b>, щоб зробити записи звуку"
 
-#: data/ui/window.ui:379
+#: data/ui/window.ui:385
 msgid "Preferred Format"
 msgstr "Бажаний формат"
 
-#: data/ui/window.ui:381
-#| msgid "Ogg Vorbis"
+#: data/ui/window.ui:387
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: data/ui/window.ui:386
+#: data/ui/window.ui:392
 msgid "Opus"
 msgstr "Opus"
 
-#: data/ui/window.ui:391
+#: data/ui/window.ui:397
 msgid "FLAC"
 msgstr "FLAC"
 
-#: data/ui/window.ui:396
+#: data/ui/window.ui:402
 msgid "MP3"
 msgstr "MP3"
 
-#: data/ui/window.ui:401
+#: data/ui/window.ui:407
 msgid "M4A"
 msgstr "M4A"
 
-#: data/ui/window.ui:407
+#: data/ui/window.ui:413
 msgid "Audio Channel"
 msgstr "Звуковий канал"
 
-#: data/ui/window.ui:409
+#: data/ui/window.ui:415
 msgid "Stereo"
 msgstr "Стерео"
 
-#: data/ui/window.ui:414
+#: data/ui/window.ui:420
 msgid "Mono"
 msgstr "Моно"
 
-#: data/ui/window.ui:422
+#: data/ui/window.ui:428
 msgid "About Sound Recorder"
 msgstr "Про «Записувач звуку»"
 
-#: src/application.js:136
-msgid "Sound Recorder started"
-msgstr "Запущено записувача звуку"
-
 #. Translators: "Recordings" here refers to the name of the directory where the application places files
-#: src/application.js:145
+#: src/application.js:24
 msgid "Recordings"
 msgstr "Записи"
 
+#: src/application.js:131
+msgid "Sound Recorder started"
+msgstr "Запущено записувача звуку"
+
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/application.js:174
+#: src/application.js:165
 msgid "translator-credits"
 msgstr "Daniel Korostil <ted.korostiled@gmail.com>"
 
-#: src/application.js:176
+#: src/application.js:167
 msgid "A Sound Recording Application for GNOME"
 msgstr "Програма для запису звуку для GNOME"
 
-#. Translators: ""Recording from %F %A at %T"" is the default name assigned to a file created
-#. by the application (for example, "Recording from 2020-03-11 Wednesday at 19:43:05").
-#: src/recorder.js:114
-msgid "Recording from %F %A at %T"
-msgstr "Запис %F %A о %T"
+#. Translators: ""Recording %d"" is the default name assigned to a file created
+#. by the application (for example, "Recording 1").
+#: src/recorder.js:109
+#, javascript-format
+#| msgid "Recordings"
+msgid "Recording %d"
+msgstr "Запис %d"
 
 #: src/utils.js:52
 msgid "Yesterday"
@@ -233,3 +234,6 @@ msgid_plural "%d years ago"
 msgstr[0] "%d рік тому"
 msgstr[1] "%d роки тому"
 msgstr[2] "%d років тому"
+
+#~ msgid "Recording from %F %A at %T"
+#~ msgstr "Запис %F %A о %T"
