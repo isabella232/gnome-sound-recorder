@@ -1,4 +1,4 @@
-/* exported MainWindow */
+/* exported Window */
 /*
 * Copyright 2013 Meg Ford
 * This library is free software; you can redistribute it and/or
@@ -27,10 +27,10 @@ const Utils = imports.utils;
 const { WaveForm } = imports.waveform;
 
 
-var MainWindow = GObject.registerClass({
+var Window = GObject.registerClass({
     Template: 'resource:///org/gnome/SoundRecorder/ui/window.ui',
-    InternalChildren: ['recordTimeLabel', 'mainStack', 'recordGrid', 'listBox', 'emptyIcon', 'playbackStack', 'headerRevealer'],
-}, class MainWindow extends Handy.ApplicationWindow {
+    InternalChildren: ['recorderTime', 'mainStack', 'recorderBox', 'listBox', 'emptyIcon', 'playbackStack', 'headerRevealer'],
+}, class Window extends Handy.ApplicationWindow {
 
     _init(params) {
         super._init(Object.assign({
@@ -40,14 +40,14 @@ var MainWindow = GObject.registerClass({
         this.recorder = new Recorder();
         this.player = new Player();
         this.waveform = new WaveForm();
-        this._recordGrid.add(this.waveform);
+        this._recorderBox.add(this.waveform);
 
         this.recorder.connect('waveform', (_, time, peak) => {
             this.waveform.drawAt(time, peak);
         });
 
         this.recorder.connect('notify::duration', _recorder => {
-            this._recordTimeLabel.label = Utils.Time.formatTime(_recorder.duration);
+            this._recorderTime.label = Utils.Time.formatTime(_recorder.duration);
         });
 
         this.connect('destroy', () => {
@@ -94,7 +94,7 @@ var MainWindow = GObject.registerClass({
         this.player.stop();
 
         this._headerRevealer.reveal_child = false;
-        this._mainStack.visible_child_name = 'recorderView';
+        this._mainStack.visible_child_name = 'recorder';
         this._playbackStack.visible_child_name = 'recorder-pause';
 
         this.recorder.start();
@@ -112,8 +112,8 @@ var MainWindow = GObject.registerClass({
 
     _refreshView() {
         if (this._recordingList.get_n_items() === 0)
-            this._mainStack.visible_child_name = 'emptyView';
+            this._mainStack.visible_child_name = 'empty';
         else
-            this._mainStack.visible_child_name = 'mainView';
+            this._mainStack.visible_child_name = 'recordings';
     }
 });

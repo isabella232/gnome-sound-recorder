@@ -3,7 +3,7 @@
 <interface>
   <requires lib="gtk+" version="3.12"/>
   <requires lib="libhandy" version="0.0"/>
-  <template class="Gjs_MainWindow" parent="HdyApplicationWindow">
+  <template class="Gjs_Window" parent="HdyApplicationWindow">
     <property name="width_request">350</property>
     <property name="height_request">480</property>
     <property name="can_focus">False</property>
@@ -149,7 +149,7 @@
                 </child>
               </object>
               <packing>
-                <property name="name">mainView</property>
+                <property name="name">recordings</property>
               </packing>
             </child>
             <child>
@@ -166,14 +166,14 @@
                     <property name="margin_bottom">24</property>
                     <property name="orientation">vertical</property>
                     <child>
-                      <object class="GtkBox" id="recordGrid">
+                      <object class="GtkBox" id="recorderBox">
                         <property name="height_request">230</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="orientation">vertical</property>
                         <child>
-                          <object class="GtkLabel" id="recordTimeLabel">
+                          <object class="GtkLabel" id="recorderTime">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="margin_top">18</property>
@@ -198,7 +198,6 @@
                     </child>
                     <child>
                       <object class="GtkBox">
-                        <property name="width_request">150</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">center</property>
@@ -306,7 +305,7 @@
                 </child>
               </object>
               <packing>
-                <property name="name">recorderView</property>
+                <property name="name">recorder</property>
                 <property name="position">1</property>
               </packing>
             </child>
@@ -373,7 +372,7 @@
                 </child>
               </object>
               <packing>
-                <property name="name">emptyView</property>
+                <property name="name">empty</property>
                 <property name="position">2</property>
               </packing>
             </child>

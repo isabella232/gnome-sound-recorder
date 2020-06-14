@@ -24,7 +24,7 @@ const { Gdk, Gio, GLib, GObject, Gst, Gtk } = imports.gi;
 const RecordingsDir = Gio.file_new_for_path(GLib.build_filenamev([GLib.get_home_dir(), _('Recordings')]));
 const Settings = new Gio.Settings({ schema: pkg.name });
 
-const { MainWindow } = imports.mainWindow;
+const { Window } = imports.window;
 
 var Application = GObject.registerClass(class Application extends Gtk.Application {
     _init() {
@@ -140,7 +140,7 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
     }
 
     vfunc_activate() {
-        this.window = new MainWindow({ application: this });
+        this.window = new Window({ application: this });
         if (pkg.name.endsWith('Devel'))
             this.window.get_style_context().add_class('devel');
         this.window.show();
