@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/issues\n"
 "POT-Creation-Date: 2020-06-06 12:28+0000\n"
-"PO-Revision-Date: 2020-06-12 21:19+0200\n"
+"PO-Revision-Date: 2019-03-03 20:18+0100\n"
 "Last-Translator: Jordi Mas <jmas@softcatala.org>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "Language: ca\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.1.1\n"
 
 #: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:5
 #: data/org.gnome.SoundRecorder.desktop.in.in:4 src/application.js:37
@@ -237,3 +237,118 @@ msgid_plural "%d years ago"
 msgstr[0] "fa %d any"
 msgstr[1] "fa %d anys"
 
+#~ msgid "Microphone volume level"
+#~ msgstr "Nivell de volum del micròfon"
+
+#~ msgid "Microphone volume level."
+#~ msgstr "Nivell de volum del micròfon."
+
+#~ msgid "Speaker volume level"
+#~ msgstr "Nivell de volum de l'altaveu"
+
+#~ msgid "Speaker volume level."
+#~ msgstr "Nivell de volum de l'altaveu."
+
+#~ msgid "org.gnome.SoundRecorder"
+#~ msgstr "org.gnome.SoundRecorder"
+
+#~ msgid "SoundRecorder"
+#~ msgstr "Enregistradora de so"
+
+#~ msgid "Info"
+#~ msgstr "Informació"
+
+#~ msgid "Cancel"
+#~ msgstr "Cancel·la"
+
+#~ msgid "Done"
+#~ msgstr "Fet"
+
+#~ msgctxt "File Name"
+#~ msgid "Name"
+#~ msgstr "Nom"
+
+#~ msgid "Source"
+#~ msgstr "Font"
+
+#~ msgid "Date Modified"
+#~ msgstr "Data de modificació"
+
+#~ msgid "Date Created"
+#~ msgstr "Data de creació"
+
+#~ msgctxt "Media Type"
+#~ msgid "Type"
+#~ msgstr "Tipus"
+
+#~ msgid "Unknown"
+#~ msgstr "Desconegut"
+
+#~ msgid "Preferences"
+#~ msgstr "Preferències"
+
+#~ msgid "Recording…"
+#~ msgstr "S'està enregistrant…"
+
+#~ msgid "%d Recorded Sound"
+#~ msgid_plural "%d Recorded Sounds"
+#~ msgstr[0] "%d àudio enregistrat"
+#~ msgstr[1] "%d àudios enregistrats"
+
+#~ msgid "No Recorded Sounds"
+#~ msgstr "Cap àudio enregistrat"
+
+#~ msgid "Play"
+#~ msgstr "Reprodueix"
+
+#~ msgid "Pause"
+#~ msgstr "Fes una pausa"
+
+#~ msgid "Delete"
+#~ msgstr "Suprimeix"
+
+#~ msgid "MOV"
+#~ msgstr "MOV"
+
+#~ msgid "Load More"
+#~ msgstr "Carrega'n més"
+
+#~ msgid "Unable to play recording"
+#~ msgstr "No es pot reproduir l'enregistrament"
+
+#~ msgid "Default mode"
+#~ msgstr "Mode per defecte"
+
+#~ msgid "Volume"
+#~ msgstr "Volum"
+
+#~ msgid "Microphone"
+#~ msgstr "Micròfon"
+
+#~ msgid "Unable to create Recordings directory."
+#~ msgstr "No s'ha pogut crear el directori «Enregistraments»."
+
+#~ msgid "Please install the GStreamer 1.0 PulseAudio plugin."
+#~ msgstr "Instal·leu el connector PulseAudio de GStreamer 1.0."
+
+#~ msgid "Your audio capture settings are invalid."
+#~ msgstr "Els paràmetres de captura d'àudio no són vàlids."
+
+#~ msgid "Not all elements could be created."
+#~ msgstr "No s'han pogut crear tots els elements."
+
+#~ msgid "Not all of the elements were linked."
+#~ msgstr "No tots els elements estaven enllaçats."
+
+#~ msgid "No Media Profile was set."
+#~ msgstr "No s'ha establert cap perfil de format."
+
+#~ msgid ""
+#~ "Unable to set the pipeline \n"
+#~ " to the recording state."
+#~ msgstr ""
+#~ "No s'ha pogut establir la canonada \n"
+#~ "a l'estat d'enregistrament."
+
+#~ msgid "Clip %d"
+#~ msgstr "Retall %d"
