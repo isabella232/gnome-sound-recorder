@@ -30,11 +30,11 @@ var WaveForm = GObject.registerClass({
 }, class WaveForm extends Gtk.DrawingArea {
 
     _init() {
-        super._init({});
+        super._init({
+            vexpand: true,
+            valign: Gtk.Align.FILL,
+        });
         this.peaks = [];
-
-        this.set_property('vexpand', true);
-        this.set_property('valign', Gtk.Align.FILL);
         this.show();
     }
 
