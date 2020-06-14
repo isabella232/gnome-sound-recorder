@@ -81,12 +81,12 @@ var MainWindow = GObject.registerClass({
     }
 
     onRecorderPause() {
-        this._recorder.state = Gst.State.PAUSED;
+        this._recorder.pause();
         this._playbackStack.set_visible_child_name('recorder-start');
     }
 
     onRecorderResume() {
-        this._recorder.state = Gst.State.PLAYING;
+        this._recorder.resume();
         this._playbackStack.set_visible_child_name('recorder-pause');
     }
 

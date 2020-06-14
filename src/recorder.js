@@ -137,6 +137,15 @@ var Recorder = new GObject.registerClass({
         });
     }
 
+    pause() {
+        this.state = Gst.State.PAUSED;
+    }
+
+    resume() {
+        if (this.state === Gst.State.PAUSED)
+            this.state = Gst.State.PLAYING;
+    }
+
     stop() {
         this.state = Gst.State.NULL;
 
