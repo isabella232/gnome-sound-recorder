@@ -1,6 +1,5 @@
 /* exported Row */
-const GObject = imports.gi.GObject;
-const Handy = imports.gi.Handy;
+const { GObject, Handy } = imports.gi;
 
 var Utils = imports.utils;
 

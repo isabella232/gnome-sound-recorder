@@ -20,8 +20,7 @@
 
 // based on code from Pitivi
 
-const GObject = imports.gi.GObject;
-const Gtk = imports.gi.Gtk;
+const { GObject, Gtk } = imports.gi;
 const Cairo = imports.cairo;
 
 const WAVE_SAMPLES = 40;

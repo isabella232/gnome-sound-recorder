@@ -17,18 +17,15 @@
 * Author: Meg Ford <megford@gnome.org>
 *
 */
+const { GObject, Gst, Handy } = imports.gi;
 
-const Gst = imports.gi.Gst;
-const GObject = imports.gi.GObject;
-const Handy = imports.gi.Handy;
-
+const { Player } = imports.player;
+const { Recorder } = imports.recorder;
+const { RecordingList } = imports.recordingList;
+const { Row, RowState } = imports.row;
 const Utils = imports.utils;
-const RecordingList = imports.recordingList.RecordingList;
-const Row = imports.row.Row;
-const RowState = imports.row.RowState;
-const Player = imports.player.Player;
-const Recorder = imports.recorder.Recorder;
-const WaveForm = imports.waveform.WaveForm;
+const { WaveForm } = imports.waveform;
+
 
 var MainWindow = GObject.registerClass({
     Template: 'resource:///org/gnome/SoundRecorder/ui/window.ui',

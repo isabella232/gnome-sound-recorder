@@ -17,9 +17,7 @@
  * Author: Meg Ford <megford@gnome.org>
  *
  */
-const Gst = imports.gi.Gst;
-const Gio = imports.gi.Gio;
-const Gtk = imports.gi.Gtk;
+const { Gio, Gst, Gtk } = imports.gi;
 
 
 var Player = class Player {

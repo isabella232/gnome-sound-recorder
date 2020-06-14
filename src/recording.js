@@ -1,9 +1,5 @@
 /* exported Recording */
-const GLib = imports.gi.GLib;
-const Gst = imports.gi.Gst;
-const GObject = imports.gi.GObject;
-const GstPbutils = imports.gi.GstPbutils;
-
+const { GLib, GObject, Gst, GstPbutils } = imports.gi;
 
 var Recording = new GObject.registerClass({
     Properties: {

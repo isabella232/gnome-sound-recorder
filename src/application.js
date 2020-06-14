@@ -1,4 +1,4 @@
-/* exported settings Application */
+/* exported Application RecordingsDir Settings */
 /*
 * Copyright 2013 Meg Ford
 * This library is free software; you can redistribute it and/or
@@ -18,17 +18,13 @@
 *
 */
 
-const Gio = imports.gi.Gio;
-const GLib = imports.gi.GLib;
-const GObject = imports.gi.GObject;
-const Gst = imports.gi.Gst;
-const Gtk = imports.gi.Gtk;
-const Gdk = imports.gi.Gdk;
+const { Gdk, Gio, GLib, GObject, Gst, Gtk } = imports.gi;
 
-const MainWindow = imports.mainWindow;
+/* Translators: "Recordings" here refers to the name of the directory where the application places files */
+const RecordingsDir = Gio.file_new_for_path(GLib.build_filenamev([GLib.get_home_dir(), _('Recordings')]));
+const Settings = new Gio.Settings({ schema: pkg.name });
 
-
-var settings = new Gio.Settings({ schema: pkg.name });
+const { MainWindow } = imports.mainWindow;
 
 var Application = GObject.registerClass(class Application extends Gtk.Application {
     _init() {
@@ -55,7 +51,7 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
 
     _initAppMenu() {
         function getDefaultProfile() {
-            switch (settings.get_enum('audio-profile')) {
+            switch (Settings.get_enum('audio-profile')) {
             case 0:
                 return new GLib.Variant('s', 'vorbis');
             case 1:
@@ -79,16 +75,16 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
             action.change_state(parameter);
         });
         profileAction.connect('change-state', (action, state) => {
-            settings.set_value('audio-profile', state);
+            Settings.set_value('audio-profile', state);
         });
-        settings.connect('changed::audio-profile', () => {
+        Settings.connect('changed::audio-profile', () => {
             profileAction.state = getDefaultProfile();
         });
         this.add_action(profileAction);
 
 
         function getDefaultChannel() {
-            switch (settings.get_enum('audio-channel')) {
+            switch (Settings.get_enum('audio-channel')) {
             case 0:
                 return new GLib.Variant('s', 'stereo');
             case 1:
@@ -106,9 +102,9 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
             action.change_state(parameter);
         });
         channelAction.connect('change-state', (action, state) => {
-            settings.set_value('audio-channel', state);
+            Settings.set_value('audio-channel', state);
         });
-        settings.connect('changed::audio-channel', () => {
+        Settings.connect('changed::audio-channel', () => {
             channelAction.state = getDefaultChannel();
         });
         this.add_action(channelAction);
@@ -139,18 +135,15 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
     }
 
     ensureDirectory() {
-        /* Translators: "Recordings" here refers to the name of the directory where the application places files */
-        let path = GLib.build_filenamev([GLib.get_home_dir(), _('Recordings')]);
-
         // Ensure Recordings directory
-        GLib.mkdir_with_parents(path, 0o0755);
-        this.saveDir = Gio.file_new_for_path(path);
+        GLib.mkdir_with_parents(RecordingsDir.get_path(), 0o0755);
     }
 
     vfunc_activate() {
-        (this.window = new MainWindow.MainWindow({ application: this })).show();
+        this.window = new MainWindow({ application: this });
         if (pkg.name.endsWith('Devel'))
             this.window.get_style_context().add_class('devel');
+        this.window.show();
     }
 
     _loadStyleSheet() {

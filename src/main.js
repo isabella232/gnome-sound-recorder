@@ -40,7 +40,7 @@ pkg.require({
     'Handy': '1',
 });
 
-const Application = imports.application.Application;
+const { Application } = imports.application;
 
 function main(argv) {
     return new Application().run(argv);

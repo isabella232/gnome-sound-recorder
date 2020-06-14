@@ -1,28 +1,23 @@
 /* exported RecordingList */
-const Gio = imports.gi.Gio;
-const GLib = imports.gi.GLib;
-const GObject = imports.gi.GObject;
+const { Gio, GLib, GObject } = imports.gi;
 
-const Recording = imports.recording.Recording;
-
+const { RecordingsDir } = imports.application;
+const { Recording } = imports.recording;
 
 var RecordingList = new GObject.registerClass(class RecordingList extends Gio.ListStore {
     _init() {
         super._init({ });
-        this._saveDir = Gio.Application.get_default().saveDir;
 
         // Monitor Direcotry actions
-        let dirMonitor = this._saveDir.monitor_directory(Gio.FileMonitorFlags.WATCH_MOVES, null);
+        let dirMonitor = RecordingsDir.monitor_directory(Gio.FileMonitorFlags.WATCH_MOVES, null);
         dirMonitor.connect('changed', (_dirMonitor, file1, file2, eventType) => {
-            // Monitor if file action done on _saveDir
             let index = this.getIndex(file1);
 
             switch (eventType) {
             case Gio.FileMonitorEvent.DELETED:
-                if (Gio.Application.get_default().saveDir.equal(file1)) {
+                if (RecordingsDir.equal(file1))
                     Gio.Application.get_default().ensureDirectory();
-                    this._saveDir = Gio.Application.get_default().saveDir;
-                }
+
                 break;
             case Gio.FileMonitorEvent.MOVED_OUT:
                 if (index >= 0)
@@ -36,7 +31,7 @@ var RecordingList = new GObject.registerClass(class RecordingList extends Gio.Li
 
         });
 
-        this._saveDir.enumerate_children_async('standard::name',
+        RecordingsDir.enumerate_children_async('standard::name',
             Gio.FileQueryInfoFlags.NOFOLLOW_SYMLINKS,
             GLib.PRIORITY_LOW,
             null,
@@ -56,8 +51,7 @@ var RecordingList = new GObject.registerClass(class RecordingList extends Gio.Li
         let fileInfos = obj.next_files_finish(res);
         if (fileInfos.length) {
             fileInfos.forEach(info => {
-                const path = GLib.build_filenamev([this._saveDir.get_path(), info.get_name()]);
-                const file = Gio.file_new_for_path(path);
+                const file = RecordingsDir.get_child(info.get_name());
                 const recording = new Recording(file);
                 this.sortedInsert(recording);
             });
