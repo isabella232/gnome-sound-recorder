@@ -179,7 +179,7 @@
                             <property name="margin_top">18</property>
                             <style>
                               <class name="dim-label"/>
-                              <class name="recording-time-label"/>
+                              <class name="recorder-time-label"/>
                             </style>
                           </object>
                           <packing>
