@@ -43,7 +43,7 @@ var MainWindow = GObject.registerClass({
         this._recordGrid.add(this.waveform);
 
         this._recorder.connect('waveform', (_, time, peak) => {
-            this.waveform._drawEvent(time, peak);
+            this.waveform.drawAt(time, peak);
         });
 
         this._recorder.connect('notify::duration', _recorder => {
@@ -51,7 +51,7 @@ var MainWindow = GObject.registerClass({
         });
 
         this.connect('destroy', () => {
-            this.waveform.endDrawing();
+            this.waveform.destroy();
             this.player.stop();
             this._recorder.stop();
         });
@@ -104,7 +104,7 @@ var MainWindow = GObject.registerClass({
         this._recordingList.insert(0, recording);
         this._headerRevealer.reveal_child = true;
 
-        this.waveform.endDrawing();
+        this.waveform.destroy();
         this._playbackStack.set_visible_child_name('recorder-start');
     }
 

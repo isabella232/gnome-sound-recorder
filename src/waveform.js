@@ -80,7 +80,7 @@ var WaveForm = GObject.registerClass({
         cr.$dispose();
     }
 
-    _drawEvent(time, peak) {
+    drawAt(time, peak) {
         // Reset on Time = 0
         if (time === 0)
             this.peaks = Array(WAVE_SAMPLES).fill(-this.get_allocated_height());
@@ -90,7 +90,7 @@ var WaveForm = GObject.registerClass({
         this.queue_draw();
     }
 
-    endDrawing() {
+    destroy() {
         this.recordedTime = 0;
         this.peaks.length = 0;
         this.queue_draw();
