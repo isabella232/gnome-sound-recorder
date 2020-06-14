@@ -68,9 +68,9 @@ var Player = class Player {
         let errorDialog = new Gtk.MessageDialog({ destroy_with_parent: true,
             buttons: Gtk.ButtonsType.OK,
             message_type: Gtk.MessageType.WARNING,
-            text: errorMessage });
+            text: errorMessage,
+            transient_for: Gio.Application.get_default().get_active_window() });
 
-        errorDialog.set_transient_for(Gio.Application.get_default().get_active_window());
         errorDialog.connect('response', () => errorDialog.destroy());
         errorDialog.show();
     }

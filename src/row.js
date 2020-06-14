@@ -46,8 +46,8 @@ var Row = GObject.registerClass({
 
     setState(rowState) {
         if (rowState === RowState.PLAYING)
-            this._playbackStack.set_visible_child_name('pause');
+            this._playbackStack.visible_child_name = 'pause';
         else if (rowState === RowState.PAUSED)
-            this._playbackStack.set_visible_child_name('play');
+            this._playbackStack.visible_child_name = 'play';
     }
 });

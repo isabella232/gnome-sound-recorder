@@ -17,7 +17,7 @@
 * Author: Meg Ford <megford@gnome.org>
 *
 */
-const { GObject, Gst, Handy } = imports.gi;
+const { GObject, Handy } = imports.gi;
 
 const { Player } = imports.player;
 const { Recorder } = imports.recorder;
@@ -37,23 +37,23 @@ var MainWindow = GObject.registerClass({
             icon_name: pkg.name,
         }, params));
 
-        this._recorder = new Recorder();
+        this.recorder = new Recorder();
         this.player = new Player();
         this.waveform = new WaveForm();
         this._recordGrid.add(this.waveform);
 
-        this._recorder.connect('waveform', (_, time, peak) => {
+        this.recorder.connect('waveform', (_, time, peak) => {
             this.waveform.drawAt(time, peak);
         });
 
-        this._recorder.connect('notify::duration', _recorder => {
+        this.recorder.connect('notify::duration', _recorder => {
             this._recordTimeLabel.label = Utils.Time.formatTime(_recorder.duration);
         });
 
         this.connect('destroy', () => {
             this.waveform.destroy();
             this.player.stop();
-            this._recorder.stop();
+            this.recorder.stop();
         });
 
         this._recordingList = new RecordingList();
@@ -81,37 +81,39 @@ var MainWindow = GObject.registerClass({
     }
 
     onRecorderPause() {
-        this._recorder.pause();
-        this._playbackStack.set_visible_child_name('recorder-start');
+        this.recorder.pause();
+        this._playbackStack.visible_child_name = 'recorder-start';
     }
 
     onRecorderResume() {
-        this._recorder.resume();
-        this._playbackStack.set_visible_child_name('recorder-pause');
+        this.recorder.resume();
+        this._playbackStack.visible_child_name = 'recorder-pause';
     }
 
     onRecorderStart() {
         this.player.stop();
-        this._mainStack.set_visible_child_name('recorderView');
-        this._recorder.start();
-        this._headerRevealer.reveal_child = false;
 
-        this._playbackStack.set_visible_child_name('recorder-pause');
+        this._headerRevealer.reveal_child = false;
+        this._mainStack.visible_child_name = 'recorderView';
+        this._playbackStack.visible_child_name = 'recorder-pause';
+
+        this.recorder.start();
     }
 
     onRecorderStop() {
-        const recording = this._recorder.stop();
+        const recording = this.recorder.stop();
         this._recordingList.insert(0, recording);
+
         this._headerRevealer.reveal_child = true;
+        this._playbackStack.visible_child_name = 'recorder-start';
 
         this.waveform.destroy();
-        this._playbackStack.set_visible_child_name('recorder-start');
     }
 
     _refreshView() {
         if (this._recordingList.get_n_items() === 0)
-            this._mainStack.set_visible_child_name('emptyView');
+            this._mainStack.visible_child_name = 'emptyView';
         else
-            this._mainStack.set_visible_child_name('mainView');
+            this._mainStack.visible_child_name = 'mainView';
     }
 });
