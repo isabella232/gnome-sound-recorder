@@ -17,7 +17,7 @@
  *  Author: Meg Ford <megford@gnome.org>
  *
  */
-const { Gio, GLib, GObject, Gst, GstPbutils } = imports.gi;
+const { GLib, GObject, Gst, GstPbutils } = imports.gi;
 
 const { RecordingsDir, Settings } = imports.application;
 const { Recording } = imports.recording;
@@ -102,16 +102,12 @@ var Recorder = new GObject.registerClass({
     start() {
         this.baseTime = 0;
 
-        const dateTime = GLib.DateTime.new_now_local();
-        /* Translators: ""Recording from %F %A at %T"" is the default name assigned to a file created
-            by the application (for example, "Recording from 2020-03-11 Wednesday at 19:43:05"). */
-        const clipName = dateTime.format(_('Recording from %F %A at %T'));
-        const clip = RecordingsDir.get_child_for_display_name(clipName);
-        const fileUri = clip.get_path();
-        this.file = Gio.file_new_for_path(fileUri);
-
-        if (fileUri === -1)
-            log('Unable to create Recordings directory.');
+        let index = 1;
+        do {
+            /* Translators: ""Recording %d"" is the default name assigned to a file created
+            by the application (for example, "Recording 1"). */
+            this.file = RecordingsDir.get_child_for_display_name(_('Recording %d').format(index++));
+        } while (this.file.query_exists(null));
 
 
         this.recordBus = this.pipeline.get_bus();
@@ -123,7 +119,7 @@ var Recorder = new GObject.registerClass({
 
 
         this.ebin.set_property('profile', this._getProfile());
-        this.filesink.set_property('location', fileUri);
+        this.filesink.set_property('location', this.file.get_path());
         this.level.link(this.ebin);
         this.ebin.link(this.filesink);
 
