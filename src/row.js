@@ -1,9 +1,9 @@
-/* exported Row */
+/* exported Row RowState */
 const { GObject, Handy } = imports.gi;
 
 var Utils = imports.utils;
 
-var RowState = {
+const RowState = {
     PLAYING: 0,
     PAUSED: 1,
 };
