@@ -17,6 +17,7 @@
 * Author: Meg Ford <megford@gnome.org>
 *
 */
+
 const { GObject, Handy } = imports.gi;
 
 const { Player } = imports.player;
@@ -42,10 +43,7 @@ var Window = GObject.registerClass({
         this.waveform = new WaveForm();
         this._recorderBox.add(this.waveform);
 
-        this.recorder.connect('waveform', (_, time, peak) => {
-            this.waveform.drawAt(time, peak);
-        });
-
+        this.recorder.bind_property('current-peak', this.waveform, 'peak', GObject.BindingFlags.SYNC_CREATE | GObject.BindingFlags.DEFAULT);
         this.recorder.connect('notify::duration', _recorder => {
             this._recorderTime.label = formatTime(_recorder.duration);
         });
