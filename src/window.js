@@ -23,7 +23,7 @@ const { Player } = imports.player;
 const { Recorder } = imports.recorder;
 const { RecordingList } = imports.recordingList;
 const { Row, RowState } = imports.row;
-const Utils = imports.utils;
+const { formatTime } = imports.utils;
 const { WaveForm } = imports.waveform;
 
 
@@ -47,7 +47,7 @@ var Window = GObject.registerClass({
         });
 
         this.recorder.connect('notify::duration', _recorder => {
-            this._recorderTime.label = Utils.Time.formatTime(_recorder.duration);
+            this._recorderTime.label = formatTime(_recorder.duration);
         });
 
         this.connect('destroy', () => {

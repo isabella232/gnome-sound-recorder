@@ -1,7 +1,6 @@
 /* exported Row RowState */
 const { GObject, Handy } = imports.gi;
-
-var Utils = imports.utils;
+const { displayDateTime, formatTime } = imports.utils;
 
 const RowState = {
     PLAYING: 0,
@@ -21,11 +20,14 @@ var Row = GObject.registerClass({
         super._init({});
 
         this._action_row.title = recording.name;
-        this._action_row.subtitle = Utils.Time.getDisplayTime(
-            recording.timeCreated > 0 ? recording.timeCreated : recording.timeModified);
+
+        if (recording.timeCreated > 0)
+            this._action_row.subtitle = displayDateTime(recording.timeCreated);
+        else
+            this._action_row.subtitle = displayDateTime(recording.timeModified);
 
         recording.connect('notify::duration', () => {
-            this._duration.label = Utils.Time.formatTime(recording.duration);
+            this._duration.label = formatTime(recording.duration);
         });
 
         this._playButton.connect('clicked', () => {
