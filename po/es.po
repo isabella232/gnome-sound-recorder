@@ -9,11 +9,11 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
 "issues\n"
-"POT-Creation-Date: 2020-06-06 12:28+0000\n"
-"PO-Revision-Date: 2020-06-08 16:06+0200\n"
+"POT-Creation-Date: 2020-06-14 16:31+0000\n"
+"PO-Revision-Date: 2020-06-16 09:31+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
-"Language-Team: es <gnome-es-list@gnome.org>\n"
-"Language: es\n"
+"Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
+"Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,7 +21,7 @@ msgstr ""
 "X-Generator: Gtranslator 3.36.0\n"
 
 #: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:5
-#: data/org.gnome.SoundRecorder.desktop.in.in:4 src/application.js:37
+#: data/org.gnome.SoundRecorder.desktop.in.in:4 src/application.js:32
 msgid "Sound Recorder"
 msgstr "Grabadora de sonidos"
 
@@ -112,82 +112,83 @@ msgstr ""
 "Canales de mapas disponibles. Si no hay ningún mapeo configurado, se usará "
 "en canal estéreo de manera predeterminada."
 
-#: data/ui/window.ui:57
+#: data/ui/window.ui:62
 msgid "Record"
 msgstr "Grabar"
 
-#: data/ui/window.ui:329
+#: data/ui/window.ui:335
 msgid "Add Recordings"
 msgstr "Añadir grabaciones"
 
-#: data/ui/window.ui:346
+#: data/ui/window.ui:352
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Use el botón <b>Grabar</b> para realizar grabaciones de sonido"
 
-#: data/ui/window.ui:379
+#: data/ui/window.ui:385
 msgid "Preferred Format"
 msgstr "Formato preferido"
 
-#: data/ui/window.ui:381
-#| msgid "Ogg Vorbis"
+#: data/ui/window.ui:387
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: data/ui/window.ui:386
+#: data/ui/window.ui:392
 msgid "Opus"
 msgstr "Opus"
 
-#: data/ui/window.ui:391
+#: data/ui/window.ui:397
 msgid "FLAC"
 msgstr "FLAC"
 
-#: data/ui/window.ui:396
+#: data/ui/window.ui:402
 msgid "MP3"
 msgstr "MP3"
 
-#: data/ui/window.ui:401
+#: data/ui/window.ui:407
 msgid "M4A"
 msgstr "M4A"
 
-#: data/ui/window.ui:407
+#: data/ui/window.ui:413
 msgid "Audio Channel"
 msgstr "Canal de sonido"
 
-#: data/ui/window.ui:409
+#: data/ui/window.ui:415
 msgid "Stereo"
 msgstr "Estéreo"
 
-#: data/ui/window.ui:414
+#: data/ui/window.ui:420
 msgid "Mono"
 msgstr "Mono"
 
-#: data/ui/window.ui:422
+#: data/ui/window.ui:428
 msgid "About Sound Recorder"
 msgstr "Acerca de la grabadora de sonidos"
 
-#: src/application.js:136
-msgid "Sound Recorder started"
-msgstr "Grabadora de sonidos iniciada"
-
 #. Translators: "Recordings" here refers to the name of the directory where the application places files
-#: src/application.js:145
+#: src/application.js:24
 msgid "Recordings"
 msgstr "Grabaciones"
 
+#: src/application.js:131
+msgid "Sound Recorder started"
+msgstr "Grabadora de sonidos iniciada"
+
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/application.js:174
+#: src/application.js:165
 msgid "translator-credits"
 msgstr "Daniel Mustieles <daniel.mustieles@gmail.com>, 2013 - 2015"
 
-#: src/application.js:176
+#: src/application.js:167
 msgid "A Sound Recording Application for GNOME"
 msgstr "Una aplicación de grabación de sonido para GNOME"
 
-#. Translators: ""Recording from %F %A at %T"" is the default name assigned to a file created
-#. by the application (for example, "Recording from 2020-03-11 Wednesday at 19:43:05").
-#: src/recorder.js:114
-msgid "Recording from %F %A at %T"
-msgstr "Grabación del %F %A a las %T"
+#. Translators: ""Recording %d"" is the default name assigned to a file created
+#. by the application (for example, "Recording 1").
+#: src/recorder.js:109
+#, javascript-format
+#| msgid "Recording "
+msgid "Recording %d"
+msgstr "Grabando %d"
 
 #: src/utils.js:52
 msgid "Yesterday"
@@ -232,6 +233,9 @@ msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "hace %d año"
 msgstr[1] "hace %d años"
+
+#~ msgid "Recording from %F %A at %T"
+#~ msgstr "Grabación del %F %A a las %T"
 
 #~ msgid "VORBIS"
 #~ msgstr "VORBIS"
@@ -403,6 +407,3 @@ msgstr[1] "hace %d años"
 
 #~ msgid "Error: "
 #~ msgstr "Error: "
-
-#~ msgid "Recording "
-#~ msgstr "Grabación "
