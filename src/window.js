@@ -109,6 +109,7 @@ var Window = GObject.registerClass({
     onRecorderStop() {
         const recording = this.recorder.stop();
         this._recordingList.insert(0, recording);
+        this._listBox.get_row_at_index(0).editMode = true;
         this._setMainView();
     }
 

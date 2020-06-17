@@ -155,7 +155,8 @@ var Recorder = new GObject.registerClass({
             this.recordBus = null;
         }
 
-        return this.file ? new Recording(this.file) : null;
+        return this.file && this.file.query_exists(null)
+            ? new Recording(this.file) : null;
     }
 
     _onMessageReceived(message) {
