@@ -4,6 +4,7 @@
     <file>application.js</file>
     <file>utils.js</file>
     <file>recordingList.js</file>
+    <file>recordingsListBox.js</file>
     <file>recording.js</file>
     <file>row.js</file>
     <file>main.js</file>

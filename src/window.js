@@ -23,14 +23,14 @@ const { GObject, Handy } = imports.gi;
 const { Player } = imports.player;
 const { Recorder } = imports.recorder;
 const { RecordingList } = imports.recordingList;
-const { Row, RowState } = imports.row;
+const { RecordingsListBox } = imports.recordingsListBox;
 const { formatTime } = imports.utils;
 const { WaveForm } = imports.waveform;
 
 
 var Window = GObject.registerClass({
     Template: 'resource:///org/gnome/SoundRecorder/ui/window.ui',
-    InternalChildren: ['recorderTime', 'mainStack', 'recorderBox', 'listBox', 'emptyIcon', 'playbackStack', 'headerRevealer'],
+    InternalChildren: ['recorderTime', 'mainStack', 'recorderBox', 'emptyIcon', 'playbackStack', 'headerRevealer', 'column'],
 }, class Window extends Handy.ApplicationWindow {
 
     _init(params) {
@@ -58,21 +58,7 @@ var Window = GObject.registerClass({
         this._refreshView();
         this._recordingList.connect('items-changed', this._refreshView.bind(this));
 
-        this._listBox.bind_model(this._recordingList, recording => {
-            let row = new Row(recording);
-            row.connect('play', currentRow => {
-                this._listBox.get_children().forEach(_row => {
-                    if (_row !== currentRow)
-                        _row.setState(RowState.PAUSED);
-                });
-                this.player.play(recording.uri);
-            });
-
-            row.connect('pause', () => this.player.pause());
-            row.connect('deleted', () => this._recordingList.remove(row.get_index()));
-
-            return row;
-        });
+        this._column.add(new RecordingsListBox(this._recordingList, this.player));
 
         this._emptyIcon.icon_name = `${pkg.name}-symbolic`;
         this.show();

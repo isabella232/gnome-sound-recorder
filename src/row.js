@@ -9,7 +9,7 @@ var RowState = {
 
 var Row = GObject.registerClass({
     Template: 'resource:///org/gnome/SoundRecorder/ui/row.ui',
-    InternalChildren: ['playbackStack', 'mainStack', 'playButton', 'pauseButton', 'name', 'entry', 'date', 'duration', 'saveBtn'],
+    InternalChildren: ['playbackStack', 'mainStack', 'playButton', 'pauseButton', 'name', 'entry', 'date', 'duration', 'saveBtn', 'revealer', 'renameBtn', 'deleteBtn'],
     Signals: {
         'play': { param_types: [GObject.TYPE_STRING] },
         'pause': {},
@@ -52,10 +52,14 @@ var Row = GObject.registerClass({
             this.emit('pause');
         });
 
-        // this._deleteButton.connect('clicked', () => {
-        //     recording.delete();
-        //     this.emit('deleted');
-        // });
+        this._renameBtn.connect('clicked', () => {
+            this.editMode = true;
+        });
+
+        this._deleteBtn.connect('clicked', () => {
+            recording.delete();
+            this.emit('deleted');
+        });
     }
 
     onSaveRecording() {
@@ -79,10 +83,18 @@ var Row = GObject.registerClass({
 
     set editMode(state) {
         this._mainStack.visible_child_name = state ? 'edit' : 'display';
+        this._editMode = state;
 
         if (state) {
             this._entry.grab_focus();
             this._saveBtn.grab_default();
+            this._renameBtn.hide();
+        } else {
+            this._renameBtn.show();
         }
+    }
+
+    get editMode() {
+        return this._editMode;
     }
 });
