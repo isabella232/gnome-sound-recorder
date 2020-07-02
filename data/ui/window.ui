@@ -120,11 +120,10 @@
                 <property name="hexpand">True</property>
                 <property name="vexpand">True</property>
                 <child>
-                  <object class="HdyColumn">
+                  <object class="HdyClamp">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="maximum_width">650</property>
-                    <property name="linear_growth_width">400</property>
+                    <property name="maximum_size">650</property>
                     <child>
                       <object class="GtkListBox" id="listBox">
                         <property name="visible">True</property>
