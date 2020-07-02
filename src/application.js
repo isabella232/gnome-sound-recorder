@@ -21,8 +21,8 @@
 const { Gdk, Gio, GLib, GObject, Gst, Gtk, Handy } = imports.gi;
 
 /* Translators: "Recordings" here refers to the name of the directory where the application places files */
-const RecordingsDir = Gio.file_new_for_path(GLib.build_filenamev([GLib.get_home_dir(), _('Recordings')]));
-const Settings = new Gio.Settings({ schema: pkg.name });
+var RecordingsDir = Gio.file_new_for_path(GLib.build_filenamev([GLib.get_home_dir(), _('Recordings')]));
+var Settings = new Gio.Settings({ schema: pkg.name });
 
 const { Window } = imports.window;
 

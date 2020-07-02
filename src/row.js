@@ -2,7 +2,7 @@
 const { Gdk, GObject, Gtk } = imports.gi;
 const { displayDateTime, formatTime } = imports.utils;
 
-const RowState = {
+var RowState = {
     PLAYING: 0,
     PAUSED: 1,
 };
