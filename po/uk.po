@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/issu"
 "es\n"
-"POT-Creation-Date: 2020-07-02 18:55+0000\n"
-"PO-Revision-Date: 2020-07-03 07:03+0300\n"
+"POT-Creation-Date: 2020-07-04 13:29+0000\n"
+"PO-Revision-Date: 2020-07-04 19:59+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -109,59 +109,67 @@ msgstr ""
 "Показує доступні канали. Якщо не вказано, типово використовується "
 "стереоканал."
 
-#: data/ui/row.ui:170
+#: data/ui/row.ui:178
 msgid "Save"
 msgstr "Зберегти"
+
+#: data/ui/row.ui:237
+msgid "Delete"
+msgstr "Вилучити"
+
+#: data/ui/row.ui:254
+msgid "Rename"
+msgstr "Перейменувати"
 
 #: data/ui/window.ui:62
 msgid "Record"
 msgstr "Записати"
 
-#: data/ui/window.ui:359
+#: data/ui/window.ui:344
 msgid "Add Recordings"
 msgstr "Додати записи"
 
-#: data/ui/window.ui:376
+#: data/ui/window.ui:361
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Натисніть кнопку <b>Записати</b>, щоб зробити записи звуку"
 
-#: data/ui/window.ui:409
+#: data/ui/window.ui:394
 msgid "Preferred Format"
 msgstr "Бажаний формат"
 
-#: data/ui/window.ui:411
+#: data/ui/window.ui:396
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: data/ui/window.ui:416
+#: data/ui/window.ui:401
 msgid "Opus"
 msgstr "Opus"
 
-#: data/ui/window.ui:421
+#: data/ui/window.ui:406
 msgid "FLAC"
 msgstr "FLAC"
 
-#: data/ui/window.ui:426
+#: data/ui/window.ui:411
 msgid "MP3"
 msgstr "MP3"
 
-#: data/ui/window.ui:431
+#: data/ui/window.ui:416
 msgid "M4A"
 msgstr "M4A"
 
-#: data/ui/window.ui:437
+#: data/ui/window.ui:422
 msgid "Audio Channel"
 msgstr "Звуковий канал"
 
-#: data/ui/window.ui:439
+#: data/ui/window.ui:424
 msgid "Stereo"
 msgstr "Стерео"
 
-#: data/ui/window.ui:444
+#: data/ui/window.ui:429
 msgid "Mono"
 msgstr "Моно"
 
-#: data/ui/window.ui:452
+#: data/ui/window.ui:437
 msgid "About Sound Recorder"
 msgstr "Про «Записувач звуку»"
 
@@ -175,17 +183,17 @@ msgid "Sound Recorder started"
 msgstr "Запущено записувача звуку"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/application.js:167
+#: src/application.js:168
 msgid "translator-credits"
 msgstr "Daniel Korostil <ted.korostiled@gmail.com>"
 
-#: src/application.js:169
+#: src/application.js:170
 msgid "A Sound Recording Application for GNOME"
 msgstr "Програма для запису звуку для GNOME"
 
 #. Translators: ""Recording %d"" is the default name assigned to a file created
 #. by the application (for example, "Recording 1").
-#: src/recorder.js:109
+#: src/recorder.js:107
 #, javascript-format
 msgid "Recording %d"
 msgstr "Запис %d"
