@@ -165,7 +165,6 @@
                 <property name="margin_right">12</property>
                 <property name="activates_default">True</property>
                 <property name="width_chars">29</property>
-                <property name="input_purpose">name</property>
               </object>
               <packing>
                 <property name="name">edit</property>

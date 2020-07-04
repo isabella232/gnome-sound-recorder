@@ -95,12 +95,12 @@ var Row = GObject.registerClass({
         this._editMode = state;
 
         if (state) {
+            if (!this.expanded)
+                this.activate();
+
             this._entry.grab_focus();
             this._saveBtn.grab_default();
             this._renameStack.visible_child_name = 'save';
-
-            if (!this.expanded)
-                this.activate();
         } else {
             this._renameStack.visible_child_name = 'rename';
         }
