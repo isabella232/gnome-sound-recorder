@@ -46,10 +46,9 @@ var RecordingsListBox = new GObject.registerClass(class RecordingsListBox extend
 
     vfunc_row_activated(row) {
         if (this.activeRow && this.activeRow !== row)
-            this.activeRow._revealer.reveal_child = false;
+            this.activeRow.expanded = false;
 
-        row._revealer.reveal_child = !row._revealer.reveal_child;
+        row.expanded = !row.expanded;
         this.activeRow = row;
     }
-
 });
