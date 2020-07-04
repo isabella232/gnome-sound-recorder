@@ -58,7 +58,8 @@ var Window = GObject.registerClass({
         this._refreshView();
         this._recordingList.connect('items-changed', this._refreshView.bind(this));
 
-        this._column.add(new RecordingsListBox(this._recordingList, this.player));
+        this._recordingListBox = new RecordingsListBox(this._recordingList, this.player);
+        this._column.add(this._recordingListBox);
 
         this._emptyIcon.icon_name = `${pkg.name}-symbolic`;
         this.show();
@@ -93,7 +94,7 @@ var Window = GObject.registerClass({
     onRecorderStop() {
         const recording = this.recorder.stop();
         this._recordingList.insert(0, recording);
-        this._listBox.get_row_at_index(0).editMode = true;
+        this._recordingListBox.get_row_at_index(0).editMode = true;
         this._setMainView();
     }
 
