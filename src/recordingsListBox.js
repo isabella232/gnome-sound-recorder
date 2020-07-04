@@ -23,9 +23,7 @@ var RecordingsListBox = new GObject.registerClass(class RecordingsListBox extend
                     this.activePlayingRow.setState(RowState.PAUSED);
 
                 player.play(recording.uri);
-
-                if (!this.activePlayingRow || this.activePlayingRow !== _row)
-                    this.activePlayingRow = _row;
+                this.activePlayingRow = _row;
             });
 
             row.connect('pause', () => player.pause());
@@ -47,13 +45,11 @@ var RecordingsListBox = new GObject.registerClass(class RecordingsListBox extend
     }
 
     vfunc_row_activated(row) {
-        if (this.activeRow)
+        if (this.activeRow && this.activeRow !== row)
             this.activeRow._revealer.reveal_child = false;
 
         row._revealer.reveal_child = !row._revealer.reveal_child;
-
-        if (!this.activeRow || this.activeRow !== row)
-            this.activeRow = row;
+        this.activeRow = row;
     }
 
 });
