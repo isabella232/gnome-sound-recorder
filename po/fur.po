@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
 "issues\n"
-"POT-Creation-Date: 2020-06-14 16:31+0000\n"
-"PO-Revision-Date: 2020-06-21 10:56+0200\n"
+"POT-Creation-Date: 2020-07-04 13:29+0000\n"
+"PO-Revision-Date: 2020-07-11 21:58+0200\n"
 "Last-Translator: Fabio Tomat <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <fur@li.org>\n"
 "Language: fur\n"
@@ -111,56 +111,67 @@ msgstr ""
 "Mapis canâi disponibii. Se no son impostazions di mape, il canâl stereo al "
 "ven doprât come predefinît."
 
+#: data/ui/row.ui:178
+msgid "Save"
+msgstr "Salve"
+
+#: data/ui/row.ui:237
+msgid "Delete"
+msgstr "Elimine"
+
+#: data/ui/row.ui:254
+msgid "Rename"
+msgstr "Cambie non"
+
 #: data/ui/window.ui:62
 msgid "Record"
 msgstr "Regjistre"
 
-#: data/ui/window.ui:335
+#: data/ui/window.ui:344
 msgid "Add Recordings"
 msgstr "Zonte regjistrazions"
 
-#: data/ui/window.ui:352
+#: data/ui/window.ui:361
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Dopre il pulsant <b>Regjistre</b> par fâ regjistrazions di sun"
 
-#: data/ui/window.ui:385
+#: data/ui/window.ui:394
 msgid "Preferred Format"
 msgstr "Formât preferît"
 
-#: data/ui/window.ui:387
-#| msgid "Ogg Vorbis"
+#: data/ui/window.ui:396
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: data/ui/window.ui:392
+#: data/ui/window.ui:401
 msgid "Opus"
 msgstr "Opus"
 
-#: data/ui/window.ui:397
+#: data/ui/window.ui:406
 msgid "FLAC"
 msgstr "FLAC"
 
-#: data/ui/window.ui:402
+#: data/ui/window.ui:411
 msgid "MP3"
 msgstr "MP3"
 
-#: data/ui/window.ui:407
+#: data/ui/window.ui:416
 msgid "M4A"
 msgstr "M4A"
 
-#: data/ui/window.ui:413
+#: data/ui/window.ui:422
 msgid "Audio Channel"
 msgstr "Canâl audio"
 
-#: data/ui/window.ui:415
+#: data/ui/window.ui:424
 msgid "Stereo"
 msgstr "Stereo"
 
-#: data/ui/window.ui:420
+#: data/ui/window.ui:429
 msgid "Mono"
 msgstr "Mono"
 
-#: data/ui/window.ui:428
+#: data/ui/window.ui:437
 msgid "About Sound Recorder"
 msgstr "Informazions su Regjistradôr di suns"
 
@@ -174,59 +185,59 @@ msgid "Sound Recorder started"
 msgstr "Regjistradôr di suns partît"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/application.js:165
+#: src/application.js:168
 msgid "translator-credits"
 msgstr "Fabio Tomat <f.t.public@gmail.com>"
 
-#: src/application.js:167
+#: src/application.js:170
 msgid "A Sound Recording Application for GNOME"
 msgstr "Une aplicazion par regjistrâ suns par GNOME"
 
 #. Translators: ""Recording %d"" is the default name assigned to a file created
 #. by the application (for example, "Recording 1").
-#: src/recorder.js:109
+#: src/recorder.js:107
 #, javascript-format
 msgid "Recording %d"
 msgstr "Regjistrazion %d"
 
-#: src/utils.js:52
+#: src/utils.js:45
 msgid "Yesterday"
 msgstr "Îr"
 
-#: src/utils.js:54
+#: src/utils.js:47
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d zornade indaûr"
 msgstr[1] "%d zornadis indûr"
 
-#: src/utils.js:58
+#: src/utils.js:49
 msgid "Last week"
 msgstr "Ultime setemane"
 
-#: src/utils.js:60
+#: src/utils.js:51
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d setemane indaûr"
 msgstr[1] "%d setemanis indaûr"
 
-#: src/utils.js:64
+#: src/utils.js:53
 msgid "Last month"
 msgstr "Ultin mês"
 
-#: src/utils.js:66
+#: src/utils.js:55
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d mês indaûr"
 msgstr[1] "%d mês indaûr"
 
-#: src/utils.js:70
+#: src/utils.js:57
 msgid "Last year"
 msgstr "Ultin àn"
 
-#: src/utils.js:72
+#: src/utils.js:59
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
@@ -299,9 +310,6 @@ msgstr[1] "%d agns indaûr"
 
 #~ msgid "Pause"
 #~ msgstr "Pause"
-
-#~ msgid "Delete"
-#~ msgstr "Elimine"
 
 #~ msgid "MOV"
 #~ msgstr "MOV"
