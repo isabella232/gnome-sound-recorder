@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
 "issues\n"
-"POT-Creation-Date: 2020-06-14 16:31+0000\n"
-"PO-Revision-Date: 2020-06-24 12:00-0400\n"
+"POT-Creation-Date: 2020-07-11 19:59+0000\n"
+"PO-Revision-Date: 2020-07-12 06:59+0800\n"
 "Last-Translator: Boyuan Yang <073plan@gmail.com>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -107,55 +107,67 @@ msgid ""
 "be used by default."
 msgstr "映射可用声道。如果未设置任何映射，将默认使用立体声声道。"
 
+#: data/ui/row.ui:209
+msgid "Delete"
+msgstr "删除"
+
+#: data/ui/row.ui:231
+msgid "Rename"
+msgstr "重命名"
+
+#: data/ui/row.ui:242
+msgid "Save"
+msgstr "保存"
+
 #: data/ui/window.ui:62
 msgid "Record"
 msgstr "录音"
 
-#: data/ui/window.ui:335
+#: data/ui/window.ui:345
 msgid "Add Recordings"
 msgstr "添加录音"
 
-#: data/ui/window.ui:352
+#: data/ui/window.ui:362
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "使用 <b>录音</b> 按钮创建录音"
 
-#: data/ui/window.ui:385
+#: data/ui/window.ui:395
 msgid "Preferred Format"
 msgstr "首选格式"
 
-#: data/ui/window.ui:387
+#: data/ui/window.ui:397
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: data/ui/window.ui:392
+#: data/ui/window.ui:402
 msgid "Opus"
 msgstr "Opus"
 
-#: data/ui/window.ui:397
+#: data/ui/window.ui:407
 msgid "FLAC"
 msgstr "FLAC"
 
-#: data/ui/window.ui:402
+#: data/ui/window.ui:412
 msgid "MP3"
 msgstr "MP3"
 
-#: data/ui/window.ui:407
+#: data/ui/window.ui:417
 msgid "M4A"
 msgstr "M4A"
 
-#: data/ui/window.ui:413
+#: data/ui/window.ui:423
 msgid "Audio Channel"
 msgstr "音频通道"
 
-#: data/ui/window.ui:415
+#: data/ui/window.ui:425
 msgid "Stereo"
 msgstr "立体声"
 
-#: data/ui/window.ui:420
+#: data/ui/window.ui:430
 msgid "Mono"
 msgstr "单声道"
 
-#: data/ui/window.ui:428
+#: data/ui/window.ui:438
 msgid "About Sound Recorder"
 msgstr "关于录音机"
 
@@ -169,61 +181,62 @@ msgid "Sound Recorder started"
 msgstr "录音机已启动"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/application.js:165
+#: src/application.js:168
 msgid "translator-credits"
 msgstr ""
 "tuhaihe <1132321739qq@gmail.com>, 2013.\n"
 "YunQiang Su <wzssyqa@gmail.com>, 2014.\n"
 "Sphinx Jiang <yishanj13@gmail.com>, 2014.\n"
 "liushuyu <liushuyu_011@126.com>, 2015.\n"
-"Jeff Bai <jeffbai@aosc.xyz>, 2016."
+"Jeff Bai <jeffbai@aosc.xyz>, 2016.\n"
+"Merrick Zhang <anphorea@gmail.com>, 2020."
 
-#: src/application.js:167
+#: src/application.js:170
 msgid "A Sound Recording Application for GNOME"
 msgstr "GNOME 平台的一款声音录制程序"
 
 #. Translators: ""Recording %d"" is the default name assigned to a file created
 #. by the application (for example, "Recording 1").
-#: src/recorder.js:109
+#: src/recorder.js:107
 #, javascript-format
 msgid "Recording %d"
 msgstr "录音 %d"
 
-#: src/utils.js:52
+#: src/utils.js:45
 msgid "Yesterday"
 msgstr "昨天"
 
-#: src/utils.js:54
+#: src/utils.js:47
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d 天前"
 
-#: src/utils.js:58
+#: src/utils.js:49
 msgid "Last week"
 msgstr "上周"
 
-#: src/utils.js:60
+#: src/utils.js:51
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d 周前"
 
-#: src/utils.js:64
+#: src/utils.js:53
 msgid "Last month"
 msgstr "上个月"
 
-#: src/utils.js:66
+#: src/utils.js:55
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d 个月前"
 
-#: src/utils.js:70
+#: src/utils.js:57
 msgid "Last year"
 msgstr "去年"
 
-#: src/utils.js:72
+#: src/utils.js:59
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
@@ -332,9 +345,6 @@ msgstr[0] "%d 年前"
 
 #~ msgid "Pause"
 #~ msgstr "暂停"
-
-#~ msgid "Delete"
-#~ msgstr "删除"
 
 #~ msgid "MOV"
 #~ msgstr "MOV"
