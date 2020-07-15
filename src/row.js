@@ -1,5 +1,5 @@
-/* exported Row RowState */
-const { Gdk, GObject, Gtk } = imports.gi;
+/* exported Row */
+const { Gdk, GObject, Gst, Gtk } = imports.gi;
 const { displayDateTime, formatTime } = imports.utils;
 
 var RowState = {
@@ -9,10 +9,12 @@ var RowState = {
 
 var Row = GObject.registerClass({
     Template: 'resource:///org/gnome/SoundRecorder/ui/row.ui',
-    InternalChildren: ['playbackStack', 'mainStack', 'playButton', 'pauseButton', 'name', 'entry', 'date', 'duration', 'saveBtn', 'revealer', 'renameStack', 'renameBtn', 'deleteBtn'],
+    InternalChildren: ['playbackStack', 'mainStack', 'playButton', 'pauseButton', 'name', 'entry', 'date', 'duration', 'saveBtn', 'revealer', 'seekBackward', 'seekForward', 'renameStack', 'renameBtn', 'deleteBtn'],
     Signals: {
         'play': { param_types: [GObject.TYPE_STRING] },
         'pause': {},
+        'seek-backward': {},
+        'seek-forward': {},
         'deleted': {},
     },
     Properties: {
@@ -24,9 +26,9 @@ var Row = GObject.registerClass({
     },
 }, class Row extends Gtk.ListBoxRow {
     _init(recording) {
-        super._init({});
         this._recording = recording;
         this._expanded = false;
+        super._init({});
 
         recording.bind_property('name', this._name, 'label', GObject.BindingFlags.SYNC_CREATE | GObject.BindingFlags.DEFAULT);
         recording.bind_property('name', this._entry, 'text', GObject.BindingFlags.SYNC_CREATE | GObject.BindingFlags.DEFAULT);
@@ -48,18 +50,21 @@ var Row = GObject.registerClass({
             this._date.label = displayDateTime(recording.timeModified);
 
         recording.connect('notify::duration', () => {
-            this._duration.label = formatTime(recording.duration);
+            this._duration.label = formatTime(recording.duration / Gst.SECOND);
         });
 
         this._playButton.connect('clicked', () => {
-            this.setState(RowState.PLAYING);
             this.emit('play', recording.uri);
+            this.state = RowState.PLAYING;
         });
 
         this._pauseButton.connect('clicked', () => {
-            this.setState(RowState.PAUSED);
             this.emit('pause');
+            this.state = RowState.PAUSED;
         });
+
+        this._seekBackward.connect('clicked', _ => this.emit('seek-backward'));
+        this._seekForward.connect('clicked', _ => this.emit('seek-forward'));
 
         this._renameBtn.connect('clicked', () => {
             this.editMode = true;
@@ -81,13 +86,6 @@ var Row = GObject.registerClass({
         } catch (e) {
             this._entry.get_style_context().add_class('error');
         }
-    }
-
-    setState(rowState) {
-        if (rowState === RowState.PLAYING)
-            this._playbackStack.visible_child_name = 'pause';
-        else if (rowState === RowState.PAUSED)
-            this._playbackStack.visible_child_name = 'play';
     }
 
     set editMode(state) {
@@ -117,5 +115,22 @@ var Row = GObject.registerClass({
 
     get expanded() {
         return this._expanded;
+    }
+
+    set state(rowState) {
+        this._state = rowState;
+
+        switch (rowState) {
+        case RowState.PLAYING:
+            this._playbackStack.visible_child_name = 'pause';
+            break;
+        case RowState.PAUSED:
+            this._playbackStack.visible_child_name = 'play';
+            break;
+        }
+    }
+
+    get state() {
+        return this._state;
     }
 });

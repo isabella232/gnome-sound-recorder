@@ -23,61 +23,6 @@
                 <property name="can_focus">False</property>
                 <property name="no_show_all">True</property>
                 <child>
-                  <object class="GtkStack" id="playbackStack">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="margin_left">12</property>
-                    <property name="margin_start">12</property>
-                    <child>
-                      <object class="GtkButton" id="playButton">
-                        <property name="name">playButton</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="halign">center</property>
-                        <property name="valign">center</property>
-                        <property name="always_show_image">True</property>
-                        <child>
-                          <object class="GtkImage" id="playIcon">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="icon_name">media-playback-start-symbolic</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="name">play</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="pauseButton">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="halign">center</property>
-                        <property name="valign">center</property>
-                        <property name="always_show_image">True</property>
-                        <child>
-                          <object class="GtkImage" id="pauseIcon">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="icon_name">media-playback-pause-symbolic</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="name">pause</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
                   <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
@@ -91,9 +36,6 @@
                         <property name="halign">end</property>
                         <property name="margin_left">12</property>
                         <property name="margin_right">12</property>
-                        <style>
-                          <class name="dim-label"/>
-                        </style>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -114,6 +56,9 @@
                             <property name="ellipsize">end</property>
                             <property name="single_line_mode">True</property>
                             <property name="xalign">0</property>
+                            <style>
+                              <class name="title"/>
+                            </style>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -125,6 +70,7 @@
                           <object class="GtkLabel" id="date">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_top">4</property>
                             <property name="xalign">0</property>
                             <style>
                               <class name="subtitle"/>
@@ -186,18 +132,6 @@
                 <property name="can_focus">False</property>
                 <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkSeparator">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="margin_bottom">12</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
                   <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
@@ -206,18 +140,26 @@
                     <property name="margin_bottom">12</property>
                     <child>
                       <object class="GtkButton" id="deleteBtn">
-                        <property name="label" translatable="yes">Delete</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
+                        <property name="tooltip_text" translatable="yes">Delete</property>
+                        <property name="halign">center</property>
+                        <property name="valign">center</property>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="icon_name">user-trash-symbolic</property>
+                          </object>
+                        </child>
                         <style>
-                          <class name="destructive-action"/>
+                          <class name="pill-button"/>
                         </style>
                       </object>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="pack_type">end</property>
                         <property name="position">0</property>
                       </packing>
                     </child>
@@ -225,13 +167,25 @@
                       <object class="GtkStack" id="renameStack">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="margin_right">12</property>
+                        <property name="hhomogeneous">False</property>
                         <child>
                           <object class="GtkButton" id="renameBtn">
-                            <property name="label" translatable="yes">Rename</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Rename</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <child>
+                              <object class="GtkImage">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="icon_name">document-edit-symbolic</property>
+                              </object>
+                            </child>
+                            <style>
+                              <class name="pill-button"/>
+                            </style>
                           </object>
                           <packing>
                             <property name="name">rename</property>
@@ -239,13 +193,24 @@
                         </child>
                         <child>
                           <object class="GtkButton" id="saveBtn">
-                            <property name="label" translatable="yes">Save</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="can_default">True</property>
                             <property name="receives_default">False</property>
+                            <property name="tooltip_text" translatable="yes">Save</property>
                             <property name="valign">center</property>
                             <signal name="clicked" handler="onSaveRecording" swapped="no"/>
+                            <child>
+                              <object class="GtkImage">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="icon_name">emblem-ok-symbolic</property>
+                              </object>
+                            </child>
+                            <style>
+                              <class name="suggested-action"/>
+                              <class name="pill-button"/>
+                            </style>
                           </object>
                           <packing>
                             <property name="name">save</property>
@@ -258,6 +223,145 @@
                         <property name="fill">True</property>
                         <property name="pack_type">end</property>
                         <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="halign">center</property>
+                        <property name="valign">center</property>
+                        <property name="hexpand">True</property>
+                        <property name="spacing">18</property>
+                        <child>
+                          <object class="GtkButton" id="seekBackward">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Seek 10s Backward</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <child>
+                              <object class="GtkImage">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="icon_name">skip-back-symbolic</property>
+                              </object>
+                            </child>
+                            <style>
+                              <class name="pill-button"/>
+                            </style>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkStack" id="playbackStack">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <child>
+                              <object class="GtkButton" id="playButton">
+                                <property name="name">playButton</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="tooltip_text" translatable="yes">Play</property>
+                                <property name="halign">center</property>
+                                <property name="valign">center</property>
+                                <property name="always_show_image">True</property>
+                                <child>
+                                  <object class="GtkImage" id="playIcon">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">7</property>
+                                    <property name="margin_bottom">7</property>
+                                    <property name="icon_name">media-playback-start-symbolic</property>
+                                    <property name="icon_size">3</property>
+                                  </object>
+                                </child>
+                                <style>
+                                  <class name="pill-button"/>
+                                </style>
+                              </object>
+                              <packing>
+                                <property name="name">play</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="pauseButton">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="tooltip_text" translatable="yes">Pause</property>
+                                <property name="halign">center</property>
+                                <property name="valign">center</property>
+                                <property name="always_show_image">True</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">7</property>
+                                    <property name="margin_bottom">7</property>
+                                    <property name="icon_name">media-playback-pause-symbolic</property>
+                                    <property name="icon_size">3</property>
+                                  </object>
+                                </child>
+                                <style>
+                                  <class name="pill-button"/>
+                                </style>
+                              </object>
+                              <packing>
+                                <property name="name">pause</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="seekForward">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Seek 10s Forward</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <property name="always_show_image">True</property>
+                            <child>
+                              <object class="GtkImage">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="icon_name">skip-forward-symbolic</property>
+                              </object>
+                            </child>
+                            <style>
+                              <class name="pill-button"/>
+                            </style>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">2</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">3</property>
                       </packing>
                     </child>
                   </object>

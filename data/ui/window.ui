@@ -196,6 +196,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
+                                <property name="tooltip_text" translatable="yes">Resume Recording</property>
                                 <property name="halign">center</property>
                                 <property name="always_show_image">True</property>
                                 <signal name="clicked" handler="onRecorderResume" swapped="no"/>
@@ -219,6 +220,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
+                                <property name="tooltip_text" translatable="yes">Pause Recording</property>
                                 <property name="halign">center</property>
                                 <property name="always_show_image">True</property>
                                 <signal name="clicked" handler="onRecorderPause" swapped="no"/>
@@ -250,6 +252,7 @@
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Stop Recording</property>
                             <property name="halign">center</property>
                             <property name="valign">center</property>
                             <signal name="clicked" handler="onRecorderStop" swapped="no"/>
@@ -278,6 +281,7 @@
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Cancel Recording</property>
                             <property name="halign">center</property>
                             <property name="valign">center</property>
                             <property name="always_show_image">True</property>

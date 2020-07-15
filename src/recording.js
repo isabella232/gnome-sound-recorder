@@ -1,5 +1,5 @@
 /* exported Recording */
-const { GLib, GObject, Gst, GstPbutils } = imports.gi;
+const { GLib, GObject, GstPbutils } = imports.gi;
 
 var Recording = new GObject.registerClass({
     Properties: {
@@ -29,7 +29,7 @@ var Recording = new GObject.registerClass({
         var discoverer = new GstPbutils.Discoverer();
         discoverer.start();
         discoverer.connect('discovered', (_discoverer, audioInfo) => {
-            this._duration = audioInfo.get_duration()  / Gst.SECOND;
+            this._duration = audioInfo.get_duration();
             this.notify('duration');
         });
 

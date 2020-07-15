@@ -17,14 +17,33 @@
  * Author: Meg Ford <megford@gnome.org>
  *
  */
-const { Gio, Gst, Gtk } = imports.gi;
+const { Gio, GObject, Gst, Gtk, GLib } = imports.gi;
 
-
-var Player = class Player {
-    constructor() {
+var Player = new GObject.registerClass({
+    Properties: {
+        'duration': GObject.ParamSpec.int(
+            'duration',
+            'Recording Duration', 'Recording duration in seconds',
+            GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
+            0, GLib.MAXINT16, 0),
+        'position': GObject.ParamSpec.int(
+            'position',
+            'Player playback position', 'Recording playback position',
+            GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
+            0, GLib.MAXINT16, 0),
+        'state': GObject.ParamSpec.enum(
+            'state',
+            'Player playback state', 'Recording playback state',
+            GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
+            Gst.State,
+            Gst.State.NULL),
+    },
+}, class Player extends GObject.Object {
+    _init() {
         this.player = Gst.ElementFactory.make('playbin', 'play');
         let sink = Gst.ElementFactory.make('pulsesink', 'sink');
         this.player.set_property('audio-sink', sink);
+        super._init({});
 
         this.playerBus = this.player.get_bus();
         this.playerBus.connect('message', (playerBus, message) => {
@@ -34,18 +53,18 @@ var Player = class Player {
     }
 
     play(uri) {
-        this.player.set_state(Gst.State.NULL);
+        this.stop();
         this.playerBus.add_signal_watch();
         this.player.set_property('uri', uri);
-        this.player.set_state(Gst.State.PLAYING);
+        this.state = Gst.State.PLAYING;
     }
 
     pause() {
-        this.player.set_state(Gst.State.PAUSED);
+        this.state = Gst.State.PAUSED;
     }
 
     stop() {
-        this.player.set_state(Gst.State.NULL);
+        this.state = Gst.State.NULL;
         this.playerBus.remove_watch();
     }
 
@@ -74,4 +93,29 @@ var Player = class Player {
         errorDialog.connect('response', () => errorDialog.destroy());
         errorDialog.show();
     }
-};
+
+    get duration() {
+        const duration = this.player.query_duration(Gst.Format.TIME)[1];
+        return duration >= 0 ? duration : 0;
+    }
+
+    set position(value) {
+        this._position = value >= 0 ? value : 0;
+        this.player.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH, this._position);
+        this.notify('position');
+    }
+
+    get position() {
+        return this.player.query_position(Gst.Format.TIME)[1];
+    }
+
+    set state(value) {
+        this._state = value;
+        this.player.set_state(value);
+        this.notify('state');
+    }
+
+    get state() {
+        return this._state;
+    }
+});

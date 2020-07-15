@@ -1,9 +1,10 @@
 /* exported RecordingsListBox */
-const { GObject, Gtk } = imports.gi;
+const { GObject, Gtk, Gst } = imports.gi;
 const { Row, RowState } = imports.row;
 
 var RecordingsListBox = new GObject.registerClass(class RecordingsListBox extends Gtk.ListBox {
     _init(model, player) {
+        this._player = player;
         super._init({
             valign: Gtk.Align.FILL,
             margin_left: 8,
@@ -15,18 +16,31 @@ var RecordingsListBox = new GObject.registerClass(class RecordingsListBox extend
 
         this.get_style_context().add_class('preferences');
 
+        this._player.connect('notify::state', _player => {
+            if (_player.state === Gst.State.NULL && this.activePlayingRow)
+                this.activePlayingRow.state = RowState.PAUSED;
+        });
+
         this.bind_model(model, recording => {
             let row = new Row(recording);
-
             row.connect('play', _row => {
                 if (this.activePlayingRow && this.activePlayingRow !== _row)
-                    this.activePlayingRow.setState(RowState.PAUSED);
+                    this.activePlayingRow.state = RowState.PAUSED;
 
                 player.play(recording.uri);
                 this.activePlayingRow = _row;
             });
 
-            row.connect('pause', () => player.pause());
+            row.connect('pause', _row => {
+                this._player.pause();
+            });
+
+            row.connect('seek-backward', _ => {
+                player.position -= 10 * Gst.SECOND;
+            });
+            row.connect('seek-forward', _ => {
+                player.position += 10 * Gst.SECOND;
+            });
 
             row.connect('deleted', () => {
                 if (row === this.activeRow)

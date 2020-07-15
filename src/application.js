@@ -128,6 +128,7 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
         super.vfunc_startup();
 
         this._loadStyleSheet();
+        Gtk.IconTheme.get_default().add_resource_path('/org/gnome/SoundRecorder/icons/');
         log(_('Sound Recorder started'));
         Handy.init();
         Gst.init(null);
