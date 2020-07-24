@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/issues\n"
-"POT-Creation-Date: 2020-06-06 12:28+0000\n"
+"POT-Creation-Date: 2020-07-04 13:29+0000\n"
 "PO-Revision-Date: 2019-03-03 20:18+0100\n"
 "Last-Translator: Jordi Mas <jmas@softcatala.org>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "X-Generator: Poedit 2.1.1\n"
 
 #: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:5
-#: data/org.gnome.SoundRecorder.desktop.in.in:4 src/application.js:37
+#: data/org.gnome.SoundRecorder.desktop.in.in:4 src/application.js:32
 msgid "Sound Recorder"
 msgstr "Enregistradora de so"
 
@@ -112,243 +112,141 @@ msgstr ""
 "Mapa els canals disponibles. Si no hi ha cap mapa establert, el canal "
 "estèreo s'utilitzarà per defecte."
 
-#: data/ui/window.ui:57
+#: data/ui/row.ui:178
+msgid "Save"
+msgstr "Desa"
+
+#: data/ui/row.ui:237
+msgid "Delete"
+msgstr "Suprimeix"
+
+#: data/ui/row.ui:254
+msgid "Rename"
+msgstr "Canvia el nom"
+
+#: data/ui/window.ui:62
 msgid "Record"
 msgstr "Enregistra"
 
-#: data/ui/window.ui:329
+#: data/ui/window.ui:344
 msgid "Add Recordings"
 msgstr "Afegeix enregistraments"
 
-#: data/ui/window.ui:346
+#: data/ui/window.ui:361
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr ""
 "Utilitzeu el botó <b>Enregistra</b> per a crear enregistraments d'àudio"
 
-#: data/ui/window.ui:379
+#: data/ui/window.ui:394
 msgid "Preferred Format"
 msgstr "Format preferit"
 
-#: data/ui/window.ui:381
+#: data/ui/window.ui:396
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: data/ui/window.ui:386
+#: data/ui/window.ui:401
 msgid "Opus"
 msgstr "Opus"
 
-#: data/ui/window.ui:391
+#: data/ui/window.ui:406
 msgid "FLAC"
 msgstr "FLAC"
 
-#: data/ui/window.ui:396
+#: data/ui/window.ui:411
 msgid "MP3"
 msgstr "MP3"
 
-#: data/ui/window.ui:401
+#: data/ui/window.ui:416
 msgid "M4A"
 msgstr "M4A"
 
-#: data/ui/window.ui:407
+#: data/ui/window.ui:422
 msgid "Audio Channel"
 msgstr "Canal d'àudio"
 
-#: data/ui/window.ui:409
+#: data/ui/window.ui:424
 msgid "Stereo"
 msgstr "Estèreo"
 
-#: data/ui/window.ui:414
+#: data/ui/window.ui:429
 msgid "Mono"
 msgstr "Mono"
 
-#: data/ui/window.ui:422
+#: data/ui/window.ui:437
 msgid "About Sound Recorder"
 msgstr "Quant a l'Enregistradora de so"
 
-#: src/application.js:136
-msgid "Sound Recorder started"
-msgstr "S'ha iniciat l'Enregistradora de so"
-
 #. Translators: "Recordings" here refers to the name of the directory where
 #. the application places files
-#: src/application.js:145
+#: src/application.js:24
 msgid "Recordings"
 msgstr "Enregistraments"
 
+#: src/application.js:131
+msgid "Sound Recorder started"
+msgstr "S'ha iniciat l'Enregistradora de so"
+
 #. Translators: Replace "translator-credits" with your names, one name per
 #. line
-#: src/application.js:174
+#: src/application.js:168
 msgid "translator-credits"
 msgstr "Pau Iranzo <pau.iranzo@softcatala.org>"
 
-#: src/application.js:176
+#: src/application.js:170
 msgid "A Sound Recording Application for GNOME"
 msgstr "Una aplicació d'enregistrament de so per al GNOME"
 
-#. Translators: ""Recording from %F %A at %T"" is the default name assigned to
-#. a file created
-#. by the application (for example, "Recording from 2020-03-11 Wednesday at
-#. 19:43:05").
-#: src/recorder.js:114
-msgid "Recording from %F %A at %T"
-msgstr "Enregistrament des de %F %A a les %T"
+#. Translators: ""Recording %d"" is the default name assigned to a file
+#. created
+#. by the application (for example, "Recording 1").
+#: src/recorder.js:107
+#, javascript-format
+#| msgid "Recordings"
+msgid "Recording %d"
+msgstr "Enregistrament %d"
 
-#: src/utils.js:52
+#: src/utils.js:45
 msgid "Yesterday"
 msgstr "Ahir"
 
-#: src/utils.js:54
+#: src/utils.js:47
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "fa %d dia"
 msgstr[1] "fa %d dies"
 
-#: src/utils.js:58
+#: src/utils.js:49
 msgid "Last week"
 msgstr "Darrera setmana"
 
-#: src/utils.js:60
+#: src/utils.js:51
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "fa %d setmana"
 msgstr[1] "fa %d setmanes"
 
-#: src/utils.js:64
+#: src/utils.js:53
 msgid "Last month"
 msgstr "Darrer mes"
 
-#: src/utils.js:66
+#: src/utils.js:55
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "fa %d mes"
 msgstr[1] "fa %d mesos"
 
-#: src/utils.js:70
+#: src/utils.js:57
 msgid "Last year"
 msgstr "Darrer any"
 
-#: src/utils.js:72
+#: src/utils.js:59
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "fa %d any"
 msgstr[1] "fa %d anys"
 
-#~ msgid "Microphone volume level"
-#~ msgstr "Nivell de volum del micròfon"
-
-#~ msgid "Microphone volume level."
-#~ msgstr "Nivell de volum del micròfon."
-
-#~ msgid "Speaker volume level"
-#~ msgstr "Nivell de volum de l'altaveu"
-
-#~ msgid "Speaker volume level."
-#~ msgstr "Nivell de volum de l'altaveu."
-
-#~ msgid "org.gnome.SoundRecorder"
-#~ msgstr "org.gnome.SoundRecorder"
-
-#~ msgid "SoundRecorder"
-#~ msgstr "Enregistradora de so"
-
-#~ msgid "Info"
-#~ msgstr "Informació"
-
-#~ msgid "Cancel"
-#~ msgstr "Cancel·la"
-
-#~ msgid "Done"
-#~ msgstr "Fet"
-
-#~ msgctxt "File Name"
-#~ msgid "Name"
-#~ msgstr "Nom"
-
-#~ msgid "Source"
-#~ msgstr "Font"
-
-#~ msgid "Date Modified"
-#~ msgstr "Data de modificació"
-
-#~ msgid "Date Created"
-#~ msgstr "Data de creació"
-
-#~ msgctxt "Media Type"
-#~ msgid "Type"
-#~ msgstr "Tipus"
-
-#~ msgid "Unknown"
-#~ msgstr "Desconegut"
-
-#~ msgid "Preferences"
-#~ msgstr "Preferències"
-
-#~ msgid "Recording…"
-#~ msgstr "S'està enregistrant…"
-
-#~ msgid "%d Recorded Sound"
-#~ msgid_plural "%d Recorded Sounds"
-#~ msgstr[0] "%d àudio enregistrat"
-#~ msgstr[1] "%d àudios enregistrats"
-
-#~ msgid "No Recorded Sounds"
-#~ msgstr "Cap àudio enregistrat"
-
-#~ msgid "Play"
-#~ msgstr "Reprodueix"
-
-#~ msgid "Pause"
-#~ msgstr "Fes una pausa"
-
-#~ msgid "Delete"
-#~ msgstr "Suprimeix"
-
-#~ msgid "MOV"
-#~ msgstr "MOV"
-
-#~ msgid "Load More"
-#~ msgstr "Carrega'n més"
-
-#~ msgid "Unable to play recording"
-#~ msgstr "No es pot reproduir l'enregistrament"
-
-#~ msgid "Default mode"
-#~ msgstr "Mode per defecte"
-
-#~ msgid "Volume"
-#~ msgstr "Volum"
-
-#~ msgid "Microphone"
-#~ msgstr "Micròfon"
-
-#~ msgid "Unable to create Recordings directory."
-#~ msgstr "No s'ha pogut crear el directori «Enregistraments»."
-
-#~ msgid "Please install the GStreamer 1.0 PulseAudio plugin."
-#~ msgstr "Instal·leu el connector PulseAudio de GStreamer 1.0."
-
-#~ msgid "Your audio capture settings are invalid."
-#~ msgstr "Els paràmetres de captura d'àudio no són vàlids."
-
-#~ msgid "Not all elements could be created."
-#~ msgstr "No s'han pogut crear tots els elements."
-
-#~ msgid "Not all of the elements were linked."
-#~ msgstr "No tots els elements estaven enllaçats."
-
-#~ msgid "No Media Profile was set."
-#~ msgstr "No s'ha establert cap perfil de format."
-
-#~ msgid ""
-#~ "Unable to set the pipeline \n"
-#~ " to the recording state."
-#~ msgstr ""
-#~ "No s'ha pogut establir la canonada \n"
-#~ "a l'estat d'enregistrament."
-
-#~ msgid "Clip %d"
-#~ msgstr "Retall %d"
