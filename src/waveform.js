@@ -1,99 +1,89 @@
-/* exported WaveForm */
+
+/* exported WaveForm
 /*
-* Copyright 2013 Meg Ford
-* This library is free software; you can redistribute it and/or
-* modify it under the terms of the GNU Library General Public
-* License as published by the Free Software Foundation; either
-* version 2 of the License, or (at your option) any later version.
-*
-* This library is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-* Library General Public License for more details.
-*
-* You should have received a copy of the GNU Library General Public
-* License along with this library; if not, see <http://www.gnu.org/licenses/>.
-*
-*
-* Author: Meg Ford <megford@gnome.org>
-*/
+ * Copyright 2013 Meg Ford
+             2020 Kavan Mevada
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, see <http://www.gnu.org/licenses/>.
+ *
+ *  Author: Meg Ford <megford@gnome.org>
+ *          Kavan Mevada <kavanmevada@gmail.com>
+ *
+ */
 
 // based on code from Pitivi
 
 const { GObject, Gtk } = imports.gi;
 const Cairo = imports.cairo;
 
-const WAVE_SAMPLES = 40;
+const GUTTER = 4;
 
 var WaveForm = GObject.registerClass({
-    GTypeName: 'WaveForm',
+    Properties: {
+        'peak': GObject.ParamSpec.float(
+            'peak',
+            'Waveform current peak', 'Waveform current peak in float [0, 1]',
+            GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
+            0.0, 1.0, 0.0),
+    },
 }, class WaveForm extends Gtk.DrawingArea {
-
     _init() {
+        this.peaks = [];
         super._init({
             vexpand: true,
             valign: Gtk.Align.FILL,
         });
-        this.peaks = [];
         this.show();
     }
 
-    vfunc_draw(cr) {
-        let xAxis = 0;
-        let start = this.recordedTime;
-        let end = start + WAVE_SAMPLES;
-        let width = this.get_allocated_width();
-        let height = this.get_allocated_height();
-        let pixelsPerSample = width / WAVE_SAMPLES;
-        let gradient = new Cairo.LinearGradient(0, 0, width, height);
+    vfunc_draw(ctx) {
+        const maxHeight = this.get_allocated_height();
+        const vertiCenter = maxHeight / 2;
+        const horizCenter = this.get_allocated_width() / 2;
 
-        gradient.addColorStopRGBA(0.75, 0.0, 0.72, 0.64, 0.35);
-        gradient.addColorStopRGBA(0.0, 0.2, 0.54, 0.47, 0.22);
-        cr.setLineWidth(1);
-        cr.setSourceRGBA(0.0, 185, 161, 255);
+        let pointer = horizCenter;
 
-        for (let i = start; i <= end; i++) {
+        ctx.setLineCap(Cairo.LineCap.ROUND);
+        ctx.setLineWidth(2);
+        ctx.setSourceRGBA(255, 0, 0, 1);
 
-            // Keep moving until we get to a non-null array member
-            if (this.peaks[i] && this.peaks[i] < 0)
-                cr.moveTo(xAxis * pixelsPerSample, height - this.peaks[i] * height);
+        ctx.moveTo(horizCenter, vertiCenter - maxHeight);
+        ctx.lineTo(horizCenter, vertiCenter + maxHeight);
+        ctx.stroke();
 
+        ctx.setLineWidth(1);
+        ctx.setSourceRGBA(0, 0, 0, 1);
+        for (let index = this.peaks.length; index > 0; index--) {
+            const peak = this.peaks[index];
 
-            // Start drawing when we reach the first non-null array member
-            if (this.peaks[i] && this.peaks[i] >= 0) {
+            ctx.moveTo(pointer, vertiCenter + peak * maxHeight);
+            ctx.lineTo(pointer, vertiCenter - peak * maxHeight);
+            ctx.stroke();
 
-                if (start >= WAVE_SAMPLES && xAxis === 0)
-                    cr.moveTo(xAxis * pixelsPerSample, height);
-
-                cr.lineTo(xAxis * pixelsPerSample, height - this.peaks[i] * height);
-            }
-
-            xAxis += 1;
+            pointer -= GUTTER;
         }
-
-
-        cr.lineTo(xAxis * pixelsPerSample, height);
-        cr.closePath();
-        cr.strokePreserve();
-        cr.setSource(gradient);
-        cr.fillPreserve();
-        cr.$dispose();
     }
 
-    drawAt(time, peak) {
-        // Reset on Time = 0
-        if (time === 0)
-            this.peaks = Array(WAVE_SAMPLES).fill(-this.get_allocated_height());
+    set peak(p) {
+        if (this.peaks.length > this.get_allocated_width() / (2 * GUTTER))
+            this.peaks.shift();
 
-        this.peaks.push(peak);
-        this.recordedTime = time;
+        this.peaks.push(p.toFixed(2));
         this.queue_draw();
     }
 
     destroy() {
-        this.recordedTime = 0;
         this.peaks.length = 0;
         this.queue_draw();
     }
-
 });

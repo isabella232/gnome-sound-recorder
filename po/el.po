@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
 "issues\n"
-"POT-Creation-Date: 2020-04-19 08:00+0000\n"
-"PO-Revision-Date: 2020-05-16 00:08+0300\n"
+"POT-Creation-Date: 2020-07-04 13:29+0000\n"
+"PO-Revision-Date: 2020-07-13 23:55+0300\n"
 "Last-Translator: Efstathios Iosifidis <eiosifidis@gnome.org>\n"
 "Language-Team: Greek, Modern (1453-) <opensuse-translation-el@opensuse.org>\n"
 "Language: el\n"
@@ -22,17 +22,16 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "X-Project-Style: gnome\n"
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in:5
-#: data/org.gnome.SoundRecorder.desktop.in.in:4 data/ui/window.ui:207
-#: src/application.js:39 src/record.js:110
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:5
+#: data/org.gnome.SoundRecorder.desktop.in.in:4 src/application.js:32
 msgid "Sound Recorder"
 msgstr "Εγγραφή ήχου"
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in:6
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:6
 msgid "A simple, modern sound recorder for GNOME"
 msgstr "Ένας απλός, σύγχρονος εγγραφέας ήχου για το GNOME"
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in:10
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:10
 msgid ""
 "Sound Recorder provides a simple and modern interface that provides a "
 "straight-forward way to record and play audio. It allows you to do basic "
@@ -42,7 +41,7 @@ msgstr ""
 "τρόπο εγγραφής και αναπαραγωγής ήχου. Σας επιτρέπει να κάνετε βασική "
 "επεξεργασία και δημιουργία φωνητικών υπενθυμίσεων."
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in:15
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:15
 msgid ""
 "Sound Recorder automatically handles the saving process so that you do not "
 "need to worry about accidentally discarding the previous recording."
@@ -50,75 +49,17 @@ msgstr ""
 "Η Εγγραφή ήχου χειρίζεται αυτόματα τη διαδικασία αποθήκευσης, έτσι ώστε να "
 "μην χρειάζεται να ανησυχείτε για κατά λάθος απόρριψη προηγούμενης εγγραφής."
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in:19
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:19
 msgid "Supported audio formats:"
 msgstr "Υποστηριζόμενες μορφές ήχου:"
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in:21
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:21
 msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
 msgstr "Ogg Vorbis, Opus, FLAC, MP3 και MOV"
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in.in:47
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:47
 msgid "The GNOME Project"
 msgstr "Το έργο GNOME"
-
-#: data/org.gnome.SoundRecorder.gschema.xml.in:12
-msgid "Window size"
-msgstr "Μέγεθος παραθύρου"
-
-#: data/org.gnome.SoundRecorder.gschema.xml.in:13
-msgid "Window size (width and height)."
-msgstr "Μέγεθος παραθύρου (πλάτος και ύψος)."
-
-#: data/org.gnome.SoundRecorder.gschema.xml.in:17
-msgid "Window position"
-msgstr "Θέση παραθύρου"
-
-#: data/org.gnome.SoundRecorder.gschema.xml.in:18
-msgid "Window position (x and y)."
-msgstr "Θέση παραθύρου (x και y)."
-
-#: data/org.gnome.SoundRecorder.gschema.xml.in:22
-msgid "Maps media types to audio encoder preset names."
-msgstr ""
-"Χαρτογραφεί τύπους πολυμέσων στα προκαθορισμένα ονόματα κωδικοποιητή ήχου."
-
-#: data/org.gnome.SoundRecorder.gschema.xml.in:23
-msgid ""
-"Maps media types to audio encoder preset names. If there is no mapping set, "
-"the default encoder settings will be used."
-msgstr ""
-"Χαρτογραφεί τύπους πολυμέσων στα προκαθορισμένα ονόματα κωδικοποιητή ήχου. "
-"Αν δεν υπάρχει ρυθμισμένη χαρτογράφηση, θα χρησιμοποιηθούν οι προεπιλεγμένες "
-"ρυθμίσεις κωδικοποιητή."
-
-#: data/org.gnome.SoundRecorder.gschema.xml.in:27
-msgid "Available channels"
-msgstr "Διαθέσιμα κανάλια"
-
-#: data/org.gnome.SoundRecorder.gschema.xml.in:28
-msgid ""
-"Maps available channels. If there is not no mapping set, stereo channel will "
-"be used by default."
-msgstr ""
-"Χαρτογραφεί τα διαθέσιμα κανάλια. Αν δεν υπάρχει ρυθμισμένη χαρτογράφηση, θα "
-"χρησιμοποιηθεί το προεπιλεγμένο στερεοφωνικό κανάλι."
-
-#: data/org.gnome.SoundRecorder.gschema.xml.in:32
-msgid "Microphone volume level"
-msgstr "Ένταση ήχου μικροφώνου"
-
-#: data/org.gnome.SoundRecorder.gschema.xml.in:33
-msgid "Microphone volume level."
-msgstr "Ένταση ήχου μικροφώνου."
-
-#: data/org.gnome.SoundRecorder.gschema.xml.in:37
-msgid "Speaker volume level"
-msgstr "Ένταση ήχου ηχείων"
-
-#: data/org.gnome.SoundRecorder.gschema.xml.in:38
-msgid "Speaker volume level."
-msgstr "Ένταση ήχου ηχείων."
 
 #: data/org.gnome.SoundRecorder.desktop.in.in:5
 msgid "Record sound via the microphone and play it back"
@@ -129,104 +70,123 @@ msgstr "Εγγραφή ήχου μέσα από το μικρόφωνο και �
 msgid "Audio;Application;Record;"
 msgstr "Ήχος;Εφαρμογή;Εγγραφή;Audio;Application;Record;"
 
-#: data/ui/window.ui:58 data/ui/infodialog.ui:188
-msgid "Done"
-msgstr "Έτοιμο"
+#: data/org.gnome.SoundRecorder.gschema.xml.in:16
+msgid "Window size"
+msgstr "Μέγεθος παραθύρου"
 
-#: data/ui/window.ui:86
-msgid "Recording"
-msgstr "Εγγραφή"
+#: data/org.gnome.SoundRecorder.gschema.xml.in:17
+msgid "Window size (width and height)."
+msgstr "Μέγεθος παραθύρου (πλάτος και ύψος)."
 
-#: data/ui/window.ui:163
-msgid "Use the <b>Record</b> button to make sound recordings"
-msgstr "Χρησιμοποιήστε το πλήκτρο <b>Εγγραφή</b> για εγγραφή ήχου"
+#: data/org.gnome.SoundRecorder.gschema.xml.in:21
+msgid "Window position"
+msgstr "Θέση παραθύρου"
 
-#: data/ui/window.ui:179
-msgid "Add Recordings"
-msgstr "Προσθήκη εγγραφών"
+#: data/org.gnome.SoundRecorder.gschema.xml.in:22
+msgid "Window position (x and y)."
+msgstr "Θέση παραθύρου (x και y)."
 
-#: data/ui/window.ui:238
-msgid "Record"
-msgstr "Ηχογράφηση"
+#: data/org.gnome.SoundRecorder.gschema.xml.in:26
+msgid "Maps media types to audio encoder preset names."
+msgstr ""
+"Χαρτογραφεί τύπους πολυμέσων στα προκαθορισμένα ονόματα κωδικοποιητή ήχου."
 
-#: data/ui/preferences.ui:17 src/mainWindow.js:92
-msgid "Preferences"
-msgstr "Προτιμήσεις"
+#: data/org.gnome.SoundRecorder.gschema.xml.in:27
+msgid ""
+"Maps media types to audio encoder preset names. If there is no mapping set, "
+"the default encoder settings will be used."
+msgstr ""
+"Χαρτογραφεί τύπους πολυμέσων στα προκαθορισμένα ονόματα κωδικοποιητή ήχου. "
+"Αν δεν υπάρχει ρυθμισμένη χαρτογράφηση, θα χρησιμοποιηθούν οι προεπιλεγμένες "
+"ρυθμίσεις κωδικοποιητή."
 
-#: data/ui/preferences.ui:62
-msgid "Preferred format"
-msgstr "Προτιμώμενη μορφή"
+#: data/org.gnome.SoundRecorder.gschema.xml.in:31
+msgid "Available channels"
+msgstr "Διαθέσιμα κανάλια"
 
-#: data/ui/preferences.ui:88
-msgid "Default mode"
-msgstr "Προεπιλεγμένη λειτουργία"
+#: data/org.gnome.SoundRecorder.gschema.xml.in:32
+msgid ""
+"Maps available channels. If there is not no mapping set, stereo channel will "
+"be used by default."
+msgstr ""
+"Χαρτογραφεί τα διαθέσιμα κανάλια. Αν δεν υπάρχει ρυθμισμένη χαρτογράφηση, θα "
+"χρησιμοποιηθεί το προεπιλεγμένο στερεοφωνικό κανάλι."
 
-#: data/ui/preferences.ui:103
-msgid "Stereo"
-msgstr "Στερεοφωνικό"
+#: data/ui/row.ui:178
+msgid "Save"
+msgstr "Αποθήκευση"
 
-#: data/ui/preferences.ui:104
-msgid "Mono"
-msgstr "Μονοφωνικό"
-
-#: data/ui/preferences.ui:118
-msgid "Volume"
-msgstr "Ένταση ήχου"
-
-#: data/ui/preferences.ui:131
-msgid "Microphone"
-msgstr "Μικρόφωνο"
-
-#: data/ui/infodialog.ui:34
-msgid "File Name"
-msgstr "Όνομα"
-
-#: data/ui/infodialog.ui:49
-msgid "Source"
-msgstr "Πηγή"
-
-#: data/ui/infodialog.ui:64
-msgid "Date Modified"
-msgstr "Ημερομηνία τροποποίησης"
-
-#: data/ui/infodialog.ui:79
-msgid "Date Created"
-msgstr "Ημερομηνία δημιουργίας"
-
-#: data/ui/infodialog.ui:94
-msgid "Media Type"
-msgstr "Τύπος μέσου"
-
-#: data/ui/infodialog.ui:154
-msgid "Unknown"
-msgstr "Άγνωστο"
-
-#: data/ui/infodialog.ui:177
-msgid "Info"
-msgstr "Πληροφορίες"
-
-#: data/ui/infodialog.ui:180
-msgid "Cancel"
-msgstr "Ακύρωση"
-
-#: data/ui/row.ui:127
+#: data/ui/row.ui:237
 msgid "Delete"
 msgstr "Διαγραφή"
 
-#: data/ui/row.ui:153
-msgid "Details"
-msgstr "Λεπτομέρειες"
+#: data/ui/row.ui:254
+msgid "Rename"
+msgstr "Μετονομασία"
 
-#: src/application.js:84
-msgid "Sound Recorder started"
-msgstr "Ξεκίνησε η εγγραφή ήχου"
+#: data/ui/window.ui:62
+msgid "Record"
+msgstr "Ηχογράφηση"
+
+#: data/ui/window.ui:344
+msgid "Add Recordings"
+msgstr "Προσθήκη εγγραφών"
+
+#: data/ui/window.ui:361
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "Χρησιμοποιήστε το πλήκτρο <b>Εγγραφή</b> για εγγραφή ήχου"
+
+#: data/ui/window.ui:394
+msgid "Preferred Format"
+msgstr "Προτιμώμενη μορφή"
+
+#: data/ui/window.ui:396
+msgid "Vorbis"
+msgstr "Vorbis"
+
+#: data/ui/window.ui:401
+msgid "Opus"
+msgstr "Opus"
+
+#: data/ui/window.ui:406
+msgid "FLAC"
+msgstr "FLAC"
+
+#: data/ui/window.ui:411
+msgid "MP3"
+msgstr "MP3"
+
+#: data/ui/window.ui:416
+msgid "M4A"
+msgstr "M4A"
+
+#: data/ui/window.ui:422
+msgid "Audio Channel"
+msgstr "Κανάλι ήχου"
+
+#: data/ui/window.ui:424
+msgid "Stereo"
+msgstr "Στερεοφωνικό"
+
+#: data/ui/window.ui:429
+msgid "Mono"
+msgstr "Μονοφωνικό"
+
+#: data/ui/window.ui:437
+msgid "About Sound Recorder"
+msgstr "Περί του Εγγραφή ήχου"
 
 #. Translators: "Recordings" here refers to the name of the directory where the application places files
-#: src/application.js:93
+#: src/application.js:24
 msgid "Recordings"
 msgstr "Ηχογραφήσεις"
 
-#: src/application.js:128
+#: src/application.js:131
+msgid "Sound Recorder started"
+msgstr "Ξεκίνησε η εγγραφή ήχου"
+
+#. Translators: Replace "translator-credits" with your names, one name per line
+#: src/application.js:168
 msgid "translator-credits"
 msgstr ""
 "Ελληνική μεταφραστική ομάδα GNOME\n"
@@ -237,91 +197,139 @@ msgstr ""
 "Για περισσότερες πληροφορίες, επισκεφθείτε τη σελίδα\n"
 "http://gnome.gr/"
 
-#: src/application.js:130
+#: src/application.js:170
 msgid "A Sound Recording Application for GNOME"
 msgstr "Μια εφαρμογή ηχογράφησης για το GNOME"
 
-#: src/utils.js:59
+#. Translators: ""Recording %d"" is the default name assigned to a file created
+#. by the application (for example, "Recording 1").
+#: src/recorder.js:107
+#, javascript-format
+msgid "Recording %d"
+msgstr "Γίνεται εγγραφή %d"
+
+#: src/utils.js:45
 msgid "Yesterday"
 msgstr "Χθες"
 
-#: src/utils.js:61
+#: src/utils.js:47
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "Πριν %d ημέρα"
 msgstr[1] "Πριν %d ημέρες"
 
-#: src/utils.js:65
+#: src/utils.js:49
 msgid "Last week"
 msgstr "Την τελευταία εβδομάδα"
 
-#: src/utils.js:67
+#: src/utils.js:51
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "Πριν %d εβδομάδα"
 msgstr[1] "Πριν %d εβδομάδες"
 
-#: src/utils.js:71
+#: src/utils.js:53
 msgid "Last month"
 msgstr "Τον τελευταίο μήνα"
 
-#: src/utils.js:73
+#: src/utils.js:55
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "Πριν %d μήνα"
 msgstr[1] "Πριν %d μήνες"
 
-#: src/utils.js:77
+#: src/utils.js:57
 msgid "Last year"
 msgstr "Τον τελευταίο χρόνο"
 
-#: src/utils.js:79
+#: src/utils.js:59
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "Πριν %d χρόνο"
 msgstr[1] "Πριν %d χρόνια"
 
-#: src/mainWindow.js:93
-msgid "About Sound Recorder"
-msgstr "Περί του Εγγραφή ήχου"
+#~ msgid "Microphone volume level"
+#~ msgstr "Ένταση ήχου μικροφώνου"
 
-#: src/record.js:64
-msgid "Unable to create Recordings directory."
-msgstr "Αδύνατη η δημιουργία καταλόγου ηχογραφήσεων."
+#~ msgid "Microphone volume level."
+#~ msgstr "Ένταση ήχου μικροφώνου."
 
-#: src/record.js:77
-msgid "Please install the GStreamer 1.0 PulseAudio plugin."
-msgstr "Παρακαλούμε κάντε εγκατάσταση το πρόσθετο GStreamer 1.0 PulseAudio."
+#~ msgid "Speaker volume level"
+#~ msgstr "Ένταση ήχου ηχείων"
 
-#: src/record.js:79
-msgid "Your audio capture settings are invalid."
-msgstr "Οι ρυθμίσεις σύλληψης ήχου είναι άκυρες."
+#~ msgid "Speaker volume level."
+#~ msgstr "Ένταση ήχου ηχείων."
 
-#: src/record.js:127
-msgid "Not all elements could be created."
-msgstr "Δεν μπόρεσαν να δημιουργηθούν όλα τα στοιχεία."
+#~ msgid "Done"
+#~ msgstr "Έτοιμο"
 
-#: src/record.js:139
-msgid "Not all of the elements were linked."
-msgstr "Δεν συνδέθηκαν όλα τα στοιχεία."
+#~ msgid "Preferences"
+#~ msgstr "Προτιμήσεις"
 
-#: src/record.js:166
-msgid ""
-"Unable to set the pipeline \n"
-" to the recording state."
-msgstr ""
-"Αδύνατη η ρύθμιση της διοχέτευσης \n"
-" στην κατάσταση εγγραφής."
+#~ msgid "Default mode"
+#~ msgstr "Προεπιλεγμένη λειτουργία"
 
-#. Translators: ""Recording from %F %A at %T"" is the default name assigned to a file created
-#. by the application (for example, "Recording from 2020-03-11 Wednesday at 19:43:05").
-#: src/record.js:336
-msgid "Recording from %F %A at %T"
-msgstr "Εγγραφή από %F %A στο %T"
+#~ msgid "Volume"
+#~ msgstr "Ένταση ήχου"
+
+#~ msgid "Microphone"
+#~ msgstr "Μικρόφωνο"
+
+#~ msgid "File Name"
+#~ msgstr "Όνομα"
+
+#~ msgid "Source"
+#~ msgstr "Πηγή"
+
+#~ msgid "Date Modified"
+#~ msgstr "Ημερομηνία τροποποίησης"
+
+#~ msgid "Date Created"
+#~ msgstr "Ημερομηνία δημιουργίας"
+
+#~ msgid "Media Type"
+#~ msgstr "Τύπος μέσου"
+
+#~ msgid "Unknown"
+#~ msgstr "Άγνωστο"
+
+#~ msgid "Info"
+#~ msgstr "Πληροφορίες"
+
+#~ msgid "Cancel"
+#~ msgstr "Ακύρωση"
+
+#~ msgid "Details"
+#~ msgstr "Λεπτομέρειες"
+
+#~ msgid "Unable to create Recordings directory."
+#~ msgstr "Αδύνατη η δημιουργία καταλόγου ηχογραφήσεων."
+
+#~ msgid "Please install the GStreamer 1.0 PulseAudio plugin."
+#~ msgstr "Παρακαλούμε κάντε εγκατάσταση το πρόσθετο GStreamer 1.0 PulseAudio."
+
+#~ msgid "Your audio capture settings are invalid."
+#~ msgstr "Οι ρυθμίσεις σύλληψης ήχου είναι άκυρες."
+
+#~ msgid "Not all elements could be created."
+#~ msgstr "Δεν μπόρεσαν να δημιουργηθούν όλα τα στοιχεία."
+
+#~ msgid "Not all of the elements were linked."
+#~ msgstr "Δεν συνδέθηκαν όλα τα στοιχεία."
+
+#~ msgid ""
+#~ "Unable to set the pipeline \n"
+#~ " to the recording state."
+#~ msgstr ""
+#~ "Αδύνατη η ρύθμιση της διοχέτευσης \n"
+#~ " στην κατάσταση εγγραφής."
+
+#~ msgid "Recording from %F %A at %T"
+#~ msgstr "Εγγραφή από %F %A στο %T"
 
 #~ msgid "org.gnome.SoundRecorder"
 #~ msgstr "org.gnome.SoundRecorder"
@@ -351,18 +359,6 @@ msgstr "Εγγραφή από %F %A στο %T"
 
 #~ msgid "Pause"
 #~ msgstr "Παύση"
-
-#~ msgid "Ogg Vorbis"
-#~ msgstr "Ogg Vorbis"
-
-#~ msgid "Opus"
-#~ msgstr "Opus"
-
-#~ msgid "FLAC"
-#~ msgstr "FLAC"
-
-#~ msgid "MP3"
-#~ msgstr "MP3"
 
 #~ msgid "MOV"
 #~ msgstr "MOV"

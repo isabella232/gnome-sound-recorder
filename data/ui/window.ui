@@ -119,26 +119,12 @@
                 <property name="can_focus">True</property>
                 <property name="hexpand">True</property>
                 <property name="vexpand">True</property>
+                <property name="hscrollbar_policy">never</property>
                 <child>
-                  <object class="HdyColumn">
+                  <object class="HdyClamp" id="column">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="maximum_width">650</property>
-                    <property name="linear_growth_width">400</property>
-                    <child>
-                      <object class="GtkListBox" id="listBox">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="margin_left">8</property>
-                        <property name="margin_right">8</property>
-                        <property name="margin_top">18</property>
-                        <property name="margin_bottom">18</property>
-                        <property name="selection_mode">none</property>
-                        <style>
-                          <class name="preferences"/>
-                        </style>
-                      </object>
-                    </child>
+                    <property name="maximum_size">650</property>
                   </object>
                 </child>
               </object>

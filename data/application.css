@@ -11,3 +11,7 @@
 .large-button {
   padding: 12px 12px;
 }
+
+row label.subtitle {
+  font-size: smaller;
+}

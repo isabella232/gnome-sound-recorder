@@ -8,13 +8,16 @@ var Recording = new GObject.registerClass({
             'Recording Duration', 'Recording duration in seconds',
             GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
             0, GLib.MAXINT16, 0),
+        'name': GObject.ParamSpec.string(
+            'name',
+            'Recording Name', 'Recording name in string',
+            GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
+            null),
     },
 }, class Recording extends GObject.Object {
     _init(file) {
         super._init({});
         this._file = file;
-
-        this._name = file.get_basename();
 
         let info = file.query_info('time::created,time::modified', 0, null);
 
@@ -34,7 +37,14 @@ var Recording = new GObject.registerClass({
     }
 
     get name() {
-        return this._name;
+        return this._file.get_basename();
+    }
+
+    set name(filename) {
+        if (filename && filename !== this.name) {
+            this._file = this._file.set_display_name(filename, null);
+            this.notify('name');
+        }
     }
 
     get timeModified() {

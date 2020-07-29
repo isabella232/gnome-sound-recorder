@@ -62,9 +62,11 @@ var Recorder = new GObject.registerClass({
             'Recording Duration', 'Recording duration in seconds',
             GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
             0, GLib.MAXINT16, 0),
-    },
-    Signals: {
-        'waveform': { param_types: [GObject.TYPE_INT, GObject.TYPE_FLOAT] },
+        'current-peak': GObject.ParamSpec.float(
+            'current-peak',
+            'Waveform current peak', 'Waveform current peak in float [0, 1]',
+            GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
+            0.0, 1.0, 0.0),
     },
 }, class Recorder extends GObject.Object {
     _init() {
@@ -93,15 +95,11 @@ var Recorder = new GObject.registerClass({
             log(`Not all elements could be addded.\n${error}`);
         }
 
-        this.clock = this.pipeline.get_clock();
-
         srcElement.link(audioConvert);
         audioConvert.link_filtered(this.level, caps);
     }
 
     start() {
-        this.baseTime = 0;
-
         let index = 1;
         do {
             /* Translators: ""Recording %d"" is the default name assigned to a file created
@@ -112,7 +110,7 @@ var Recorder = new GObject.registerClass({
 
         this.recordBus = this.pipeline.get_bus();
         this.recordBus.add_signal_watch();
-        this.recordBus.connect('message', (recordBus, message) => {
+        this.handlerId = this.recordBus.connect('message', (_, message) => {
             if (message !== null)
                 this._onMessageReceived(message);
         });
@@ -152,10 +150,12 @@ var Recorder = new GObject.registerClass({
 
         if (this.recordBus) {
             this.recordBus.remove_watch();
+            this.recordBus.disconnect(this.handlerId);
             this.recordBus = null;
         }
 
-        return this.file ? new Recording(this.file) : null;
+        return this.file && this.file.query_exists(null)
+            ? new Recording(this.file) : null;
     }
 
     _onMessageReceived(message) {
@@ -169,39 +169,11 @@ var Recorder = new GObject.registerClass({
             }
 
             let s = message.get_structure();
-            if (s) {
-                if (s.has_name('level')) {
-                    let peakVal = 0;
-                    peakVal = s.get_value('peak');
+            if (s && s.has_name('level')) {
+                const peakVal = s.get_value('peak');
 
-                    if (peakVal) {
-                        let val = peakVal.get_nth(0);
-
-                        if (val > 0)
-                            val = 0;
-
-                        const peak = Math.pow(10, val / 20);
-
-
-                        if  (this.clock === null)
-                            this.clock = this.pipeline.get_clock();
-
-                        let absoluteTime;
-                        try {
-                            absoluteTime = this.clock.get_time();
-                        } catch (error) {
-                            absoluteTime = 0;
-                        }
-
-
-                        if (this.baseTime === 0)
-                            this.baseTime = absoluteTime;
-
-                        const runTime = absoluteTime - this.baseTime;
-                        let approxTime = Math.round(runTime / 100000000);
-                        this.emit('waveform', approxTime, peak);
-                    }
-                }
+                if (peakVal)
+                    this.current_peak = peakVal.get_nth(0);
             }
             break;
         }
@@ -240,6 +212,20 @@ var Recorder = new GObject.registerClass({
 
     get duration() {
         return this._duration;
+    }
+
+    // eslint-disable-next-line camelcase
+    get current_peak() {
+        return this._current_peak;
+    }
+
+    // eslint-disable-next-line camelcase
+    set current_peak(peak) {
+        if (peak > 0)
+            peak = 0;
+
+        this._current_peak = Math.pow(10, peak / 20);
+        this.notify('current-peak');
     }
 
     set duration(val) {
