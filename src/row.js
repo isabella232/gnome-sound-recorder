@@ -1,5 +1,5 @@
 /* exported Row */
-const { Gdk, GObject, Gst, Gtk } = imports.gi;
+const { Gdk, Gio, GObject, Gst, Gtk } = imports.gi;
 const { displayDateTime, formatTime } = imports.utils;
 const { WaveForm, WaveType } = imports.waveform;
 
@@ -10,7 +10,7 @@ var RowState = {
 
 var Row = GObject.registerClass({
     Template: 'resource:///org/gnome/SoundRecorder/ui/row.ui',
-    InternalChildren: ['playbackStack', 'mainStack', 'playButton', 'pauseButton', 'name', 'entry', 'date', 'duration', 'saveBtn', 'revealer', 'optionBox', 'seekBackward', 'seekForward', 'renameStack', 'renameBtn', 'deleteBtn'],
+    InternalChildren: ['playbackStack', 'mainStack', 'playButton', 'pauseButton', 'name', 'entry', 'date', 'duration', 'revealer', 'playbackControls', 'rightStack', 'squeezer', 'saveBtn', 'renameBtn', 'exportBtn', 'saveBtn', 'rightStack', 'optionBox', 'seekBackward', 'seekForward', 'optionBtn', 'deleteBtn'],
     Signals: {
         'play': { param_types: [GObject.TYPE_STRING] },
         'pause': {},
@@ -48,6 +48,34 @@ var Row = GObject.registerClass({
         this.bind_property('expanded', this._revealer, 'reveal_child', GObject.BindingFlags.SYNC_CREATE | GObject.BindingFlags.DEFAULT);
 
         this._editMode = false;
+
+        let actionGroup = new Gio.SimpleActionGroup();
+
+        let renameAction = new Gio.SimpleAction({ name: 'rename' });
+        let exportAction = new Gio.SimpleAction({ name: 'export' });
+
+        exportAction.connect('activate', () => {
+            const dialog = Gtk.FileChooserNative.new(_('Export Recording'), null, Gtk.FileChooserAction.SAVE, _('_Export'), _('_Cancel'));
+            dialog.set_current_name(this._recording.name);
+            dialog.connect('response', (_dialog, _response) => {
+                if (_response === Gtk.ResponseType.ACCEPT) {
+                    const dest = dialog.get_file();
+                    this._recording.save(dest);
+                }
+                _dialog.destroy();
+            });
+
+            dialog.run();
+        });
+
+        renameAction.connect('activate', () => {
+            this.editMode = true;
+        });
+
+        actionGroup.add_action(renameAction);
+        actionGroup.add_action(exportAction);
+        this.insert_action_group('recording', actionGroup);
+
 
         this._entry.connect('key-press-event', (_, event) => {
             const key = event.get_keyval()[1];
@@ -89,10 +117,6 @@ var Row = GObject.registerClass({
         this._seekBackward.connect('clicked', _ => this.emit('seek-backward'));
         this._seekForward.connect('clicked', _ => this.emit('seek-forward'));
 
-        this._renameBtn.connect('clicked', () => {
-            this.editMode = true;
-        });
-
         this._deleteBtn.connect('clicked', () => {
             recording.delete();
             this.emit('deleted');
@@ -121,9 +145,9 @@ var Row = GObject.registerClass({
 
             this._entry.grab_focus();
             this._saveBtn.grab_default();
-            this._renameStack.visible_child_name = 'save';
+            this._rightStack.visible_child_name = 'save';
         } else {
-            this._renameStack.visible_child_name = 'rename';
+            this._rightStack.visible_child_name = 'options';
         }
     }
 

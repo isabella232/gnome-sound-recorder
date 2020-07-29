@@ -2,6 +2,7 @@
 <!-- Generated with glade 3.22.2 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
+  <requires lib="libhandy" version="0.0"/>
   <template class="Gjs_Row" parent="GtkListBoxRow">
     <property name="visible">True</property>
     <property name="can_focus">True</property>
@@ -139,56 +140,102 @@
                     <property name="margin_right">12</property>
                     <property name="margin_bottom">12</property>
                     <child>
-                      <object class="GtkButton" id="deleteBtn">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="tooltip_text" translatable="yes">Delete</property>
-                        <property name="halign">center</property>
-                        <property name="valign">center</property>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="icon_name">user-trash-symbolic</property>
-                          </object>
-                        </child>
-                        <style>
-                          <class name="pill-button"/>
-                        </style>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkStack" id="renameStack">
+                      <object class="GtkStack" id="rightStack">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="hhomogeneous">False</property>
+                        <property name="halign">end</property>
+                        <property name="valign">center</property>
                         <child>
-                          <object class="GtkButton" id="renameBtn">
+                          <object class="HdySqueezer" id="squeezer">
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="tooltip_text" translatable="yes">Rename</property>
-                            <property name="halign">center</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">end</property>
                             <property name="valign">center</property>
+                            <property name="homogeneous">True</property>
                             <child>
-                              <object class="GtkImage">
+                              <object class="GtkBox">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="icon_name">document-edit-symbolic</property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                                <child>
+                                  <object class="GtkButton" id="exportBtn">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                    <property name="tooltip_text" translatable="yes">Export</property>
+                                    <property name="halign">center</property>
+                                    <property name="valign">center</property>
+                                    <property name="action_name">recording.export</property>
+                                    <child>
+                                      <object class="GtkImage">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="icon_name">document-save-symbolic</property>
+                                      </object>
+                                    </child>
+                                    <style>
+                                      <class name="pill-button"/>
+                                    </style>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkButton" id="renameBtn">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                    <property name="tooltip_text" translatable="yes">Rename</property>
+                                    <property name="halign">center</property>
+                                    <property name="valign">center</property>
+                                    <property name="margin_left">8</property>
+                                    <property name="action_name">recording.rename</property>
+                                    <child>
+                                      <object class="GtkImage">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="icon_name">document-edit-symbolic</property>
+                                      </object>
+                                    </child>
+                                    <style>
+                                      <class name="pill-button"/>
+                                    </style>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
                               </object>
                             </child>
-                            <style>
-                              <class name="pill-button"/>
-                            </style>
+                            <child>
+                              <object class="GtkMenuButton" id="optionBtn">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="menu_model">optionMenu</property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="icon_name">view-more-symbolic</property>
+                                  </object>
+                                </child>
+                                <style>
+                                  <class name="pill-button"/>
+                                </style>
+                              </object>
+                            </child>
                           </object>
                           <packing>
-                            <property name="name">rename</property>
+                            <property name="name">options</property>
                           </packing>
                         </child>
                         <child>
@@ -198,6 +245,7 @@
                             <property name="can_default">True</property>
                             <property name="receives_default">False</property>
                             <property name="tooltip_text" translatable="yes">Save</property>
+                            <property name="halign">end</property>
                             <property name="valign">center</property>
                             <signal name="clicked" handler="onSaveRecording" swapped="no"/>
                             <child>
@@ -222,11 +270,42 @@
                         <property name="expand">False</property>
                         <property name="fill">True</property>
                         <property name="pack_type">end</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="deleteBtnBox">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <child>
+                          <object class="GtkButton" id="deleteBtn">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Delete</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <child>
+                              <object class="GtkImage">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="icon_name">user-trash-symbolic</property>
+                              </object>
+                            </child>
+                            <style>
+                              <class name="pill-button"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
                         <property name="position">1</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkBox">
+                      <object class="GtkBox" id="playbackControls">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">center</property>
@@ -383,4 +462,23 @@
       </object>
     </child>
   </template>
+  <menu id="optionMenu">
+    <section>
+    <item>
+        <attribute name="action">recording.rename</attribute>
+        <attribute name="label" translatable="yes">Rename</attribute>
+    </item>
+    <item>
+        <attribute name="action">recording.export</attribute>
+        <attribute name="label" translatable="yes">Export</attribute>
+    </item>
+    </section>
+  </menu>
+  <object class="GtkSizeGroup">
+  <property name="mode">GTK_SIZE_GROUP_HORIZONTAL</property>
+  <widgets>
+    <widget name="rightStack"/>
+    <widget name="deleteBtnBox"/>
+  </widgets>
+</object>
 </interface>

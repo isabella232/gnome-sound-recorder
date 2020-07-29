@@ -100,6 +100,14 @@ var Recording = new GObject.registerClass({
         this.waveformCache.trash_async(GLib.PRIORITY_DEFAULT, null, null);
     }
 
+    save(dest) {
+        this.file.copy_async(dest,
+            Gio.FileCreateFlags.NONE, GLib.PRIORITY_DEFAULT, null, null, (obj, res) => {
+                if (obj.copy_finish(res))
+                    log('Exporting file: done');
+            });
+    }
+
     get waveformCache() {
         return CacheDir.get_child(`${this.name}_data`);
     }
