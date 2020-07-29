@@ -36,6 +36,7 @@ pkg.require({
     'Gtk': '3.0',
     'Gst': '1.0',
     'GstAudio': '1.0',
+    'GstPlayer': '1.0',
     'GstPbutils': '1.0',
     'Handy': '1',
 });

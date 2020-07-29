@@ -1,4 +1,4 @@
-/* exported Application RecordingsDir Settings */
+/* exported Application RecordingsDir CacheDir Settings */
 /*
 * Copyright 2013 Meg Ford
 * This library is free software; you can redistribute it and/or
@@ -22,6 +22,7 @@ const { Gdk, Gio, GLib, GObject, Gst, Gtk, Handy } = imports.gi;
 
 /* Translators: "Recordings" here refers to the name of the directory where the application places files */
 var RecordingsDir = Gio.file_new_for_path(GLib.build_filenamev([GLib.get_home_dir(), _('Recordings')]));
+var CacheDir = Gio.file_new_for_path(GLib.build_filenamev([GLib.get_user_cache_dir(), pkg.name]));
 var Settings = new Gio.Settings({ schema: pkg.name });
 
 const { Window } = imports.window;
@@ -139,6 +140,7 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
     ensureDirectory() {
         // Ensure Recordings directory
         GLib.mkdir_with_parents(RecordingsDir.get_path(), 0o0755);
+        GLib.mkdir_with_parents(CacheDir.get_path(), 0o0755);
     }
 
     vfunc_activate() {

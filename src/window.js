@@ -18,14 +18,13 @@
 *
 */
 
-const { GObject, Handy } = imports.gi;
+const { GObject, GstPlayer, Gtk, Handy } = imports.gi;
 
-const { Player } = imports.player;
 const { Recorder } = imports.recorder;
 const { RecordingList } = imports.recordingList;
 const { RecordingsListBox } = imports.recordingsListBox;
 const { formatTime } = imports.utils;
-const { WaveForm } = imports.waveform;
+const { WaveForm, WaveType } = imports.waveform;
 
 
 var Window = GObject.registerClass({
@@ -39,9 +38,15 @@ var Window = GObject.registerClass({
         }, params));
 
         this.recorder = new Recorder();
-        this.player = new Player();
-        this.waveform = new WaveForm();
+        this.waveform = new WaveForm({
+            vexpand: true,
+            valign: Gtk.Align.FILL,
+        }, WaveType.RECORDER);
         this._recorderBox.add(this.waveform);
+
+        const dispatcher = GstPlayer.PlayerGMainContextSignalDispatcher.new(null);
+        this.player = GstPlayer.Player.new(null, dispatcher);
+        this.player.connect('end-of-stream', _p => this.player.stop());
 
         this.recorder.bind_property('current-peak', this.waveform, 'peak', GObject.BindingFlags.SYNC_CREATE | GObject.BindingFlags.DEFAULT);
         this.recorder.connect('notify::duration', _recorder => {

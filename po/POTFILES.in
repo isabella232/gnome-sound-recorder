@@ -7,7 +7,6 @@ data/ui/row.ui
 data/ui/window.ui
 src/application.js
 src/main.js
-src/player.js
 src/recorder.js
 src/row.js
 src/utils.js

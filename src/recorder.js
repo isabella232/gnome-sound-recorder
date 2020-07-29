@@ -18,7 +18,6 @@
  *
  */
 const { GLib, GObject, Gst, GstPbutils } = imports.gi;
-
 const { RecordingsDir, Settings } = imports.application;
 const { Recording } = imports.recording;
 
@@ -70,6 +69,7 @@ var Recorder = new GObject.registerClass({
     },
 }, class Recorder extends GObject.Object {
     _init() {
+        this.peaks = [];
         super._init({});
 
         let srcElement, audioConvert, caps;
@@ -100,7 +100,9 @@ var Recorder = new GObject.registerClass({
     }
 
     start() {
+        this.peaks.length = 0;
         let index = 1;
+
         do {
             /* Translators: ""Recording %d"" is the default name assigned to a file created
             by the application (for example, "Recording 1"). */
@@ -154,8 +156,14 @@ var Recorder = new GObject.registerClass({
             this.recordBus = null;
         }
 
-        return this.file && this.file.query_exists(null)
-            ? new Recording(this.file) : null;
+
+        if (this.file && this.file.query_exists(null) && this.peaks.length > 0) {
+            const recording = new Recording(this.file);
+            recording.peaks = this.peaks;
+            return recording;
+        }
+
+        return null;
     }
 
     _onMessageReceived(message) {
@@ -225,6 +233,7 @@ var Recorder = new GObject.registerClass({
             peak = 0;
 
         this._current_peak = Math.pow(10, peak / 20);
+        this.peaks.push(this._current_peak);
         this.notify('current-peak');
     }
 

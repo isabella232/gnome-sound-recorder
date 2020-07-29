@@ -23,27 +23,65 @@
 
 // based on code from Pitivi
 
-const { GObject, Gtk } = imports.gi;
+const { Gdk, GObject, Gtk } = imports.gi;
 const Cairo = imports.cairo;
+
+var WaveType = {
+    RECORDER: 0,
+    PLAYER: 1,
+};
 
 const GUTTER = 4;
 
 var WaveForm = GObject.registerClass({
     Properties: {
+        'position': GObject.ParamSpec.float(
+            'position',
+            'Waveform position', 'Waveform position',
+            GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
+            0.0, 1.0, 0.0),
         'peak': GObject.ParamSpec.float(
             'peak',
             'Waveform current peak', 'Waveform current peak in float [0, 1]',
             GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
             0.0, 1.0, 0.0),
     },
+    Signals: {
+        'position-changed': {  param_types: [GObject.TYPE_FLOAT]  },
+    },
 }, class WaveForm extends Gtk.DrawingArea {
-    _init() {
-        this.peaks = [];
-        super._init({
-            vexpand: true,
-            valign: Gtk.Align.FILL,
-        });
+    _init(params, type) {
+        this._peaks = [];
+        this._position = 0;
+        this.lastPosition = 0;
+        this.waveType = type;
+        super._init(params);
+
+        if (this.waveType === WaveType.PLAYER) {
+            this.add_events(Gdk.EventMask.BUTTON_PRESS_MASK |
+                Gdk.EventMask.BUTTON_RELEASE_MASK |
+                Gdk.EventMask.BUTTON1_MOTION_MASK);
+        }
+
+
         this.show();
+    }
+
+    vfunc_button_press_event(event) {
+        this._startX = event.x;
+        return true;
+    }
+
+    vfunc_motion_notify_event(event) {
+        this._position = this._clamped(event.x - this._startX + this._lastX);
+        this.queue_draw();
+        return true;
+    }
+
+    vfunc_button_release_event(_) {
+        this._lastX = this._position;
+        this.emit('position-changed', this.position);
+        return true;
     }
 
     vfunc_draw(ctx) {
@@ -51,39 +89,74 @@ var WaveForm = GObject.registerClass({
         const vertiCenter = maxHeight / 2;
         const horizCenter = this.get_allocated_width() / 2;
 
-        let pointer = horizCenter;
+        let pointer = horizCenter + this._position;
 
         ctx.setLineCap(Cairo.LineCap.ROUND);
         ctx.setLineWidth(2);
-        ctx.setSourceRGBA(255, 0, 0, 1);
+
+        if (this.waveType === WaveType.PLAYER)
+            ctx.setSourceRGB(28 / 255, 113 / 255, 216 / 255);
+        else
+            ctx.setSourceRGB(1, 0, 0);
 
         ctx.moveTo(horizCenter, vertiCenter - maxHeight);
         ctx.lineTo(horizCenter, vertiCenter + maxHeight);
         ctx.stroke();
 
         ctx.setLineWidth(1);
-        ctx.setSourceRGBA(0, 0, 0, 1);
-        for (let index = this.peaks.length; index > 0; index--) {
-            const peak = this.peaks[index];
+
+        this._peaks.forEach(peak => {
+            if (pointer > horizCenter)
+                ctx.setSourceRGB(192 / 255, 191 / 255, 188 / 255);
+            else
+                ctx.setSourceRGB(46 / 255, 52 / 255, 54 / 255);
 
             ctx.moveTo(pointer, vertiCenter + peak * maxHeight);
             ctx.lineTo(pointer, vertiCenter - peak * maxHeight);
             ctx.stroke();
 
-            pointer -= GUTTER;
-        }
+            if (this.waveType === WaveType.PLAYER)
+                pointer += GUTTER;
+            else
+                pointer -= GUTTER;
+        });
     }
 
     set peak(p) {
-        if (this.peaks.length > this.get_allocated_width() / (2 * GUTTER))
-            this.peaks.shift();
+        if (this._peaks.length > this.get_allocated_width() / (2 * GUTTER))
+            this._peaks.pop();
 
-        this.peaks.push(p.toFixed(2));
+        this._peaks.unshift(p.toFixed(2));
         this.queue_draw();
     }
 
+    set peaks(p) {
+        this._peaks = p;
+        this.queue_draw();
+    }
+
+    set position(pos) {
+        this._position = this._clamped(-pos * this._peaks.length * GUTTER);
+        this._lastX = this._position;
+        this.queue_draw();
+        this.notify('position');
+    }
+
+    get position() {
+        return -this._position / (this._peaks.length * GUTTER);
+    }
+
+    _clamped(position) {
+        if (position > 0)
+            position = 0;
+        else if (position < -this._peaks.length * GUTTER)
+            position = -this._peaks.length * GUTTER;
+
+        return position;
+    }
+
     destroy() {
-        this.peaks.length = 0;
+        this._peaks.length = 0;
         this.queue_draw();
     }
 });

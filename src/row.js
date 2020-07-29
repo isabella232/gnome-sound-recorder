@@ -1,6 +1,7 @@
 /* exported Row */
 const { Gdk, GObject, Gst, Gtk } = imports.gi;
 const { displayDateTime, formatTime } = imports.utils;
+const { WaveForm, WaveType } = imports.waveform;
 
 var RowState = {
     PLAYING: 0,
@@ -9,7 +10,7 @@ var RowState = {
 
 var Row = GObject.registerClass({
     Template: 'resource:///org/gnome/SoundRecorder/ui/row.ui',
-    InternalChildren: ['playbackStack', 'mainStack', 'playButton', 'pauseButton', 'name', 'entry', 'date', 'duration', 'saveBtn', 'revealer', 'seekBackward', 'seekForward', 'renameStack', 'renameBtn', 'deleteBtn'],
+    InternalChildren: ['playbackStack', 'mainStack', 'playButton', 'pauseButton', 'name', 'entry', 'date', 'duration', 'saveBtn', 'revealer', 'optionBox', 'seekBackward', 'seekForward', 'renameStack', 'renameBtn', 'deleteBtn'],
     Signals: {
         'play': { param_types: [GObject.TYPE_STRING] },
         'pause': {},
@@ -30,6 +31,18 @@ var Row = GObject.registerClass({
         this._expanded = false;
         super._init({});
 
+        this.waveform = new WaveForm({
+            hexpand: true,
+            halign: Gtk.Align.FILL,
+            margin_bottom: 24,
+            height_request: 60,
+            margin_left: 12,
+            margin_right: 12,
+        }, WaveType.PLAYER);
+
+        this._optionBox.add(this.waveform);
+        this._optionBox.reorder_child(this.waveform, 0);
+
         recording.bind_property('name', this._name, 'label', GObject.BindingFlags.SYNC_CREATE | GObject.BindingFlags.DEFAULT);
         recording.bind_property('name', this._entry, 'text', GObject.BindingFlags.SYNC_CREATE | GObject.BindingFlags.DEFAULT);
         this.bind_property('expanded', this._revealer, 'reveal_child', GObject.BindingFlags.SYNC_CREATE | GObject.BindingFlags.DEFAULT);
@@ -49,8 +62,18 @@ var Row = GObject.registerClass({
         else
             this._date.label = displayDateTime(recording.timeModified);
 
+        this.waveform.peaks = this._recording.peaks;
+        this._recording.connect('peaks-updated', _ => {
+            this.waveform.peaks = this._recording.peaks;
+        });
+
         recording.connect('notify::duration', () => {
             this._duration.label = formatTime(recording.duration / Gst.SECOND);
+        });
+
+        this.waveform.connect('button-press-event', _ => {
+            this.emit('pause');
+            this.state = RowState.PAUSED;
         });
 
         this._playButton.connect('clicked', () => {
