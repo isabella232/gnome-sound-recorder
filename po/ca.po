@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/issues\n"
-"POT-Creation-Date: 2020-07-04 13:29+0000\n"
+"POT-Creation-Date: 2020-07-29 16:10+0000\n"
 "PO-Revision-Date: 2019-03-03 20:18+0100\n"
 "Last-Translator: Jordi Mas <jmas@softcatala.org>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
@@ -112,68 +112,100 @@ msgstr ""
 "Mapa els canals disponibles. Si no hi ha cap mapa establert, el canal "
 "estèreo s'utilitzarà per defecte."
 
-#: data/ui/row.ui:178
-msgid "Save"
-msgstr "Desa"
-
-#: data/ui/row.ui:237
+#: data/ui/row.ui:146
 msgid "Delete"
 msgstr "Suprimeix"
 
-#: data/ui/row.ui:254
+#: data/ui/row.ui:176
 msgid "Rename"
 msgstr "Canvia el nom"
+
+#: data/ui/row.ui:200
+msgid "Save"
+msgstr "Desa"
+
+#: data/ui/row.ui:241
+msgid "Seek 10s Backward"
+msgstr "Cerca 10s cap enrere"
+
+#: data/ui/row.ui:273
+msgid "Play"
+msgstr "Reprodueix"
+
+#: data/ui/row.ui:302
+msgid "Pause"
+msgstr "Fes una pausa"
+
+#: data/ui/row.ui:339
+msgid "Seek 10s Forward"
+msgstr "Cerca endavant 10s"
 
 #: data/ui/window.ui:62
 msgid "Record"
 msgstr "Enregistra"
 
-#: data/ui/window.ui:344
+#: data/ui/window.ui:199
+msgid "Resume Recording"
+msgstr "Continua l'enregistrament"
+
+#: data/ui/window.ui:223
+msgid "Pause Recording"
+msgstr "Posa en pausa l'enregistrament"
+
+#: data/ui/window.ui:255
+msgid "Stop Recording"
+msgstr "Atura l'enregistrament"
+
+#: data/ui/window.ui:284
+msgid "Cancel Recording"
+msgstr "Cancel·la l'enregistrament"
+
+#: data/ui/window.ui:349
 msgid "Add Recordings"
 msgstr "Afegeix enregistraments"
 
-#: data/ui/window.ui:361
+#: data/ui/window.ui:366
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr ""
 "Utilitzeu el botó <b>Enregistra</b> per a crear enregistraments d'àudio"
 
-#: data/ui/window.ui:394
+#: data/ui/window.ui:399
 msgid "Preferred Format"
 msgstr "Format preferit"
 
-#: data/ui/window.ui:396
+#: data/ui/window.ui:401
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: data/ui/window.ui:401
+#: data/ui/window.ui:406
 msgid "Opus"
 msgstr "Opus"
 
-#: data/ui/window.ui:406
+#: data/ui/window.ui:411
 msgid "FLAC"
 msgstr "FLAC"
 
-#: data/ui/window.ui:411
+#: data/ui/window.ui:416
 msgid "MP3"
 msgstr "MP3"
 
-#: data/ui/window.ui:416
+#: data/ui/window.ui:421
 msgid "M4A"
 msgstr "M4A"
 
-#: data/ui/window.ui:422
+#: data/ui/window.ui:427
 msgid "Audio Channel"
 msgstr "Canal d'àudio"
 
-#: data/ui/window.ui:424
+#: data/ui/window.ui:429
 msgid "Stereo"
 msgstr "Estèreo"
 
-#: data/ui/window.ui:429
+#: data/ui/window.ui:434
 msgid "Mono"
 msgstr "Mono"
 
-#: data/ui/window.ui:437
+#: data/ui/window.ui:442
 msgid "About Sound Recorder"
 msgstr "Quant a l'Enregistradora de so"
 
@@ -183,17 +215,17 @@ msgstr "Quant a l'Enregistradora de so"
 msgid "Recordings"
 msgstr "Enregistraments"
 
-#: src/application.js:131
+#: src/application.js:132
 msgid "Sound Recorder started"
 msgstr "S'ha iniciat l'Enregistradora de so"
 
 #. Translators: Replace "translator-credits" with your names, one name per
 #. line
-#: src/application.js:168
+#: src/application.js:169
 msgid "translator-credits"
 msgstr "Pau Iranzo <pau.iranzo@softcatala.org>"
 
-#: src/application.js:170
+#: src/application.js:171
 msgid "A Sound Recording Application for GNOME"
 msgstr "Una aplicació d'enregistrament de so per al GNOME"
 
@@ -202,7 +234,6 @@ msgstr "Una aplicació d'enregistrament de so per al GNOME"
 #. by the application (for example, "Recording 1").
 #: src/recorder.js:107
 #, javascript-format
-#| msgid "Recordings"
 msgid "Recording %d"
 msgstr "Enregistrament %d"
 
@@ -249,4 +280,3 @@ msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "fa %d any"
 msgstr[1] "fa %d anys"
-
