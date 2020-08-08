@@ -74,7 +74,9 @@ var RecordingsListBox = new GObject.registerClass(class RecordingsListBox extend
                 if (row === this.activePlayingRow)
                     this.activePlayingRow = null;
 
-                model.remove(row.get_index());
+                const index = row.get_index();
+                this.isolateAt(index, false);
+                model.remove(index);
             });
 
             return row;
@@ -84,10 +86,37 @@ var RecordingsListBox = new GObject.registerClass(class RecordingsListBox extend
     }
 
     vfunc_row_activated(row) {
-        if (this.activeRow && this.activeRow !== row)
+        if (this.activeRow && this.activeRow !== row) {
             this.activeRow.expanded = false;
+            this.isolateAt(this.activeRow.get_index(), false);
+        }
 
         row.expanded = !row.expanded;
+        this.isolateAt(row.get_index(), row.expanded);
+
         this.activeRow = row;
+    }
+
+
+    isolateAt(index, expanded) {
+        const before = this.get_row_at_index(index - 1);
+        const current = this.get_row_at_index(index);
+        const after = this.get_row_at_index(index + 1);
+
+        if (expanded) {
+            if (current)
+                current.get_style_context().add_class('expanded');
+            if (before)
+                before.get_style_context().add_class('expanded-before');
+            if (after)
+                after.get_style_context().add_class('expanded-after');
+        } else {
+            if (current)
+                current.get_style_context().remove_class('expanded');
+            if (before)
+                before.get_style_context().remove_class('expanded-before');
+            if (after)
+                after.get_style_context().remove_class('expanded-after');
+        }
     }
 });

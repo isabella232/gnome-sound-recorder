@@ -15,10 +15,36 @@
 }
 
 
-row label.title {
+list row label.title {
   font-weight: bold;
 }
 
-row label.subtitle {
+list row label.subtitle {
   font-size: smaller;
+}
+
+list row.expanded {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border-bottom-width: 1px;
+}
+
+list row.expanded-before {
+  border-bottom-width: 1px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+list row.expanded-after {
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+}
+
+list row:first-child.expanded {
+  margin-top:0;
+}
+
+list row:last-child.expanded {
+  margin-bottom: 0;
 }
