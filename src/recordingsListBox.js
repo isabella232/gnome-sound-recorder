@@ -86,9 +86,9 @@ var RecordingsListBox = new GObject.registerClass(class RecordingsListBox extend
     }
 
     vfunc_row_activated(row) {
-        if (row.editMode && row.expanded || (this.activeRow && this.activeRow.editMode && this.activeRow.expanded)) {
+        if (row.editMode && row.expanded || this.activeRow && this.activeRow.editMode && this.activeRow.expanded)
             return;
-        }
+
         if (this.activeRow && this.activeRow !== row) {
             this.activeRow.expanded = false;
             this.isolateAt(this.activeRow.get_index(), false);

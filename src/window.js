@@ -83,6 +83,10 @@ var Window = GObject.registerClass({
     onRecorderStart() {
         this.player.stop();
 
+        const activeRow = this._recordingListBox.activeRow;
+        if (activeRow && activeRow.editMode)
+            activeRow.editMode = false;
+
         this._headerRevealer.reveal_child = false;
         this._mainStack.visible_child_name = 'recorder';
         this._playbackStack.visible_child_name = 'recorder-pause';
