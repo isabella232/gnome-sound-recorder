@@ -9,16 +9,11 @@ var RecordingList = new GObject.registerClass(class RecordingList extends Gio.Li
         super._init({ });
 
         // Monitor Direcotry actions
-        let dirMonitor = RecordingsDir.monitor_directory(Gio.FileMonitorFlags.WATCH_MOVES, null);
-        dirMonitor.connect('changed', (_dirMonitor, file1, file2, eventType) => {
-            let index = this.getIndex(file1);
+        this.dirMonitor = RecordingsDir.monitor_directory(Gio.FileMonitorFlags.WATCH_MOVES, null);
+        this.dirMonitor.connect('changed', (_dirMonitor, file1, file2, eventType) => {
+            const index = this.getIndex(file1);
 
             switch (eventType) {
-            case Gio.FileMonitorEvent.DELETED:
-                if (RecordingsDir.equal(file1))
-                    Gio.Application.get_default().ensureDirectory();
-
-                break;
             case Gio.FileMonitorEvent.MOVED_OUT:
                 if (index >= 0)
                     this.remove(index);
@@ -36,6 +31,60 @@ var RecordingList = new GObject.registerClass(class RecordingList extends Gio.Li
             GLib.PRIORITY_LOW,
             null,
             this._enumerateDirectory.bind(this));
+
+        this.copyOldFiles();
+    }
+
+    copyOldFiles() {
+        // Necessary code to move old recordings into the new location for few releases
+        // FIXME: Remove by 3.40/3.42
+        const oldDir = Gio.file_new_for_path(GLib.build_filenamev([GLib.get_home_dir(), _('Recordings')]));
+
+        if (!oldDir.query_exists(null))
+            return;
+
+        const fileEnumerator = oldDir.enumerate_children('standard::name', Gio.FileQueryInfoFlags.NOFOLLOW_SYMLINKS, null);
+        let allCopied = true;
+
+        const copyFiles = function (obj, res) {
+            const fileInfos = obj.next_files_finish(res);
+            if (fileInfos.length) {
+                fileInfos.forEach(info => {
+                    const name = info.get_name();
+                    const src = oldDir.get_child(name);
+                    /* Translators: ""%s (Old)"" is the new name assigned to a file moved from
+                        the old recordings location */
+                    const dest = RecordingsDir.get_child(_('%s (Old)').format(name));
+
+                    src.copy_async(dest, Gio.FileCopyFlags.BACKUP, GLib.PRIORITY_LOW, null, null, (objCopy, resCopy) => {
+                        try {
+                            objCopy.copy_finish(resCopy);
+                            objCopy.trash_async(GLib.PRIORITY_LOW, null, null);
+                            this.dirMonitor.emit_event(dest, src, Gio.FileMonitorEvent.MOVED_IN);
+                        } catch (e) {
+                            log(`Failed to copy recording ${name} to the new location`);
+                            log(e);
+                            allCopied = false;
+                        }
+                    });
+
+                });
+                fileEnumerator.next_files_async(5, GLib.PRIORITY_LOW, null, copyFiles);
+            } else {
+                fileEnumerator.close(null);
+                if (allCopied) {
+                    oldDir.delete_async(GLib.PRIORITY_LOW, null, (objDelete, resDelete) => {
+                        try {
+                            objDelete.delete_finish(resDelete);
+                        } catch (e) {
+                            log('Failed to remove the old Recordings directory. Ignore if you\'re using flatpak');
+                            log(e);
+                        }
+                    });
+                }
+            }
+        }.bind(this);
+        fileEnumerator.next_files_async(5, GLib.PRIORITY_LOW, null, copyFiles);
     }
 
     _enumerateDirectory(obj, res) {
@@ -44,7 +93,7 @@ var RecordingList = new GObject.registerClass(class RecordingList extends Gio.Li
             log('The contents of the Recordings directory were not indexed.');
             return;
         }
-        this._enumerator.next_files_async(20, GLib.PRIORITY_LOW, null, this._onNextFiles.bind(this));
+        this._enumerator.next_files_async(5, GLib.PRIORITY_LOW, null, this._onNextFiles.bind(this));
     }
 
     _onNextFiles(obj, res) {
@@ -55,7 +104,7 @@ var RecordingList = new GObject.registerClass(class RecordingList extends Gio.Li
                 const recording = new Recording(file);
                 this.sortedInsert(recording);
             });
-            this._enumerator.next_files_async(20, GLib.PRIORITY_LOW, null, this._onNextFiles.bind(this));
+            this._enumerator.next_files_async(5, GLib.PRIORITY_LOW, null, this._onNextFiles.bind(this));
         } else {
             this._enumerator.close(null);
         }

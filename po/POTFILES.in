@@ -8,6 +8,7 @@ data/ui/window.ui
 src/application.js
 src/main.js
 src/recorder.js
+src/recordingList.js
 src/row.js
 src/utils.js
 src/waveform.js
