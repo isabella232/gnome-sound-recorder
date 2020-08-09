@@ -14,7 +14,7 @@ var RecordingsListBox = new GObject.registerClass(class RecordingsListBox extend
             activate_on_single_click: true,
         });
 
-        this.get_style_context().add_class('preferences');
+        this.get_style_context().add_class('content');
 
         this._player.connect('state-changed', (_player, state) => {
             if (state === GstPlayer.PlayerState.STOPPED && this.activePlayingRow) {
@@ -90,7 +90,6 @@ var RecordingsListBox = new GObject.registerClass(class RecordingsListBox extend
             this.activeRow.expanded = false;
             this.isolateAt(this.activeRow.get_index(), false);
         }
-
         row.expanded = !row.expanded;
         this.isolateAt(row.get_index(), row.expanded);
 
