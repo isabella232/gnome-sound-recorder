@@ -20,8 +20,8 @@
 
 const { Gdk, Gio, GLib, GObject, Gst, Gtk, Handy } = imports.gi;
 
-/* Translators: "Recordings" here refers to the name of the directory where the application places files */
-var RecordingsDir = Gio.file_new_for_path(GLib.build_filenamev([GLib.get_home_dir(), _('Recordings')]));
+
+var RecordingsDir = Gio.file_new_for_path(GLib.build_filenamev([GLib.get_user_data_dir(), pkg.name]))
 var CacheDir = Gio.file_new_for_path(GLib.build_filenamev([GLib.get_user_cache_dir(), pkg.name]));
 var Settings = new Gio.Settings({ schema: pkg.name });
 
@@ -127,20 +127,24 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
 
     vfunc_startup() {
         super.vfunc_startup();
-
         this._loadStyleSheet();
         Gtk.IconTheme.get_default().add_resource_path('/org/gnome/SoundRecorder/icons/');
         log(_('Sound Recorder started'));
         Handy.init();
         Gst.init(null);
-        this._initAppMenu();
-        this.ensureDirectory();
-    }
 
-    ensureDirectory() {
-        // Ensure Recordings directory
-        GLib.mkdir_with_parents(RecordingsDir.get_path(), 0o0755);
-        GLib.mkdir_with_parents(CacheDir.get_path(), 0o0755);
+<<<<<<< HEAD
+        if (!RecordingsDir.query_exists(null))
+            RecordingsDir.make_directory_with_parents(null);
+        if (!CacheDir.query_exists(null))
+=======
+        if(!RecordingsDir.query_exists(null))
+            RecordingsDir.make_directory_with_parents(null);
+        if(!CacheDir.query_exists(null))
+>>>>>>> 0e86097... move recordings directory into xdg-data
+            CacheDir.make_directory_with_parents(null);
+
+        this._initAppMenu();
     }
 
     vfunc_activate() {
