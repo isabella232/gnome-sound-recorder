@@ -1,11 +1,12 @@
 /* exported Recording */
-const { Gio, GLib, GObject, GstPbutils } = imports.gi;
+const { Gio, GLib, GObject, Gst, GstPbutils } = imports.gi;
 const { CacheDir } = imports.application;
 const ByteArray = imports.byteArray;
 
 var Recording = new GObject.registerClass({
     Signals: {
         'peaks-updated': {},
+        'peaks-loading': {},
     },
     Properties: {
         'duration': GObject.ParamSpec.int(
@@ -23,6 +24,7 @@ var Recording = new GObject.registerClass({
     _init(file) {
         this._file = file;
         this._peaks = [];
+        this._loadedPeaks = [];
         super._init({});
 
         let info = file.query_info('time::created,time::modified', 0, null);
@@ -123,7 +125,46 @@ var Recording = new GObject.registerClass({
                     log(`Error reading waveform data file: ${this.name}_data`);
                 }
             });
+        } else {
+            this.emit('peaks-loading');
+            this.generatePeaks();
         }
     }
 
+    generatePeaks() {
+        const pipeline = Gst.parse_launch('uridecodebin name=uridecodebin ! audioconvert ! audio/x-raw,channels=1 ! level name=level ! fakesink name=faked');
+
+        let uridecodebin = pipeline.get_by_name('uridecodebin');
+        uridecodebin.set_property('uri', this.uri);
+
+        let fakesink = pipeline.get_by_name('faked');
+        fakesink.set_property('qos', false);
+        fakesink.set_property('sync', true);
+
+        const bus = pipeline.get_bus();
+        pipeline.set_state(Gst.State.PLAYING);
+        bus.add_signal_watch();
+
+        bus.connect('message', (_bus, message) => {
+            let s;
+            switch (message.type) {
+            case Gst.MessageType.ELEMENT:
+                s = message.get_structure();
+                if (s && s.has_name('level')) {
+                    const peakVal = s.get_value('peak');
+
+                    if (peakVal) {
+                        const peak = peakVal.get_nth(0);
+                        this._loadedPeaks.push(Math.pow(10, peak / 20));
+                    }
+                }
+                break;
+            case Gst.MessageType.EOS:
+                this.peaks = this._loadedPeaks;
+                pipeline.set_state(Gst.State.NULL);
+                break;
+            }
+        });
+    }
 });
+
