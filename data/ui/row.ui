@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.2 -->
+<!-- Generated with glade 3.36.0 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
   <requires lib="libhandy" version="0.0"/>
@@ -133,6 +133,28 @@
                 <property name="can_focus">False</property>
                 <property name="orientation">vertical</property>
                 <child>
+                  <object class="GtkStack" id="waveformStack">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="transition_type">crossfade</property>
+                    <child>
+                      <object class="GtkSpinner">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="active">True</property>
+                      </object>
+                      <packing>
+                        <property name="name">loading</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
                   <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
@@ -218,7 +240,6 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
-                                <property name="menu_model">optionMenu</property>
                                 <property name="halign">end</property>
                                 <property name="valign">center</property>
                                 <child>
@@ -296,6 +317,11 @@
                               <class name="pill-button"/>
                             </style>
                           </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
                         </child>
                       </object>
                       <packing>
@@ -462,23 +488,10 @@
       </object>
     </child>
   </template>
-  <menu id="optionMenu">
-    <section>
-    <item>
-        <attribute name="action">recording.rename</attribute>
-        <attribute name="label" translatable="yes">Rename</attribute>
-    </item>
-    <item>
-        <attribute name="action">recording.export</attribute>
-        <attribute name="label" translatable="yes">Export</attribute>
-    </item>
-    </section>
-  </menu>
   <object class="GtkSizeGroup">
-  <property name="mode">GTK_SIZE_GROUP_HORIZONTAL</property>
-  <widgets>
-    <widget name="rightStack"/>
-    <widget name="deleteBtnBox"/>
-  </widgets>
-</object>
+    <widgets>
+      <widget name="rightStack"/>
+      <widget name="deleteBtnBox"/>
+    </widgets>
+  </object>
 </interface>

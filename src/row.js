@@ -10,7 +10,7 @@ var RowState = {
 
 var Row = GObject.registerClass({
     Template: 'resource:///org/gnome/SoundRecorder/ui/row.ui',
-    InternalChildren: ['playbackStack', 'mainStack', 'playButton', 'pauseButton', 'name', 'entry', 'date', 'duration', 'revealer', 'playbackControls', 'rightStack', 'squeezer', 'saveBtn', 'renameBtn', 'exportBtn', 'saveBtn', 'rightStack', 'optionBox', 'seekBackward', 'seekForward', 'optionBtn', 'deleteBtn'],
+    InternalChildren: ['playbackStack', 'mainStack', 'playButton', 'waveformStack', 'pauseButton', 'name', 'entry', 'date', 'duration', 'revealer', 'playbackControls', 'rightStack', 'squeezer', 'saveBtn', 'renameBtn', 'exportBtn', 'saveBtn', 'rightStack', 'seekBackward', 'seekForward', 'optionBtn', 'deleteBtn'],
     Signals: {
         'play': { param_types: [GObject.TYPE_STRING] },
         'pause': {},
@@ -39,9 +39,7 @@ var Row = GObject.registerClass({
             margin_left: 12,
             margin_right: 12,
         }, WaveType.PLAYER);
-
-        this._optionBox.add(this.waveform);
-        this._optionBox.reorder_child(this.waveform, 0);
+        this._waveformStack.add_named(this.waveform, 'wave');
 
         recording.bind_property('name', this._name, 'label', GObject.BindingFlags.SYNC_CREATE | GObject.BindingFlags.DEFAULT);
         recording.bind_property('name', this._entry, 'text', GObject.BindingFlags.SYNC_CREATE | GObject.BindingFlags.DEFAULT);
@@ -92,7 +90,12 @@ var Row = GObject.registerClass({
 
         this.waveform.peaks = this._recording.peaks;
         this._recording.connect('peaks-updated', _ => {
+            this._waveformStack.visible_child_name = 'wave';
             this.waveform.peaks = this._recording.peaks;
+        });
+
+        this._recording.connect('peaks-loading', _ => {
+            this._waveformStack.visible_child_name = 'loading';
         });
 
         recording.connect('notify::duration', () => {

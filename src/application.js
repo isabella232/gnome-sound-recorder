@@ -20,7 +20,6 @@
 
 const { Gdk, Gio, GLib, GObject, Gst, Gtk, Handy } = imports.gi;
 
-
 var RecordingsDir = Gio.file_new_for_path(GLib.build_filenamev([GLib.get_user_data_dir(), pkg.name]))
 var CacheDir = Gio.file_new_for_path(GLib.build_filenamev([GLib.get_user_cache_dir(), pkg.name]));
 var Settings = new Gio.Settings({ schema: pkg.name });
@@ -133,15 +132,9 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
         Handy.init();
         Gst.init(null);
 
-<<<<<<< HEAD
-        if (!RecordingsDir.query_exists(null))
-            RecordingsDir.make_directory_with_parents(null);
-        if (!CacheDir.query_exists(null))
-=======
         if(!RecordingsDir.query_exists(null))
             RecordingsDir.make_directory_with_parents(null);
         if(!CacheDir.query_exists(null))
->>>>>>> 0e86097... move recordings directory into xdg-data
             CacheDir.make_directory_with_parents(null);
 
         this._initAppMenu();
