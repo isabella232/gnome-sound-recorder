@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
 "issues\n"
-"POT-Creation-Date: 2020-07-29 16:10+0000\n"
-"PO-Revision-Date: 2020-08-03 21:26+0300\n"
+"POT-Creation-Date: 2020-08-10 14:13+0000\n"
+"PO-Revision-Date: 2020-08-10 21:39+0300\n"
 "Last-Translator: Efstathios Iosifidis <eiosifidis@gnome.org>\n"
 "Language-Team: Greek, Modern (1453-) <opensuse-translation-el@opensuse.org>\n"
 "Language: el\n"
@@ -23,7 +23,8 @@ msgstr ""
 "X-Project-Style: gnome\n"
 
 #: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:5
-#: data/org.gnome.SoundRecorder.desktop.in.in:4 src/application.js:32
+#: data/org.gnome.SoundRecorder.desktop.in.in:4 data/ui/window.ui:28
+#: src/application.js:32
 msgid "Sound Recorder"
 msgstr "Εγγραφή ήχου"
 
@@ -112,113 +113,116 @@ msgstr ""
 "Χαρτογραφεί τα διαθέσιμα κανάλια. Αν δεν υπάρχει ρυθμισμένη χαρτογράφηση, θα "
 "χρησιμοποιηθεί το προεπιλεγμένο στερεοφωνικό κανάλι."
 
-#: data/ui/row.ui:146
-msgid "Delete"
-msgstr "Διαγραφή"
+#: data/ui/row.ui:188 data/ui/row.ui:500
+msgid "Export"
+msgstr "Εισαγωγή"
 
-#: data/ui/row.ui:176
+#: data/ui/row.ui:214 data/ui/row.ui:496
 msgid "Rename"
 msgstr "Μετονομασία"
 
-#: data/ui/row.ui:200
+#: data/ui/row.ui:269
 msgid "Save"
 msgstr "Αποθήκευση"
 
-#: data/ui/row.ui:241
+#: data/ui/row.ui:307
+msgid "Delete"
+msgstr "Διαγραφή"
+
+#: data/ui/row.ui:347
 msgid "Seek 10s Backward"
 msgstr "Αναζήτηση 10δ προς τα πίσω"
 
-#: data/ui/row.ui:273
+#: data/ui/row.ui:379
 msgid "Play"
 msgstr "Αναπαραγωγή"
 
-#: data/ui/row.ui:302
+#: data/ui/row.ui:408
 msgid "Pause"
 msgstr "Παύση"
 
-#: data/ui/row.ui:339
+#: data/ui/row.ui:445
 msgid "Seek 10s Forward"
 msgstr "Αναζήτηση 10δ προς τα εμπρός"
 
-#: data/ui/window.ui:62
+#: data/ui/window.ui:63
 msgid "Record"
 msgstr "Ηχογράφηση"
 
-#: data/ui/window.ui:199
+#: data/ui/window.ui:204
 msgid "Resume Recording"
 msgstr "Συνέχιση εγγραφής"
 
-#: data/ui/window.ui:223
+#: data/ui/window.ui:228
 msgid "Pause Recording"
 msgstr "Παύση εγγραφής"
 
-#: data/ui/window.ui:255
+#: data/ui/window.ui:260
 msgid "Stop Recording"
 msgstr "Διακοπή εγγραφής"
 
-#: data/ui/window.ui:284
+#: data/ui/window.ui:289
 msgid "Cancel Recording"
 msgstr "Ακύρωση εγγραφής"
 
-#: data/ui/window.ui:349
+#: data/ui/window.ui:354
 msgid "Add Recordings"
 msgstr "Προσθήκη εγγραφών"
 
-#: data/ui/window.ui:366
+#: data/ui/window.ui:371
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Χρησιμοποιήστε το πλήκτρο <b>Εγγραφή</b> για εγγραφή ήχου"
 
-#: data/ui/window.ui:399
+#: data/ui/window.ui:418
+msgid "Undo"
+msgstr "Aναίρεση"
+
+#: data/ui/window.ui:459
 msgid "Preferred Format"
 msgstr "Προτιμώμενη μορφή"
 
-#: data/ui/window.ui:401
+#: data/ui/window.ui:461
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: data/ui/window.ui:406
+#: data/ui/window.ui:466
 msgid "Opus"
 msgstr "Opus"
 
-#: data/ui/window.ui:411
+#: data/ui/window.ui:471
 msgid "FLAC"
 msgstr "FLAC"
 
-#: data/ui/window.ui:416
+#: data/ui/window.ui:476
 msgid "MP3"
 msgstr "MP3"
 
-#: data/ui/window.ui:421
+#: data/ui/window.ui:481
 msgid "M4A"
 msgstr "M4A"
 
-#: data/ui/window.ui:427
+#: data/ui/window.ui:487
 msgid "Audio Channel"
 msgstr "Κανάλι ήχου"
 
-#: data/ui/window.ui:429
+#: data/ui/window.ui:489
 msgid "Stereo"
 msgstr "Στερεοφωνικό"
 
-#: data/ui/window.ui:434
+#: data/ui/window.ui:494
 msgid "Mono"
 msgstr "Μονοφωνικό"
 
-#: data/ui/window.ui:442
+#: data/ui/window.ui:502
 msgid "About Sound Recorder"
 msgstr "Περί του Εγγραφή ήχου"
 
-#. Translators: "Recordings" here refers to the name of the directory where the application places files
-#: src/application.js:24
-msgid "Recordings"
-msgstr "Ηχογραφήσεις"
-
-#: src/application.js:132
+#: src/application.js:131
 msgid "Sound Recorder started"
 msgstr "Ξεκίνησε η εγγραφή ήχου"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/application.js:169
+#: src/application.js:168
 msgid "translator-credits"
 msgstr ""
 "Ελληνική μεταφραστική ομάδα GNOME\n"
@@ -230,16 +234,41 @@ msgstr ""
 "Για περισσότερες πληροφορίες, επισκεφθείτε τη σελίδα\n"
 "http://gnome.gr/"
 
-#: src/application.js:171
+#: src/application.js:170
 msgid "A Sound Recording Application for GNOME"
 msgstr "Μια εφαρμογή ηχογράφησης για το GNOME"
 
 #. Translators: ""Recording %d"" is the default name assigned to a file created
 #. by the application (for example, "Recording 1").
-#: src/recorder.js:107
+#: src/recorder.js:109
 #, javascript-format
 msgid "Recording %d"
 msgstr "Γίνεται εγγραφή %d"
+
+#. Necessary code to move old recordings into the new location for few releases
+#. FIXME: Remove by 3.40/3.42
+#: src/recordingList.js:41
+msgid "Recordings"
+msgstr "Ηχογραφήσεις"
+
+#. Translators: ""%s (Old)"" is the new name assigned to a file moved from
+#. the old recordings location
+#: src/recordingList.js:57
+#, javascript-format
+msgid "%s (Old)"
+msgstr "%s (παλιό)"
+
+#: src/row.js:56
+msgid "Export Recording"
+msgstr "Εξαγωγή εγγραφής"
+
+#: src/row.js:56
+msgid "_Export"
+msgstr "_Εξαγωγή"
+
+#: src/row.js:56
+msgid "_Cancel"
+msgstr "_Ακύρωση"
 
 #: src/utils.js:45
 msgid "Yesterday"
@@ -284,6 +313,11 @@ msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "Πριν %d χρόνο"
 msgstr[1] "Πριν %d χρόνια"
+
+#: src/window.js:70
+#, javascript-format
+msgid "\"%s\" deleted"
+msgstr "«%s» διαγράφηκε"
 
 #~ msgid "Microphone volume level"
 #~ msgstr "Ένταση ήχου μικροφώνου"
@@ -332,9 +366,6 @@ msgstr[1] "Πριν %d χρόνια"
 
 #~ msgid "Info"
 #~ msgstr "Πληροφορίες"
-
-#~ msgid "Cancel"
-#~ msgstr "Ακύρωση"
 
 #~ msgid "Details"
 #~ msgstr "Λεπτομέρειες"
