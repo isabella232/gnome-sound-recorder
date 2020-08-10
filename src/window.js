@@ -18,7 +18,7 @@
 *
 */
 
-const { GObject, GstPlayer, Gtk, Handy } = imports.gi;
+const { GLib, GObject, GstPlayer, Gtk, Handy } = imports.gi;
 
 const { Recorder } = imports.recorder;
 const { RecordingList } = imports.recordingList;
@@ -29,7 +29,7 @@ const { WaveForm, WaveType } = imports.waveform;
 
 var Window = GObject.registerClass({
     Template: 'resource:///org/gnome/SoundRecorder/ui/window.ui',
-    InternalChildren: ['recorderTime', 'mainStack', 'recorderBox', 'emptyIcon', 'playbackStack', 'headerRevealer', 'column'],
+    InternalChildren: ['recorderTime', 'mainStack', 'recorderBox', 'emptyIcon', 'playbackStack', 'headerRevealer', 'notificationRevealer', 'notificationMessage', 'notificationUndoBtn', 'notificationCancelBtn', 'column'],
 }, class Window extends Handy.ApplicationWindow {
 
     _init(params) {
@@ -64,6 +64,25 @@ var Window = GObject.registerClass({
         this._recordingList.connect('items-changed', this._refreshView.bind(this));
 
         this._recordingListBox = new RecordingsListBox(this._recordingList, this.player);
+
+        this._recordingListBox.connect('row-deleted', (_listBox, recording, index) => {
+            this._recordingList.remove(index);
+            this.notify(_('"%s" deleted').format(recording.name),
+                _ => recording.delete(),
+                _ => this._recordingList.insert(index, recording),
+            );
+        });
+
+        this._notificationCancelBtn.connect('clicked', _ => {
+            this._notificationRevealer.reveal_child = false;
+            if (this.deleteSignalId && this.deleteSignalId > 0) {
+                GLib.source_remove(this.deleteSignalId);
+                this.deleteSignalId = 0;
+            }
+            this._notificationUndoBtn.disconnect(this.cancelSignalId);
+        });
+
+
         this._column.add(this._recordingListBox);
 
         this._emptyIcon.icon_name = `${pkg.name}-symbolic`;
@@ -119,5 +138,25 @@ var Window = GObject.registerClass({
             this._mainStack.visible_child_name = 'empty';
         else
             this._mainStack.visible_child_name = 'recordings';
+    }
+
+    notify(message, callback, cancelCallback) {
+        this._notificationMessage.label = message;
+        this._notificationRevealer.reveal_child = true;
+        this.deleteSignalId = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 3, () => {
+            callback();
+            this._notificationRevealer.reveal_child = false;
+            this._notificationUndoBtn.disconnect(this.cancelSignalId);
+        });
+
+        this.cancelSignalId = this._notificationUndoBtn.connect('clicked', _ => {
+            cancelCallback();
+            this._notificationRevealer.reveal_child = false;
+            if (this.deleteSignalId && this.deleteSignalId > 0) {
+                GLib.source_remove(this.deleteSignalId);
+                this.deleteSignalId = 0;
+            }
+            this._notificationUndoBtn.disconnect(this.cancelSignalId);
+        });
     }
 });

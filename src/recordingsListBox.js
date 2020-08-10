@@ -2,7 +2,11 @@
 const { GObject, GstPlayer, Gtk, Gst } = imports.gi;
 const { Row, RowState } = imports.row;
 
-var RecordingsListBox = new GObject.registerClass(class RecordingsListBox extends Gtk.ListBox {
+var RecordingsListBox = new GObject.registerClass({
+    Signals: {
+        'row-deleted': { param_types: [GObject.TYPE_OBJECT, GObject.TYPE_INT] },
+    },
+}, class RecordingsListBox extends Gtk.ListBox {
     _init(model, player) {
         this._player = player;
         super._init({
@@ -76,7 +80,7 @@ var RecordingsListBox = new GObject.registerClass(class RecordingsListBox extend
 
                 const index = row.get_index();
                 this.isolateAt(index, false);
-                model.remove(index);
+                this.emit('row-deleted', row._recording, index);
             });
 
             return row;
@@ -98,7 +102,6 @@ var RecordingsListBox = new GObject.registerClass(class RecordingsListBox extend
 
         this.activeRow = row;
     }
-
 
     isolateAt(index, expanded) {
         const before = this.get_row_at_index(index - 1);

@@ -98,6 +98,8 @@ var Row = GObject.registerClass({
             this._waveformStack.visible_child_name = 'loading';
         });
 
+
+        this._duration.label = formatTime(recording.duration / Gst.SECOND);
         recording.connect('notify::duration', () => {
             this._duration.label = formatTime(recording.duration / Gst.SECOND);
         });
@@ -119,11 +121,7 @@ var Row = GObject.registerClass({
 
         this._seekBackward.connect('clicked', _ => this.emit('seek-backward'));
         this._seekForward.connect('clicked', _ => this.emit('seek-forward'));
-
-        this._deleteBtn.connect('clicked', () => {
-            recording.delete();
-            this.emit('deleted');
-        });
+        this._deleteBtn.connect('clicked', () => this.emit('deleted'));
     }
 
     onSaveRecording() {
