@@ -34,7 +34,7 @@ var Row = GObject.registerClass({
         this.waveform = new WaveForm({
             hexpand: true,
             halign: Gtk.Align.FILL,
-            margin_bottom: 24,
+            margin_top: 18,
             height_request: 60,
             margin_left: 12,
             margin_right: 12,

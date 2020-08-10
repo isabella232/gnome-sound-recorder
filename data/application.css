@@ -3,17 +3,9 @@
   font-weight: 300
 }
 
-.pill-button {
-  border-radius: 9999px;
-  -gtk-outline-radius: 9999px;
-  padding-left: 9px;
-  padding-right: 9px;
+button.large {
+  padding: 12px;
 }
-
-.large-button {
-  padding: 12px 12px;
-}
-
 
 list row label.title {
   font-weight: bold;

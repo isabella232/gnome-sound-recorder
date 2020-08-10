@@ -11,18 +11,17 @@
       <object class="GtkBox">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="margin_top">12</property>
+        <property name="margin_bottom">12</property>
         <property name="orientation">vertical</property>
         <child>
           <object class="GtkStack" id="mainStack">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="margin_top">12</property>
-            <property name="margin_bottom">12</property>
             <child>
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="no_show_all">True</property>
                 <child>
                   <object class="GtkBox">
                     <property name="visible">True</property>
@@ -35,12 +34,9 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">end</property>
-                        <property name="margin_left">12</property>
                         <property name="margin_right">12</property>
                       </object>
                       <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
                         <property name="pack_type">end</property>
                         <property name="position">0</property>
                       </packing>
@@ -62,8 +58,6 @@
                             </style>
                           </object>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
                             <property name="position">0</property>
                           </packing>
                         </child>
@@ -78,22 +72,16 @@
                             </style>
                           </object>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
                             <property name="position">1</property>
                           </packing>
                         </child>
                       </object>
                       <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
                         <property name="position">2</property>
                       </packing>
                     </child>
                   </object>
                   <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -106,7 +94,6 @@
               <object class="GtkEntry" id="entry">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="valign">center</property>
                 <property name="margin_left">12</property>
                 <property name="margin_right">12</property>
                 <property name="activates_default">True</property>
@@ -118,8 +105,6 @@
             </child>
           </object>
           <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
             <property name="position">0</property>
           </packing>
         </child>
@@ -149,8 +134,6 @@
                     </child>
                   </object>
                   <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
                     <property name="position">0</property>
                   </packing>
                 </child>
@@ -160,34 +143,28 @@
                     <property name="can_focus">False</property>
                     <property name="margin_left">12</property>
                     <property name="margin_right">12</property>
-                    <property name="margin_bottom">12</property>
+                    <property name="margin_top">18</property>
                     <child>
                       <object class="GtkStack" id="rightStack">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="halign">end</property>
-                        <property name="valign">center</property>
                         <child>
                           <object class="HdySqueezer" id="squeezer">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="halign">end</property>
-                            <property name="valign">center</property>
                             <property name="homogeneous">True</property>
                             <child>
                               <object class="GtkBox">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="halign">end</property>
-                                <property name="valign">center</property>
                                 <child>
                                   <object class="GtkButton" id="exportBtn">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
+                                    <property name="valign">center</property>
+                                    <property name="halign">center</property>
                                     <property name="receives_default">True</property>
                                     <property name="tooltip_text" translatable="yes">Export</property>
-                                    <property name="halign">center</property>
-                                    <property name="valign">center</property>
                                     <property name="action_name">recording.export</property>
                                     <child>
                                       <object class="GtkImage">
@@ -197,12 +174,11 @@
                                       </object>
                                     </child>
                                     <style>
-                                      <class name="pill-button"/>
+                                      <class name="image-button"/>
+                                      <class name="circular"/>
                                     </style>
                                   </object>
                                   <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
                                     <property name="position">0</property>
                                   </packing>
                                 </child>
@@ -210,11 +186,11 @@
                                   <object class="GtkButton" id="renameBtn">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
+                                    <property name="valign">center</property>
+                                    <property name="halign">center</property>
+                                    <property name="margin_left">8</property>
                                     <property name="receives_default">True</property>
                                     <property name="tooltip_text" translatable="yes">Rename</property>
-                                    <property name="halign">center</property>
-                                    <property name="valign">center</property>
-                                    <property name="margin_left">8</property>
                                     <property name="action_name">recording.rename</property>
                                     <child>
                                       <object class="GtkImage">
@@ -224,12 +200,11 @@
                                       </object>
                                     </child>
                                     <style>
-                                      <class name="pill-button"/>
+                                      <class name="image-button"/>
+                                      <class name="circular"/>
                                     </style>
                                   </object>
                                   <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
                                     <property name="position">1</property>
                                   </packing>
                                 </child>
@@ -251,7 +226,8 @@
                                   </object>
                                 </child>
                                 <style>
-                                  <class name="pill-button"/>
+                                  <class name="image-button"/>
+                                  <class name="circular"/>
                                 </style>
                               </object>
                             </child>
@@ -265,10 +241,10 @@
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="can_default">True</property>
+                            <property name="valign">center</property>
+                            <property name="halign">end</property>
                             <property name="receives_default">False</property>
                             <property name="tooltip_text" translatable="yes">Save</property>
-                            <property name="halign">end</property>
-                            <property name="valign">center</property>
                             <signal name="clicked" handler="onSaveRecording" swapped="no"/>
                             <child>
                               <object class="GtkImage">
@@ -279,7 +255,8 @@
                             </child>
                             <style>
                               <class name="suggested-action"/>
-                              <class name="pill-button"/>
+                              <class name="image-button"/>
+                              <class name="circular"/>
                             </style>
                           </object>
                           <packing>
@@ -289,8 +266,6 @@
                         </child>
                       </object>
                       <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
                         <property name="pack_type">end</property>
                         <property name="position">0</property>
                       </packing>
@@ -303,10 +278,10 @@
                           <object class="GtkButton" id="deleteBtn">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
+                            <property name="valign">center</property>
+                            <property name="halign">center</property>
                             <property name="receives_default">True</property>
                             <property name="tooltip_text" translatable="yes">Delete</property>
-                            <property name="halign">center</property>
-                            <property name="valign">center</property>
                             <child>
                               <object class="GtkImage">
                                 <property name="visible">True</property>
@@ -315,19 +290,16 @@
                               </object>
                             </child>
                             <style>
-                              <class name="pill-button"/>
+                              <class name="image-button"/>
+                              <class name="circular"/>
                             </style>
                           </object>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
                             <property name="position">0</property>
                           </packing>
                         </child>
                       </object>
                       <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
                         <property name="position">1</property>
                       </packing>
                     </child>
@@ -336,17 +308,15 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">center</property>
-                        <property name="valign">center</property>
-                        <property name="hexpand">True</property>
                         <property name="spacing">18</property>
                         <child>
                           <object class="GtkButton" id="seekBackward">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
+                            <property name="valign">center</property>
+                            <property name="halign">center</property>
                             <property name="receives_default">True</property>
                             <property name="tooltip_text" translatable="yes">Seek 10s Backward</property>
-                            <property name="halign">center</property>
-                            <property name="valign">center</property>
                             <child>
                               <object class="GtkImage">
                                 <property name="visible">True</property>
@@ -355,12 +325,11 @@
                               </object>
                             </child>
                             <style>
-                              <class name="pill-button"/>
+                              <class name="image-button"/>
+                              <class name="circular"/>
                             </style>
                           </object>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
                             <property name="position">0</property>
                           </packing>
                         </child>
@@ -368,32 +337,26 @@
                           <object class="GtkStack" id="playbackStack">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="halign">center</property>
-                            <property name="valign">center</property>
                             <child>
                               <object class="GtkButton" id="playButton">
-                                <property name="name">playButton</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
+                                <property name="valign">center</property>
+                                <property name="halign">center</property>
                                 <property name="receives_default">True</property>
                                 <property name="tooltip_text" translatable="yes">Play</property>
-                                <property name="halign">center</property>
-                                <property name="valign">center</property>
-                                <property name="always_show_image">True</property>
                                 <child>
-                                  <object class="GtkImage" id="playIcon">
+                                  <object class="GtkImage">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="margin_left">4</property>
-                                    <property name="margin_right">4</property>
-                                    <property name="margin_top">7</property>
-                                    <property name="margin_bottom">7</property>
                                     <property name="icon_name">media-playback-start-symbolic</property>
                                     <property name="icon_size">3</property>
                                   </object>
                                 </child>
                                 <style>
-                                  <class name="pill-button"/>
+                                  <class name="image-button"/>
+                                  <class name="circular"/>
+                                  <class name="large"/>
                                 </style>
                               </object>
                               <packing>
@@ -404,25 +367,22 @@
                               <object class="GtkButton" id="pauseButton">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
+                                <property name="valign">center</property>
+                                <property name="halign">center</property>
                                 <property name="receives_default">True</property>
                                 <property name="tooltip_text" translatable="yes">Pause</property>
-                                <property name="halign">center</property>
-                                <property name="valign">center</property>
-                                <property name="always_show_image">True</property>
                                 <child>
                                   <object class="GtkImage">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="margin_left">4</property>
-                                    <property name="margin_right">4</property>
-                                    <property name="margin_top">7</property>
-                                    <property name="margin_bottom">7</property>
                                     <property name="icon_name">media-playback-pause-symbolic</property>
                                     <property name="icon_size">3</property>
                                   </object>
                                 </child>
                                 <style>
-                                  <class name="pill-button"/>
+                                  <class name="image-button"/>
+                                  <class name="circular"/>
+                                  <class name="large"/>
                                 </style>
                               </object>
                               <packing>
@@ -432,8 +392,6 @@
                             </child>
                           </object>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
                             <property name="position">1</property>
                           </packing>
                         </child>
@@ -441,11 +399,10 @@
                           <object class="GtkButton" id="seekForward">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
+                            <property name="valign">center</property>
+                            <property name="halign">center</property>
                             <property name="receives_default">True</property>
                             <property name="tooltip_text" translatable="yes">Seek 10s Forward</property>
-                            <property name="halign">center</property>
-                            <property name="valign">center</property>
-                            <property name="always_show_image">True</property>
                             <child>
                               <object class="GtkImage">
                                 <property name="visible">True</property>
@@ -454,26 +411,22 @@
                               </object>
                             </child>
                             <style>
-                              <class name="pill-button"/>
+                              <class name="image-button"/>
+                              <class name="circular"/>
                             </style>
                           </object>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
                             <property name="position">2</property>
                           </packing>
                         </child>
                       </object>
                       <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
+                        <property name="expand">True</property>
                         <property name="position">3</property>
                       </packing>
                     </child>
                   </object>
                   <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -481,8 +434,6 @@
             </child>
           </object>
           <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
             <property name="position">1</property>
           </packing>
         </child>
