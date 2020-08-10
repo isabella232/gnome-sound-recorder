@@ -23,7 +23,7 @@
 
 // based on code from Pitivi
 
-const { Gdk, GObject, Gtk } = imports.gi;
+const { Gdk, Gio, GObject, Gtk } = imports.gi;
 const Cairo = imports.cairo;
 
 var WaveType = {
@@ -32,6 +32,7 @@ var WaveType = {
 };
 
 const GUTTER = 4;
+const IsDark = new Gio.Settings({ schema: 'org.gnome.desktop.interface' }).get_string('gtk-theme').endsWith('dark');
 
 var WaveForm = GObject.registerClass({
     Properties: {
@@ -63,6 +64,9 @@ var WaveForm = GObject.registerClass({
                 Gdk.EventMask.BUTTON1_MOTION_MASK);
         }
 
+        this.rightColor = (IsDark ? [80, 80, 80] : [192, 191, 188]).map(x => x / 255);
+        this.leftColor = (IsDark ? [192, 191, 188] : [46, 52, 54]).map(x => x / 255);
+        this.dividerColor = (this.waveType === WaveType.PLAYER ? [28, 113, 216] : [255, 0, 0]).map(x => x / 255);
 
         this.show();
     }
@@ -94,10 +98,7 @@ var WaveForm = GObject.registerClass({
         ctx.setLineCap(Cairo.LineCap.ROUND);
         ctx.setLineWidth(2);
 
-        if (this.waveType === WaveType.PLAYER)
-            ctx.setSourceRGB(28 / 255, 113 / 255, 216 / 255);
-        else
-            ctx.setSourceRGB(1, 0, 0);
+        ctx.setSourceRGB(...this.dividerColor);
 
         ctx.moveTo(horizCenter, vertiCenter - maxHeight);
         ctx.lineTo(horizCenter, vertiCenter + maxHeight);
@@ -106,10 +107,14 @@ var WaveForm = GObject.registerClass({
         ctx.setLineWidth(1);
 
         this._peaks.forEach(peak => {
-            if (pointer > horizCenter)
-                ctx.setSourceRGB(192 / 255, 191 / 255, 188 / 255);
-            else
-                ctx.setSourceRGB(46 / 255, 52 / 255, 54 / 255);
+            if (this.waveType === WaveType.PLAYER) {
+                if (pointer > horizCenter)
+                    ctx.setSourceRGB(...this.rightColor);
+                else
+                    ctx.setSourceRGB(...this.leftColor);
+            } else {
+                ctx.setSourceRGB(...this.leftColor);
+            }
 
             ctx.moveTo(pointer, vertiCenter + peak * maxHeight);
             ctx.lineTo(pointer, vertiCenter - peak * maxHeight);
