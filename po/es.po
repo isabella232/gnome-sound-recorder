@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
 "issues\n"
-"POT-Creation-Date: 2020-07-04 13:29+0000\n"
-"PO-Revision-Date: 2020-07-29 13:03+0200\n"
+"POT-Creation-Date: 2020-08-10 14:13+0000\n"
+"PO-Revision-Date: 2020-08-13 10:10+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
 "Language: es_ES\n"
@@ -21,7 +21,8 @@ msgstr ""
 "X-Generator: Gtranslator 3.36.0\n"
 
 #: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:5
-#: data/org.gnome.SoundRecorder.desktop.in.in:4 src/application.js:32
+#: data/org.gnome.SoundRecorder.desktop.in.in:4 data/ui/window.ui:28
+#: src/application.js:32
 msgid "Sound Recorder"
 msgstr "Grabadora de sonidos"
 
@@ -112,74 +113,113 @@ msgstr ""
 "Canales de mapas disponibles. Si no hay ningún mapeo configurado, se usará "
 "en canal estéreo de manera predeterminada."
 
-#: data/ui/row.ui:178
-msgid "Save"
-msgstr "Guardar"
+#: data/ui/row.ui:188 data/ui/row.ui:500
+msgid "Export"
+msgstr "Exportar"
 
-#: data/ui/row.ui:237
-msgid "Delete"
-msgstr "Eliminar"
-
-#: data/ui/row.ui:254
+#: data/ui/row.ui:214 data/ui/row.ui:496
 msgid "Rename"
 msgstr "Renombrar"
 
-#: data/ui/window.ui:62
+#: data/ui/row.ui:269
+msgid "Save"
+msgstr "Guardar"
+
+#: data/ui/row.ui:307
+msgid "Delete"
+msgstr "Eliminar"
+
+#: data/ui/row.ui:347
+msgid "Seek 10s Backward"
+msgstr "Retroceder 10s"
+
+#: data/ui/row.ui:379
+msgid "Play"
+msgstr "Reproducir"
+
+#: data/ui/row.ui:408
+msgid "Pause"
+msgstr "Pausar"
+
+#: data/ui/row.ui:445
+msgid "Seek 10s Forward"
+msgstr "Avanzar 10s"
+
+#: data/ui/window.ui:63
 msgid "Record"
 msgstr "Grabar"
 
-#: data/ui/window.ui:344
+#: data/ui/window.ui:204
+#| msgid "Recording"
+msgid "Resume Recording"
+msgstr "Reanudar la grabación"
+
+#: data/ui/window.ui:228
+#| msgid "Recording"
+msgid "Pause Recording"
+msgstr "Pausar la grabación"
+
+#: data/ui/window.ui:260
+#| msgid "Recording"
+msgid "Stop Recording"
+msgstr "Detener la grabación"
+
+#: data/ui/window.ui:289
+#| msgid "Recording"
+msgid "Cancel Recording"
+msgstr "Cancelar la grabación"
+
+#: data/ui/window.ui:354
 msgid "Add Recordings"
 msgstr "Añadir grabaciones"
 
-#: data/ui/window.ui:361
+#: data/ui/window.ui:371
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Use el botón <b>Grabar</b> para realizar grabaciones de sonido"
 
-#: data/ui/window.ui:394
+#: data/ui/window.ui:418
+msgid "Undo"
+msgstr "Deshacer"
+
+#: data/ui/window.ui:459
 msgid "Preferred Format"
 msgstr "Formato preferido"
 
-#: data/ui/window.ui:396
+#: data/ui/window.ui:461
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: data/ui/window.ui:401
+#: data/ui/window.ui:466
 msgid "Opus"
 msgstr "Opus"
 
-#: data/ui/window.ui:406
+#: data/ui/window.ui:471
 msgid "FLAC"
 msgstr "FLAC"
 
-#: data/ui/window.ui:411
+#: data/ui/window.ui:476
 msgid "MP3"
 msgstr "MP3"
 
-#: data/ui/window.ui:416
+#: data/ui/window.ui:481
 msgid "M4A"
 msgstr "M4A"
 
-#: data/ui/window.ui:422
+#: data/ui/window.ui:487
 msgid "Audio Channel"
 msgstr "Canal de sonido"
 
-#: data/ui/window.ui:424
+#: data/ui/window.ui:489
 msgid "Stereo"
 msgstr "Estéreo"
 
-#: data/ui/window.ui:429
+#: data/ui/window.ui:494
 msgid "Mono"
 msgstr "Mono"
 
-#: data/ui/window.ui:437
+#: data/ui/window.ui:502
 msgid "About Sound Recorder"
 msgstr "Acerca de la grabadora de sonidos"
-
-#. Translators: "Recordings" here refers to the name of the directory where the application places files
-#: src/application.js:24
-msgid "Recordings"
-msgstr "Grabaciones"
 
 #: src/application.js:131
 msgid "Sound Recorder started"
@@ -196,10 +236,37 @@ msgstr "Una aplicación de grabación de sonido para GNOME"
 
 #. Translators: ""Recording %d"" is the default name assigned to a file created
 #. by the application (for example, "Recording 1").
-#: src/recorder.js:107
+#: src/recorder.js:109
 #, javascript-format
 msgid "Recording %d"
 msgstr "Grabando %d"
+
+#. Necessary code to move old recordings into the new location for few releases
+#. FIXME: Remove by 3.40/3.42
+#: src/recordingList.js:41
+msgid "Recordings"
+msgstr "Grabaciones"
+
+#. Translators: ""%s (Old)"" is the new name assigned to a file moved from
+#. the old recordings location
+#: src/recordingList.js:57
+#, javascript-format
+msgid "%s (Old)"
+msgstr "%s (Antiguo)"
+
+#: src/row.js:56
+#| msgid "Recording"
+msgid "Export Recording"
+msgstr "Exportar grabación"
+
+#: src/row.js:56
+msgid "_Export"
+msgstr "_Exportar"
+
+#: src/row.js:56
+#| msgid "Cancel"
+msgid "_Cancel"
+msgstr "C_ancelar"
 
 #: src/utils.js:45
 msgid "Yesterday"
@@ -244,6 +311,11 @@ msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "hace %d año"
 msgstr[1] "hace %d años"
+
+#: src/window.js:70
+#, javascript-format
+msgid "\"%s\" deleted"
+msgstr "«%s» eliminado"
 
 #~ msgid "Recording from %F %A at %T"
 #~ msgstr "Grabación del %F %A a las %T"
@@ -291,10 +363,6 @@ msgstr[1] "hace %d años"
 #~ msgid "Done"
 #~ msgstr "Hecho"
 
-#~| msgid "Recordings"
-#~ msgid "Recording"
-#~ msgstr "Grabación"
-
 #~ msgid "Preferences"
 #~ msgstr "Preferencias"
 
@@ -330,9 +398,6 @@ msgstr[1] "hace %d años"
 #~ msgid "Info"
 #~ msgstr "Información"
 
-#~ msgid "Cancel"
-#~ msgstr "Cancelar"
-
 #~ msgid "Details"
 #~ msgstr "Detalles"
 
@@ -358,12 +423,6 @@ msgstr[1] "hace %d años"
 #~| msgid_plural "%d Recorded Sounds"
 #~ msgid "No Recorded Sounds"
 #~ msgstr "No hay sonidos grabados"
-
-#~ msgid "Play"
-#~ msgstr "Reproducir"
-
-#~ msgid "Pause"
-#~ msgstr "Pausar"
 
 #~ msgid "MOV"
 #~ msgstr "MOV"
