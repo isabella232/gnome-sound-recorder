@@ -148,7 +148,10 @@ var Window = GObject.registerClass({
         this.deleteSignalId = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 3, () => {
             callback();
             this._notificationRevealer.reveal_child = false;
-            this._notificationUndoBtn.disconnect(this.cancelSignalId);
+            if (this.cancelSignalId && this.cancelSignalId > 0) {
+                this._notificationUndoBtn.disconnect(this.cancelSignalId);
+                this.cancelSignalId = -1;
+            }
         });
 
         this.cancelSignalId = this._notificationUndoBtn.connect('clicked', _ => {
