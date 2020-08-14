@@ -26,6 +26,11 @@ const { RecordingsListBox } = imports.recordingsListBox;
 const { formatTime } = imports.utils;
 const { WaveForm, WaveType } = imports.waveform;
 
+var WindowState = {
+    EMPTY: 0,
+    LIST: 1,
+    RECORDER: 2,
+};
 
 var Window = GObject.registerClass({
     Template: 'resource:///org/gnome/SoundRecorder/ui/window.ui',
@@ -60,8 +65,14 @@ var Window = GObject.registerClass({
         });
 
         this._recordingList = new RecordingList();
-        this._refreshView();
-        this._recordingList.connect('items-changed', this._refreshView.bind(this));
+        this._recordingList.connect('items-changed', _ => {
+            if (this.state !== WindowState.RECORDER) {
+                if (this._recordingList.get_n_items() === 0)
+                    this.state = WindowState.EMPTY;
+                else
+                    this.state = WindowState.LIST;
+            }
+        });
 
         this._recordingListBox = new RecordingsListBox(this._recordingList, this.player);
 
@@ -106,38 +117,29 @@ var Window = GObject.registerClass({
         if (activeRow && activeRow.editMode)
             activeRow.editMode = false;
 
-        this._headerRevealer.reveal_child = false;
-        this._mainStack.visible_child_name = 'recorder';
         this._playbackStack.visible_child_name = 'recorder-pause';
-
+        this.state = WindowState.RECORDER;
         this.recorder.start();
     }
 
     onRecorderCancel() {
         const recording = this.recorder.stop();
         recording.delete();
-        this._setMainView();
+
+        if (this._recordingList.get_n_items() === 0)
+            this.state = WindowState.EMPTY;
+        else
+            this.state = WindowState.LIST;
+
+        this.waveform.destroy();
     }
 
     onRecorderStop() {
         const recording = this.recorder.stop();
         this._recordingList.insert(0, recording);
         this._recordingListBox.get_row_at_index(0).editMode = true;
-        this._setMainView();
-    }
-
-    _setMainView() {
+        this.state = WindowState.LIST;
         this.waveform.destroy();
-        this._playbackStack.visible_child_name = 'recorder-start';
-        this._mainStack.visible_child_name = 'recordings';
-        this._headerRevealer.reveal_child = true;
-    }
-
-    _refreshView() {
-        if (this._recordingList.get_n_items() === 0)
-            this._mainStack.visible_child_name = 'empty';
-        else
-            this._mainStack.visible_child_name = 'recordings';
     }
 
     notify(message, callback, cancelCallback) {
@@ -158,5 +160,33 @@ var Window = GObject.registerClass({
             }
             this._notificationUndoBtn.disconnect(this.cancelSignalId);
         });
+    }
+
+    set state(state) {
+        let visibleChild;
+        let isHeaderVisible;
+
+        switch (state) {
+        case WindowState.RECORDER:
+            visibleChild = 'recorder';
+            isHeaderVisible = false;
+            break;
+        case WindowState.LIST:
+            visibleChild = 'recordings';
+            isHeaderVisible = true;
+            break;
+        case WindowState.EMPTY:
+            visibleChild = 'empty';
+            isHeaderVisible = true;
+            break;
+        }
+
+        this._mainStack.visible_child_name = visibleChild;
+        this._headerRevealer.reveal_child = isHeaderVisible;
+        this._state = state;
+    }
+
+    get state() {
+        return this._state;
     }
 });
