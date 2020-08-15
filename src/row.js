@@ -40,6 +40,12 @@ var Row = GObject.registerClass({
             margin_right: 12,
         }, WaveType.PLAYER);
         this._waveformStack.add_named(this.waveform, 'wave');
+        if (this._recording._peaks.length > 0) {
+            this.waveform.peaks = this._recording.peaks;
+            this._waveformStack.visible_child_name = 'wave';
+        } else {
+            this._recording.loadPeaks();
+        }
 
         recording.bind_property('name', this._name, 'label', GObject.BindingFlags.SYNC_CREATE | GObject.BindingFlags.DEFAULT);
         recording.bind_property('name', this._entry, 'text', GObject.BindingFlags.SYNC_CREATE | GObject.BindingFlags.DEFAULT);
@@ -88,10 +94,10 @@ var Row = GObject.registerClass({
         else
             this._date.label = displayDateTime(recording.timeModified);
 
-        this.waveform.peaks = this._recording.peaks;
-        this._recording.connect('peaks-updated', _ => {
+
+        this._recording.connect('peaks-updated', _recording => {
             this._waveformStack.visible_child_name = 'wave';
-            this.waveform.peaks = this._recording.peaks;
+            this.waveform.peaks = _recording.peaks;
         });
 
         this._recording.connect('peaks-loading', _ => {

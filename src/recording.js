@@ -34,8 +34,6 @@ var Recording = new GObject.registerClass({
         this._timeModified = GLib.DateTime.new_from_unix_local(timeModified);
         this._timeCreated = GLib.DateTime.new_from_unix_local(timeCreated);
 
-        this.readPeaks();
-
         var discoverer = new GstPbutils.Discoverer();
         discoverer.start();
         discoverer.connect('discovered', (_discoverer, audioInfo) => {
@@ -114,7 +112,7 @@ var Recording = new GObject.registerClass({
         return CacheDir.get_child(`${this.name}_data`);
     }
 
-    readPeaks() {
+    loadPeaks() {
         if (this.waveformCache.query_exists(null)) {
             this.waveformCache.load_bytes_async(null, (obj, res) => {
                 const bytes = obj.load_bytes_finish(res)[0];

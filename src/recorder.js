@@ -69,7 +69,7 @@ var Recorder = new GObject.registerClass({
     },
 }, class Recorder extends GObject.Object {
     _init() {
-        this.peaks = [];
+        this._peaks = [];
         super._init({});
 
         let srcElement, audioConvert, caps;
@@ -100,7 +100,6 @@ var Recorder = new GObject.registerClass({
     }
 
     start() {
-        this.peaks.length = 0;
         let index = 1;
 
         do {
@@ -157,9 +156,10 @@ var Recorder = new GObject.registerClass({
         }
 
 
-        if (this.file && this.file.query_exists(null) && this.peaks.length > 0) {
+        if (this.file && this.file.query_exists(null) && this._peaks.length > 0) {
             const recording = new Recording(this.file);
-            recording.peaks = this.peaks;
+            recording.peaks = this._peaks;
+            this._peaks.length = 0;
             return recording;
         }
 
@@ -233,7 +233,7 @@ var Recorder = new GObject.registerClass({
             peak = 0;
 
         this._current_peak = Math.pow(10, peak / 20);
-        this.peaks.push(this._current_peak);
+        this._peaks.push(this._current_peak);
         this.notify('current-peak');
     }
 
