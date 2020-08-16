@@ -34,7 +34,7 @@ var WindowState = {
 
 var Window = GObject.registerClass({
     Template: 'resource:///org/gnome/SoundRecorder/ui/window.ui',
-    InternalChildren: ['recorderTime', 'mainStack', 'recorderBox', 'emptyIcon', 'playbackStack', 'headerRevealer', 'notificationRevealer', 'notificationMessage', 'notificationUndoBtn', 'notificationCancelBtn', 'column'],
+    InternalChildren: ['recorderTime', 'mainStack', 'recorderBox', 'emptyIcon', 'playbackStack', 'headerRevealer', 'notificationRevealer', 'notificationMessage', 'notificationUndoBtn', 'notificationCloseBtn', 'column'],
 }, class Window extends Handy.ApplicationWindow {
 
     _init(params) {
@@ -84,7 +84,7 @@ var Window = GObject.registerClass({
             );
         });
 
-        this._notificationCancelBtn.connect('clicked', _ => {
+        this._notificationCloseBtn.connect('clicked', _ => {
             this._notificationRevealer.reveal_child = false;
             if (this.deleteSignalId && this.deleteSignalId > 0) {
                 GLib.source_remove(this.deleteSignalId);
@@ -144,6 +144,7 @@ var Window = GObject.registerClass({
 
     notify(message, callback, cancelCallback) {
         this._notificationMessage.label = message;
+        this._notificationMessage.tooltip_text = message;
         this._notificationRevealer.reveal_child = true;
         this.deleteSignalId = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 3, () => {
             callback();

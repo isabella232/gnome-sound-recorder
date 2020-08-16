@@ -381,7 +381,10 @@
                     <child>
                       <object class="GtkLabel" id="notificationMessage">
                         <property name="visible">True</property>
+                        <property name="xalign">0.0</property>
                         <property name="can_focus">False</property>
+                        <property name="wrap">True</property>
+                        <property name="ellipsize">end</property>
                       </object>
                     </child>
                     <child>
@@ -394,11 +397,12 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkButton" id="notificationCancelBtn">
+                      <object class="GtkButton" id="notificationCloseBtn">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="margin_start">8</property>
+                        <property name="tooltip_text" translatable="yes">Close</property>
                         <property name="relief">none</property>
                         <child>
                           <object class="GtkImage">
