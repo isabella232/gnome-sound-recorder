@@ -126,8 +126,8 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
 
     vfunc_startup() {
         super.vfunc_startup();
-        log("Sound Recorder (%s)".format(pkg.name));
-        log("Version: %s".format(pkg.version));
+        log('Sound Recorder (%s)'.format(pkg.name));
+        log('Version: %s'.format(pkg.version));
 
         let provider = new Gtk.CssProvider();
         provider.load_from_resource('/org/gnome/SoundRecorder/application.css');

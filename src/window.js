@@ -37,7 +37,7 @@ var Window = GObject.registerClass({
     InternalChildren: [
         'recorderTime', 'mainStack', 'recorderBox', 'emptyIcon', 'playbackStack',
         'headerRevealer', 'notificationRevealer', 'notificationMessage',
-        'notificationUndoBtn', 'notificationCloseBtn', 'column'
+        'notificationUndoBtn', 'notificationCloseBtn', 'column',
     ],
 }, class Window extends Handy.ApplicationWindow {
 
