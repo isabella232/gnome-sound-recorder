@@ -109,7 +109,11 @@ var Row = GObject.registerClass({
             this._waveformStack.visible_child_name = 'loading';
         });
 
+        // Force LTR, we don't want forward/play/backward
+        this._playbackControls.set_direction(Gtk.TextDirection.LTR);
 
+        // Force LTR, we don't want reverse hh:mm::ss
+        this._duration.set_direction(Gtk.TextDirection.LTR);
         this._duration.label = formatTime(recording.duration / Gst.SECOND);
         recording.connect('notify::duration', () => {
             this._duration.label = formatTime(recording.duration / Gst.SECOND);
