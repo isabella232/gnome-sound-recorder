@@ -126,9 +126,16 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
 
     vfunc_startup() {
         super.vfunc_startup();
-        this._loadStyleSheet();
+        log("Sound Recorder (%s)".format(pkg.name));
+        log("Version: %s".format(pkg.version));
+
+        let provider = new Gtk.CssProvider();
+        provider.load_from_resource('/org/gnome/SoundRecorder/application.css');
+        Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),
+            provider,
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
         Gtk.IconTheme.get_default().add_resource_path('/org/gnome/SoundRecorder/icons/');
-        log(_('Sound Recorder started'));
         Handy.init();
         Gst.init(null);
 
@@ -145,14 +152,6 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
         if (pkg.name.endsWith('Devel'))
             this.window.get_style_context().add_class('devel');
         this.window.show();
-    }
-
-    _loadStyleSheet() {
-        let provider = new Gtk.CssProvider();
-        provider.load_from_resource('/org/gnome/SoundRecorder/application.css');
-        Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),
-            provider,
-            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
     }
 
     _showAbout() {
