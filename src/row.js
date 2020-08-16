@@ -10,7 +10,12 @@ var RowState = {
 
 var Row = GObject.registerClass({
     Template: 'resource:///org/gnome/SoundRecorder/ui/row.ui',
-    InternalChildren: ['playbackStack', 'mainStack', 'playButton', 'waveformStack', 'pauseButton', 'name', 'entry', 'date', 'duration', 'revealer', 'playbackControls', 'rightStack', 'squeezer', 'saveBtn', 'renameBtn', 'exportBtn', 'saveBtn', 'rightStack', 'seekBackward', 'seekForward', 'optionBtn', 'deleteBtn'],
+    InternalChildren: [
+        'playbackStack', 'mainStack', 'playButton', 'waveformStack', 'pauseButton',
+        'name', 'entry', 'date', 'duration', 'revealer', 'playbackControls', 'rightStack',
+        'squeezer', 'saveBtn', 'renameBtn', 'exportBtn', 'saveBtn', 'rightStack',
+        'seekBackward', 'seekForward', 'optionBtn', 'deleteBtn'
+    ],
     Signals: {
         'play': { param_types: [GObject.TYPE_STRING] },
         'pause': {},

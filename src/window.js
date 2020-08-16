@@ -34,7 +34,11 @@ var WindowState = {
 
 var Window = GObject.registerClass({
     Template: 'resource:///org/gnome/SoundRecorder/ui/window.ui',
-    InternalChildren: ['recorderTime', 'mainStack', 'recorderBox', 'emptyIcon', 'playbackStack', 'headerRevealer', 'notificationRevealer', 'notificationMessage', 'notificationUndoBtn', 'notificationCloseBtn', 'column'],
+    InternalChildren: [
+        'recorderTime', 'mainStack', 'recorderBox', 'emptyIcon', 'playbackStack',
+        'headerRevealer', 'notificationRevealer', 'notificationMessage',
+        'notificationUndoBtn', 'notificationCloseBtn', 'column'
+    ],
 }, class Window extends Handy.ApplicationWindow {
 
     _init(params) {
