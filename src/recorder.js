@@ -157,8 +157,8 @@ var Recorder = new GObject.registerClass({
 
 
         if (this.file && this.file.query_exists(null) && this._peaks.length > 0) {
-            const recording = new Recording(this.file);
-            recording.peaks = this._peaks;
+            let recording = new Recording(this.file);
+            recording.peaks = this._peaks.slice();
             this._peaks.length = 0;
             return recording;
         }
