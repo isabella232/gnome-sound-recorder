@@ -77,6 +77,7 @@ var RecordingsListBox = new GObject.registerClass({
 
                 if (row === this.activePlayingRow)
                     this.activePlayingRow = null;
+                    this._player.stop();
 
                 const index = row.get_index();
                 this.isolateAt(index, false);
