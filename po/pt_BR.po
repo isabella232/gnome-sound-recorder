@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
 "issues\n"
-"POT-Creation-Date: 2020-08-09 12:43+0000\n"
-"PO-Revision-Date: 2020-08-10 08:22-0300\n"
+"POT-Creation-Date: 2020-08-10 14:13+0000\n"
+"PO-Revision-Date: 2020-08-16 07:12-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -24,7 +24,7 @@ msgstr ""
 
 #: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:5
 #: data/org.gnome.SoundRecorder.desktop.in.in:4 data/ui/window.ui:28
-#: src/application.js:33
+#: src/application.js:32
 msgid "Sound Recorder"
 msgstr "Gravador de som"
 
@@ -114,35 +114,35 @@ msgstr ""
 "Mapeia os canais disponíveis. Se não houver mapeamento definido, será "
 "utilizado por padrão o canal estéreo."
 
-#: data/ui/row.ui:166 data/ui/row.ui:473
+#: data/ui/row.ui:188 data/ui/row.ui:500
 msgid "Export"
 msgstr "Exporta"
 
-#: data/ui/row.ui:192 data/ui/row.ui:469
+#: data/ui/row.ui:214 data/ui/row.ui:496
 msgid "Rename"
 msgstr "Renomeia"
 
-#: data/ui/row.ui:247
+#: data/ui/row.ui:269
 msgid "Save"
 msgstr "Salva"
 
-#: data/ui/row.ui:285
+#: data/ui/row.ui:307
 msgid "Delete"
 msgstr "Exclui"
 
-#: data/ui/row.ui:320
+#: data/ui/row.ui:347
 msgid "Seek 10s Backward"
 msgstr "Volta 10s"
 
-#: data/ui/row.ui:352
+#: data/ui/row.ui:379
 msgid "Play"
 msgstr "Reproduz"
 
-#: data/ui/row.ui:381
+#: data/ui/row.ui:408
 msgid "Pause"
 msgstr "Pausa"
 
-#: data/ui/row.ui:418
+#: data/ui/row.ui:445
 msgid "Seek 10s Forward"
 msgstr "Avança 10s"
 
@@ -150,88 +150,86 @@ msgstr "Avança 10s"
 msgid "Record"
 msgstr "Gravar"
 
-#: data/ui/window.ui:200
-#| msgid "Recordings"
+#: data/ui/window.ui:204
 msgid "Resume Recording"
 msgstr "Continua a gravação"
 
-#: data/ui/window.ui:224
-#| msgid "Recordings"
+#: data/ui/window.ui:228
 msgid "Pause Recording"
 msgstr "Pausa a gravação"
 
-#: data/ui/window.ui:256
-#| msgid "Recordings"
+#: data/ui/window.ui:260
 msgid "Stop Recording"
 msgstr "Para a gravação"
 
-#: data/ui/window.ui:285
-#| msgid "Recordings"
+#: data/ui/window.ui:289
 msgid "Cancel Recording"
 msgstr "Cancela a gravação"
 
-#: data/ui/window.ui:350
+#: data/ui/window.ui:354
 msgid "Add Recordings"
 msgstr "Adicionar gravações"
 
-#: data/ui/window.ui:367
+#: data/ui/window.ui:371
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Use o botão <b>Gravar</b> para efetuar gravações de sons"
 
-#: data/ui/window.ui:400
-#| msgid "Preferred format"
+#: data/ui/window.ui:418
+msgid "Undo"
+msgstr "Desfaz"
+
+#: data/ui/window.ui:459
 msgid "Preferred Format"
 msgstr "Formato preferido"
 
-#: data/ui/window.ui:402
-#| msgid "Ogg Vorbis"
+#: data/ui/window.ui:461
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: data/ui/window.ui:407
+#: data/ui/window.ui:466
 msgid "Opus"
 msgstr "Opus"
 
-#: data/ui/window.ui:412
+#: data/ui/window.ui:471
 msgid "FLAC"
 msgstr "FLAC"
 
-#: data/ui/window.ui:417
+#: data/ui/window.ui:476
 msgid "MP3"
 msgstr "MP3"
 
-#: data/ui/window.ui:422
+#: data/ui/window.ui:481
 msgid "M4A"
 msgstr "M4A"
 
-#: data/ui/window.ui:428
+#: data/ui/window.ui:487
 msgid "Audio Channel"
 msgstr "Canal de áudio"
 
-#: data/ui/window.ui:430
+#: data/ui/window.ui:489
 msgid "Stereo"
 msgstr "Estéreo"
 
-#: data/ui/window.ui:435
+#: data/ui/window.ui:494
 msgid "Mono"
 msgstr "Mono"
 
-#: data/ui/window.ui:443
+#: data/ui/window.ui:502
 msgid "About Sound Recorder"
 msgstr "Sobre o Gravador de som"
 
-#: src/application.js:132
+#: src/application.js:131
 msgid "Sound Recorder started"
 msgstr "O gravador de som iniciou"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/application.js:169
+#: src/application.js:168
 msgid "translator-credits"
 msgstr ""
 "Enrico Nicoletto <liverig@gmail.com>\n"
 "Rafael Fontenelle <rafaelff@gnome.org>"
 
-#: src/application.js:171
+#: src/application.js:170
 msgid "A Sound Recording Application for GNOME"
 msgstr "Um aplicativo de gravação de som para o GNOME"
 
@@ -239,7 +237,6 @@ msgstr "Um aplicativo de gravação de som para o GNOME"
 #. by the application (for example, "Recording 1").
 #: src/recorder.js:109
 #, javascript-format
-#| msgid "Recording "
 msgid "Recording %d"
 msgstr "Gravação %d"
 
@@ -256,17 +253,15 @@ msgstr "Gravações"
 msgid "%s (Old)"
 msgstr "%s (Antiga)"
 
-#: src/row.js:58
-#| msgid "Recordings"
+#: src/row.js:56
 msgid "Export Recording"
 msgstr "Exportar gravação"
 
-#: src/row.js:58
+#: src/row.js:56
 msgid "_Export"
 msgstr "_Exportar"
 
-#: src/row.js:58
-#| msgid "Cancel"
+#: src/row.js:56
 msgid "_Cancel"
 msgstr "_Cancelar"
 
@@ -313,6 +308,11 @@ msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "%d ano atrás"
 msgstr[1] "%d anos atrás"
+
+#: src/window.js:70
+#, javascript-format
+msgid "\"%s\" deleted"
+msgstr "“%s” excluído"
 
 #~ msgid "Microphone volume level"
 #~ msgstr "Nível de volume do microfone"
