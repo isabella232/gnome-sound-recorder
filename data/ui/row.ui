@@ -103,6 +103,8 @@
           <object class="GtkRevealer" id="revealer">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="transition_duration">250</property>
+            <property name="transition_type">GTK_REVEALER_TRANSITION_TYPE_SLIDE_DOWN</property>
             <child>
               <object class="GtkBox">
                 <property name="visible">True</property>
