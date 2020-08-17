@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
 "issues\n"
-"POT-Creation-Date: 2020-06-06 12:28+0000\n"
+"POT-Creation-Date: 2020-08-16 15:08+0000\n"
 "PO-Revision-Date: 2020-06-10 18:45+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
@@ -23,7 +23,8 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:5
-#: data/org.gnome.SoundRecorder.desktop.in.in:4 src/application.js:37
+#: data/org.gnome.SoundRecorder.desktop.in.in:4 data/ui/window.ui:28
+#: src/application.js:32
 msgid "Sound Recorder"
 msgstr "サウンドレコーダー"
 
@@ -111,69 +112,124 @@ msgstr ""
 "利用可能なチャンネルをマップします。もしマッピングセットがなければ、デフォル"
 "トでステレオチャンネルを使用します。"
 
-#: data/ui/window.ui:57
+#: data/ui/row.ui:159 data/ui/row.ui:442
+msgid "Export"
+msgstr ""
+
+#: data/ui/row.ui:184 data/ui/row.ui:438
+msgid "Rename"
+msgstr ""
+
+#: data/ui/row.ui:238
+msgid "Save"
+msgstr ""
+
+#: data/ui/row.ui:275
+msgid "Delete"
+msgstr "削除"
+
+#: data/ui/row.ui:310
+msgid "Seek 10s Backward"
+msgstr ""
+
+#: data/ui/row.ui:338
+msgid "Play"
+msgstr "再生"
+
+#: data/ui/row.ui:364
+msgid "Pause"
+msgstr "一時停止"
+
+#: data/ui/row.ui:396
+msgid "Seek 10s Forward"
+msgstr ""
+
+#: data/ui/window.ui:63
 msgid "Record"
 msgstr "録音"
 
-#: data/ui/window.ui:329
+#: data/ui/window.ui:144
 msgid "Add Recordings"
 msgstr "録音してください"
 
-#: data/ui/window.ui:346
+#: data/ui/window.ui:156
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "<b>録音</b>ボタンを押すと音声を録音します"
 
-#: data/ui/window.ui:379
+#: data/ui/window.ui:253
+#, fuzzy
+#| msgid "Recordings"
+msgid "Resume Recording"
+msgstr "レコーディング"
+
+#: data/ui/window.ui:278
+#, fuzzy
+#| msgid "Recordings"
+msgid "Pause Recording"
+msgstr "レコーディング"
+
+#: data/ui/window.ui:309
+#, fuzzy
+#| msgid "Recordings"
+msgid "Stop Recording"
+msgstr "レコーディング"
+
+#: data/ui/window.ui:337
+#, fuzzy
+#| msgid "Recordings"
+msgid "Cancel Recording"
+msgstr "レコーディング"
+
+#: data/ui/window.ui:395
+msgid "Undo"
+msgstr ""
+
+#: data/ui/window.ui:405
+msgid "Close"
+msgstr ""
+
+#: data/ui/window.ui:430
 msgid "Preferred Format"
 msgstr "フォーマット"
 
-#: data/ui/window.ui:381
+#: data/ui/window.ui:432
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: data/ui/window.ui:386
+#: data/ui/window.ui:437
 msgid "Opus"
 msgstr "Opus"
 
-#: data/ui/window.ui:391
+#: data/ui/window.ui:442
 msgid "FLAC"
 msgstr "FLAC"
 
-#: data/ui/window.ui:396
+#: data/ui/window.ui:447
 msgid "MP3"
 msgstr "MP3"
 
-#: data/ui/window.ui:401
+#: data/ui/window.ui:452
 msgid "M4A"
 msgstr "M4A"
 
-#: data/ui/window.ui:407
+#: data/ui/window.ui:458
 msgid "Audio Channel"
 msgstr "音声チャンネル"
 
-#: data/ui/window.ui:409
+#: data/ui/window.ui:460
 msgid "Stereo"
 msgstr "ステレオ"
 
-#: data/ui/window.ui:414
+#: data/ui/window.ui:465
 msgid "Mono"
 msgstr "モノラル"
 
-#: data/ui/window.ui:422
+#: data/ui/window.ui:473
 msgid "About Sound Recorder"
 msgstr "サウンドレコーダーについて"
 
-#: src/application.js:136
-msgid "Sound Recorder started"
-msgstr "サウンドレコーダーを開始しました"
-
-#. Translators: "Recordings" here refers to the name of the directory where the application places files
-#: src/application.js:145
-msgid "Recordings"
-msgstr "レコーディング"
-
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/application.js:174
+#: src/application.js:167
 msgid "translator-credits"
 msgstr ""
 "坂本 貴史 <o-takashi@sakamocchi.jp>\n"
@@ -182,55 +238,97 @@ msgstr ""
 "Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "sicklylife <translation@sicklylife.jp>"
 
-#: src/application.js:176
+#: src/application.js:169
 msgid "A Sound Recording Application for GNOME"
 msgstr "GNOME 用の録音アプリケーション"
 
-#. Translators: ""Recording from %F %A at %T"" is the default name assigned to a file created
-#. by the application (for example, "Recording from 2020-03-11 Wednesday at 19:43:05").
-#: src/recorder.js:114
-msgid "Recording from %F %A at %T"
-msgstr "録音 %Y年%m月%d日 %A %H時%M分%S秒"
+#. Translators: ""Recording %d"" is the default name assigned to a file created
+#. by the application (for example, "Recording 1").
+#: src/recorder.js:108
+#, fuzzy, javascript-format
+#| msgid "Recordings"
+msgid "Recording %d"
+msgstr "レコーディング"
 
-#: src/utils.js:52
+#. Necessary code to move old recordings into the new location for few releases
+#. FIXME: Remove by 3.40/3.42
+#: src/recordingList.js:41
+msgid "Recordings"
+msgstr "レコーディング"
+
+#. Translators: ""%s (Old)"" is the new name assigned to a file moved from
+#. the old recordings location
+#: src/recordingList.js:57
+#, javascript-format
+msgid "%s (Old)"
+msgstr ""
+
+#: src/row.js:67
+#, fuzzy
+#| msgid "Recordings"
+msgid "Export Recording"
+msgstr "レコーディング"
+
+#: src/row.js:67
+msgid "_Export"
+msgstr ""
+
+#: src/row.js:67
+#, fuzzy
+#| msgid "Cancel"
+msgid "_Cancel"
+msgstr "キャンセル"
+
+#: src/utils.js:45
 msgid "Yesterday"
 msgstr "昨日"
 
-#: src/utils.js:54
+#: src/utils.js:47
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d 日前"
 
-#: src/utils.js:58
+#: src/utils.js:49
 msgid "Last week"
 msgstr "先週"
 
-#: src/utils.js:60
+#: src/utils.js:51
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d 週前"
 
-#: src/utils.js:64
+#: src/utils.js:53
 msgid "Last month"
 msgstr "先月"
 
-#: src/utils.js:66
+#: src/utils.js:55
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d ヶ月前"
 
-#: src/utils.js:70
+#: src/utils.js:57
 msgid "Last year"
 msgstr "昨年"
 
-#: src/utils.js:72
+#: src/utils.js:59
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "%d 年前"
+
+#: src/window.js:85
+#, javascript-format
+msgid "\"%s\" deleted"
+msgstr ""
+
+#~ msgid "Sound Recorder started"
+#~ msgstr "サウンドレコーダーを開始しました"
+
+#~ msgid "Recording from %F %A at %T"
+#~ msgstr "録音 %Y年%m月%d日 %A %H時%M分%S秒"
 
 #~ msgid "Microphone volume level"
 #~ msgstr "マイクの音量レベル"
@@ -249,9 +347,6 @@ msgstr[0] "%d 年前"
 
 #~ msgid "Info"
 #~ msgstr "情報"
-
-#~ msgid "Cancel"
-#~ msgstr "キャンセル"
 
 #~ msgid "Done"
 #~ msgstr "完了"
@@ -288,15 +383,6 @@ msgstr[0] "%d 年前"
 
 #~ msgid "No Recorded Sounds"
 #~ msgstr "録音済み音声がありません"
-
-#~ msgid "Play"
-#~ msgstr "再生"
-
-#~ msgid "Pause"
-#~ msgstr "一時停止"
-
-#~ msgid "Delete"
-#~ msgstr "削除"
 
 #~ msgid "MOV"
 #~ msgstr "MOV"
