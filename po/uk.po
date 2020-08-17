@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/issu"
 "es\n"
-"POT-Creation-Date: 2020-08-10 14:13+0000\n"
-"PO-Revision-Date: 2020-08-10 21:05+0300\n"
+"POT-Creation-Date: 2020-08-16 15:08+0000\n"
+"PO-Revision-Date: 2020-08-17 19:11+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<"
 "=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 20.07.70\n"
+"X-Generator: Lokalize 20.11.70\n"
 "X-Project-Style: gnome\n"
 
 #: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:5
@@ -110,35 +110,35 @@ msgstr ""
 "Показує доступні канали. Якщо не вказано, типово використовується "
 "стереоканал."
 
-#: data/ui/row.ui:188 data/ui/row.ui:500
+#: data/ui/row.ui:159 data/ui/row.ui:442
 msgid "Export"
 msgstr "Експортувати"
 
-#: data/ui/row.ui:214 data/ui/row.ui:496
+#: data/ui/row.ui:184 data/ui/row.ui:438
 msgid "Rename"
 msgstr "Перейменувати"
 
-#: data/ui/row.ui:269
+#: data/ui/row.ui:238
 msgid "Save"
 msgstr "Зберегти"
 
-#: data/ui/row.ui:307
+#: data/ui/row.ui:275
 msgid "Delete"
 msgstr "Вилучити"
 
-#: data/ui/row.ui:347
+#: data/ui/row.ui:310
 msgid "Seek 10s Backward"
 msgstr "Перемотати на 10 с назад"
 
-#: data/ui/row.ui:379
+#: data/ui/row.ui:338
 msgid "Play"
 msgstr "Пуск"
 
-#: data/ui/row.ui:408
+#: data/ui/row.ui:364
 msgid "Pause"
 msgstr "Пауза"
 
-#: data/ui/row.ui:445
+#: data/ui/row.ui:396
 msgid "Seek 10s Forward"
 msgstr "Перемотати на 10 с вперед"
 
@@ -146,90 +146,90 @@ msgstr "Перемотати на 10 с вперед"
 msgid "Record"
 msgstr "Записати"
 
-#: data/ui/window.ui:204
-msgid "Resume Recording"
-msgstr "Відновити записування"
-
-#: data/ui/window.ui:228
-msgid "Pause Recording"
-msgstr "Призупинити записування"
-
-#: data/ui/window.ui:260
-msgid "Stop Recording"
-msgstr "Припинити запис"
-
-#: data/ui/window.ui:289
-msgid "Cancel Recording"
-msgstr "Скасувати записування"
-
-#: data/ui/window.ui:354
+#: data/ui/window.ui:144
 msgid "Add Recordings"
 msgstr "Додати записи"
 
-#: data/ui/window.ui:371
+#: data/ui/window.ui:156
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Натисніть кнопку <b>Записати</b>, щоб зробити записи звуку"
 
-#: data/ui/window.ui:418
+#: data/ui/window.ui:253
+msgid "Resume Recording"
+msgstr "Відновити записування"
+
+#: data/ui/window.ui:278
+msgid "Pause Recording"
+msgstr "Призупинити записування"
+
+#: data/ui/window.ui:309
+msgid "Stop Recording"
+msgstr "Припинити запис"
+
+#: data/ui/window.ui:337
+msgid "Cancel Recording"
+msgstr "Скасувати записування"
+
+#: data/ui/window.ui:395
 msgid "Undo"
 msgstr "Скасувати"
 
-#: data/ui/window.ui:459
+#: data/ui/window.ui:405
+msgid "Close"
+msgstr "Закрити"
+
+#: data/ui/window.ui:430
 msgid "Preferred Format"
 msgstr "Бажаний формат"
 
-#: data/ui/window.ui:461
+#: data/ui/window.ui:432
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: data/ui/window.ui:466
+#: data/ui/window.ui:437
 msgid "Opus"
 msgstr "Opus"
 
-#: data/ui/window.ui:471
+#: data/ui/window.ui:442
 msgid "FLAC"
 msgstr "FLAC"
 
-#: data/ui/window.ui:476
+#: data/ui/window.ui:447
 msgid "MP3"
 msgstr "MP3"
 
-#: data/ui/window.ui:481
+#: data/ui/window.ui:452
 msgid "M4A"
 msgstr "M4A"
 
-#: data/ui/window.ui:487
+#: data/ui/window.ui:458
 msgid "Audio Channel"
 msgstr "Звуковий канал"
 
-#: data/ui/window.ui:489
+#: data/ui/window.ui:460
 msgid "Stereo"
 msgstr "Стерео"
 
-#: data/ui/window.ui:494
+#: data/ui/window.ui:465
 msgid "Mono"
 msgstr "Моно"
 
-#: data/ui/window.ui:502
+#: data/ui/window.ui:473
 msgid "About Sound Recorder"
 msgstr "Про «Записувач звуку»"
 
-#: src/application.js:131
-msgid "Sound Recorder started"
-msgstr "Запущено записувача звуку"
-
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/application.js:168
+#: src/application.js:167
 msgid "translator-credits"
 msgstr "Daniel Korostil <ted.korostiled@gmail.com>"
 
-#: src/application.js:170
+#: src/application.js:169
 msgid "A Sound Recording Application for GNOME"
 msgstr "Програма для запису звуку для GNOME"
 
 #. Translators: ""Recording %d"" is the default name assigned to a file created
 #. by the application (for example, "Recording 1").
-#: src/recorder.js:109
+#: src/recorder.js:108
 #, javascript-format
 msgid "Recording %d"
 msgstr "Запис %d"
@@ -247,15 +247,15 @@ msgstr "Записи"
 msgid "%s (Old)"
 msgstr "%s (старий)"
 
-#: src/row.js:56
+#: src/row.js:67
 msgid "Export Recording"
 msgstr "Експортувати запис"
 
-#: src/row.js:56
+#: src/row.js:67
 msgid "_Export"
 msgstr "_Експортувати"
 
-#: src/row.js:56
+#: src/row.js:67
 msgid "_Cancel"
 msgstr "_Скасувати"
 
@@ -307,10 +307,13 @@ msgstr[0] "%d рік тому"
 msgstr[1] "%d роки тому"
 msgstr[2] "%d років тому"
 
-#: src/window.js:70
+#: src/window.js:85
 #, javascript-format
 msgid "\"%s\" deleted"
 msgstr "«%s» вилучено"
+
+#~ msgid "Sound Recorder started"
+#~ msgstr "Запущено записувача звуку"
 
 #~ msgid "Recording from %F %A at %T"
 #~ msgstr "Запис %F %A о %T"
