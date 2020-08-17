@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
 "issues\n"
 "POT-Creation-Date: 2020-08-16 15:08+0000\n"
-"PO-Revision-Date: 2020-06-10 18:45+0900\n"
+"PO-Revision-Date: 2020-08-17 06:30+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -114,15 +114,15 @@ msgstr ""
 
 #: data/ui/row.ui:159 data/ui/row.ui:442
 msgid "Export"
-msgstr ""
+msgstr "エクスポート"
 
 #: data/ui/row.ui:184 data/ui/row.ui:438
 msgid "Rename"
-msgstr ""
+msgstr "名前を変更"
 
 #: data/ui/row.ui:238
 msgid "Save"
-msgstr ""
+msgstr "保存"
 
 #: data/ui/row.ui:275
 msgid "Delete"
@@ -130,7 +130,7 @@ msgstr "削除"
 
 #: data/ui/row.ui:310
 msgid "Seek 10s Backward"
-msgstr ""
+msgstr "10 秒後方へシーク"
 
 #: data/ui/row.ui:338
 msgid "Play"
@@ -142,7 +142,7 @@ msgstr "一時停止"
 
 #: data/ui/row.ui:396
 msgid "Seek 10s Forward"
-msgstr ""
+msgstr "10 秒前方へシーク"
 
 #: data/ui/window.ui:63
 msgid "Record"
@@ -157,36 +157,28 @@ msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "<b>録音</b>ボタンを押すと音声を録音します"
 
 #: data/ui/window.ui:253
-#, fuzzy
-#| msgid "Recordings"
 msgid "Resume Recording"
-msgstr "レコーディング"
+msgstr "録音を再開"
 
 #: data/ui/window.ui:278
-#, fuzzy
-#| msgid "Recordings"
 msgid "Pause Recording"
-msgstr "レコーディング"
+msgstr "録音を中断"
 
 #: data/ui/window.ui:309
-#, fuzzy
-#| msgid "Recordings"
 msgid "Stop Recording"
-msgstr "レコーディング"
+msgstr "録音を停止"
 
 #: data/ui/window.ui:337
-#, fuzzy
-#| msgid "Recordings"
 msgid "Cancel Recording"
-msgstr "レコーディング"
+msgstr "録音をキャンセル"
 
 #: data/ui/window.ui:395
 msgid "Undo"
-msgstr ""
+msgstr "元に戻す"
 
 #: data/ui/window.ui:405
 msgid "Close"
-msgstr ""
+msgstr "閉じる"
 
 #: data/ui/window.ui:430
 msgid "Preferred Format"
@@ -245,10 +237,9 @@ msgstr "GNOME 用の録音アプリケーション"
 #. Translators: ""Recording %d"" is the default name assigned to a file created
 #. by the application (for example, "Recording 1").
 #: src/recorder.js:108
-#, fuzzy, javascript-format
-#| msgid "Recordings"
+#, javascript-format
 msgid "Recording %d"
-msgstr "レコーディング"
+msgstr "録音 %d"
 
 #. Necessary code to move old recordings into the new location for few releases
 #. FIXME: Remove by 3.40/3.42
@@ -261,23 +252,19 @@ msgstr "レコーディング"
 #: src/recordingList.js:57
 #, javascript-format
 msgid "%s (Old)"
-msgstr ""
+msgstr "%s (旧)"
 
 #: src/row.js:67
-#, fuzzy
-#| msgid "Recordings"
 msgid "Export Recording"
-msgstr "レコーディング"
+msgstr "録音をエクスポート"
 
 #: src/row.js:67
 msgid "_Export"
-msgstr ""
+msgstr "エクスポート(_E)"
 
 #: src/row.js:67
-#, fuzzy
-#| msgid "Cancel"
 msgid "_Cancel"
-msgstr "キャンセル"
+msgstr "キャンセル(_C)"
 
 #: src/utils.js:45
 msgid "Yesterday"
@@ -321,7 +308,7 @@ msgstr[0] "%d 年前"
 
 #: src/window.js:85
 #, javascript-format
-msgid "\"%s\" deleted"
+msgid "\"%s\" を削除しました"
 msgstr ""
 
 #~ msgid "Sound Recorder started"
