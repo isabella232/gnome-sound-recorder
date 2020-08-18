@@ -37,6 +37,17 @@ var RecordingsListBox = new GObject.registerClass({
         this.bind_model(model, recording => {
             let row = new Row(recording);
 
+            row.waveform.connect('button-press-event', _ => {
+                if (!this.activePlayingRow || this.activePlayingRow !== row) {
+
+                    if (this.activePlayingRow)
+                        this.activePlayingRow.waveform.position = 0.0;
+
+                    this.activePlayingRow = row;
+                    this._player.set_uri(recording.uri);
+                }
+            });
+
             row.waveform.connect('position-changed', (_wave, _position) => {
                 this._player.seek(_position * row._recording.duration);
             });
