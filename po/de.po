@@ -1,30 +1,31 @@
 # German translation for gnome-sound-recorder.
 # Copyright (C) 2013 gnome-sound-recorder's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-sound-recorder package.
+#
 # Christian Kirbach <christian.kirbach@gmail.com>, 2014.
 # Wolfgang Stöggl <c72578@yahoo.de>, 2014-2015.
-# Mario Blättermann <mario.blaettermann@gmail.com>, 2016-2017.
+# Mario Blättermann <mario.blaettermann@gmail.com>, 2016-2017, 2020.
 # Fabian Schölzel <fabian.schoelzel@googlemail.com>, 2016.
 # Tim Sabsch <tim@sabsch.com>, 2019.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
 "issues\n"
-"POT-Creation-Date: 2020-07-04 13:29+0000\n"
-"PO-Revision-Date: 2020-07-09 22:08+0200\n"
-"Last-Translator: Tim Sabsch <tim@sabsch.com>\n"
-"Language-Team: Deutsch <gnome-de@gnome.org>\n"
+"POT-Creation-Date: 2020-08-16 15:08+0000\n"
+"PO-Revision-Date: 2020-08-17 20:25+0200\n"
+"Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
+"Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Lokalize 20.08.0\n"
 
 #: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:5
-#: data/org.gnome.SoundRecorder.desktop.in.in:4 src/application.js:32
+#: data/org.gnome.SoundRecorder.desktop.in.in:4 data/ui/window.ui:28
+#: src/application.js:32
 msgid "Sound Recorder"
 msgstr "Tonaufzeichner"
 
@@ -98,8 +99,8 @@ msgid ""
 "Maps media types to audio encoder preset names. If there is no mapping set, "
 "the default encoder settings will be used."
 msgstr ""
-"Leitet aus Medientypen die Namen von Voreinstellungen des Audio-Kodierers "
-"ab. Wenn es keine Vorgabe für einen Medientypen gibt, so wird der Standard-"
+"Leitet aus Medientypen die Namen von Voreinstellungen des Audio-Kodierers ab. "
+"Wenn es keine Vorgabe für einen Medientypen gibt, so wird der Standard-"
 "Kodierer verwendet."
 
 #: data/org.gnome.SoundRecorder.gschema.xml.in:31
@@ -114,96 +115,162 @@ msgstr ""
 "Weist die verfügbaren Kanäle zu. Existiert noch keine Zuweisung, wird "
 "standardmäßig Stereo verwendet."
 
-#: data/ui/row.ui:178
-msgid "Save"
-msgstr "Speichern"
+#: data/ui/row.ui:159 data/ui/row.ui:442
+msgid "Export"
+msgstr "Exportieren"
 
-#: data/ui/row.ui:237
-msgid "Delete"
-msgstr "Löschen"
-
-#: data/ui/row.ui:254
+#: data/ui/row.ui:184 data/ui/row.ui:438
 msgid "Rename"
 msgstr "Umbenennen"
 
-#: data/ui/window.ui:62
+#: data/ui/row.ui:238
+msgid "Save"
+msgstr "Speichern"
+
+#: data/ui/row.ui:275
+msgid "Delete"
+msgstr "Löschen"
+
+#: data/ui/row.ui:310
+msgid "Seek 10s Backward"
+msgstr "10 s zurückspulen"
+
+#: data/ui/row.ui:338
+msgid "Play"
+msgstr "Wiedergabe"
+
+#: data/ui/row.ui:364
+msgid "Pause"
+msgstr "Pause"
+
+#: data/ui/row.ui:396
+msgid "Seek 10s Forward"
+msgstr "10 s vorspulen"
+
+#: data/ui/window.ui:63
 msgid "Record"
 msgstr "Aufnehmen"
 
-#: data/ui/window.ui:344
+#: data/ui/window.ui:144
 msgid "Add Recordings"
 msgstr "Aufnahmen hinzufügen"
 
-#: data/ui/window.ui:361
+#: data/ui/window.ui:156
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Verwenden Sie den Knopf <b>Aufnehmen</b> zur Tonaufzeichnung"
 
-#: data/ui/window.ui:394
+#: data/ui/window.ui:253
+#| msgid "Recordings"
+msgid "Resume Recording"
+msgstr "Aufzeichnung fortsetzen"
+
+#: data/ui/window.ui:278
+#| msgid "Recordings"
+msgid "Pause Recording"
+msgstr "Aufzeichnung pausieren"
+
+#: data/ui/window.ui:309
+#| msgid "Recordings"
+msgid "Stop Recording"
+msgstr "Aufzeichnung beenden"
+
+#: data/ui/window.ui:337
+#| msgid "Recordings"
+msgid "Cancel Recording"
+msgstr "Aufzeichnung abbrechen"
+
+#: data/ui/window.ui:395
+msgid "Undo"
+msgstr "Rückgängig"
+
+#: data/ui/window.ui:405
+msgid "Close"
+msgstr "Schließen"
+
+#: data/ui/window.ui:430
 msgid "Preferred Format"
 msgstr "Bevorzugtes Format"
 
-#: data/ui/window.ui:396
+#: data/ui/window.ui:432
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: data/ui/window.ui:401
+#: data/ui/window.ui:437
 msgid "Opus"
 msgstr "Opus"
 
-#: data/ui/window.ui:406
+#: data/ui/window.ui:442
 msgid "FLAC"
 msgstr "FLAC"
 
-#: data/ui/window.ui:411
+#: data/ui/window.ui:447
 msgid "MP3"
 msgstr "MP3"
 
-#: data/ui/window.ui:416
+#: data/ui/window.ui:452
 msgid "M4A"
 msgstr "M4A"
 
-#: data/ui/window.ui:422
+#: data/ui/window.ui:458
 msgid "Audio Channel"
 msgstr "Audiokanal"
 
-#: data/ui/window.ui:424
+#: data/ui/window.ui:460
 msgid "Stereo"
 msgstr "Stereo"
 
-#: data/ui/window.ui:429
+#: data/ui/window.ui:465
 msgid "Mono"
 msgstr "Mono"
 
-#: data/ui/window.ui:437
+#: data/ui/window.ui:473
 msgid "About Sound Recorder"
 msgstr "Info zu Tonaufzeichner"
 
-#. Translators: "Recordings" here refers to the name of the directory where the application places files
-#: src/application.js:24
-msgid "Recordings"
-msgstr "Aufnahmen"
-
-#: src/application.js:131
-msgid "Sound Recorder started"
-msgstr "Tonaufzeichner gestartet"
-
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/application.js:168
+#: src/application.js:167
 msgid "translator-credits"
 msgstr ""
 "Christian Kirbach <christian.kirbach@gmail.com>, 2014\n"
 "Tim Sabsch <tim@sabsch.com>, 2019"
 
-#: src/application.js:170
+#: src/application.js:169
 msgid "A Sound Recording Application for GNOME"
 msgstr "Eine Tonaufzeichnungsanwendung für GNOME"
 
 #. Translators: ""Recording %d"" is the default name assigned to a file created
 #. by the application (for example, "Recording 1").
-#: src/recorder.js:107
+#: src/recorder.js:108
 #, javascript-format
 msgid "Recording %d"
 msgstr "Aufnahme %d"
+
+#. Necessary code to move old recordings into the new location for few releases
+#. FIXME: Remove by 3.40/3.42
+#: src/recordingList.js:41
+msgid "Recordings"
+msgstr "Aufnahmen"
+
+#. Translators: ""%s (Old)"" is the new name assigned to a file moved from
+#. the old recordings location
+#: src/recordingList.js:57
+#, javascript-format
+msgid "%s (Old)"
+msgstr "%s (Alt)"
+
+#: src/row.js:67
+#| msgid "Recordings"
+msgid "Export Recording"
+msgstr "Aufnahme exportieren"
+
+#: src/row.js:67
+msgid "_Export"
+msgstr "_Exportieren"
+
+#: src/row.js:67
+#| msgid "Cancel"
+msgid "_Cancel"
+msgstr "A_bbrechen"
 
 #: src/utils.js:45
 msgid "Yesterday"
@@ -249,6 +316,14 @@ msgid_plural "%d years ago"
 msgstr[0] "Vor %d Jahr"
 msgstr[1] "Vor %d Jahren"
 
+#: src/window.js:85
+#, javascript-format
+msgid "\"%s\" deleted"
+msgstr "»%s« wurde gelöscht"
+
+#~ msgid "Sound Recorder started"
+#~ msgstr "Tonaufzeichner gestartet"
+
 #~ msgid "Microphone volume level"
 #~ msgstr "Mikrofonlautstärke"
 
@@ -269,9 +344,6 @@ msgstr[1] "Vor %d Jahren"
 
 #~ msgid "Info"
 #~ msgstr "Info"
-
-#~ msgid "Cancel"
-#~ msgstr "Abbrechen"
 
 #~ msgid "Done"
 #~ msgstr "Fertig"
@@ -310,12 +382,6 @@ msgstr[1] "Vor %d Jahren"
 #~ msgid "No Recorded Sounds"
 #~ msgstr "Keine Tonaufzeichnungen"
 
-#~ msgid "Play"
-#~ msgstr "Wiedergabe"
-
-#~ msgid "Pause"
-#~ msgstr "Pause"
-
 #~ msgid "MOV"
 #~ msgstr "MOV"
 
@@ -338,8 +404,7 @@ msgstr[1] "Vor %d Jahren"
 #~ msgstr "Der Ordner für die Aufzeichnungen kann nicht angelegt werden."
 
 #~ msgid "Please install the GStreamer 1.0 PulseAudio plugin."
-#~ msgstr ""
-#~ "Bitte installieren Sie die PulseAudio-Erweiterung für GStreamer 1.0."
+#~ msgstr "Bitte installieren Sie die PulseAudio-Erweiterung für GStreamer 1.0."
 
 #~ msgid "Your audio capture settings are invalid."
 #~ msgstr "Ihre Einstellungen zur Tonaufnahme sind ungültig."
