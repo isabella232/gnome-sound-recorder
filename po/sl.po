@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
 "issues\n"
-"POT-Creation-Date: 2020-06-16 07:46+0000\n"
-"PO-Revision-Date: 2020-06-16 19:04+0200\n"
+"POT-Creation-Date: 2020-08-19 13:35+0000\n"
+"PO-Revision-Date: 2020-08-21 18:17+0200\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian <gnome-si@googlegroups.com>\n"
 "Language: sl\n"
@@ -24,7 +24,8 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:5
-#: data/org.gnome.SoundRecorder.desktop.in.in:4 src/application.js:32
+#: data/org.gnome.SoundRecorder.desktop.in.in:4 data/ui/window.ui:28
+#: src/application.js:32
 msgid "Sound Recorder"
 msgstr "Snemalnik zvoka"
 
@@ -112,66 +113,113 @@ msgstr ""
 "Izpiše razpoložljivih kanalov. Če nabor ni določen, bo privzeto uporabljen "
 "stereo kanal."
 
-#: data/ui/window.ui:62
+#: data/ui/row.ui:161 data/ui/row.ui:444
+msgid "Export"
+msgstr "Izvozi"
+
+#: data/ui/row.ui:186 data/ui/row.ui:440
+msgid "Rename"
+msgstr "Preimenuj"
+
+#: data/ui/row.ui:240
+msgid "Save"
+msgstr "Shrani"
+
+#: data/ui/row.ui:277
+msgid "Delete"
+msgstr "Izbriši"
+
+#: data/ui/row.ui:312
+msgid "Seek 10s Backward"
+msgstr "Išči 10s nazaj"
+
+#: data/ui/row.ui:340
+msgid "Play"
+msgstr "Predvajaj"
+
+#: data/ui/row.ui:366
+msgid "Pause"
+msgstr "Premor"
+
+#: data/ui/row.ui:398
+msgid "Seek 10s Forward"
+msgstr "Išči 10s naprej"
+
+#: data/ui/window.ui:63
 msgid "Record"
 msgstr "Posnemi"
 
-#: data/ui/window.ui:359
+#: data/ui/window.ui:144
 msgid "Add Recordings"
 msgstr "Dodaj posnetke"
 
-#: data/ui/window.ui:376
+#: data/ui/window.ui:156
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Uporabite gumb <b>Posnemi</b> za snemanje posnetkov."
 
-#: data/ui/window.ui:409
+#: data/ui/window.ui:253
+msgid "Resume Recording"
+msgstr "Nadaljuj snemanje"
+
+#: data/ui/window.ui:278
+msgid "Pause Recording"
+msgstr "Naredi premor snemanja"
+
+#: data/ui/window.ui:309
+msgid "Stop Recording"
+msgstr "Zaustavi snemanje"
+
+#: data/ui/window.ui:337
+msgid "Cancel Recording"
+msgstr "Prekliči snemanje"
+
+#: data/ui/window.ui:395
+msgid "Undo"
+msgstr "Razveljavi"
+
+#: data/ui/window.ui:405
+msgid "Close"
+msgstr "Zapri"
+
+#: data/ui/window.ui:430
 msgid "Preferred Format"
 msgstr "Prednostni zapis"
 
-#: data/ui/window.ui:411
+#: data/ui/window.ui:432
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: data/ui/window.ui:416
+#: data/ui/window.ui:437
 msgid "Opus"
 msgstr "Opus"
 
-#: data/ui/window.ui:421
+#: data/ui/window.ui:442
 msgid "FLAC"
 msgstr "FLAC"
 
-#: data/ui/window.ui:426
+#: data/ui/window.ui:447
 msgid "MP3"
 msgstr "MP3"
 
-#: data/ui/window.ui:431
+#: data/ui/window.ui:452
 msgid "M4A"
 msgstr "M4A"
 
-#: data/ui/window.ui:437
+#: data/ui/window.ui:458
 msgid "Audio Channel"
 msgstr "Zvokovni kanal"
 
-#: data/ui/window.ui:439
+#: data/ui/window.ui:460
 msgid "Stereo"
 msgstr "Stereo"
 
-#: data/ui/window.ui:444
+#: data/ui/window.ui:465
 msgid "Mono"
 msgstr "Mono"
 
-#: data/ui/window.ui:452
+#: data/ui/window.ui:473
 msgid "About Sound Recorder"
 msgstr "O programu"
-
-#. Translators: "Recordings" here refers to the name of the directory where the application places files
-#: src/application.js:24
-msgid "Recordings"
-msgstr "Posnetki"
-
-#: src/application.js:131
-msgid "Sound Recorder started"
-msgstr "Snemalnik zvoka je zagnan"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/application.js:167
@@ -184,10 +232,35 @@ msgstr "Program za snemanje zvoka za okolje GNOME"
 
 #. Translators: ""Recording %d"" is the default name assigned to a file created
 #. by the application (for example, "Recording 1").
-#: src/recorder.js:109
+#: src/recorder.js:108
 #, javascript-format
 msgid "Recording %d"
 msgstr "posnetek %d"
+
+#. Necessary code to move old recordings into the new location for few releases
+#. FIXME: Remove by 3.40/3.42
+#: src/recordingList.js:41
+msgid "Recordings"
+msgstr "Posnetki"
+
+#. Translators: ""%s (Old)"" is the new name assigned to a file moved from
+#. the old recordings location
+#: src/recordingList.js:57
+#, javascript-format
+msgid "%s (Old)"
+msgstr "%s (staro)"
+
+#: src/row.js:67
+msgid "Export Recording"
+msgstr "Izvozi posnetek"
+
+#: src/row.js:67
+msgid "_Export"
+msgstr "_Izvozi"
+
+#: src/row.js:67
+msgid "_Cancel"
+msgstr "_Prekliči"
 
 #: src/utils.js:45
 msgid "Yesterday"
@@ -240,6 +313,14 @@ msgstr[0] "Pred %d leti"
 msgstr[1] "Pred %d letom"
 msgstr[2] "Pred %d letoma"
 msgstr[3] "Pred %d leti"
+
+#: src/window.js:85
+#, javascript-format
+msgid "\"%s\" deleted"
+msgstr "Datoteka »%s« je izbrisana."
+
+#~ msgid "Sound Recorder started"
+#~ msgstr "Snemalnik zvoka je zagnan"
 
 #~ msgid "Microphone volume level"
 #~ msgstr "Raven glasnosti mikrofona"
@@ -299,9 +380,6 @@ msgstr[3] "Pred %d leti"
 #~ msgid "Info"
 #~ msgstr "Podrobnosti"
 
-#~ msgid "Cancel"
-#~ msgstr "Prekliči"
-
 #~ msgid "Done"
 #~ msgstr "Dokončano"
 
@@ -337,15 +415,6 @@ msgstr[3] "Pred %d leti"
 
 #~ msgid "No Recorded Sounds"
 #~ msgstr "Ni shranjenih posnetkov"
-
-#~ msgid "Play"
-#~ msgstr "Predvajaj"
-
-#~ msgid "Pause"
-#~ msgstr "Premor"
-
-#~ msgid "Delete"
-#~ msgstr "Izbriši"
 
 #~ msgid "MOV"
 #~ msgstr "MOV"
