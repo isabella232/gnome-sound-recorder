@@ -260,8 +260,7 @@
                                       </object>
                                     </child>
                                     <style>
-                                      <class name="image-button"/>
-                                      <class name="circular"/>
+                                      <class name="rounded-button"/>
                                     </style>
                                   </object>
                                   <packing>
@@ -285,8 +284,7 @@
                                       </object>
                                     </child>
                                     <style>
-                                      <class name="image-button"/>
-                                      <class name="circular"/>
+                                      <class name="rounded-button"/>
                                     </style>
                                   </object>
                                   <packing>
@@ -318,8 +316,7 @@
                                 </child>
                                 <style>
                                   <class name="destructive-action"/>
-                                  <class name="image-button"/>
-                                  <class name="circular"/>
+                                  <class name="rounded-button"/>
                                   <class name="large"/>
                                 </style>
                               </object>
@@ -344,8 +341,7 @@
                                   </object>
                                 </child>
                                 <style>
-                                  <class name="image-button"/>
-                                  <class name="circular"/>
+                                  <class name="rounded-button"/>
                                 </style>
                               </object>
                               <packing>

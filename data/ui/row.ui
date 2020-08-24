@@ -168,8 +168,7 @@
                                       </object>
                                     </child>
                                     <style>
-                                      <class name="image-button"/>
-                                      <class name="circular"/>
+                                      <class name="rounded-button"/>
                                     </style>
                                   </object>
                                   <packing>
@@ -193,8 +192,7 @@
                                       </object>
                                     </child>
                                     <style>
-                                      <class name="image-button"/>
-                                      <class name="circular"/>
+                                      <class name="rounded-button"/>
                                     </style>
                                   </object>
                                   <packing>
@@ -219,8 +217,7 @@
                                   </object>
                                 </child>
                                 <style>
-                                  <class name="image-button"/>
-                                  <class name="circular"/>
+                                  <class name="rounded-button"/>
                                 </style>
                               </object>
                             </child>
@@ -247,9 +244,8 @@
                               </object>
                             </child>
                             <style>
+                              <class name="rounded-button"/>
                               <class name="suggested-action"/>
-                              <class name="image-button"/>
-                              <class name="circular"/>
                             </style>
                           </object>
                           <packing>
@@ -283,8 +279,7 @@
                               </object>
                             </child>
                             <style>
-                              <class name="image-button"/>
-                              <class name="circular"/>
+                              <class name="rounded-button"/>
                             </style>
                           </object>
                           <packing>
@@ -318,8 +313,7 @@
                               </object>
                             </child>
                             <style>
-                              <class name="image-button"/>
-                              <class name="circular"/>
+                              <class name="rounded-button"/>
                             </style>
                           </object>
                           <packing>
@@ -347,8 +341,7 @@
                                   </object>
                                 </child>
                                 <style>
-                                  <class name="image-button"/>
-                                  <class name="circular"/>
+                                  <class name="rounded-button"/>
                                   <class name="large"/>
                                 </style>
                               </object>
@@ -373,8 +366,7 @@
                                   </object>
                                 </child>
                                 <style>
-                                  <class name="image-button"/>
-                                  <class name="circular"/>
+                                  <class name="rounded-button"/>
                                   <class name="large"/>
                                 </style>
                               </object>
@@ -404,8 +396,7 @@
                               </object>
                             </child>
                             <style>
-                              <class name="image-button"/>
-                              <class name="circular"/>
+                              <class name="rounded-button"/>
                             </style>
                           </object>
                           <packing>
