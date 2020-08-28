@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
 "issues\n"
-"POT-Creation-Date: 2020-06-06 11:37+0000\n"
-"PO-Revision-Date: 2020-06-06 18:55+0700\n"
+"POT-Creation-Date: 2020-08-16 17:50+0000\n"
+"PO-Revision-Date: 2020-08-19 21:35+0700\n"
 "Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
@@ -18,10 +18,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural= n!=1;\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.4.1\n"
 
 #: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:5
-#: data/org.gnome.SoundRecorder.desktop.in.in:4 src/application.js:37
+#: data/org.gnome.SoundRecorder.desktop.in.in:4 data/ui/window.ui:28
+#: src/application.js:32
 msgid "Sound Recorder"
 msgstr "Perekam Suara"
 
@@ -68,27 +69,27 @@ msgstr "Rekam suara melalui mikrofon dan putar ulang"
 msgid "Audio;Application;Record;"
 msgstr "Audio;Aplikasi;Rekam;"
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:12
+#: data/org.gnome.SoundRecorder.gschema.xml.in:16
 msgid "Window size"
 msgstr "Ukuran jendela"
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:13
+#: data/org.gnome.SoundRecorder.gschema.xml.in:17
 msgid "Window size (width and height)."
 msgstr "Ukuran jendela (lebar dan tinggi)."
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:17
+#: data/org.gnome.SoundRecorder.gschema.xml.in:21
 msgid "Window position"
 msgstr "Posisi jendela"
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:18
+#: data/org.gnome.SoundRecorder.gschema.xml.in:22
 msgid "Window position (x and y)."
 msgstr "Posisi jendela (x dan y)."
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:22
+#: data/org.gnome.SoundRecorder.gschema.xml.in:26
 msgid "Maps media types to audio encoder preset names."
 msgstr "Memetakan tipe media ke nama pratata enkoder audio."
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:23
+#: data/org.gnome.SoundRecorder.gschema.xml.in:27
 msgid ""
 "Maps media types to audio encoder preset names. If there is no mapping set, "
 "the default encoder settings will be used."
@@ -96,125 +97,223 @@ msgstr ""
 "Memetakan tipe media ke nama pratata enkoder audio. Bila tidak ada pemetaan "
 "yang ditata, pengaturan enkoder baku akan dipakai."
 
-#: data/ui/window.ui:57
+#: data/org.gnome.SoundRecorder.gschema.xml.in:31
+msgid "Available channels"
+msgstr "Kanal yang tersedia"
+
+#: data/org.gnome.SoundRecorder.gschema.xml.in:32
+msgid ""
+"Maps available channels. If there is not no mapping set, stereo channel will "
+"be used by default."
+msgstr ""
+"Petakan kanal yang tersedia. Bila tidak ada pemetaan yang ditata, secara "
+"baku akan dipakai kanal stereo."
+
+#: data/ui/row.ui:161 data/ui/row.ui:444
+msgid "Export"
+msgstr "Ekspor"
+
+#: data/ui/row.ui:186 data/ui/row.ui:440
+msgid "Rename"
+msgstr "Ganti nama"
+
+#: data/ui/row.ui:240
+msgid "Save"
+msgstr "Simpan"
+
+#: data/ui/row.ui:277
+msgid "Delete"
+msgstr "Hapus"
+
+#: data/ui/row.ui:312
+msgid "Seek 10s Backward"
+msgstr "Cari 10s Mundur"
+
+#: data/ui/row.ui:340
+msgid "Play"
+msgstr "Putar"
+
+#: data/ui/row.ui:366
+msgid "Pause"
+msgstr "Jeda"
+
+#: data/ui/row.ui:398
+msgid "Seek 10s Forward"
+msgstr "Cari 10s Maju"
+
+#: data/ui/window.ui:63
 msgid "Record"
 msgstr "Rekam"
 
-#: data/ui/window.ui:253
+#: data/ui/window.ui:144
 msgid "Add Recordings"
 msgstr "Tambah Rekaman"
 
-#: data/ui/window.ui:270
+#: data/ui/window.ui:156
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Pakai tombol <b>Rekam</b> untuk membuat rekaman suara"
 
-#: data/ui/window.ui:303
+#: data/ui/window.ui:253
+msgid "Resume Recording"
+msgstr "Lanjutkan Merekam"
+
+#: data/ui/window.ui:278
+msgid "Pause Recording"
+msgstr "Jeda Merekam"
+
+#: data/ui/window.ui:309
+msgid "Stop Recording"
+msgstr "Berhenti Merekam"
+
+#: data/ui/window.ui:337
+msgid "Cancel Recording"
+msgstr "Batalkan Merekam"
+
+#: data/ui/window.ui:395
+msgid "Undo"
+msgstr "Tak jadi"
+
+#: data/ui/window.ui:405
+msgid "Close"
+msgstr "Tutup"
+
+#: data/ui/window.ui:430
 msgid "Preferred Format"
 msgstr "Format yang Disukai"
 
-#: data/ui/window.ui:305
+#: data/ui/window.ui:432
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: data/ui/window.ui:310
+#: data/ui/window.ui:437
 msgid "Opus"
 msgstr "Opus"
 
-#: data/ui/window.ui:315
+#: data/ui/window.ui:442
 msgid "FLAC"
 msgstr "FLAC"
 
-#: data/ui/window.ui:320
+#: data/ui/window.ui:447
 msgid "MP3"
 msgstr "MP3"
 
-#: data/ui/window.ui:325
+#: data/ui/window.ui:452
 msgid "M4A"
 msgstr "M4A"
 
-#: data/ui/window.ui:333
+#: data/ui/window.ui:458
+msgid "Audio Channel"
+msgstr "Kanal Audio"
+
+#: data/ui/window.ui:460
+msgid "Stereo"
+msgstr "Stereo"
+
+#: data/ui/window.ui:465
+msgid "Mono"
+msgstr "Mono"
+
+#: data/ui/window.ui:473
 msgid "About Sound Recorder"
 msgstr "Tentang Perekam Suara"
 
-#: src/application.js:109
-msgid "Sound Recorder started"
-msgstr "Perekam Suara dimulai"
-
-#. Translators: "Recordings" here refers to the name of the directory where the application places files
-#: src/application.js:118
-msgid "Recordings"
-msgstr "Rekaman"
-
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/application.js:147
+#: src/application.js:167
 msgid "translator-credits"
 msgstr ""
 "Andika Triwidada <andika@gmail.com>, 2014, 2016.\n"
 "Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2017, 2019, 2020."
 
-#: src/application.js:149
+#: src/application.js:169
 msgid "A Sound Recording Application for GNOME"
 msgstr "Aplikasi Perekam Suara untuk GNOME"
 
-#. Translators: ""Recording from %F %A at %T"" is the default name assigned to a file created
-#. by the application (for example, "Recording from 2020-03-11 Wednesday at 19:43:05").
-#: src/recorder.js:109
-msgid "Recording from %F %A at %T"
-msgstr "Rekaman dari %F %A pada %T"
+#. Translators: ""Recording %d"" is the default name assigned to a file created
+#. by the application (for example, "Recording 1").
+#: src/recorder.js:108
+#, javascript-format
+msgid "Recording %d"
+msgstr "Merekam %d"
 
-#: src/utils.js:52
+#. Necessary code to move old recordings into the new location for few releases
+#. FIXME: Remove by 3.40/3.42
+#: src/recordingList.js:41
+msgid "Recordings"
+msgstr "Rekaman"
+
+#. Translators: ""%s (Old)"" is the new name assigned to a file moved from
+#. the old recordings location
+#: src/recordingList.js:57
+#, javascript-format
+msgid "%s (Old)"
+msgstr "%s (lama)"
+
+#: src/row.js:67
+msgid "Export Recording"
+msgstr "Ekspor Rekaman"
+
+#: src/row.js:67
+msgid "_Export"
+msgstr "_Ekspor"
+
+#: src/row.js:67
+msgid "_Cancel"
+msgstr "_Batal"
+
+#: src/utils.js:45
 msgid "Yesterday"
 msgstr "Kemarin"
 
-#: src/utils.js:54
+#: src/utils.js:47
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d hari yang lalu"
 msgstr[1] "%d hari yang lalu"
 
-#: src/utils.js:58
+#: src/utils.js:49
 msgid "Last week"
 msgstr "Minggu lalu"
 
-#: src/utils.js:60
+#: src/utils.js:51
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d minggu yang lalu"
 msgstr[1] "%d minggu yang lalu"
 
-#: src/utils.js:64
+#: src/utils.js:53
 msgid "Last month"
 msgstr "Bulan lalu"
 
-#: src/utils.js:66
+#: src/utils.js:55
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d bulan yang lalu"
 msgstr[1] "%d bulan yang lalu"
 
-#: src/utils.js:70
+#: src/utils.js:57
 msgid "Last year"
 msgstr "Tahun lalu"
 
-#: src/utils.js:72
+#: src/utils.js:59
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "%d tahun yang lalu"
 msgstr[1] "%d tahun yang lalu"
 
-#~ msgid "Available channels"
-#~ msgstr "Kanal yang tersedia"
+#: src/window.js:85
+#, javascript-format
+msgid "\"%s\" deleted"
+msgstr "\"%s\" dihapus"
 
-#~ msgid ""
-#~ "Maps available channels. If there is not no mapping set, stereo channel "
-#~ "will be used by default."
-#~ msgstr ""
-#~ "Petakan kanal yang tersedia. Bila tidak ada pemetaan yang ditata, secara "
-#~ "baku akan dipakai kanal stereo."
+#~ msgid "Sound Recorder started"
+#~ msgstr "Perekam Suara dimulai"
+
+#~ msgid "Recording from %F %A at %T"
+#~ msgstr "Rekaman dari %F %A pada %T"
 
 #~ msgid "Microphone volume level"
 #~ msgstr "Tingkat volume mikrofon"
@@ -236,9 +335,6 @@ msgstr[1] "%d tahun yang lalu"
 
 #~ msgid "Info"
 #~ msgstr "Info"
-
-#~ msgid "Cancel"
-#~ msgstr "Batal"
 
 #~ msgid "Done"
 #~ msgstr "Selesai"
@@ -277,23 +373,8 @@ msgstr[1] "%d tahun yang lalu"
 #~ msgid "No Recorded Sounds"
 #~ msgstr "Tidak Ada Suara yang Direkam"
 
-#~ msgid "Play"
-#~ msgstr "Putar"
-
-#~ msgid "Pause"
-#~ msgstr "Jeda"
-
-#~ msgid "Delete"
-#~ msgstr "Hapus"
-
 #~ msgid "MOV"
 #~ msgstr "MOV"
-
-#~ msgid "Mono"
-#~ msgstr "Mono"
-
-#~ msgid "Stereo"
-#~ msgstr "Stereo"
 
 #~ msgid "Load More"
 #~ msgstr "Muat Lebih Banyak"
