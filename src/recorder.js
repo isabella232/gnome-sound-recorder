@@ -26,27 +26,32 @@ var EncodingProfiles = [
     { name: 'VORBIS',
         containerCaps: 'application/ogg;audio/ogg;video/ogg',
         audioCaps: 'audio/x-vorbis',
-        mimeType: 'audio/x-vorbis' },
+        contentType: 'audio/x-vorbis+ogg',
+        extension: 'ogg' },
 
     { name: 'OPUS',
         containerCaps: 'application/ogg',
         audioCaps: 'audio/x-opus',
-        mimeType: 'audio/x-opus' },
+        contentType: 'audio/x-opus+ogg',
+        extension: 'opus' },
 
     { name: 'FLAC',
         containerCaps: 'audio/x-flac',
         audioCaps: 'audio/x-flac',
-        mimeType: 'audio/x-flac' },
+        contentType: 'audio/flac',
+        extension: 'flac' },
 
     { name: 'MP3',
         containerCaps: 'application/x-id3',
         audioCaps: 'audio/mpeg,mpegversion=(int)1,layer=(int)3',
-        mimeType: 'audio/mpeg' },
+        contentType: 'audio/mpeg',
+        extension: 'mp3' },
 
     { name: 'M4A',
         containerCaps: 'video/quicktime,variant=(string)iso',
         audioCaps: 'audio/mpeg,mpegversion=(int)4',
-        mimeType: 'audio/mpeg' },
+        contentType: 'video/mp4',
+        extension: 'm4a' },
 ];
 
 var AudioChannels = {
@@ -107,7 +112,6 @@ var Recorder = new GObject.registerClass({
             by the application (for example, "Recording 1"). */
             this.file = RecordingsDir.get_child_for_display_name(_('Recording %d').format(index++));
         } while (this.file.query_exists(null));
-
 
         this.recordBus = this.pipeline.get_bus();
         this.recordBus.add_signal_watch();

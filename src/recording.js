@@ -2,6 +2,7 @@
 const { Gio, GLib, GObject, Gst, GstPbutils } = imports.gi;
 const { CacheDir } = imports.application;
 const ByteArray = imports.byteArray;
+const Recorder = imports.recorder;
 
 var Recording = new GObject.registerClass({
     Signals: {
@@ -27,7 +28,15 @@ var Recording = new GObject.registerClass({
         this._loadedPeaks = [];
         super._init({});
 
-        let info = file.query_info('time::created,time::modified', 0, null);
+        let info = file.query_info('time::created,time::modified,standard::content-type', 0, null);
+        const contentType = info.get_attribute_string('standard::content-type');
+
+        for (let profile of Recorder.EncodingProfiles) {
+            if (profile.contentType === contentType) {
+                this._extension = profile.extension;
+                break;
+            }
+        }
 
         let timeModified = info.get_attribute_uint64('time::modified');
         let timeCreated = info.get_attribute_uint64('time::created');
@@ -53,6 +62,10 @@ var Recording = new GObject.registerClass({
             this._file = this._file.set_display_name(filename, null);
             this.notify('name');
         }
+    }
+
+    get extension() {
+        return this._extension;
     }
 
     get timeModified() {
