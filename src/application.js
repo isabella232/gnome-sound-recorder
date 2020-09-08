@@ -122,6 +122,11 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
         });
         this.add_action(quitAction);
         this.add_accelerator('<Primary>q', 'app.quit', null);
+        this.add_accelerator('<Primary>r', 'recorder.start', null);
+        this.add_accelerator('<Primary>p', 'recorder.pause', null);
+        this.add_accelerator('<Primary>r', 'recorder.resume', null);
+        this.add_accelerator('<Primary>c', 'recorder.cancel', null);
+        this.add_accelerator('<Primary>s', 'recorder.stop', null);
     }
 
     vfunc_startup() {

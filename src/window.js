@@ -18,7 +18,7 @@
 *
 */
 
-const { GLib, GObject, GstPlayer, Gtk, Handy } = imports.gi;
+const { Gio, GLib, GObject, GstPlayer, Gtk, Handy } = imports.gi;
 
 const { Recorder } = imports.recorder;
 const { RecordingList } = imports.recordingList;
@@ -97,6 +97,23 @@ var Window = GObject.registerClass({
             this._notificationUndoBtn.disconnect(this.cancelSignalId);
         });
 
+        const actions = [
+            { name: 'start', callback : this.onRecorderStart.bind(this), enabled: true },
+            { name: 'pause', callback : this.onRecorderPause.bind(this), enabled: false },
+            { name: 'stop', callback : this.onRecorderStop.bind(this), enabled: false,  },
+            { name: 'resume', callback : this.onRecorderResume.bind(this), enabled: false },
+            { name: 'cancel', callback : this.onRecorderCancel.bind(this), enabled: false }
+        ];
+
+        this.recorderActions = new Gio.SimpleActionGroup();
+
+        for ( let { name, callback, enabled } of actions) {
+            const action = new Gio.SimpleAction({ name: name, enabled: enabled });
+            action.connect('activate', callback);
+            this.recorderActions.add_action(action);
+        }
+
+        this.insert_action_group('recorder', this.recorderActions);
 
         this._column.add(this._recordingListBox);
 
@@ -106,16 +123,25 @@ var Window = GObject.registerClass({
 
     onRecorderPause() {
         this.recorder.pause();
+        this.recorderActions.lookup('resume').set_enabled(true);
+        this.recorderActions.lookup('pause').set_enabled(false);
         this._playbackStack.visible_child_name = 'recorder-start';
     }
 
     onRecorderResume() {
         this.recorder.resume();
+        this.recorderActions.lookup('resume').set_enabled(false);
+        this.recorderActions.lookup('pause').set_enabled(true);
         this._playbackStack.visible_child_name = 'recorder-pause';
     }
 
     onRecorderStart() {
         this.player.stop();
+        this.recorderActions.lookup('start').set_enabled(false);
+        this.recorderActions.lookup('stop').set_enabled(true);
+        this.recorderActions.lookup('cancel').set_enabled(true);
+        this.recorderActions.lookup('pause').set_enabled(true);
+        this.recorderActions.lookup('resume').set_enabled(false);
 
         const activeRow = this._recordingListBox.activeRow;
         if (activeRow && activeRow.editMode)
@@ -128,6 +154,13 @@ var Window = GObject.registerClass({
 
     onRecorderCancel() {
         const recording = this.recorder.stop();
+
+        this.recorderActions.lookup('stop').set_enabled(false);
+        this.recorderActions.lookup('cancel').set_enabled(false);
+        this.recorderActions.lookup('resume').set_enabled(false);
+        this.recorderActions.lookup('pause').set_enabled(false);
+        this.recorderActions.lookup('start').set_enabled(true);
+
         recording.delete();
 
         if (this._recordingList.get_n_items() === 0)
@@ -140,6 +173,13 @@ var Window = GObject.registerClass({
 
     onRecorderStop() {
         const recording = this.recorder.stop();
+
+        this.recorderActions.lookup('stop').set_enabled(false);
+        this.recorderActions.lookup('cancel').set_enabled(false);
+        this.recorderActions.lookup('resume').set_enabled(false);
+        this.recorderActions.lookup('pause').set_enabled(false);
+        this.recorderActions.lookup('start').set_enabled(true);
+
         this._recordingList.insert(0, recording);
         this._recordingListBox.get_row_at_index(0).editMode = true;
         this.state = WindowState.LIST;

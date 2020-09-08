@@ -37,7 +37,7 @@
                     <property name="valign">center</property>
                     <property name="halign">center</property>
                     <property name="receives_default">False</property>
-                    <signal name="clicked" handler="onRecorderStart" swapped="no"/>
+                    <property name="action_name">recorder.start</property>
                     <child>
                       <object class="GtkBox">
                         <property name="visible">True</property>
@@ -251,7 +251,7 @@
                                     <property name="halign">center</property>
                                     <property name="receives_default">True</property>
                                     <property name="tooltip_text" translatable="yes">Resume Recording</property>
-                                    <signal name="clicked" handler="onRecorderResume" swapped="no"/>
+                                    <property name="action_name">recorder.resume</property>
                                     <child>
                                       <object class="GtkImage" id="playIcon">
                                         <property name="visible">True</property>
@@ -275,7 +275,7 @@
                                     <property name="halign">center</property>
                                     <property name="receives_default">True</property>
                                     <property name="tooltip_text" translatable="yes">Pause Recording</property>
-                                    <signal name="clicked" handler="onRecorderPause" swapped="no"/>
+                                    <property name="action_name">recorder.pause</property>
                                     <child>
                                       <object class="GtkImage" id="pauseIcon">
                                         <property name="visible">True</property>
@@ -305,7 +305,7 @@
                                 <property name="halign">center</property>
                                 <property name="receives_default">True</property>
                                 <property name="tooltip_text" translatable="yes">Stop Recording</property>
-                                <signal name="clicked" handler="onRecorderStop" swapped="no"/>
+                                <property name="action_name">recorder.stop</property>
                                 <child>
                                   <object class="GtkImage">
                                     <property name="visible">True</property>
@@ -332,7 +332,7 @@
                                 <property name="halign">center</property>
                                 <property name="receives_default">True</property>
                                 <property name="tooltip_text" translatable="yes">Cancel Recording</property>
-                                <signal name="clicked" handler="onRecorderCancel" swapped="no"/>
+                                <property name="action_name">recorder.cancel</property>
                                 <child>
                                   <object class="GtkImage">
                                     <property name="visible">True</property>
