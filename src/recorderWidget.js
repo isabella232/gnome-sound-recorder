@@ -11,7 +11,10 @@ var RecorderState = {
 
 var RecorderWidget = GObject.registerClass({
     Template: 'resource:///org/gnome/SoundRecorder/ui/recorder.ui',
-    InternalChildren: ['recorderBox', 'playbackStack', 'recorderTime'],
+    InternalChildren: [
+        'recorderBox', 'playbackStack', 'recorderTime',
+        'pauseBtn', 'resumeBtn',
+    ],
     Signals: {
         'canceled': {},
         'paused': {},
@@ -138,12 +141,14 @@ var RecorderWidget = GObject.registerClass({
         case RecorderState.PAUSED:
             this.actionsGroup.lookup('pause').set_enabled(false);
             this.actionsGroup.lookup('resume').set_enabled(true);
+            this._resumeBtn.grab_focus();
             break;
         case RecorderState.RECORDING:
             this.actionsGroup.lookup('start').set_enabled(false);
             this.actionsGroup.lookup('stop').set_enabled(true);
             this.actionsGroup.lookup('resume').set_enabled(false);
             this.actionsGroup.lookup('pause').set_enabled(true);
+            this._pauseBtn.grab_focus();
             break;
         case RecorderState.STOPPED:
             this.actionsGroup.lookup('start').set_enabled(true);
