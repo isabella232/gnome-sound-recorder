@@ -1,7 +1,7 @@
 # Swedish translation for gnome-sound-recorder.
-# Copyright © 2014-2019 gnome-sound-recorder's COPYRIGHT HOLDER
+# Copyright © 2014-2020 gnome-sound-recorder's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-sound-recorder package.
-# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2014, 2015, 2016, 2017, 2019.
+# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2014, 2015, 2016, 2017, 2019, 2020.
 # Sebastian Rasmussen <sebras@gmail.com>, 2014.
 #
 msgid ""
@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
 "issues\n"
-"POT-Creation-Date: 2019-02-04 17:36+0000\n"
-"PO-Revision-Date: 2019-02-07 21:10+0100\n"
+"POT-Creation-Date: 2020-09-09 18:18+0000\n"
+"PO-Revision-Date: 2020-09-09 20:35+0200\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -18,19 +18,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.4.1\n"
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:5
-#: data/org.gnome.SoundRecorder.desktop.in:4 src/application.js:152
-#: src/record.js:115
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:5
+#: data/org.gnome.SoundRecorder.desktop.in.in:4 data/ui/window.ui:28
+#: src/application.js:32
 msgid "Sound Recorder"
 msgstr "Ljudinspelare"
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:6
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:6
 msgid "A simple, modern sound recorder for GNOME"
 msgstr "En enkel, modern ljudinspelare för GNOME"
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:10
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:10
 msgid ""
 "Sound Recorder provides a simple and modern interface that provides a "
 "straight-forward way to record and play audio. It allows you to do basic "
@@ -40,7 +40,7 @@ msgstr ""
 "erbjuder ett enkelt sätt att spela in och spela upp ljud. Det låter dig göra "
 "grundläggande redigering och skapa röstmeddelanden."
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:15
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:15
 msgid ""
 "Sound Recorder automatically handles the saving process so that you do not "
 "need to worry about accidentally discarding the previous recording."
@@ -48,39 +48,48 @@ msgstr ""
 "Ljudinspelaren hanterar automatiskt sparande så du behöver inte oroa dig för "
 "att av misstag kasta bort den föregående inspelningen."
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:19
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:19
 msgid "Supported audio formats:"
 msgstr "Ljudformat som stöds:"
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:21
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:21
 msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
 msgstr "Ogg Vorbis, Opus, FLAC, MP3 och MOV"
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:42
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:50
 msgid "The GNOME Project"
 msgstr "GNOME-projektet"
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:5
+#: data/org.gnome.SoundRecorder.desktop.in.in:5
+msgid "Record sound via the microphone and play it back"
+msgstr "Spela in ljud via mikrofonen och spela upp det"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.SoundRecorder.desktop.in.in:10
+msgid "Audio;Application;Record;"
+msgstr "Ljud;Program;Inspelning;"
+
+#: data/org.gnome.SoundRecorder.gschema.xml.in:16
 msgid "Window size"
 msgstr "Fönsterstorlek"
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:6
+#: data/org.gnome.SoundRecorder.gschema.xml.in:17
 msgid "Window size (width and height)."
 msgstr "Fönsterstorlek (bredd och höjd)."
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:10
+#: data/org.gnome.SoundRecorder.gschema.xml.in:21
 msgid "Window position"
 msgstr "Fönsterposition"
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:11
+#: data/org.gnome.SoundRecorder.gschema.xml.in:22
 msgid "Window position (x and y)."
 msgstr "Fönsterposition (x och y)."
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:15
+#: data/org.gnome.SoundRecorder.gschema.xml.in:26
 msgid "Maps media types to audio encoder preset names."
 msgstr "Kopplar mediatyper till namn på förvalda ljudkodare."
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:16
+#: data/org.gnome.SoundRecorder.gschema.xml.in:27
 msgid ""
 "Maps media types to audio encoder preset names. If there is no mapping set, "
 "the default encoder settings will be used."
@@ -88,11 +97,11 @@ msgstr ""
 "Kopplar mediatyper till namn på förvalda ljudkodare. Om ingen koppling är "
 "inställd så används standardinställningarna för kodaren."
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:20
+#: data/org.gnome.SoundRecorder.gschema.xml.in:31
 msgid "Available channels"
 msgstr "Tillgängliga kanaler"
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:21
+#: data/org.gnome.SoundRecorder.gschema.xml.in:32
 msgid ""
 "Maps available channels. If there is not no mapping set, stereo channel will "
 "be used by default."
@@ -100,51 +109,185 @@ msgstr ""
 "Kopplar tillgängliga kanaler. Om ingen koppling är inställd så kommer "
 "stereokanal att användas som standard."
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:25
-msgid "Microphone volume level"
-msgstr "Volymnivå för mikrofon"
+#: data/ui/help-overlay.ui:15
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Allmänt"
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:26
-msgid "Microphone volume level."
-msgstr "Volymnivå för mikrofon."
+#: data/ui/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Record"
+msgstr "Spela in"
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:30
-msgid "Speaker volume level"
-msgstr "Volymnivå för högtalare"
+#: data/ui/help-overlay.ui:27
+msgctxt "shortcut window"
+msgid "Stop Recording"
+msgstr "Stoppa inspelning"
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:31
-msgid "Speaker volume level."
-msgstr "Volymnivå för högtalare."
+#: data/ui/help-overlay.ui:34
+msgctxt "shortcut window"
+msgid "Play / Pause / Resume"
+msgstr "Spela / Pausa / Återuppta"
 
-#: data/org.gnome.SoundRecorder.desktop.in:5
-msgid "Record sound via the microphone and play it back"
-msgstr "Spela in ljud via mikrofonen och spela upp det"
+#: data/ui/help-overlay.ui:42
+msgctxt "shortcut window"
+msgid "Delete"
+msgstr "Ta bort"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: data/org.gnome.SoundRecorder.desktop.in:7
-msgid "org.gnome.SoundRecorder"
-msgstr "org.gnome.SoundRecorder"
+#: data/ui/help-overlay.ui:49
+msgctxt "shortcut window"
+msgid "Open menu"
+msgstr "Öppna meny"
 
-#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.SoundRecorder.desktop.in:10
-msgid "Audio;Application;Record;"
-msgstr "Ljud;Program;Inspelning;"
+#: data/ui/help-overlay.ui:56
+msgctxt "shortcut window"
+msgid "Keyboard shortcuts"
+msgstr "Tangentbordsgenvägar"
 
-#: src/application.js:40
-msgid "SoundRecorder"
-msgstr "Ljudinspelare"
+#: data/ui/help-overlay.ui:63
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Avsluta"
 
-#: src/application.js:68
-msgid "Sound Recorder started"
-msgstr "Ljudinspelare startad"
+#: data/ui/help-overlay.ui:71
+msgctxt "shortcut window"
+msgid "Recording"
+msgstr "Inspelning"
 
-#. Translators: "Recordings" here refers to the name of the directory where the application places files
-#: src/application.js:78
-msgid "Recordings"
-msgstr "Inspelningar"
+#: data/ui/help-overlay.ui:76
+msgctxt "shortcut window"
+msgid "Seek Backward"
+msgstr "Spola bakåt"
+
+#: data/ui/help-overlay.ui:83
+msgctxt "shortcut window"
+msgid "Seek Forward"
+msgstr "Spola framåt"
+
+#: data/ui/help-overlay.ui:90
+msgctxt "shortcut window"
+msgid "Rename"
+msgstr "Byt namn"
+
+#: data/ui/help-overlay.ui:97
+msgctxt "shortcut window"
+msgid "Export"
+msgstr "Exportera"
+
+#: data/ui/recorder.ui:72
+msgid "Resume Recording"
+msgstr "Återuppta inspelning"
+
+#: data/ui/recorder.ui:96
+msgid "Pause Recording"
+msgstr "Pausa inspelning"
+
+#: data/ui/recorder.ui:128
+msgid "Stop Recording"
+msgstr "Stoppa inspelning"
+
+#: data/ui/recorder.ui:157
+msgid "Delete Recording"
+msgstr "Ta bort inspelning"
+
+#: data/ui/row.ui:165 data/ui/row.ui:444
+msgid "Export"
+msgstr "Exportera"
+
+#: data/ui/row.ui:189 data/ui/row.ui:440
+msgid "Rename"
+msgstr "Byt namn"
+
+#: data/ui/row.ui:241
+msgid "Save"
+msgstr "Spara"
+
+#: data/ui/row.ui:278 src/recorderWidget.js:100
+msgid "Delete"
+msgstr "Ta bort"
+
+#: data/ui/row.ui:313
+msgid "Seek 10s Backward"
+msgstr "Spola bakåt 10s"
+
+#: data/ui/row.ui:341
+msgid "Play"
+msgstr "Spela"
+
+#: data/ui/row.ui:367
+msgid "Pause"
+msgstr "Gör paus"
+
+#: data/ui/row.ui:399
+msgid "Seek 10s Forward"
+msgstr "Spola framåt 10s"
+
+#: data/ui/window.ui:60
+msgid "Record"
+msgstr "Spela in"
+
+#: data/ui/window.ui:149
+msgid "Add Recordings"
+msgstr "Lägg till inspelningar"
+
+#: data/ui/window.ui:166
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "Använd knappen <b>Inspelning</b> för att göra ljudinspelningar"
+
+#: data/ui/window.ui:237
+msgid "Undo"
+msgstr "Ångra"
+
+#: data/ui/window.ui:254
+msgid "Close"
+msgstr "Stäng"
+
+#: data/ui/window.ui:290
+msgid "Preferred Format"
+msgstr "Föredraget format"
+
+#: data/ui/window.ui:292
+msgid "Vorbis"
+msgstr "Vorbis"
+
+#: data/ui/window.ui:297
+msgid "Opus"
+msgstr "Opus"
+
+#: data/ui/window.ui:302
+msgid "FLAC"
+msgstr "FLAC"
+
+#: data/ui/window.ui:307
+msgid "MP3"
+msgstr "MP3"
+
+#: data/ui/window.ui:312
+msgid "M4A"
+msgstr "M4A"
+
+#: data/ui/window.ui:318
+msgid "Audio Channel"
+msgstr "Ljudkanal"
+
+#: data/ui/window.ui:320
+msgid "Stereo"
+msgstr "Stereo"
+
+#: data/ui/window.ui:325
+msgid "Mono"
+msgstr "Mono"
+
+#: data/ui/window.ui:332
+msgid "_Keyboard Shortcuts"
+msgstr "_Tangentbordsgenvägar"
+
+#: data/ui/window.ui:337
+msgid "About Sound Recorder"
+msgstr "Om Ljudinspelare"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/application.js:151
+#: src/application.js:129
 msgid "translator-credits"
 msgstr ""
 "Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
@@ -153,243 +296,247 @@ msgstr ""
 "Skicka synpunkter på översättningen till\n"
 "<tp-sv@listor.tp-sv.se>."
 
-#: src/fileUtil.js:84
+#: src/application.js:131
+msgid "A Sound Recording Application for GNOME"
+msgstr "Ett ljudinspelningsprogram för GNOME"
+
+#. Translators: ""Recording %d"" is the default name assigned to a file created
+#. by the application (for example, "Recording 1").
+#: src/recorder.js:113
+#, javascript-format
+msgid "Recording %d"
+msgstr "Inspelning %d"
+
+#: src/recorderWidget.js:94
+msgid "Delete recording?"
+msgstr "Ta bort inspelning?"
+
+#: src/recorderWidget.js:95
+msgid "This recording will not be saved."
+msgstr "Denna inspelning kommer inte att sparas."
+
+#: src/recorderWidget.js:99
+msgid "Resume"
+msgstr "Återuppta"
+
+#. Necessary code to move old recordings into the new location for few releases
+#. FIXME: Remove by 3.40/3.42
+#: src/recordingList.js:42
+msgid "Recordings"
+msgstr "Inspelningar"
+
+#. Translators: ""%s (Old)"" is the new name assigned to a file moved from
+#. the old recordings location
+#: src/recordingList.js:59
+#, javascript-format
+msgid "%s (Old)"
+msgstr "%s (Gammal)"
+
+#: src/row.js:71
+msgid "Export Recording"
+msgstr "Exportera inspelning"
+
+#: src/row.js:71
+msgid "_Export"
+msgstr "_Exportera"
+
+#: src/row.js:71
+msgid "_Cancel"
+msgstr "A_vbryt"
+
+#: src/utils.js:48
 msgid "Yesterday"
 msgstr "Igår"
 
-#: src/fileUtil.js:86
+#: src/utils.js:50
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d dag sedan"
 msgstr[1] "%d dagar sedan"
 
-#: src/fileUtil.js:90
+#: src/utils.js:52
 msgid "Last week"
 msgstr "Förra veckan"
 
-#: src/fileUtil.js:92
+#: src/utils.js:54
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d vecka sedan"
 msgstr[1] "%d veckor sedan"
 
-#: src/fileUtil.js:96
+#: src/utils.js:56
 msgid "Last month"
 msgstr "Förra månaden"
 
-#: src/fileUtil.js:98
+#: src/utils.js:58
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d månad sedan"
 msgstr[1] "%d månader sedan"
 
-#: src/fileUtil.js:102
+#: src/utils.js:60
 msgid "Last year"
 msgstr "Förra året"
 
-#: src/fileUtil.js:104
+#: src/utils.js:62
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "%d år sedan"
 msgstr[1] "%d år sedan"
 
-#: src/info.js:42 src/mainWindow.js:518
-msgid "Info"
-msgstr "Info"
-
-#: src/info.js:47
-msgid "Cancel"
-msgstr "Avbryt"
-
-#. finish button (stop recording)
-#: src/info.js:52 src/mainWindow.js:325
-msgid "Done"
-msgstr "Klar"
-
-#. File Name item
-#. Translators: "File Name" is the label next to the file name
-#. in the info dialog
-#: src/info.js:79
-msgctxt "File Name"
-msgid "Name"
-msgstr "Namn"
-
-#. Source item
-#: src/info.js:86
-msgid "Source"
-msgstr "Källa"
-
-#. Date Modified item
-#: src/info.js:95
-msgid "Date Modified"
-msgstr "Ändrad"
-
-#. Date Created item
-#: src/info.js:101
-msgid "Date Created"
-msgstr "Skapad"
-
-#. Media type item
-#. Translators: "Type" is the label next to the media type
-#. (Ogg Vorbis, AAC, ...) in the info dialog
-#: src/info.js:112
-msgctxt "Media Type"
-msgid "Type"
-msgstr "Typ"
-
-#. Media type data
-#: src/info.js:151
-msgid "Unknown"
-msgstr "Okänd"
-
-#: src/mainWindow.js:115 src/mainWindow.js:782
-msgid "Record"
-msgstr "Spela in"
-
-#: src/mainWindow.js:127 src/preferences.js:38
-msgid "Preferences"
-msgstr "Inställningar"
-
-#: src/mainWindow.js:128
-msgid "About Sound Recorder"
-msgstr "Om Ljudinspelare"
-
-#: src/mainWindow.js:163
-msgid "Add Recordings"
-msgstr "Lägg till inspelningar"
-
-#: src/mainWindow.js:168
-msgid "Use the <b>Record</b> button to make sound recordings"
-msgstr "Använd knappen <b>Inspelning</b> för att göra ljudinspelningar"
-
-#: src/mainWindow.js:311
-msgid "Recording…"
-msgstr "Spelar in…"
-
-#. Translators: This is the title in the headerbar
-#: src/mainWindow.js:361
+#: src/window.js:71
 #, javascript-format
-msgid "%d Recorded Sound"
-msgid_plural "%d Recorded Sounds"
-msgstr[0] "%d inspelat ljud"
-msgstr[1] "%d inspelade ljud"
+msgid "\"%s\" deleted"
+msgstr "”%s” togs bort"
 
-#: src/mainWindow.js:365
-msgid "No Recorded Sounds"
-msgstr "Inga inspelade ljud"
+#, fuzzy
+#~| msgid "Record"
+#~ msgctxt "shortcut window"
+#~ msgid "Recorder"
+#~ msgstr "Spela in"
 
-#: src/mainWindow.js:407
-msgid "Play"
-msgstr "Spela"
+#, fuzzy
+#~ msgctxt "shortcut window"
+#~ msgid "Start/Resume Recording"
+#~ msgstr "Starta/återuppta inspelning"
 
-#: src/mainWindow.js:427
-msgid "Pause"
-msgstr "Gör paus"
+#, fuzzy
+#~| msgid "Pause"
+#~ msgctxt "shortcut window"
+#~ msgid "Pause"
+#~ msgstr "Gör paus"
 
-#: src/mainWindow.js:532
-msgid "Delete"
-msgstr "Ta bort"
+#, fuzzy
+#~ msgctxt "shortcut window"
+#~ msgid "Stop"
+#~ msgstr "Stoppa"
 
-#: src/mainWindow.js:814
-msgid "Ogg Vorbis"
-msgstr "Ogg Vorbis"
+#~ msgctxt "shortcut window"
+#~ msgid "Delete Recording"
+#~ msgstr "Ta bort inspelning"
 
-#: src/mainWindow.js:814
-msgid "Opus"
-msgstr "Opus"
+#~ msgctxt "shortcut window"
+#~ msgid "Rename Recording"
+#~ msgstr "Byt namn på inspelning"
 
-#: src/mainWindow.js:814
-msgid "FLAC"
-msgstr "FLAC"
+#~ msgid "Microphone volume level"
+#~ msgstr "Volymnivå för mikrofon"
 
-#: src/mainWindow.js:814
-msgid "MP3"
-msgstr "MP3"
+#~ msgid "Microphone volume level."
+#~ msgstr "Volymnivå för mikrofon."
 
-#: src/mainWindow.js:814
-msgid "MOV"
-msgstr "MOV"
+#~ msgid "Speaker volume level"
+#~ msgstr "Volymnivå för högtalare"
 
-#: src/mainWindow.js:835
-msgid "Mono"
-msgstr "Mono"
+#~ msgid "Speaker volume level."
+#~ msgstr "Volymnivå för högtalare."
 
-#: src/mainWindow.js:835
-msgid "Stereo"
-msgstr "Stereo"
+#~ msgid "Done"
+#~ msgstr "Klar"
 
-#: src/mainWindow.js:856
-msgid "Load More"
-msgstr "Läs in fler"
+#~ msgid "Preferences"
+#~ msgstr "Inställningar"
 
-#: src/play.js:85
-msgid "Unable to play recording"
-msgstr "Kunde inte spela upp inspelning"
+#~ msgid "Default mode"
+#~ msgstr "Standardläge"
 
-#: src/preferences.js:62
-msgid "Preferred format"
-msgstr "Föredraget format"
+#~ msgid "Volume"
+#~ msgstr "Volym"
 
-#: src/preferences.js:70
-msgid "Default mode"
-msgstr "Standardläge"
+#~ msgid "Microphone"
+#~ msgstr "Mikrofon"
 
-#: src/preferences.js:78
-msgid "Volume"
-msgstr "Volym"
+#~ msgid "File Name"
+#~ msgstr "Filnamn"
 
-#: src/preferences.js:92
-msgid "Microphone"
-msgstr "Mikrofon"
+#~ msgid "Source"
+#~ msgstr "Källa"
 
-#: src/record.js:69
-msgid "Unable to create Recordings directory."
-msgstr "Kunde inte skapa katalogen Inspelningar."
+#~ msgid "Date Modified"
+#~ msgstr "Ändrad"
 
-#: src/record.js:82
-msgid "Please install the GStreamer 1.0 PulseAudio plugin."
-msgstr "Installera GStreamer 1.0 PulseAudio-insticksmodulen."
+#~ msgid "Date Created"
+#~ msgstr "Skapad"
 
-#: src/record.js:84
-msgid "Your audio capture settings are invalid."
-msgstr "Dina inställningar för ljudfångst är ogiltiga."
+#~ msgid "Media Type"
+#~ msgstr "Mediatyp"
 
-#: src/record.js:132
-msgid "Not all elements could be created."
-msgstr "Alla element kunde inte skapas."
+#~ msgid "Unknown"
+#~ msgstr "Okänd"
 
-#: src/record.js:144
-msgid "Not all of the elements were linked."
-msgstr "Alla element länkades inte."
+#~ msgid "Info"
+#~ msgstr "Info"
 
-#: src/record.js:169
-msgid "No Media Profile was set."
-msgstr "Ingen mediaprofil var inställd."
+#~ msgid "Details"
+#~ msgstr "Detaljer"
 
-#: src/record.js:180
-msgid ""
-"Unable to set the pipeline \n"
-" to the recording state."
-msgstr ""
-"Kunde inte ställa in rörledningen \n"
-" till inspelningsläget."
+#~ msgid "Sound Recorder started"
+#~ msgstr "Ljudinspelare startad"
 
-#. Translators: ""Clip %d"" is the default name assigned to a file created
-#. by the application (for example, "Clip 1").
-#: src/record.js:356
-#, javascript-format
-msgid "Clip %d"
-msgstr "Klipp %d"
+#~ msgid "Unable to create Recordings directory."
+#~ msgstr "Kunde inte skapa katalogen Inspelningar."
+
+#~ msgid "Please install the GStreamer 1.0 PulseAudio plugin."
+#~ msgstr "Installera GStreamer 1.0 PulseAudio-insticksmodulen."
+
+#~ msgid "Your audio capture settings are invalid."
+#~ msgstr "Dina inställningar för ljudfångst är ogiltiga."
+
+#~ msgid "Not all elements could be created."
+#~ msgstr "Alla element kunde inte skapas."
+
+#~ msgid "Not all of the elements were linked."
+#~ msgstr "Alla element länkades inte."
+
+#~ msgid ""
+#~ "Unable to set the pipeline \n"
+#~ " to the recording state."
+#~ msgstr ""
+#~ "Kunde inte ställa in rörledningen \n"
+#~ " till inspelningsläget."
+
+#~ msgid "Recording from %F %A at %T"
+#~ msgstr "Inspelning från %A %F, %T"
+
+#~ msgid "org.gnome.SoundRecorder"
+#~ msgstr "org.gnome.SoundRecorder"
+
+#~ msgid "SoundRecorder"
+#~ msgstr "Ljudinspelare"
+
+#~ msgctxt "Media Type"
+#~ msgid "Type"
+#~ msgstr "Typ"
+
+#~ msgid "Recording…"
+#~ msgstr "Spelar in…"
+
+#~ msgid "%d Recorded Sound"
+#~ msgid_plural "%d Recorded Sounds"
+#~ msgstr[0] "%d inspelat ljud"
+#~ msgstr[1] "%d inspelade ljud"
+
+#~ msgid "No Recorded Sounds"
+#~ msgstr "Inga inspelade ljud"
+
+#~ msgid "MOV"
+#~ msgstr "MOV"
+
+#~ msgid "Load More"
+#~ msgstr "Läs in fler"
+
+#~ msgid "No Media Profile was set."
+#~ msgstr "Ingen mediaprofil var inställd."
+
+#~ msgid "Clip %d"
+#~ msgstr "Klipp %d"
 
 #~ msgid "About"
 #~ msgstr "Om"
-
-#~ msgid "Quit"
-#~ msgstr "Avsluta"
 
 #~ msgid "%Y-%m-%d %H:%M:%S"
 #~ msgstr "%Y-%m-%d %H:%M:%S"
