@@ -130,7 +130,7 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
         });
         aboutDialog.show();
         aboutDialog.connect('response', () => {
-            aboutDialog.destroy();
+            aboutDialog.close();
         });
     }
 });

@@ -67,15 +67,14 @@ var Row = GObject.registerClass({
             const window = Gio.Application.get_default().get_active_window();
             const dialog = Gtk.FileChooserNative.new(_('Export Recording'), window, Gtk.FileChooserAction.SAVE, _('_Export'), _('_Cancel'));
             dialog.set_current_name(`${this._recording.name}.${this._recording.extension}`);
-            dialog.connect('response', (_dialog, _response) => {
-                if (_response === Gtk.ResponseType.ACCEPT) {
+            dialog.connect('response', (_dialog, response) => {
+                if (response === Gtk.ResponseType.ACCEPT) {
                     const dest = dialog.get_file();
                     this._recording.save(dest);
                 }
-                _dialog.destroy();
+                dialog.destroy();
             });
-
-            dialog.run();
+            dialog.show();
         });
 
         renameAction.connect('activate', () => {
