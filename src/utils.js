@@ -18,15 +18,18 @@
  *
  */
 const Gettext = imports.gettext;
-const GLib = imports.gi.GLib;
+const { GLib, Gst } = imports.gi;
 
-var formatTime = totalSeconds => {
-    totalSeconds = Math.floor(totalSeconds);
-    const hours = parseInt(totalSeconds / Math.pow(60, 2)).toString();
-    const minutes = (parseInt(totalSeconds / 60) % 60).toString();
-    const seconds = parseInt(totalSeconds % 60).toString();
+var formatTime = nanoSeconds => {
+    const time = new Date(0, 0, 0, 0, 0, 0, parseInt(nanoSeconds / Gst.MSECOND));
 
-    return `${hours.padStart(2, '0')}∶${minutes.padStart(2, '0')}∶${seconds.padStart(2, '0')}`;
+    const miliseconds = time.getMilliseconds().toString().padStart(2, '0').substring(0, 2);
+    const seconds = time.getSeconds().toString().padStart(2, '0');
+    const minutes = time.getMinutes().toString().padStart(2, '0');
+    const hours = time.getHours().toString().padStart(2, '0');
+
+    // eslint-disable-next-line no-irregular-whitespace
+    return `${hours} ∶ ${minutes} ∶ ${seconds} . <small>${miliseconds}</small>`;
 };
 
 var displayDateTime = time => {

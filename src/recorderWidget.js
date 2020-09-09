@@ -35,7 +35,7 @@ var RecorderWidget = GObject.registerClass({
 
         this.recorder.bind_property('current-peak', this.waveform, 'peak', GObject.BindingFlags.SYNC_CREATE | GObject.BindingFlags.DEFAULT);
         this.recorder.connect('notify::duration', _recorder => {
-            this._recorderTime.label = formatTime(_recorder.duration);
+            this._recorderTime.set_markup(formatTime(_recorder.duration));
         });
 
 

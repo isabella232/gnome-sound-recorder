@@ -1,5 +1,5 @@
 /* exported Row */
-const { Gdk, Gio, GObject, Gst, Gtk } = imports.gi;
+const { Gdk, Gio, GObject, Gtk } = imports.gi;
 const { displayDateTime, formatTime } = imports.utils;
 const { WaveForm, WaveType } = imports.waveform;
 
@@ -154,9 +154,9 @@ var Row = GObject.registerClass({
 
         // Force LTR, we don't want reverse hh:mm::ss
         this._duration.direction = Gtk.TextDirection.LTR;
-        this._duration.label = formatTime(recording.duration / Gst.SECOND);
+        this._duration.markup = formatTime(recording.duration);
         recording.connect('notify::duration', () => {
-            this._duration.label = formatTime(recording.duration / Gst.SECOND);
+            this._duration.label = formatTime(recording.duration);
         });
     }
 
