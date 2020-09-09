@@ -235,7 +235,7 @@
                             <property name="halign">end</property>
                             <property name="receives_default">False</property>
                             <property name="tooltip_text" translatable="yes">Save</property>
-                            <signal name="clicked" handler="onSaveRecording" swapped="no"/>
+                            <property name="action_name">recording.save</property>
                             <child>
                               <object class="GtkImage">
                                 <property name="visible">True</property>
@@ -264,11 +264,12 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <child>
-                          <object class="GtkButton" id="deleteBtn">
+                          <object class="GtkButton">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="valign">center</property>
                             <property name="halign">center</property>
+                            <property name="action_name">recording.delete</property>
                             <property name="receives_default">True</property>
                             <property name="tooltip_text" translatable="yes">Delete</property>
                             <child>
@@ -298,11 +299,12 @@
                         <property name="halign">center</property>
                         <property name="spacing">18</property>
                         <child>
-                          <object class="GtkButton" id="seekBackward">
+                          <object class="GtkButton">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="valign">center</property>
                             <property name="halign">center</property>
+                            <property name="action_name">recording.seek-backward</property>
                             <property name="receives_default">True</property>
                             <property name="tooltip_text" translatable="yes">Seek 10s Backward</property>
                             <child>
@@ -325,12 +327,13 @@
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <child>
-                              <object class="GtkButton" id="playButton">
+                              <object class="GtkButton">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="valign">center</property>
                                 <property name="halign">center</property>
                                 <property name="receives_default">True</property>
+                                <property name="action_name">recording.play</property>
                                 <property name="tooltip_text" translatable="yes">Play</property>
                                 <child>
                                   <object class="GtkImage">
@@ -350,11 +353,12 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkButton" id="pauseButton">
+                              <object class="GtkButton">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="valign">center</property>
                                 <property name="halign">center</property>
+                                <property name="action_name">recording.pause</property>
                                 <property name="receives_default">True</property>
                                 <property name="tooltip_text" translatable="yes">Pause</property>
                                 <child>
@@ -381,11 +385,12 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkButton" id="seekForward">
+                          <object class="GtkButton">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="valign">center</property>
                             <property name="halign">center</property>
+                            <property name="action_name">recording.seek-forward</property>
                             <property name="receives_default">True</property>
                             <property name="tooltip_text" translatable="yes">Seek 10s Forward</property>
                             <child>

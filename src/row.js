@@ -11,9 +11,9 @@ var RowState = {
 var Row = GObject.registerClass({
     Template: 'resource:///org/gnome/SoundRecorder/ui/row.ui',
     InternalChildren: [
-        'playbackStack', 'mainStack', 'playButton', 'waveformStack', 'pauseButton',
-        'name', 'entry', 'date', 'duration', 'revealer', 'playbackControls', 'rightStack',
-        'saveBtn', 'seekBackward', 'seekForward',  'deleteBtn',
+        'playbackStack', 'mainStack', 'waveformStack', 'rightStack',
+        'name', 'entry', 'date', 'duration', 'revealer', 'playbackControls',
+        'saveBtn',
     ],
     Signals: {
         'play': { param_types: [GObject.TYPE_STRING] },
@@ -33,6 +33,8 @@ var Row = GObject.registerClass({
     _init(recording) {
         this._recording = recording;
         this._expanded = false;
+        this._editMode = false;
+
         super._init({});
 
         this.waveform = new WaveForm({
@@ -44,6 +46,7 @@ var Row = GObject.registerClass({
             margin_end: 12,
         }, WaveType.PLAYER);
         this._waveformStack.add_named(this.waveform, 'wave');
+
         if (this._recording._peaks.length > 0) {
             this.waveform.peaks = this._recording.peaks;
             this._waveformStack.visible_child_name = 'wave';
@@ -51,17 +54,18 @@ var Row = GObject.registerClass({
             this._recording.loadPeaks();
         }
 
+        if (recording.timeCreated > 0)
+            this._date.label = displayDateTime(recording.timeCreated);
+        else
+            this._date.label = displayDateTime(recording.timeModified);
+
         recording.bind_property('name', this._name, 'label', GObject.BindingFlags.SYNC_CREATE | GObject.BindingFlags.DEFAULT);
         recording.bind_property('name', this._entry, 'text', GObject.BindingFlags.SYNC_CREATE | GObject.BindingFlags.DEFAULT);
         this.bind_property('expanded', this._revealer, 'reveal_child', GObject.BindingFlags.SYNC_CREATE | GObject.BindingFlags.DEFAULT);
 
-        this._editMode = false;
+        this.actionGroup = new Gio.SimpleActionGroup();
 
-        let actionGroup = new Gio.SimpleActionGroup();
-
-        let renameAction = new Gio.SimpleAction({ name: 'rename' });
         let exportAction = new Gio.SimpleAction({ name: 'export' });
-
         exportAction.connect('activate', () => {
             const window = Gio.Application.get_default().get_active_window();
             const dialog = Gtk.FileChooserNative.new(_('Export Recording'), window, Gtk.FileChooserAction.SAVE, _('_Export'), _('_Cancel'));
@@ -75,15 +79,58 @@ var Row = GObject.registerClass({
             });
             dialog.show();
         });
+        this.actionGroup.add_action(exportAction);
 
-        renameAction.connect('activate', () => {
+        let saveRenameAction = new Gio.SimpleAction({ name: 'save', enabled: false });
+        saveRenameAction.connect('activate', this.onRenameRecording.bind(this));
+        this.actionGroup.add_action(saveRenameAction);
+
+        this.renameAction = new Gio.SimpleAction({ name: 'rename', enabled: true });
+        this.renameAction.connect('activate', action => {
             this.editMode = true;
+            action.enabled = false;
         });
+        this.renameAction.bind_property('enabled', saveRenameAction, 'enabled', GObject.BindingFlags.INVERT_BOOLEAN);
+        this.actionGroup.add_action(this.renameAction);
 
-        actionGroup.add_action(renameAction);
-        actionGroup.add_action(exportAction);
-        this.insert_action_group('recording', actionGroup);
+        let pauseAction = new Gio.SimpleAction({ name: 'pause', enabled: false });
+        pauseAction.connect('activate', () => {
+            this.emit('pause');
+            this.state = RowState.PAUSED;
+        });
+        this.actionGroup.add_action(pauseAction);
 
+        let playAction = new Gio.SimpleAction({ name: 'play', enabled: true });
+        playAction.connect('activate', () => {
+            this.emit('play', this._recording.uri);
+            this.state = RowState.PLAYING;
+        });
+        playAction.bind_property('enabled', pauseAction, 'enabled', GObject.BindingFlags.INVERT_BOOLEAN);
+        this.actionGroup.add_action(playAction);
+
+        let deleteAction = new Gio.SimpleAction({ name: 'delete' });
+        deleteAction.connect('activate', () => {
+            this.emit('deleted');
+        });
+        this.actionGroup.add_action(deleteAction);
+
+        let seekBackAction = new Gio.SimpleAction({ name: 'seek-backward' });
+        seekBackAction.connect('activate', () => {
+            this.emit('seek-backward');
+        });
+        this.actionGroup.add_action(seekBackAction);
+
+        let seekForwardAction = new Gio.SimpleAction({ name: 'seek-forward' });
+        seekForwardAction.connect('activate', () => {
+            this.emit('seek-forward');
+        });
+        this.actionGroup.add_action(seekForwardAction);
+
+        this.insert_action_group('recording', this.actionGroup);
+
+        this.waveform.connect('button-press-event', _ => {
+            pauseAction.activate();
+        });
 
         this._entry.connect('key-press-event', (_, event) => {
             const key = event.get_keyval()[1];
@@ -92,12 +139,6 @@ var Row = GObject.registerClass({
             if (key === Gdk.KEY_Escape)
                 this.editMode = false;
         });
-
-        if (recording.timeCreated > 0)
-            this._date.label = displayDateTime(recording.timeCreated);
-        else
-            this._date.label = displayDateTime(recording.timeModified);
-
 
         this._recording.connect('peaks-updated', _recording => {
             this._waveformStack.visible_child_name = 'wave';
@@ -117,33 +158,15 @@ var Row = GObject.registerClass({
         recording.connect('notify::duration', () => {
             this._duration.label = formatTime(recording.duration / Gst.SECOND);
         });
-
-        this.waveform.connect('button-press-event', _ => {
-            this.emit('pause');
-            this.state = RowState.PAUSED;
-        });
-
-        this._playButton.connect('clicked', () => {
-            this.emit('play', recording.uri);
-            this.state = RowState.PLAYING;
-        });
-
-        this._pauseButton.connect('clicked', () => {
-            this.emit('pause');
-            this.state = RowState.PAUSED;
-        });
-
-        this._seekBackward.connect('clicked', _ => this.emit('seek-backward'));
-        this._seekForward.connect('clicked', _ => this.emit('seek-forward'));
-        this._deleteBtn.connect('clicked', () => this.emit('deleted'));
     }
 
-    onSaveRecording() {
+    onRenameRecording() {
         try {
             if (this._name.label !== this._entry.text)
                 this._recording.name = this._entry.text;
 
             this.editMode = false;
+            this.renameAction.enabled = true;
             this._entry.get_style_context().remove_class('error');
         } catch (e) {
             this._entry.get_style_context().add_class('error');
@@ -184,9 +207,11 @@ var Row = GObject.registerClass({
 
         switch (rowState) {
         case RowState.PLAYING:
+            this.actionGroup.lookup('play').set_enabled(false);
             this._playbackStack.visible_child_name = 'pause';
             break;
         case RowState.PAUSED:
+            this.actionGroup.lookup('play').set_enabled(true);
             this._playbackStack.visible_child_name = 'play';
             break;
         }
