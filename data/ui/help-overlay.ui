@@ -44,28 +44,28 @@
               <object class="GtkShortcutsShortcut">
                 <property name="visible">1</property>
                 <property name="accelerator">&lt;ctrl&gt;R</property>
-                <property name="title" translatable="yes" context="shortcut window">Start/Resume Recording</property>
+                <property name="title" translatable="yes" context="shortcut window">Start Recording</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">1</property>
-                <property name="accelerator">&lt;ctrl&gt;P</property>
-                <property name="title" translatable="yes" context="shortcut window">Pause</property>
+                <property name="accelerator">space</property>
+                <property name="title" translatable="yes" context="shortcut window">Pause/Resume Recording</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">1</property>
-                <property name="accelerator">&lt;ctrl&gt;S</property>
-                <property name="title" translatable="yes" context="shortcut window">Stop</property>
+                <property name="accelerator">S</property>
+                <property name="title" translatable="yes" context="shortcut window">Stop Recording</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">1</property>
-                <property name="accelerator">&lt;ctrl&gt;C</property>
-                <property name="title" translatable="yes" context="shortcut window">Delete</property>
+                <property name="accelerator">Delete</property>
+                <property name="title" translatable="yes" context="shortcut window">Delete Recording</property>
               </object>
             </child>
           </object>
@@ -77,7 +77,7 @@
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">1</property>
-                <property name="accelerator">P</property>
+                <property name="accelerator">space</property>
                 <property name="title" translatable="yes" context="shortcut window">Play / Pause</property>
               </object>
             </child>
@@ -91,7 +91,7 @@
              <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">1</property>
-                <property name="accelerator">F</property>
+                <property name="accelerator">N</property>
                 <property name="title" translatable="yes" context="shortcut window">Seek Forward</property>
               </object>
             </child>
@@ -99,14 +99,14 @@
               <object class="GtkShortcutsShortcut">
                 <property name="visible">1</property>
                 <property name="accelerator">Delete</property>
-                <property name="title" translatable="yes" context="shortcut window">Delete Recording</property>
+                <property name="title" translatable="yes" context="shortcut window">Delete</property>
               </object>
             </child>
              <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">1</property>
                 <property name="accelerator">F2</property>
-                <property name="title" translatable="yes" context="shortcut window">Rename Recording</property>
+                <property name="title" translatable="yes" context="shortcut window">Rename</property>
               </object>
             </child>
              <child>
