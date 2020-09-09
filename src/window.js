@@ -25,6 +25,7 @@ const { RecordingList } = imports.recordingList;
 const { RecordingsListBox } = imports.recordingsListBox;
 const { formatTime } = imports.utils;
 const { WaveForm, WaveType } = imports.waveform;
+const { RecorderWidget } = imports.recorderWidget;
 
 var WindowState = {
     EMPTY: 0,
@@ -35,9 +36,9 @@ var WindowState = {
 var Window = GObject.registerClass({
     Template: 'resource:///org/gnome/SoundRecorder/ui/window.ui',
     InternalChildren: [
-        'recorderTime', 'mainStack', 'recorderBox', 'emptyIcon', 'playbackStack',
-        'headerRevealer', 'notificationRevealer', 'notificationMessage',
-        'notificationUndoBtn', 'notificationCloseBtn', 'column',
+        'mainStack', 'emptyIcon', 'column', 'headerRevealer',
+        'notificationRevealer', 'notificationMessage',
+        'notificationUndoBtn', 'notificationCloseBtn',
     ],
 }, class Window extends Handy.ApplicationWindow {
 
@@ -47,23 +48,15 @@ var Window = GObject.registerClass({
         }, params));
 
         this.recorder = new Recorder();
-        this.waveform = new WaveForm({
-            vexpand: true,
-            valign: Gtk.Align.FILL,
-        }, WaveType.RECORDER);
-        this._recorderBox.add(this.waveform);
+        this.recorderWidget = new RecorderWidget(this.recorder);
+        this._mainStack.add_named(this.recorderWidget, "recorder");
 
         const dispatcher = GstPlayer.PlayerGMainContextSignalDispatcher.new(null);
         this.player = GstPlayer.Player.new(null, dispatcher);
         this.player.connect('end-of-stream', _p => this.player.stop());
 
-        this.recorder.bind_property('current-peak', this.waveform, 'peak', GObject.BindingFlags.SYNC_CREATE | GObject.BindingFlags.DEFAULT);
-        this.recorder.connect('notify::duration', _recorder => {
-            this._recorderTime.label = formatTime(_recorder.duration);
-        });
 
         this.connect('destroy', () => {
-            this.waveform.destroy();
             this.player.stop();
             this.recorder.stop();
         });
@@ -96,94 +89,38 @@ var Window = GObject.registerClass({
             }
             this._notificationUndoBtn.disconnect(this.cancelSignalId);
         });
-
-        const actions = [
-            { name: 'start', callback : this.onRecorderStart.bind(this), enabled: true },
-            { name: 'pause', callback : this.onRecorderPause.bind(this), enabled: false },
-            { name: 'stop', callback : this.onRecorderStop.bind(this), enabled: false,  },
-            { name: 'resume', callback : this.onRecorderResume.bind(this), enabled: false },
-            { name: 'cancel', callback : this.onRecorderCancel.bind(this), enabled: false }
-        ];
-
-        this.recorderActions = new Gio.SimpleActionGroup();
-
-        for ( let { name, callback, enabled } of actions) {
-            const action = new Gio.SimpleAction({ name: name, enabled: enabled });
-            action.connect('activate', callback);
-            this.recorderActions.add_action(action);
-        }
-
-        this.insert_action_group('recorder', this.recorderActions);
-
         this._column.add(this._recordingListBox);
 
+        this.recorderWidget.connect('started', this.onRecorderStarted.bind(this));
+        this.recorderWidget.connect('canceled', this.onRecorderCanceled.bind(this));
+        this.recorderWidget.connect('stopped', this.onRecorderStopped.bind(this));
+        this.insert_action_group('recorder', this.recorderWidget.actionsGroup);
         this._emptyIcon.icon_name = `${pkg.name}-symbolic`;
         this.show();
     }
 
-    onRecorderPause() {
-        this.recorder.pause();
-        this.recorderActions.lookup('resume').set_enabled(true);
-        this.recorderActions.lookup('pause').set_enabled(false);
-        this._playbackStack.visible_child_name = 'recorder-start';
-    }
-
-    onRecorderResume() {
-        this.recorder.resume();
-        this.recorderActions.lookup('resume').set_enabled(false);
-        this.recorderActions.lookup('pause').set_enabled(true);
-        this._playbackStack.visible_child_name = 'recorder-pause';
-    }
-
-    onRecorderStart() {
+    onRecorderStarted() {
         this.player.stop();
-        this.recorderActions.lookup('start').set_enabled(false);
-        this.recorderActions.lookup('stop').set_enabled(true);
-        this.recorderActions.lookup('cancel').set_enabled(true);
-        this.recorderActions.lookup('pause').set_enabled(true);
-        this.recorderActions.lookup('resume').set_enabled(false);
 
         const activeRow = this._recordingListBox.activeRow;
         if (activeRow && activeRow.editMode)
             activeRow.editMode = false;
 
-        this._playbackStack.visible_child_name = 'recorder-pause';
         this.state = WindowState.RECORDER;
-        this.recorder.start();
     }
 
-    onRecorderCancel() {
-        const recording = this.recorder.stop();
-
-        this.recorderActions.lookup('stop').set_enabled(false);
-        this.recorderActions.lookup('cancel').set_enabled(false);
-        this.recorderActions.lookup('resume').set_enabled(false);
-        this.recorderActions.lookup('pause').set_enabled(false);
-        this.recorderActions.lookup('start').set_enabled(true);
-
-        recording.delete();
-
+    onRecorderCanceled() {
         if (this._recordingList.get_n_items() === 0)
             this.state = WindowState.EMPTY;
         else
             this.state = WindowState.LIST;
-
-        this.waveform.destroy();
     }
 
-    onRecorderStop() {
-        const recording = this.recorder.stop();
-
-        this.recorderActions.lookup('stop').set_enabled(false);
-        this.recorderActions.lookup('cancel').set_enabled(false);
-        this.recorderActions.lookup('resume').set_enabled(false);
-        this.recorderActions.lookup('pause').set_enabled(false);
-        this.recorderActions.lookup('start').set_enabled(true);
+    onRecorderStopped(widget, recording) {
 
         this._recordingList.insert(0, recording);
         this._recordingListBox.get_row_at_index(0).editMode = true;
         this.state = WindowState.LIST;
-        this.waveform.destroy();
     }
 
     notify(message, callback, cancelCallback) {

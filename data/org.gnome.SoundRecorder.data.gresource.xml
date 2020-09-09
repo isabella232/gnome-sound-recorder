@@ -2,8 +2,9 @@
 <gresources>
   <gresource prefix="/org/gnome/SoundRecorder">
     <file>application.css</file>
-    <file>ui/window.ui</file>
+    <file>ui/recorder.ui</file>
     <file>ui/row.ui</file>
+    <file>ui/window.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">icons/skip-back-symbolic.svg</file>
     <file compressed="true" preprocess="xml-stripblanks">icons/skip-forward-symbolic.svg</file>
   </gresource>
