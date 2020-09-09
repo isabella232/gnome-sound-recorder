@@ -305,7 +305,6 @@ msgid "Mono"
 msgstr "Моно"
 
 #: data/ui/window.ui:332
-#, fuzzy
 msgid "_Keyboard Shortcuts"
 msgstr "_Клавіатурні скорочення"
 
