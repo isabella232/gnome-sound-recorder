@@ -11,8 +11,8 @@ var RecordingsListBox = new GObject.registerClass({
         this._player = player;
         super._init({
             valign: Gtk.Align.FILL,
-            margin_left: 8,
-            margin_right: 8,
+            margin_start: 8,
+            margin_end: 8,
             margin_top: 12,
             margin_bottom: 12,
             activate_on_single_click: true,

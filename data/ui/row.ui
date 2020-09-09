@@ -23,8 +23,8 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="valign">center</property>
-                <property name="margin_left">12</property>
-                <property name="margin_right">12</property>
+                <property name="margin_start">12</property>
+                <property name="margin_end">12</property>
                 <property name="hexpand">True</property>
                 <child>
                   <object class="GtkLabel" id="duration">
@@ -85,8 +85,8 @@
               <object class="GtkEntry" id="entry">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="margin_left">12</property>
-                <property name="margin_right">12</property>
+                <property name="margin_start">12</property>
+                <property name="margin_end">12</property>
                 <property name="activates_default">True</property>
               </object>
               <packing>
@@ -134,8 +134,8 @@
                   <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="margin_left">12</property>
-                    <property name="margin_right">12</property>
+                    <property name="margin_start">12</property>
+                    <property name="margin_end">12</property>
                     <property name="margin_top">18</property>
                     <child>
                       <object class="GtkStack" id="rightStack">

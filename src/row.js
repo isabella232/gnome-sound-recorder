@@ -41,8 +41,8 @@ var Row = GObject.registerClass({
             halign: Gtk.Align.FILL,
             margin_top: 18,
             height_request: 60,
-            margin_left: 12,
-            margin_right: 12,
+            margin_start: 12,
+            margin_end: 12,
         }, WaveType.PLAYER);
         this._waveformStack.add_named(this.waveform, 'wave');
         if (this._recording._peaks.length > 0) {
