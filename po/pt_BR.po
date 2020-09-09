@@ -2,7 +2,7 @@
 # Copyright (C) 2020 gnome-sound-recorder's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-sound-recorder package.
 # Adorilson Bezerra <adorilson@gmail.com>, 2013.
-# Enrico Nicoletto <liverig@gmail.com>, 2014, 2016.
+# Enrico Nicoletto <liverig@gmail.com>, 2014, 2016, 2020.
 # Rafael Fontenelle <rafaelff@gnome.org>, 2013-2020.
 #
 msgid ""
@@ -10,16 +10,16 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
 "issues\n"
-"POT-Creation-Date: 2020-09-09 12:58+0000\n"
-"PO-Revision-Date: 2020-09-09 14:21-0300\n"
-"Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
+"POT-Creation-Date: 2020-09-09 18:18+0000\n"
+"PO-Revision-Date: 2020-09-09 18:58-0300\n"
+"Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1)\n"
-"X-Generator: Gtranslator 3.36.0\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.4.1\n"
 "X-Project-Style: gnome\n"
 
 #: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:5
@@ -121,127 +121,109 @@ msgstr "Geral"
 
 #: data/ui/help-overlay.ui:20
 msgctxt "shortcut window"
+msgid "Record"
+msgstr "Gravação"
+
+#: data/ui/help-overlay.ui:27
+msgctxt "shortcut window"
+msgid "Stop Recording"
+msgstr "Para a gravação"
+
+#: data/ui/help-overlay.ui:34
+msgctxt "shortcut window"
+msgid "Play / Pause / Resume"
+msgstr "Reproduz / Pausa / Continua"
+
+#: data/ui/help-overlay.ui:42
+msgctxt "shortcut window"
+msgid "Delete"
+msgstr "Exclui"
+
+#: data/ui/help-overlay.ui:49
+msgctxt "shortcut window"
 msgid "Open menu"
 msgstr "Abrir menu"
 
-#: data/ui/help-overlay.ui:27
+#: data/ui/help-overlay.ui:56
 msgctxt "shortcut window"
 msgid "Keyboard shortcuts"
 msgstr "Atalhos de teclado"
 
-#: data/ui/help-overlay.ui:34
+#: data/ui/help-overlay.ui:63
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Sai"
 
-#: data/ui/help-overlay.ui:42
-msgctxt "shortcut window"
-msgid "Recorder"
-msgstr "Gravador"
-
-#: data/ui/help-overlay.ui:47
-msgctxt "shortcut window"
-msgid "Start/Resume Recording"
-msgstr "Inicia/Continua a gravação"
-
-#: data/ui/help-overlay.ui:54
-msgctxt "shortcut window"
-msgid "Pause"
-msgstr "Pausa"
-
-#: data/ui/help-overlay.ui:61
-msgctxt "shortcut window"
-msgid "Stop"
-msgstr "Para"
-
-#: data/ui/help-overlay.ui:68
-#| msgid "Delete"
-msgctxt "shortcut window"
-msgid "Delete"
-msgstr "Exclui"
-
-#: data/ui/help-overlay.ui:76
+#: data/ui/help-overlay.ui:71
 msgctxt "shortcut window"
 msgid "Recording"
 msgstr "Gravação"
 
-#: data/ui/help-overlay.ui:81
-msgctxt "shortcut window"
-msgid "Play / Pause"
-msgstr "Reproduz / pausa"
-
-#: data/ui/help-overlay.ui:88
+#: data/ui/help-overlay.ui:76
 msgctxt "shortcut window"
 msgid "Seek Backward"
 msgstr "Volta"
 
-#: data/ui/help-overlay.ui:95
+#: data/ui/help-overlay.ui:83
 msgctxt "shortcut window"
 msgid "Seek Forward"
 msgstr "Avança"
 
-#: data/ui/help-overlay.ui:102
+#: data/ui/help-overlay.ui:90
 msgctxt "shortcut window"
-msgid "Delete Recording"
-msgstr "Exclui a gravação"
-
-#: data/ui/help-overlay.ui:109
-msgctxt "shortcut window"
-msgid "Rename Recording"
-msgstr "Renomeia a gravação"
-
-#: data/ui/help-overlay.ui:116
-msgctxt "shortcut window"
-msgid "Export"
-msgstr "Exporta"
-
-#: data/ui/recorder.ui:68
-msgid "Resume Recording"
-msgstr "Continua a gravação"
-
-#: data/ui/recorder.ui:92
-msgid "Pause Recording"
-msgstr "Pausa a gravação"
-
-#: data/ui/recorder.ui:124
-msgid "Stop Recording"
-msgstr "Para a gravação"
-
-#: data/ui/recorder.ui:153
-#| msgctxt "shortcut window"
-#| msgid "Delete Recording"
-msgid "Delete Recording"
-msgstr "Exclui a gravação"
-
-#: data/ui/row.ui:161 data/ui/row.ui:440
-msgid "Export"
-msgstr "Exporta"
-
-#: data/ui/row.ui:185 data/ui/row.ui:436
 msgid "Rename"
 msgstr "Renomeia"
 
-#: data/ui/row.ui:237
+#: data/ui/help-overlay.ui:97
+msgctxt "shortcut window"
+msgid "Export"
+msgstr "Exporta"
+
+#: data/ui/recorder.ui:72
+msgid "Resume Recording"
+msgstr "Continua a gravação"
+
+#: data/ui/recorder.ui:96
+msgid "Pause Recording"
+msgstr "Pausa a gravação"
+
+#: data/ui/recorder.ui:128
+msgid "Stop Recording"
+msgstr "Para a gravação"
+
+#: data/ui/recorder.ui:157
+msgid "Delete Recording"
+msgstr "Exclui a gravação"
+
+#: data/ui/row.ui:165 data/ui/row.ui:444
+msgid "Export"
+msgstr "Exporta"
+
+#: data/ui/row.ui:189 data/ui/row.ui:440
+msgid "Rename"
+msgstr "Renomeia"
+
+#: data/ui/row.ui:241
 msgid "Save"
 msgstr "Salva"
 
-#: data/ui/row.ui:274 src/recorderWidget.js:97
+#: data/ui/row.ui:278 src/recorderWidget.js:100
 msgid "Delete"
 msgstr "Exclui"
 
-#: data/ui/row.ui:309
+#: data/ui/row.ui:313
 msgid "Seek 10s Backward"
 msgstr "Volta 10s"
 
-#: data/ui/row.ui:337
+#: data/ui/row.ui:341
 msgid "Play"
 msgstr "Reproduz"
 
-#: data/ui/row.ui:363
+#: data/ui/row.ui:367
 msgid "Pause"
 msgstr "Pausa"
 
-#: data/ui/row.ui:395
+#: data/ui/row.ui:399
 msgid "Seek 10s Forward"
 msgstr "Avança 10s"
 
@@ -327,17 +309,15 @@ msgstr "Um aplicativo de gravação de som para o GNOME"
 msgid "Recording %d"
 msgstr "Gravação %d"
 
-#: src/recorderWidget.js:91
-#| msgctxt "shortcut window"
-#| msgid "Delete Recording"
+#: src/recorderWidget.js:94
 msgid "Delete recording?"
 msgstr "Excluir a gravação?"
 
-#: src/recorderWidget.js:92
+#: src/recorderWidget.js:95
 msgid "This recording will not be saved."
 msgstr "Esta gravação não será salva."
 
-#: src/recorderWidget.js:96
+#: src/recorderWidget.js:99
 msgid "Resume"
 msgstr "Continuar"
 
@@ -366,44 +346,44 @@ msgstr "_Exportar"
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: src/utils.js:45
+#: src/utils.js:48
 msgid "Yesterday"
 msgstr "Ontem"
 
-#: src/utils.js:47
+#: src/utils.js:50
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d dia atrás"
 msgstr[1] "%d dias atrás"
 
-#: src/utils.js:49
+#: src/utils.js:52
 msgid "Last week"
 msgstr "Semana passada"
 
-#: src/utils.js:51
+#: src/utils.js:54
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d semana atrás"
 msgstr[1] "%d semanas atrás"
 
-#: src/utils.js:53
+#: src/utils.js:56
 msgid "Last month"
 msgstr "Mês passado"
 
-#: src/utils.js:55
+#: src/utils.js:58
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d mês atrás"
 msgstr[1] "%d meses atrás"
 
-#: src/utils.js:57
+#: src/utils.js:60
 msgid "Last year"
 msgstr "Ano passado"
 
-#: src/utils.js:59
+#: src/utils.js:62
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
@@ -414,6 +394,30 @@ msgstr[1] "%d anos atrás"
 #, javascript-format
 msgid "\"%s\" deleted"
 msgstr "“%s” excluído"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Recorder"
+#~ msgstr "Gravador"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Start/Resume Recording"
+#~ msgstr "Inicia/Continua a gravação"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Pause"
+#~ msgstr "Pausa"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Stop"
+#~ msgstr "Para"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Delete Recording"
+#~ msgstr "Exclui a gravação"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Rename Recording"
+#~ msgstr "Renomeia a gravação"
 
 #~| msgid "_Cancel"
 #~ msgctxt "shortcut window"
