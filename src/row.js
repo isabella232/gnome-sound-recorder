@@ -129,7 +129,7 @@ var Row = GObject.registerClass({
         this.insert_action_group('recording', this.actionGroup);
 
         this.waveform.connect('button-press-event', _ => {
-            pauseAction.activate();
+            pauseAction.activate(null);
         });
 
         this._entry.connect('key-press-event', (_, event) => {
@@ -180,13 +180,14 @@ var Row = GObject.registerClass({
         if (state) {
             if (!this.expanded)
                 this.activate();
-
             this._entry.grab_focus();
             this._saveBtn.grab_default();
             this._rightStack.visible_child_name = 'save';
         } else {
             this._rightStack.visible_child_name = 'options';
+            this.grab_focus();
         }
+        this.actionGroup.lookup('rename').enabled = !state;
     }
 
     get editMode() {
@@ -207,11 +208,11 @@ var Row = GObject.registerClass({
 
         switch (rowState) {
         case RowState.PLAYING:
-            this.actionGroup.lookup('play').set_enabled(false);
+            this.actionGroup.lookup('play').enabled = false;
             this._playbackStack.visible_child_name = 'pause';
             break;
         case RowState.PAUSED:
-            this.actionGroup.lookup('play').set_enabled(true);
+            this.actionGroup.lookup('play').enabled = true;
             this._playbackStack.visible_child_name = 'play';
             break;
         }

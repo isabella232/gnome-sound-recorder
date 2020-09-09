@@ -18,7 +18,7 @@
 *
 */
 
-const { GLib, GObject, Gst, GstPlayer, Handy } = imports.gi;
+const { Gio, GLib, GObject, Gst, GstPlayer, Gtk, Handy } = imports.gi;
 
 const { Recorder } = imports.recorder;
 const { RecordingList } = imports.recordingList;
@@ -73,6 +73,17 @@ var Window = GObject.registerClass({
                 _ => this._recordingList.insert(index, recording),
             );
         });
+
+        const builder = Gtk.Builder.new_from_resource('/org/gnome/SoundRecorder/gtk/help-overlay.ui');
+        const dialog = builder.get_object('help_overlay');
+        this.set_help_overlay(dialog);
+
+        let openMenuAction = new Gio.SimpleAction({ name: 'open-primary-menu', state: new GLib.Variant('b', true) });
+        openMenuAction.connect('activate', action => {
+            const state = action.get_state().get_boolean();
+            action.state = new GLib.Variant('b', !state);
+        });
+        this.add_action(openMenuAction);
 
         this._notificationCloseBtn.connect('clicked', _ => {
             this._notificationRevealer.reveal_child = false;
