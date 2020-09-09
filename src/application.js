@@ -91,9 +91,9 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
             RecordingsDir.make_directory_with_parents(null);
             CacheDir.make_directory_with_parents(null);
         } catch (e) {
-            if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) {
-                warn(`Failed to create directory ${e}`)
-            }
+            if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS))
+                error(`Failed to create directory ${e}`);
+
         }
         this._initAppMenu();
     }

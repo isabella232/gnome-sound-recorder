@@ -18,13 +18,11 @@
 *
 */
 
-const { Gio, GLib, GObject, GstPlayer, Gtk, Handy } = imports.gi;
+const { GLib, GObject, GstPlayer, Handy } = imports.gi;
 
 const { Recorder } = imports.recorder;
 const { RecordingList } = imports.recordingList;
 const { RecordingsListBox } = imports.recordingsListBox;
-const { formatTime } = imports.utils;
-const { WaveForm, WaveType } = imports.waveform;
 const { RecorderWidget } = imports.recorderWidget;
 
 var WindowState = {
@@ -49,7 +47,7 @@ var Window = GObject.registerClass({
 
         this.recorder = new Recorder();
         this.recorderWidget = new RecorderWidget(this.recorder);
-        this._mainStack.add_named(this.recorderWidget, "recorder");
+        this._mainStack.add_named(this.recorderWidget, 'recorder');
 
         const dispatcher = GstPlayer.PlayerGMainContextSignalDispatcher.new(null);
         this.player = GstPlayer.Player.new(null, dispatcher);

@@ -1,17 +1,17 @@
 /* exported RecorderState RecorderWidget */
-const { Gdk, Gio, GObject, Gst, Gtk } = imports.gi;
-const { displayDateTime, formatTime } = imports.utils;
+const { Gio, GObject, Gtk } = imports.gi;
+const { formatTime } = imports.utils;
 const { WaveForm, WaveType } = imports.waveform;
 
 var RecorderState = {
     RECORDING: 0,
     PAUSED: 1,
     STOPPED: 2,
-}
+};
 
 var RecorderWidget = GObject.registerClass({
     Template: 'resource:///org/gnome/SoundRecorder/ui/recorder.ui',
-    InternalChildren: ['recorderBox', 'playbackStack', 'recorderTime', ],
+    InternalChildren: ['recorderBox', 'playbackStack', 'recorderTime'],
     Signals: {
         'canceled': {},
         'paused': {},
@@ -37,24 +37,24 @@ var RecorderWidget = GObject.registerClass({
 
 
         const actions = [
-            { name: 'start', callback : this.onStart.bind(this), enabled: true },
-            { name: 'pause', callback : this.onPause.bind(this), enabled: false },
-            { name: 'stop', callback : this.onStop.bind(this), enabled: false,  },
-            { name: 'resume', callback : this.onResume.bind(this), enabled: false },
-            { name: 'cancel', callback : this.onCancel.bind(this), enabled: false }
+            { name: 'start', callback: this.onStart.bind(this), enabled: true },
+            { name: 'pause', callback: this.onPause.bind(this), enabled: false },
+            { name: 'stop', callback: this.onStop.bind(this), enabled: false  },
+            { name: 'resume', callback: this.onResume.bind(this), enabled: false },
+            { name: 'cancel', callback: this.onCancel.bind(this), enabled: false },
         ];
 
         this.actionsGroup = new Gio.SimpleActionGroup();
 
-        for ( let { name, callback, enabled } of actions) {
-            const action = new Gio.SimpleAction({ name: name, enabled: enabled });
+        for (let { name, callback, enabled } of actions) {
+            const action = new Gio.SimpleAction({ name, enabled });
             action.connect('activate', callback);
             this.actionsGroup.add_action(action);
         }
 
         const cancelAction = this.actionsGroup.lookup('cancel');
         const startAction = this.actionsGroup.lookup('start');
-        startAction.bind_property("enabled", cancelAction, "enabled", GObject.BindingFlags.INVERT_BOOLEAN);
+        startAction.bind_property('enabled', cancelAction, 'enabled', GObject.BindingFlags.INVERT_BOOLEAN);
     }
 
     onPause() {
@@ -99,20 +99,20 @@ var RecorderWidget = GObject.registerClass({
 
     set state(recorderState) {
         switch (recorderState) {
-            case RecorderState.PAUSED:
-                this.actionsGroup.lookup('pause').set_enabled(false);
-                this.actionsGroup.lookup('resume').set_enabled(true);
-                break;
-            case RecorderState.RECORDING:
-                this.actionsGroup.lookup('start').set_enabled(false);
-                this.actionsGroup.lookup('stop').set_enabled(true);
-                this.actionsGroup.lookup('resume').set_enabled(false);
-                this.actionsGroup.lookup('pause').set_enabled(true);
-                break;
-            case RecorderState.STOPPED:
-                this.actionsGroup.lookup('start').set_enabled(true);
-                this.actionsGroup.lookup('stop').set_enabled(false);
-                break;
+        case RecorderState.PAUSED:
+            this.actionsGroup.lookup('pause').set_enabled(false);
+            this.actionsGroup.lookup('resume').set_enabled(true);
+            break;
+        case RecorderState.RECORDING:
+            this.actionsGroup.lookup('start').set_enabled(false);
+            this.actionsGroup.lookup('stop').set_enabled(true);
+            this.actionsGroup.lookup('resume').set_enabled(false);
+            this.actionsGroup.lookup('pause').set_enabled(true);
+            break;
+        case RecorderState.STOPPED:
+            this.actionsGroup.lookup('start').set_enabled(true);
+            this.actionsGroup.lookup('stop').set_enabled(false);
+            break;
         }
     }
 });
