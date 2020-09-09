@@ -87,11 +87,14 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
         Handy.init();
         Gst.init(null);
 
-        if (!RecordingsDir.query_exists(null))
+        try {
             RecordingsDir.make_directory_with_parents(null);
-        if (!CacheDir.query_exists(null))
             CacheDir.make_directory_with_parents(null);
-
+        } catch (e) {
+            if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) {
+                warn(`Failed to create directory ${e}`)
+            }
+        }
         this._initAppMenu();
     }
 
