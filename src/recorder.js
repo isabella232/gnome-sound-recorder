@@ -63,7 +63,7 @@ var Recorder = new GObject.registerClass({
     Properties: {
         'duration': GObject.ParamSpec.int(
             'duration',
-            'Recording Duration', 'Recording duration in seconds',
+            'Recording Duration', 'Recording duration in nanoseconds',
             GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
             0, GLib.MAXINT16, 0),
         'current-peak': GObject.ParamSpec.float(
@@ -131,7 +131,7 @@ var Recorder = new GObject.registerClass({
         this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100, () => {
             const pos = this.pipeline.query_position(Gst.Format.TIME)[1];
             if (pos > 0)
-                this.duration = pos / Gst.SECOND;
+                this.duration = pos;
             return true;
         });
     }
@@ -147,7 +147,7 @@ var Recorder = new GObject.registerClass({
 
     stop() {
         this.state = Gst.State.NULL;
-
+        this.duration = 0;
         if (this.timeout) {
             GLib.source_remove(this.timeout);
             this.timeout = null;

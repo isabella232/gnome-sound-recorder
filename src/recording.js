@@ -12,7 +12,7 @@ var Recording = new GObject.registerClass({
     Properties: {
         'duration': GObject.ParamSpec.int(
             'duration',
-            'Recording Duration', 'Recording duration in seconds',
+            'Recording Duration', 'Recording duration in nanoseconds',
             GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
             0, GLib.MAXINT16, 0),
         'name': GObject.ParamSpec.string(
@@ -47,6 +47,7 @@ var Recording = new GObject.registerClass({
         discoverer.start();
         discoverer.connect('discovered', (_discoverer, audioInfo) => {
             this._duration = audioInfo.get_duration();
+
             this.notify('duration');
         });
 
