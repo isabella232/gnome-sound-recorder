@@ -50,77 +50,20 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
     }
 
     _initAppMenu() {
-        function getDefaultProfile() {
-            switch (Settings.get_enum('audio-profile')) {
-            case 0:
-                return new GLib.Variant('s', 'vorbis');
-            case 1:
-                return new GLib.Variant('s', 'opus');
-            case 2:
-                return new GLib.Variant('s', 'flac');
-            case 3:
-                return new GLib.Variant('s', 'mp3');
-            case 4:
-                return new GLib.Variant('s', 'm4a');
-            }
-        }
-
-        let profileAction = new Gio.SimpleAction({
-            enabled: true,
-            name: 'audio-profile',
-            state: getDefaultProfile(),
-            parameter_type: new GLib.VariantType('s'),
-        });
-        profileAction.connect('activate', (action, parameter) => {
-            action.change_state(parameter);
-        });
-        profileAction.connect('change-state', (action, state) => {
-            Settings.set_value('audio-profile', state);
-        });
-        Settings.connect('changed::audio-profile', () => {
-            profileAction.state = getDefaultProfile();
-        });
+        const profileAction = Settings.create_action('audio-profile');
         this.add_action(profileAction);
 
-
-        function getDefaultChannel() {
-            switch (Settings.get_enum('audio-channel')) {
-            case 0:
-                return new GLib.Variant('s', 'stereo');
-            case 1:
-                return new GLib.Variant('s', 'mono');
-            }
-        }
-
-        let channelAction = new Gio.SimpleAction({
-            enabled: true,
-            name: 'audio-channel',
-            state: getDefaultChannel(),
-            parameter_type: new GLib.VariantType('s'),
-        });
-        channelAction.connect('activate', (action, parameter) => {
-            action.change_state(parameter);
-        });
-        channelAction.connect('change-state', (action, state) => {
-            Settings.set_value('audio-channel', state);
-        });
-        Settings.connect('changed::audio-channel', () => {
-            channelAction.state = getDefaultChannel();
-        });
+        const channelAction = Settings.create_action('audio-channel');
         this.add_action(channelAction);
 
-
         let aboutAction = new Gio.SimpleAction({ name: 'about' });
-        aboutAction.connect('activate', () => {
-            this._showAbout();
-        });
+        aboutAction.connect('activate', this._showAbout.bind(this));
         this.add_action(aboutAction);
 
         let quitAction = new Gio.SimpleAction({ name: 'quit' });
-        quitAction.connect('activate', () => {
-            this.quit();
-        });
+        quitAction.connect('activate', this.quit.bind(this));
         this.add_action(quitAction);
+
         this.add_accelerator('<Primary>q', 'app.quit', null);
         this.add_accelerator('<Primary>r', 'recorder.start', null);
         this.add_accelerator('<Primary>p', 'recorder.pause', null);
