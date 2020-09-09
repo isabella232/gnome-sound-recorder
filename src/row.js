@@ -13,7 +13,7 @@ var Row = GObject.registerClass({
     InternalChildren: [
         'playbackStack', 'mainStack', 'waveformStack', 'rightStack',
         'name', 'entry', 'date', 'duration', 'revealer', 'playbackControls',
-        'saveBtn',
+        'saveBtn', 'playBtn', 'pauseBtn',
     ],
     Signals: {
         'play': { param_types: [GObject.TYPE_STRING] },
@@ -210,10 +210,12 @@ var Row = GObject.registerClass({
         case RowState.PLAYING:
             this.actionGroup.lookup('play').enabled = false;
             this._playbackStack.visible_child_name = 'pause';
+            this._pauseBtn.grab_focus();
             break;
         case RowState.PAUSED:
             this.actionGroup.lookup('play').enabled = true;
             this._playbackStack.visible_child_name = 'play';
+            this._playBtn.grab_focus();
             break;
         }
     }
