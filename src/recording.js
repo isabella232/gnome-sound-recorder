@@ -80,7 +80,7 @@ var Recording = new GObject.registerClass({
         if (this._duration)
             return this._duration;
         else
-            return undefined;
+            return 0;
     }
 
     get file() {
