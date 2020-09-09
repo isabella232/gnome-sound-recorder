@@ -73,7 +73,7 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkMenuButton" id="appMenuButton">
+                  <object class="GtkMenuButton">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
@@ -183,7 +183,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkScrolledWindow" id="scrolledWindow">
+                  <object class="GtkScrolledWindow">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="hexpand">True</property>
@@ -201,9 +201,6 @@
                     <property name="name">recordings</property>
                     <property name="position">1</property>
                   </packing>
-                </child>
-                <child>
-                  <placeholder/>
                 </child>
               </object>
               <packing>

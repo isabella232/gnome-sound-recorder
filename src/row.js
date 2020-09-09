@@ -13,8 +13,7 @@ var Row = GObject.registerClass({
     InternalChildren: [
         'playbackStack', 'mainStack', 'playButton', 'waveformStack', 'pauseButton',
         'name', 'entry', 'date', 'duration', 'revealer', 'playbackControls', 'rightStack',
-        'squeezer', 'saveBtn', 'renameBtn', 'exportBtn', 'saveBtn', 'rightStack',
-        'seekBackward', 'seekForward', 'optionBtn', 'deleteBtn',
+        'saveBtn', 'seekBackward', 'seekForward',  'deleteBtn',
     ],
     Signals: {
         'play': { param_types: [GObject.TYPE_STRING] },
