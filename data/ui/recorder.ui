@@ -150,7 +150,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <property name="tooltip_text" translatable="yes">Cancel Recording</property>
+                    <property name="tooltip_text" translatable="yes">Delete Recording</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
                     <property name="action_name">recorder.cancel</property>

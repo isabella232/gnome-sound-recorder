@@ -65,7 +65,7 @@
               <object class="GtkShortcutsShortcut">
                 <property name="visible">1</property>
                 <property name="accelerator">&lt;ctrl&gt;C</property>
-                <property name="title" translatable="yes" context="shortcut window">Cancel</property>
+                <property name="title" translatable="yes" context="shortcut window">Delete</property>
               </object>
             </child>
           </object>

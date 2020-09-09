@@ -1,5 +1,5 @@
 /* exported RecorderState RecorderWidget */
-const { Gio, GObject, Gtk } = imports.gi;
+const { Gdk, Gio, GObject, Gtk } = imports.gi;
 const { formatTime } = imports.utils;
 const { WaveForm, WaveType } = imports.waveform;
 
@@ -82,12 +82,48 @@ var RecorderWidget = GObject.registerClass({
     }
 
     onCancel() {
-        const recording = this.recorder.stop();
-        this.state = RecorderState.STOPPED;
-        this.waveform.destroy();
+        this.onPause();
+        let dialog = new Gtk.MessageDialog({
+            modal: true,
+            destroy_with_parent: true,
+            buttons: Gtk.ButtonsType.NONE,
+            message_type: Gtk.MessageType.QUESTION,
+            text: _('Delete recording?'),
+            secondary_text: _('This recording will not be saved.'),
+        });
 
-        recording.delete();
-        this.emit('canceled');
+        dialog.set_default_response(Gtk.ResponseType.NO);
+        dialog.add_button(_('Resume'), Gtk.ResponseType.NO);
+        dialog.add_button(_('Delete'), Gtk.ResponseType.YES)
+            .get_style_context().add_class('destructive-action');
+
+        dialog.set_transient_for(Gio.Application.get_default().get_active_window());
+        dialog.connect('response', (_, response) => {
+            switch (response) {
+            case Gtk.ResponseType.YES: {
+                const recording = this.recorder.stop();
+                this.state = RecorderState.STOPPED;
+                this.waveform.destroy();
+
+                recording.delete();
+                this.emit('canceled');
+                break;
+            }
+            case Gtk.ResponseType.NO:
+                this.onResume();
+                break;
+            }
+
+            dialog.close();
+        });
+
+        dialog.connect('key-press-event', (_, event) => {
+            const key = event.get_keyval()[1];
+            if (key === Gdk.KEY_Escape)
+                dialog.response(Gtk.ResponseType.NO);
+        });
+
+        dialog.show();
     }
 
     onStop() {
