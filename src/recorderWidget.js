@@ -139,20 +139,20 @@ var RecorderWidget = GObject.registerClass({
     set state(recorderState) {
         switch (recorderState) {
         case RecorderState.PAUSED:
-            this.actionsGroup.lookup('pause').set_enabled(false);
-            this.actionsGroup.lookup('resume').set_enabled(true);
+            this.actionsGroup.lookup('pause').enabled = false;
+            this.actionsGroup.lookup('resume').enabled = true;
             this._resumeBtn.grab_focus();
             break;
         case RecorderState.RECORDING:
-            this.actionsGroup.lookup('start').set_enabled(false);
-            this.actionsGroup.lookup('stop').set_enabled(true);
-            this.actionsGroup.lookup('resume').set_enabled(false);
-            this.actionsGroup.lookup('pause').set_enabled(true);
+            this.actionsGroup.lookup('start').enabled = false;
+            this.actionsGroup.lookup('stop').enabled = true;
+            this.actionsGroup.lookup('resume').enabled = false;
+            this.actionsGroup.lookup('pause').enabled = true;
             this._pauseBtn.grab_focus();
             break;
         case RecorderState.STOPPED:
-            this.actionsGroup.lookup('start').set_enabled(true);
-            this.actionsGroup.lookup('stop').set_enabled(false);
+            this.actionsGroup.lookup('start').enabled = true;
+            this.actionsGroup.lookup('stop').enabled = false;
             break;
         }
     }
