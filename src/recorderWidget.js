@@ -142,6 +142,7 @@ var RecorderWidget = GObject.registerClass({
             this.actionsGroup.lookup('pause').enabled = false;
             this.actionsGroup.lookup('resume').enabled = true;
             this._resumeBtn.grab_focus();
+            this._recorderTime.get_style_context().add_class('paused');
             break;
         case RecorderState.RECORDING:
             this.actionsGroup.lookup('start').enabled = false;
@@ -149,6 +150,7 @@ var RecorderWidget = GObject.registerClass({
             this.actionsGroup.lookup('resume').enabled = false;
             this.actionsGroup.lookup('pause').enabled = true;
             this._pauseBtn.grab_focus();
+            this._recorderTime.get_style_context().remove_class('paused');
             break;
         case RecorderState.STOPPED:
             this.actionsGroup.lookup('start').enabled = true;
