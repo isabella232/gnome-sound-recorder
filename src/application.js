@@ -61,7 +61,9 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
         this.add_action(aboutAction);
 
         let quitAction = new Gio.SimpleAction({ name: 'quit' });
-        quitAction.connect('activate', this.quit.bind(this));
+        quitAction.connect('activate', () => {
+            this.get_active_window().close();
+        });
         this.add_action(quitAction);
 
         this.add_accelerator('<Primary>q', 'app.quit', null);
@@ -88,8 +90,8 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
         Gst.init(null);
 
         try {
-            RecordingsDir.make_directory_with_parents(null);
             CacheDir.make_directory_with_parents(null);
+            RecordingsDir.make_directory_with_parents(null);
         } catch (e) {
             if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS))
                 error(`Failed to create directory ${e}`);

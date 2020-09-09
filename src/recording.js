@@ -143,17 +143,18 @@ var Recording = new GObject.registerClass({
     }
 
     generatePeaks() {
-        const pipeline = Gst.parse_launch('uridecodebin name=uridecodebin ! audioconvert ! audio/x-raw,channels=1 ! level name=level ! fakesink name=faked');
+        this.pipeline = Gst.parse_launch('uridecodebin name=uridecodebin ! audioconvert ! audio/x-raw,channels=1 ! level name=level ! fakesink name=faked');
 
-        let uridecodebin = pipeline.get_by_name('uridecodebin');
+
+        let uridecodebin = this.pipeline.get_by_name('uridecodebin');
         uridecodebin.set_property('uri', this.uri);
 
-        let fakesink = pipeline.get_by_name('faked');
+        let fakesink = this.pipeline.get_by_name('faked');
         fakesink.set_property('qos', false);
         fakesink.set_property('sync', true);
 
-        const bus = pipeline.get_bus();
-        pipeline.set_state(Gst.State.PLAYING);
+        const bus = this.pipeline.get_bus();
+        this.pipeline.set_state(Gst.State.PLAYING);
         bus.add_signal_watch();
 
         bus.connect('message', (_bus, message) => {
@@ -172,7 +173,8 @@ var Recording = new GObject.registerClass({
                 break;
             case Gst.MessageType.EOS:
                 this.peaks = this._loadedPeaks;
-                pipeline.set_state(Gst.State.NULL);
+                this.pipeline.set_state(Gst.State.NULL);
+                this.pipeline = null;
                 break;
             }
         });

@@ -18,7 +18,7 @@
 *
 */
 
-const { GLib, GObject, GstPlayer, Handy } = imports.gi;
+const { GLib, GObject, Gst, GstPlayer, Handy } = imports.gi;
 
 const { Recorder } = imports.recorder;
 const { RecordingList } = imports.recordingList;
@@ -54,13 +54,8 @@ var Window = GObject.registerClass({
         this.player.connect('end-of-stream', _p => this.player.stop());
 
 
-        this.connect('destroy', () => {
-            this.player.stop();
-            this.recorder.stop();
-        });
-
         this._recordingList = new RecordingList();
-        this._recordingList.connect('items-changed', _ => {
+        this.itemsSignalId = this._recordingList.connect('items-changed', _ => {
             if (this.state !== WindowState.RECORDER) {
                 if (this._recordingList.get_n_items() === 0)
                     this.state = WindowState.EMPTY;
@@ -95,6 +90,20 @@ var Window = GObject.registerClass({
         this.insert_action_group('recorder', this.recorderWidget.actionsGroup);
         this._emptyIcon.icon_name = `${pkg.name}-symbolic`;
         this.show();
+    }
+
+    vfunc_delete_event() {
+        this._recordingList.cancellable.cancel();
+        if (this.itemsSignalId)
+            this._recordingList.disconnect(this.itemsSignalId);
+
+        for (let i = 0; i < this._recordingList.get_n_items(); i++) {
+            const recording = this._recordingList.get_item(i);
+            if (recording.pipeline)
+                recording.pipeline.set_state(Gst.State.NULL);
+        }
+
+        this.recorder.stop();
     }
 
     onRecorderStarted() {
