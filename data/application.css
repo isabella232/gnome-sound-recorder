@@ -3,7 +3,20 @@
   font-weight: 300
 }
 
-button.rounded-button { 
+@keyframes clocks-blink {
+	0% { color: @theme_text_color; }
+	100% { color: #FF0000; }
+}
+
+.recorder-time-label.paused {
+	color: #FF0000;
+	animation-name: clocks-blink;
+	animation-iteration-count: infinite;
+	animation-timing-function: cubic-bezier(1.0,0,0,1.0);
+	animation-duration: 1s;
+}
+
+button.rounded-button {
   padding: 4px;
   border-radius: 9999px;
 	-gtk-outline-radius: 9999px;
