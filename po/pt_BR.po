@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
 "issues\n"
-"POT-Creation-Date: 2020-09-09 04:48+0000\n"
-"PO-Revision-Date: 2020-09-09 07:54-0300\n"
+"POT-Creation-Date: 2020-09-09 12:58+0000\n"
+"PO-Revision-Date: 2020-09-09 14:21-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -59,7 +59,7 @@ msgstr "Formatos de áudio com suporte:"
 msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
 msgstr "Ogg Vorbis, Opus, FLAC, MP3 e MOV"
 
-#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:47
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:50
 msgid "The GNOME Project"
 msgstr "O Projeto GNOME"
 
@@ -130,25 +130,21 @@ msgid "Keyboard shortcuts"
 msgstr "Atalhos de teclado"
 
 #: data/ui/help-overlay.ui:34
-#| msgid "Quit"
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Sai"
 
 #: data/ui/help-overlay.ui:42
-#| msgid "Record"
 msgctxt "shortcut window"
 msgid "Recorder"
 msgstr "Gravador"
 
 #: data/ui/help-overlay.ui:47
-#| msgid "Resume Recording"
 msgctxt "shortcut window"
 msgid "Start/Resume Recording"
 msgstr "Inicia/Continua a gravação"
 
 #: data/ui/help-overlay.ui:54
-#| msgid "Pause"
 msgctxt "shortcut window"
 msgid "Pause"
 msgstr "Pausa"
@@ -159,13 +155,12 @@ msgid "Stop"
 msgstr "Para"
 
 #: data/ui/help-overlay.ui:68
-#| msgid "_Cancel"
+#| msgid "Delete"
 msgctxt "shortcut window"
-msgid "Cancel"
-msgstr "Cancela"
+msgid "Delete"
+msgstr "Exclui"
 
 #: data/ui/help-overlay.ui:76
-#| msgid "Recordings"
 msgctxt "shortcut window"
 msgid "Recording"
 msgstr "Gravação"
@@ -176,31 +171,26 @@ msgid "Play / Pause"
 msgstr "Reproduz / pausa"
 
 #: data/ui/help-overlay.ui:88
-#| msgid "Seek 10s Backward"
 msgctxt "shortcut window"
 msgid "Seek Backward"
 msgstr "Volta"
 
 #: data/ui/help-overlay.ui:95
-#| msgid "Seek 10s Forward"
 msgctxt "shortcut window"
 msgid "Seek Forward"
 msgstr "Avança"
 
 #: data/ui/help-overlay.ui:102
-#| msgid "Resume Recording"
 msgctxt "shortcut window"
 msgid "Delete Recording"
 msgstr "Exclui a gravação"
 
 #: data/ui/help-overlay.ui:109
-#| msgid "Resume Recording"
 msgctxt "shortcut window"
 msgid "Rename Recording"
 msgstr "Renomeia a gravação"
 
 #: data/ui/help-overlay.ui:116
-#| msgid "Export"
 msgctxt "shortcut window"
 msgid "Export"
 msgstr "Exporta"
@@ -218,8 +208,10 @@ msgid "Stop Recording"
 msgstr "Para a gravação"
 
 #: data/ui/recorder.ui:153
-msgid "Cancel Recording"
-msgstr "Cancela a gravação"
+#| msgctxt "shortcut window"
+#| msgid "Delete Recording"
+msgid "Delete Recording"
+msgstr "Exclui a gravação"
 
 #: data/ui/row.ui:161 data/ui/row.ui:440
 msgid "Export"
@@ -233,7 +225,7 @@ msgstr "Renomeia"
 msgid "Save"
 msgstr "Salva"
 
-#: data/ui/row.ui:274
+#: data/ui/row.ui:274 src/recorderWidget.js:97
 msgid "Delete"
 msgstr "Exclui"
 
@@ -335,6 +327,20 @@ msgstr "Um aplicativo de gravação de som para o GNOME"
 msgid "Recording %d"
 msgstr "Gravação %d"
 
+#: src/recorderWidget.js:91
+#| msgctxt "shortcut window"
+#| msgid "Delete Recording"
+msgid "Delete recording?"
+msgstr "Excluir a gravação?"
+
+#: src/recorderWidget.js:92
+msgid "This recording will not be saved."
+msgstr "Esta gravação não será salva."
+
+#: src/recorderWidget.js:96
+msgid "Resume"
+msgstr "Continuar"
+
 #. Necessary code to move old recordings into the new location for few releases
 #. FIXME: Remove by 3.40/3.42
 #: src/recordingList.js:42
@@ -408,6 +414,14 @@ msgstr[1] "%d anos atrás"
 #, javascript-format
 msgid "\"%s\" deleted"
 msgstr "“%s” excluído"
+
+#~| msgid "_Cancel"
+#~ msgctxt "shortcut window"
+#~ msgid "Cancel"
+#~ msgstr "Cancela"
+
+#~ msgid "Cancel Recording"
+#~ msgstr "Cancela a gravação"
 
 #~ msgid "Sound Recorder started"
 #~ msgstr "O gravador de som iniciou"
