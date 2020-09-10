@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/issu"
 "es\n"
-"POT-Creation-Date: 2020-09-09 12:58+0000\n"
-"PO-Revision-Date: 2020-09-09 20:01+0300\n"
+"POT-Creation-Date: 2020-09-09 18:18+0000\n"
+"PO-Revision-Date: 2020-09-10 09:29+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -116,128 +116,115 @@ msgid "General"
 msgstr "Загальне"
 
 #: data/ui/help-overlay.ui:20
+#| msgid "Record"
+msgctxt "shortcut window"
+msgid "Record"
+msgstr "Записати"
+
+#: data/ui/help-overlay.ui:27
+#| msgid "Stop Recording"
+msgctxt "shortcut window"
+msgid "Stop Recording"
+msgstr "Припинити запис"
+
+#: data/ui/help-overlay.ui:34
+#| msgctxt "shortcut window"
+#| msgid "Play / Pause"
+msgctxt "shortcut window"
+msgid "Play / Pause / Resume"
+msgstr "Відтворення / Пауза / Продовження"
+
+#: data/ui/help-overlay.ui:42
+msgctxt "shortcut window"
+msgid "Delete"
+msgstr "Вилучити"
+
+#: data/ui/help-overlay.ui:49
 msgctxt "shortcut window"
 msgid "Open menu"
 msgstr "Відкрити меню"
 
-#: data/ui/help-overlay.ui:27
+#: data/ui/help-overlay.ui:56
 msgctxt "shortcut window"
 msgid "Keyboard shortcuts"
 msgstr "Клавіатурні скорочення"
 
-#: data/ui/help-overlay.ui:34
+#: data/ui/help-overlay.ui:63
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Вийти"
 
-#: data/ui/help-overlay.ui:42
-msgctxt "shortcut window"
-msgid "Recorder"
-msgstr "Записувач"
-
-#: data/ui/help-overlay.ui:47
-msgctxt "shortcut window"
-msgid "Start/Resume Recording"
-msgstr "Почати або відновити записування"
-
-#: data/ui/help-overlay.ui:54
-msgctxt "shortcut window"
-msgid "Pause"
-msgstr "Призупинити"
-
-#: data/ui/help-overlay.ui:61
-msgctxt "shortcut window"
-msgid "Stop"
-msgstr "Зупинити"
-
-#: data/ui/help-overlay.ui:68
-#| msgid "Delete"
-msgctxt "shortcut window"
-msgid "Delete"
-msgstr "Вилучити"
-
-#: data/ui/help-overlay.ui:76
+#: data/ui/help-overlay.ui:71
 msgctxt "shortcut window"
 msgid "Recording"
 msgstr "Запис"
 
-#: data/ui/help-overlay.ui:81
-msgctxt "shortcut window"
-msgid "Play / Pause"
-msgstr "Відтворення / Пауза"
-
-#: data/ui/help-overlay.ui:88
+#: data/ui/help-overlay.ui:76
 msgctxt "shortcut window"
 msgid "Seek Backward"
 msgstr "Перемотати назад"
 
-#: data/ui/help-overlay.ui:95
+#: data/ui/help-overlay.ui:83
 msgctxt "shortcut window"
 msgid "Seek Forward"
 msgstr "Перемотати вперед"
 
-#: data/ui/help-overlay.ui:102
+#: data/ui/help-overlay.ui:90
+#| msgid "Rename"
 msgctxt "shortcut window"
-msgid "Delete Recording"
-msgstr "Вилучити запис"
-
-#: data/ui/help-overlay.ui:109
-msgctxt "shortcut window"
-msgid "Rename Recording"
-msgstr "Перейменувати запис"
-
-#: data/ui/help-overlay.ui:116
-msgctxt "shortcut window"
-msgid "Export"
-msgstr "Експортувати"
-
-#: data/ui/recorder.ui:68
-msgid "Resume Recording"
-msgstr "Відновити записування"
-
-#: data/ui/recorder.ui:92
-msgid "Pause Recording"
-msgstr "Призупинити записування"
-
-#: data/ui/recorder.ui:124
-msgid "Stop Recording"
-msgstr "Припинити запис"
-
-#: data/ui/recorder.ui:153
-#| msgctxt "shortcut window"
-#| msgid "Delete Recording"
-msgid "Delete Recording"
-msgstr "Вилучити запис"
-
-#: data/ui/row.ui:161 data/ui/row.ui:440
-msgid "Export"
-msgstr "Експортувати"
-
-#: data/ui/row.ui:185 data/ui/row.ui:436
 msgid "Rename"
 msgstr "Перейменувати"
 
-#: data/ui/row.ui:237
+#: data/ui/help-overlay.ui:97
+msgctxt "shortcut window"
+msgid "Export"
+msgstr "Експортувати"
+
+#: data/ui/recorder.ui:72
+msgid "Resume Recording"
+msgstr "Відновити записування"
+
+#: data/ui/recorder.ui:96
+msgid "Pause Recording"
+msgstr "Призупинити записування"
+
+#: data/ui/recorder.ui:128
+msgid "Stop Recording"
+msgstr "Припинити запис"
+
+#: data/ui/recorder.ui:157
+msgid "Delete Recording"
+msgstr "Вилучити запис"
+
+#: data/ui/row.ui:165 data/ui/row.ui:444
+msgid "Export"
+msgstr "Експортувати"
+
+#: data/ui/row.ui:189 data/ui/row.ui:440
+msgid "Rename"
+msgstr "Перейменувати"
+
+#: data/ui/row.ui:241
 msgid "Save"
 msgstr "Зберегти"
 
-#: data/ui/row.ui:274 src/recorderWidget.js:97
+#: data/ui/row.ui:278 src/recorderWidget.js:100
 msgid "Delete"
 msgstr "Вилучити"
 
-#: data/ui/row.ui:309
+#: data/ui/row.ui:313
 msgid "Seek 10s Backward"
 msgstr "Перемотати на 10 с назад"
 
-#: data/ui/row.ui:337
+#: data/ui/row.ui:341
 msgid "Play"
 msgstr "Пуск"
 
-#: data/ui/row.ui:363
+#: data/ui/row.ui:367
 msgid "Pause"
 msgstr "Пауза"
 
-#: data/ui/row.ui:395
+#: data/ui/row.ui:399
 msgid "Seek 10s Forward"
 msgstr "Перемотати на 10 с вперед"
 
@@ -321,17 +308,15 @@ msgstr "Програма для запису звуку для GNOME"
 msgid "Recording %d"
 msgstr "Запис %d"
 
-#: src/recorderWidget.js:91
-#| msgctxt "shortcut window"
-#| msgid "Delete Recording"
+#: src/recorderWidget.js:94
 msgid "Delete recording?"
 msgstr "Вилучити запис?"
 
-#: src/recorderWidget.js:92
+#: src/recorderWidget.js:95
 msgid "This recording will not be saved."
 msgstr "Цей запис не буде збережено."
 
-#: src/recorderWidget.js:96
+#: src/recorderWidget.js:99
 msgid "Resume"
 msgstr "Продовжити"
 
@@ -360,11 +345,11 @@ msgstr "_Експортувати"
 msgid "_Cancel"
 msgstr "_Скасувати"
 
-#: src/utils.js:45
+#: src/utils.js:48
 msgid "Yesterday"
 msgstr "Вчора"
 
-#: src/utils.js:47
+#: src/utils.js:50
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -372,11 +357,11 @@ msgstr[0] "%d день тому"
 msgstr[1] "%d дні тому"
 msgstr[2] "%d днів тому"
 
-#: src/utils.js:49
+#: src/utils.js:52
 msgid "Last week"
 msgstr "Минулого тижня"
 
-#: src/utils.js:51
+#: src/utils.js:54
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -384,11 +369,11 @@ msgstr[0] "%d тиждень тому"
 msgstr[1] "%d тижні тому"
 msgstr[2] "%d тижнів тому"
 
-#: src/utils.js:53
+#: src/utils.js:56
 msgid "Last month"
 msgstr "Минулого місяця"
 
-#: src/utils.js:55
+#: src/utils.js:58
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
@@ -396,11 +381,11 @@ msgstr[0] "%d місяць тому"
 msgstr[1] "%d місяці тому"
 msgstr[2] "%d місяців тому"
 
-#: src/utils.js:57
+#: src/utils.js:60
 msgid "Last year"
 msgstr "Минулого року"
 
-#: src/utils.js:59
+#: src/utils.js:62
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
@@ -412,6 +397,30 @@ msgstr[2] "%d років тому"
 #, javascript-format
 msgid "\"%s\" deleted"
 msgstr "«%s» вилучено"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Recorder"
+#~ msgstr "Записувач"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Start/Resume Recording"
+#~ msgstr "Почати або відновити записування"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Pause"
+#~ msgstr "Призупинити"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Stop"
+#~ msgstr "Зупинити"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Delete Recording"
+#~ msgstr "Вилучити запис"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Rename Recording"
+#~ msgstr "Перейменувати запис"
 
 #~| msgid "_Cancel"
 #~ msgctxt "shortcut window"
