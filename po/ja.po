@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
 "issues\n"
-"POT-Creation-Date: 2020-08-17 00:28+0000\n"
+"POT-Creation-Date: 2020-09-09 18:18+0000\n"
 "PO-Revision-Date: 2020-08-18 23:03+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
@@ -58,7 +58,7 @@ msgstr "サポートしている音声フォーマット:"
 msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
 msgstr "Ogg Vorbis、Opus、FLAC、MP3、MOV"
 
-#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:47
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:50
 msgid "The GNOME Project"
 msgstr "The GNOME Project"
 
@@ -112,116 +112,203 @@ msgstr ""
 "利用可能なチャンネルをマップします。もしマッピングセットがなければ、デフォル"
 "トでステレオチャンネルを使用します。"
 
-#: data/ui/row.ui:161 data/ui/row.ui:444
-msgid "Export"
-msgstr "エクスポート"
+#: data/ui/help-overlay.ui:15
+msgctxt "shortcut window"
+msgid "General"
+msgstr ""
 
-#: data/ui/row.ui:186 data/ui/row.ui:440
-msgid "Rename"
-msgstr "名前を変更"
-
-#: data/ui/row.ui:240
-msgid "Save"
-msgstr "保存"
-
-#: data/ui/row.ui:277
-msgid "Delete"
-msgstr "削除"
-
-#: data/ui/row.ui:312
-msgid "Seek 10s Backward"
-msgstr "10 秒後方へシーク"
-
-#: data/ui/row.ui:340
-msgid "Play"
-msgstr "再生"
-
-#: data/ui/row.ui:366
-msgid "Pause"
-msgstr "一時停止"
-
-#: data/ui/row.ui:398
-msgid "Seek 10s Forward"
-msgstr "10 秒前方へシーク"
-
-#: data/ui/window.ui:63
+#: data/ui/help-overlay.ui:20
+#, fuzzy
+#| msgid "Record"
+msgctxt "shortcut window"
 msgid "Record"
 msgstr "録音"
 
-#: data/ui/window.ui:144
-msgid "Add Recordings"
-msgstr "録音してください"
-
-#: data/ui/window.ui:156
-msgid "Use the <b>Record</b> button to make sound recordings"
-msgstr "<b>録音</b>ボタンを押すと音声を録音します"
-
-#: data/ui/window.ui:253
-msgid "Resume Recording"
-msgstr "録音を再開"
-
-#: data/ui/window.ui:278
-msgid "Pause Recording"
-msgstr "録音を中断"
-
-#: data/ui/window.ui:309
+#: data/ui/help-overlay.ui:27
+#, fuzzy
+#| msgid "Stop Recording"
+msgctxt "shortcut window"
 msgid "Stop Recording"
 msgstr "録音を停止"
 
-#: data/ui/window.ui:337
-msgid "Cancel Recording"
-msgstr "録音をキャンセル"
+#: data/ui/help-overlay.ui:34
+msgctxt "shortcut window"
+msgid "Play / Pause / Resume"
+msgstr ""
 
-#: data/ui/window.ui:395
+#: data/ui/help-overlay.ui:42
+#, fuzzy
+#| msgid "Delete"
+msgctxt "shortcut window"
+msgid "Delete"
+msgstr "削除"
+
+#: data/ui/help-overlay.ui:49
+msgctxt "shortcut window"
+msgid "Open menu"
+msgstr ""
+
+#: data/ui/help-overlay.ui:56
+msgctxt "shortcut window"
+msgid "Keyboard shortcuts"
+msgstr ""
+
+#: data/ui/help-overlay.ui:63
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr ""
+
+#: data/ui/help-overlay.ui:71
+#, fuzzy
+#| msgid "Recordings"
+msgctxt "shortcut window"
+msgid "Recording"
+msgstr "レコーディング"
+
+#: data/ui/help-overlay.ui:76
+#, fuzzy
+#| msgid "Seek 10s Backward"
+msgctxt "shortcut window"
+msgid "Seek Backward"
+msgstr "10 秒後方へシーク"
+
+#: data/ui/help-overlay.ui:83
+#, fuzzy
+#| msgid "Seek 10s Forward"
+msgctxt "shortcut window"
+msgid "Seek Forward"
+msgstr "10 秒前方へシーク"
+
+#: data/ui/help-overlay.ui:90
+#, fuzzy
+#| msgid "Rename"
+msgctxt "shortcut window"
+msgid "Rename"
+msgstr "名前を変更"
+
+#: data/ui/help-overlay.ui:97
+#, fuzzy
+#| msgid "Export"
+msgctxt "shortcut window"
+msgid "Export"
+msgstr "エクスポート"
+
+#: data/ui/recorder.ui:72
+msgid "Resume Recording"
+msgstr "録音を再開"
+
+#: data/ui/recorder.ui:96
+msgid "Pause Recording"
+msgstr "録音を中断"
+
+#: data/ui/recorder.ui:128
+msgid "Stop Recording"
+msgstr "録音を停止"
+
+#: data/ui/recorder.ui:157
+#, fuzzy
+#| msgid "Resume Recording"
+msgid "Delete Recording"
+msgstr "録音を再開"
+
+#: data/ui/row.ui:165 data/ui/row.ui:444
+msgid "Export"
+msgstr "エクスポート"
+
+#: data/ui/row.ui:189 data/ui/row.ui:440
+msgid "Rename"
+msgstr "名前を変更"
+
+#: data/ui/row.ui:241
+msgid "Save"
+msgstr "保存"
+
+#: data/ui/row.ui:278 src/recorderWidget.js:100
+msgid "Delete"
+msgstr "削除"
+
+#: data/ui/row.ui:313
+msgid "Seek 10s Backward"
+msgstr "10 秒後方へシーク"
+
+#: data/ui/row.ui:341
+msgid "Play"
+msgstr "再生"
+
+#: data/ui/row.ui:367
+msgid "Pause"
+msgstr "一時停止"
+
+#: data/ui/row.ui:399
+msgid "Seek 10s Forward"
+msgstr "10 秒前方へシーク"
+
+#: data/ui/window.ui:60
+msgid "Record"
+msgstr "録音"
+
+#: data/ui/window.ui:149
+msgid "Add Recordings"
+msgstr "録音してください"
+
+#: data/ui/window.ui:166
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "<b>録音</b>ボタンを押すと音声を録音します"
+
+#: data/ui/window.ui:237
 msgid "Undo"
 msgstr "元に戻す"
 
-#: data/ui/window.ui:405
+#: data/ui/window.ui:254
 msgid "Close"
 msgstr "閉じる"
 
-#: data/ui/window.ui:430
+#: data/ui/window.ui:290
 msgid "Preferred Format"
 msgstr "フォーマット"
 
-#: data/ui/window.ui:432
+#: data/ui/window.ui:292
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: data/ui/window.ui:437
+#: data/ui/window.ui:297
 msgid "Opus"
 msgstr "Opus"
 
-#: data/ui/window.ui:442
+#: data/ui/window.ui:302
 msgid "FLAC"
 msgstr "FLAC"
 
-#: data/ui/window.ui:447
+#: data/ui/window.ui:307
 msgid "MP3"
 msgstr "MP3"
 
-#: data/ui/window.ui:452
+#: data/ui/window.ui:312
 msgid "M4A"
 msgstr "M4A"
 
-#: data/ui/window.ui:458
+#: data/ui/window.ui:318
 msgid "Audio Channel"
 msgstr "音声チャンネル"
 
-#: data/ui/window.ui:460
+#: data/ui/window.ui:320
 msgid "Stereo"
 msgstr "ステレオ"
 
-#: data/ui/window.ui:465
+#: data/ui/window.ui:325
 msgid "Mono"
 msgstr "モノラル"
 
-#: data/ui/window.ui:473
+#: data/ui/window.ui:332
+msgid "_Keyboard Shortcuts"
+msgstr ""
+
+#: data/ui/window.ui:337
 msgid "About Sound Recorder"
 msgstr "サウンドレコーダーについて"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/application.js:167
+#: src/application.js:129
 msgid "translator-credits"
 msgstr ""
 "坂本 貴史 <o-takashi@sakamocchi.jp>\n"
@@ -230,86 +317,103 @@ msgstr ""
 "Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "sicklylife <translation@sicklylife.jp>"
 
-#: src/application.js:169
+#: src/application.js:131
 msgid "A Sound Recording Application for GNOME"
 msgstr "GNOME 用の録音アプリケーション"
 
 #. Translators: ""Recording %d"" is the default name assigned to a file created
 #. by the application (for example, "Recording 1").
-#: src/recorder.js:108
+#: src/recorder.js:113
 #, javascript-format
 msgid "Recording %d"
 msgstr "録音 %d"
 
+#: src/recorderWidget.js:94
+#, fuzzy
+#| msgid "Resume Recording"
+msgid "Delete recording?"
+msgstr "録音を再開"
+
+#: src/recorderWidget.js:95
+msgid "This recording will not be saved."
+msgstr ""
+
+#: src/recorderWidget.js:99
+msgid "Resume"
+msgstr ""
+
 #. Necessary code to move old recordings into the new location for few releases
 #. FIXME: Remove by 3.40/3.42
-#: src/recordingList.js:41
+#: src/recordingList.js:42
 msgid "Recordings"
 msgstr "レコーディング"
 
 #. Translators: ""%s (Old)"" is the new name assigned to a file moved from
 #. the old recordings location
-#: src/recordingList.js:57
+#: src/recordingList.js:59
 #, javascript-format
 msgid "%s (Old)"
 msgstr "%s (旧)"
 
-#: src/row.js:67
+#: src/row.js:71
 msgid "Export Recording"
 msgstr "録音をエクスポート"
 
-#: src/row.js:67
+#: src/row.js:71
 msgid "_Export"
 msgstr "エクスポート(_E)"
 
-#: src/row.js:67
+#: src/row.js:71
 msgid "_Cancel"
 msgstr "キャンセル(_C)"
 
-#: src/utils.js:45
+#: src/utils.js:48
 msgid "Yesterday"
 msgstr "昨日"
 
-#: src/utils.js:47
+#: src/utils.js:50
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d 日前"
 
-#: src/utils.js:49
+#: src/utils.js:52
 msgid "Last week"
 msgstr "先週"
 
-#: src/utils.js:51
+#: src/utils.js:54
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d 週前"
 
-#: src/utils.js:53
+#: src/utils.js:56
 msgid "Last month"
 msgstr "先月"
 
-#: src/utils.js:55
+#: src/utils.js:58
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d ヶ月前"
 
-#: src/utils.js:57
+#: src/utils.js:60
 msgid "Last year"
 msgstr "昨年"
 
-#: src/utils.js:59
+#: src/utils.js:62
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "%d 年前"
 
-#: src/window.js:85
+#: src/window.js:71
 #, javascript-format
 msgid "\"%s\" deleted"
 msgstr "\"%s\" を削除しました"
+
+#~ msgid "Cancel Recording"
+#~ msgstr "録音をキャンセル"
 
 #~ msgid "Sound Recorder started"
 #~ msgstr "サウンドレコーダーを開始しました"
