@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
 "issues\n"
 "POT-Creation-Date: 2020-09-09 18:18+0000\n"
-"PO-Revision-Date: 2020-08-18 23:03+0900\n"
+"PO-Revision-Date: 2020-09-11 21:20+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -30,7 +30,7 @@ msgstr "サウンドレコーダー"
 
 #: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:6
 msgid "A simple, modern sound recorder for GNOME"
-msgstr "GNOME 用のシンプルでモダンなサウンドレコーダー"
+msgstr "シンプルでモダンな GNOME のサウンドレコーダー"
 
 #: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:10
 msgid ""
@@ -115,83 +115,67 @@ msgstr ""
 #: data/ui/help-overlay.ui:15
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "全般"
 
 #: data/ui/help-overlay.ui:20
-#, fuzzy
-#| msgid "Record"
 msgctxt "shortcut window"
 msgid "Record"
-msgstr "録音"
+msgstr "録音する"
 
 #: data/ui/help-overlay.ui:27
-#, fuzzy
-#| msgid "Stop Recording"
 msgctxt "shortcut window"
 msgid "Stop Recording"
-msgstr "録音を停止"
+msgstr "録音を停止する"
 
 #: data/ui/help-overlay.ui:34
 msgctxt "shortcut window"
 msgid "Play / Pause / Resume"
-msgstr ""
+msgstr "再生 / 一時停止 / 再開"
 
 #: data/ui/help-overlay.ui:42
-#, fuzzy
-#| msgid "Delete"
 msgctxt "shortcut window"
 msgid "Delete"
-msgstr "削除"
+msgstr "削除する"
 
 #: data/ui/help-overlay.ui:49
 msgctxt "shortcut window"
 msgid "Open menu"
-msgstr ""
+msgstr "メニューを開く"
 
 #: data/ui/help-overlay.ui:56
 msgctxt "shortcut window"
 msgid "Keyboard shortcuts"
-msgstr ""
+msgstr "キーボードショートカットを表示する"
 
 #: data/ui/help-overlay.ui:63
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "終了する"
 
 #: data/ui/help-overlay.ui:71
-#, fuzzy
-#| msgid "Recordings"
 msgctxt "shortcut window"
 msgid "Recording"
 msgstr "レコーディング"
 
 #: data/ui/help-overlay.ui:76
-#, fuzzy
-#| msgid "Seek 10s Backward"
 msgctxt "shortcut window"
 msgid "Seek Backward"
-msgstr "10 秒後方へシーク"
+msgstr "後方へシークする"
 
 #: data/ui/help-overlay.ui:83
-#, fuzzy
-#| msgid "Seek 10s Forward"
 msgctxt "shortcut window"
 msgid "Seek Forward"
-msgstr "10 秒前方へシーク"
+msgstr "前方へシークする"
 
 #: data/ui/help-overlay.ui:90
-#, fuzzy
-#| msgid "Rename"
 msgctxt "shortcut window"
 msgid "Rename"
-msgstr "名前を変更"
+msgstr "名前を変更する"
 
 #: data/ui/help-overlay.ui:97
-#, fuzzy
-#| msgid "Export"
 msgctxt "shortcut window"
 msgid "Export"
-msgstr "エクスポート"
+msgstr "エクスポートする"
 
 #: data/ui/recorder.ui:72
 msgid "Resume Recording"
@@ -206,10 +190,8 @@ msgid "Stop Recording"
 msgstr "録音を停止"
 
 #: data/ui/recorder.ui:157
-#, fuzzy
-#| msgid "Resume Recording"
 msgid "Delete Recording"
-msgstr "録音を再開"
+msgstr "録音を削除"
 
 #: data/ui/row.ui:165 data/ui/row.ui:444
 msgid "Export"
@@ -301,7 +283,7 @@ msgstr "モノラル"
 
 #: data/ui/window.ui:332
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "キーボードショートカット(_K)"
 
 #: data/ui/window.ui:337
 msgid "About Sound Recorder"
@@ -319,7 +301,7 @@ msgstr ""
 
 #: src/application.js:131
 msgid "A Sound Recording Application for GNOME"
-msgstr "GNOME 用の録音アプリケーション"
+msgstr "GNOME の録音アプリケーション"
 
 #. Translators: ""Recording %d"" is the default name assigned to a file created
 #. by the application (for example, "Recording 1").
@@ -329,18 +311,16 @@ msgid "Recording %d"
 msgstr "録音 %d"
 
 #: src/recorderWidget.js:94
-#, fuzzy
-#| msgid "Resume Recording"
 msgid "Delete recording?"
-msgstr "録音を再開"
+msgstr "録音を削除しますか?"
 
 #: src/recorderWidget.js:95
 msgid "This recording will not be saved."
-msgstr ""
+msgstr "これは保存されません。"
 
 #: src/recorderWidget.js:99
 msgid "Resume"
-msgstr ""
+msgstr "再開"
 
 #. Necessary code to move old recordings into the new location for few releases
 #. FIXME: Remove by 3.40/3.42
