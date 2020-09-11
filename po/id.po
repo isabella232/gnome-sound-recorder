@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
 "issues\n"
-"POT-Creation-Date: 2020-08-16 17:50+0000\n"
-"PO-Revision-Date: 2020-08-19 21:35+0700\n"
+"POT-Creation-Date: 2020-09-09 18:18+0000\n"
+"PO-Revision-Date: 2020-09-11 22:29+0700\n"
 "Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
@@ -56,7 +56,7 @@ msgstr "Format audio yang didukung:"
 msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
 msgstr "Ogg Vorbis, Opus, FLAC, MP3, dan MOV"
 
-#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:47
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:50
 msgid "The GNOME Project"
 msgstr "Proyek GNOME"
 
@@ -109,205 +109,289 @@ msgstr ""
 "Petakan kanal yang tersedia. Bila tidak ada pemetaan yang ditata, secara "
 "baku akan dipakai kanal stereo."
 
-#: data/ui/row.ui:161 data/ui/row.ui:444
-msgid "Export"
-msgstr "Ekspor"
+#: data/ui/help-overlay.ui:15
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Umum"
 
-#: data/ui/row.ui:186 data/ui/row.ui:440
-msgid "Rename"
-msgstr "Ganti nama"
-
-#: data/ui/row.ui:240
-msgid "Save"
-msgstr "Simpan"
-
-#: data/ui/row.ui:277
-msgid "Delete"
-msgstr "Hapus"
-
-#: data/ui/row.ui:312
-msgid "Seek 10s Backward"
-msgstr "Cari 10s Mundur"
-
-#: data/ui/row.ui:340
-msgid "Play"
-msgstr "Putar"
-
-#: data/ui/row.ui:366
-msgid "Pause"
-msgstr "Jeda"
-
-#: data/ui/row.ui:398
-msgid "Seek 10s Forward"
-msgstr "Cari 10s Maju"
-
-#: data/ui/window.ui:63
+#: data/ui/help-overlay.ui:20
+msgctxt "shortcut window"
 msgid "Record"
 msgstr "Rekam"
 
-#: data/ui/window.ui:144
-msgid "Add Recordings"
-msgstr "Tambah Rekaman"
-
-#: data/ui/window.ui:156
-msgid "Use the <b>Record</b> button to make sound recordings"
-msgstr "Pakai tombol <b>Rekam</b> untuk membuat rekaman suara"
-
-#: data/ui/window.ui:253
-msgid "Resume Recording"
-msgstr "Lanjutkan Merekam"
-
-#: data/ui/window.ui:278
-msgid "Pause Recording"
-msgstr "Jeda Merekam"
-
-#: data/ui/window.ui:309
+#: data/ui/help-overlay.ui:27
+msgctxt "shortcut window"
 msgid "Stop Recording"
 msgstr "Berhenti Merekam"
 
-#: data/ui/window.ui:337
-msgid "Cancel Recording"
-msgstr "Batalkan Merekam"
+#: data/ui/help-overlay.ui:34
+msgctxt "shortcut window"
+msgid "Play / Pause / Resume"
+msgstr "Putar / Jeda / Lanjutkan"
 
-#: data/ui/window.ui:395
+#: data/ui/help-overlay.ui:42
+msgctxt "shortcut window"
+msgid "Delete"
+msgstr "Hapus"
+
+#: data/ui/help-overlay.ui:49
+msgctxt "shortcut window"
+msgid "Open menu"
+msgstr "Buka menu"
+
+#: data/ui/help-overlay.ui:56
+msgctxt "shortcut window"
+msgid "Keyboard shortcuts"
+msgstr "Pintasan papan tik"
+
+#: data/ui/help-overlay.ui:63
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Keluar"
+
+#: data/ui/help-overlay.ui:71
+msgctxt "shortcut window"
+msgid "Recording"
+msgstr "Merekam"
+
+#: data/ui/help-overlay.ui:76
+msgctxt "shortcut window"
+msgid "Seek Backward"
+msgstr "Cari Mundur"
+
+#: data/ui/help-overlay.ui:83
+msgctxt "shortcut window"
+msgid "Seek Forward"
+msgstr "Cari Maju"
+
+#: data/ui/help-overlay.ui:90
+msgctxt "shortcut window"
+msgid "Rename"
+msgstr "Ganti nama"
+
+#: data/ui/help-overlay.ui:97
+msgctxt "shortcut window"
+msgid "Export"
+msgstr "Ekspor"
+
+#: data/ui/recorder.ui:72
+msgid "Resume Recording"
+msgstr "Lanjutkan Merekam"
+
+#: data/ui/recorder.ui:96
+msgid "Pause Recording"
+msgstr "Jeda Merekam"
+
+#: data/ui/recorder.ui:128
+msgid "Stop Recording"
+msgstr "Berhenti Merekam"
+
+#: data/ui/recorder.ui:157
+msgid "Delete Recording"
+msgstr "Hapus Rekaman"
+
+#: data/ui/row.ui:165 data/ui/row.ui:444
+msgid "Export"
+msgstr "Ekspor"
+
+#: data/ui/row.ui:189 data/ui/row.ui:440
+msgid "Rename"
+msgstr "Ganti nama"
+
+#: data/ui/row.ui:241
+msgid "Save"
+msgstr "Simpan"
+
+#: data/ui/row.ui:278 src/recorderWidget.js:100
+msgid "Delete"
+msgstr "Hapus"
+
+#: data/ui/row.ui:313
+msgid "Seek 10s Backward"
+msgstr "Cari 10s Mundur"
+
+#: data/ui/row.ui:341
+msgid "Play"
+msgstr "Putar"
+
+#: data/ui/row.ui:367
+msgid "Pause"
+msgstr "Jeda"
+
+#: data/ui/row.ui:399
+msgid "Seek 10s Forward"
+msgstr "Cari 10s Maju"
+
+#: data/ui/window.ui:60
+msgid "Record"
+msgstr "Rekam"
+
+#: data/ui/window.ui:149
+msgid "Add Recordings"
+msgstr "Tambah Rekaman"
+
+#: data/ui/window.ui:166
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "Pakai tombol <b>Rekam</b> untuk membuat rekaman suara"
+
+#: data/ui/window.ui:237
 msgid "Undo"
 msgstr "Tak jadi"
 
-#: data/ui/window.ui:405
+#: data/ui/window.ui:254
 msgid "Close"
 msgstr "Tutup"
 
-#: data/ui/window.ui:430
+#: data/ui/window.ui:290
 msgid "Preferred Format"
 msgstr "Format yang Disukai"
 
-#: data/ui/window.ui:432
+#: data/ui/window.ui:292
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: data/ui/window.ui:437
+#: data/ui/window.ui:297
 msgid "Opus"
 msgstr "Opus"
 
-#: data/ui/window.ui:442
+#: data/ui/window.ui:302
 msgid "FLAC"
 msgstr "FLAC"
 
-#: data/ui/window.ui:447
+#: data/ui/window.ui:307
 msgid "MP3"
 msgstr "MP3"
 
-#: data/ui/window.ui:452
+#: data/ui/window.ui:312
 msgid "M4A"
 msgstr "M4A"
 
-#: data/ui/window.ui:458
+#: data/ui/window.ui:318
 msgid "Audio Channel"
 msgstr "Kanal Audio"
 
-#: data/ui/window.ui:460
+#: data/ui/window.ui:320
 msgid "Stereo"
 msgstr "Stereo"
 
-#: data/ui/window.ui:465
+#: data/ui/window.ui:325
 msgid "Mono"
 msgstr "Mono"
 
-#: data/ui/window.ui:473
+#: data/ui/window.ui:332
+msgid "_Keyboard Shortcuts"
+msgstr "Pintasan Papan Ti_k"
+
+#: data/ui/window.ui:337
 msgid "About Sound Recorder"
 msgstr "Tentang Perekam Suara"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/application.js:167
+#: src/application.js:129
 msgid "translator-credits"
 msgstr ""
 "Andika Triwidada <andika@gmail.com>, 2014, 2016.\n"
 "Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2017, 2019, 2020."
 
-#: src/application.js:169
+#: src/application.js:131
 msgid "A Sound Recording Application for GNOME"
 msgstr "Aplikasi Perekam Suara untuk GNOME"
 
 #. Translators: ""Recording %d"" is the default name assigned to a file created
 #. by the application (for example, "Recording 1").
-#: src/recorder.js:108
+#: src/recorder.js:113
 #, javascript-format
 msgid "Recording %d"
 msgstr "Merekam %d"
 
+#: src/recorderWidget.js:94
+msgid "Delete recording?"
+msgstr "Hapus Rekaman?"
+
+#: src/recorderWidget.js:95
+msgid "This recording will not be saved."
+msgstr "Rekaman ini tidak akan disimpan."
+
+#: src/recorderWidget.js:99
+msgid "Resume"
+msgstr "Lanjutkan"
+
 #. Necessary code to move old recordings into the new location for few releases
 #. FIXME: Remove by 3.40/3.42
-#: src/recordingList.js:41
+#: src/recordingList.js:42
 msgid "Recordings"
 msgstr "Rekaman"
 
 #. Translators: ""%s (Old)"" is the new name assigned to a file moved from
 #. the old recordings location
-#: src/recordingList.js:57
+#: src/recordingList.js:59
 #, javascript-format
 msgid "%s (Old)"
 msgstr "%s (lama)"
 
-#: src/row.js:67
+#: src/row.js:71
 msgid "Export Recording"
 msgstr "Ekspor Rekaman"
 
-#: src/row.js:67
+#: src/row.js:71
 msgid "_Export"
 msgstr "_Ekspor"
 
-#: src/row.js:67
+#: src/row.js:71
 msgid "_Cancel"
 msgstr "_Batal"
 
-#: src/utils.js:45
+#: src/utils.js:48
 msgid "Yesterday"
 msgstr "Kemarin"
 
-#: src/utils.js:47
+#: src/utils.js:50
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d hari yang lalu"
 msgstr[1] "%d hari yang lalu"
 
-#: src/utils.js:49
+#: src/utils.js:52
 msgid "Last week"
 msgstr "Minggu lalu"
 
-#: src/utils.js:51
+#: src/utils.js:54
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d minggu yang lalu"
 msgstr[1] "%d minggu yang lalu"
 
-#: src/utils.js:53
+#: src/utils.js:56
 msgid "Last month"
 msgstr "Bulan lalu"
 
-#: src/utils.js:55
+#: src/utils.js:58
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d bulan yang lalu"
 msgstr[1] "%d bulan yang lalu"
 
-#: src/utils.js:57
+#: src/utils.js:60
 msgid "Last year"
 msgstr "Tahun lalu"
 
-#: src/utils.js:59
+#: src/utils.js:62
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "%d tahun yang lalu"
 msgstr[1] "%d tahun yang lalu"
 
-#: src/window.js:85
+#: src/window.js:71
 #, javascript-format
 msgid "\"%s\" deleted"
 msgstr "\"%s\" dihapus"
+
+#~ msgid "Cancel Recording"
+#~ msgstr "Batalkan Merekam"
 
 #~ msgid "Sound Recorder started"
 #~ msgstr "Perekam Suara dimulai"
@@ -421,6 +505,3 @@ msgstr "\"%s\" dihapus"
 
 #~ msgid "About"
 #~ msgstr "Tentang"
-
-#~ msgid "Quit"
-#~ msgstr "Keluar"
