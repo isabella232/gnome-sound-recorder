@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
 "issues\n"
 "POT-Creation-Date: 2020-09-09 18:18+0000\n"
-"PO-Revision-Date: 2020-09-11 14:51+0200\n"
+"PO-Revision-Date: 2020-09-11 14:54+0200\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
 "Language: sk\n"
@@ -199,9 +199,10 @@ msgstr "Odstráni nahrávku"
 msgid "Export"
 msgstr "Exportuje"
 
+# tooltip
 #: data/ui/row.ui:189 data/ui/row.ui:440
 msgid "Rename"
-msgstr "Premenovať"
+msgstr "Premenuje"
 
 # tooltip
 #: data/ui/row.ui:241
@@ -213,6 +214,7 @@ msgstr "Uloží"
 msgid "Delete"
 msgstr "Odstráni"
 
+# tooltip
 #: data/ui/row.ui:313
 msgid "Seek 10s Backward"
 msgstr "Prejde o 10s dozadu"
@@ -227,6 +229,7 @@ msgstr "Prehrá"
 msgid "Pause"
 msgstr "Pozastaví"
 
+# tooltip
 #: data/ui/row.ui:399
 msgid "Seek 10s Forward"
 msgstr "Prejde o 10s dopredu"
