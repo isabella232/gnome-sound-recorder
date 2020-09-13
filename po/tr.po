@@ -1,17 +1,19 @@
 # Turkish translation for gnome-sound-recorder.
-# Copyright (C) 2014 gnome-sound-recorder's COPYRIGHT HOLDER
+# Copyright (C) 2014-2020 gnome-sound-recorder's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-sound-recorder package.
+#
 # Gökhan Gurbetoğlu <ggurbet@gmail.com>, 2014.
 # Muhammet Kara <muhammetk@gmail.com>, 2014, 2015, 2016.
 # Furkan Ahmet Kara <furkanahmetkara.fk@gmail.com>, 2017.
 # Emin Tufan Çetin <etcetin@gmail.com>, 2016-2020.
+# Sabri Ünal <libreajans@gmail.com>, 2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
 "issues\n"
-"POT-Creation-Date: 2020-08-16 17:50+0000\n"
+"POT-Creation-Date: 2020-09-09 18:18+0000\n"
 "PO-Revision-Date: 2020-04-28 15:58+0300\n"
 "Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
 "Language-Team: Türkçe <gnome-turk@gnome.org>\n"
@@ -59,7 +61,7 @@ msgstr "Desteklenen ses biçimleri:"
 msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
 msgstr "Ogg Vorbis, Opus, FLAC, MP3 ve MOV"
 
-#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:47
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:50
 msgid "The GNOME Project"
 msgstr "GNOME Projesi"
 
@@ -113,201 +115,285 @@ msgstr ""
 "Uygun kanalları haritalar. Eğer haritalama kümesi yoksa, çiftli kanal "
 "öntanımlı olarak kullanılır."
 
-#: data/ui/row.ui:161 data/ui/row.ui:444
-msgid "Export"
-msgstr "Dışa Aktar"
+#: data/ui/help-overlay.ui:15
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Genel"
 
-#: data/ui/row.ui:186 data/ui/row.ui:440
-msgid "Rename"
-msgstr "Yeniden Adlandır"
-
-#: data/ui/row.ui:240
-msgid "Save"
-msgstr "Kaydet"
-
-#: data/ui/row.ui:277
-msgid "Delete"
-msgstr "Sil"
-
-#: data/ui/row.ui:312
-msgid "Seek 10s Backward"
-msgstr "10sn Geri Sar"
-
-#: data/ui/row.ui:340
-msgid "Play"
-msgstr "Oynat"
-
-#: data/ui/row.ui:366
-msgid "Pause"
-msgstr "Duraklat"
-
-#: data/ui/row.ui:398
-msgid "Seek 10s Forward"
-msgstr "10sn İleri Sar"
-
-#: data/ui/window.ui:63
+#: data/ui/help-overlay.ui:20
+msgctxt "shortcut window"
 msgid "Record"
 msgstr "Kaydet"
 
-#: data/ui/window.ui:144
-msgid "Add Recordings"
-msgstr "Kayıt Ekle"
-
-#: data/ui/window.ui:156
-msgid "Use the <b>Record</b> button to make sound recordings"
-msgstr "Ses kaydı yapmak için <b>Kaydet</b> düğmesini kullanın"
-
-#: data/ui/window.ui:253
-msgid "Resume Recording"
-msgstr "Kaydı Sürdür"
-
-#: data/ui/window.ui:278
-msgid "Pause Recording"
-msgstr "Kaydı Duraklat"
-
-#: data/ui/window.ui:309
+#: data/ui/help-overlay.ui:27
+msgctxt "shortcut window"
 msgid "Stop Recording"
 msgstr "Kaydı Durdur"
 
-#: data/ui/window.ui:337
-msgid "Cancel Recording"
-msgstr "Kaydı İptal Et"
+#: data/ui/help-overlay.ui:34
+msgctxt "shortcut window"
+msgid "Play / Pause / Resume"
+msgstr "Oynat / Duraklat / Sürdür"
 
-#: data/ui/window.ui:395
+#: data/ui/help-overlay.ui:42
+msgctxt "shortcut window"
+msgid "Delete"
+msgstr "Sil"
+
+#: data/ui/help-overlay.ui:49
+msgctxt "shortcut window"
+msgid "Open menu"
+msgstr "Menüyü aç"
+
+#: data/ui/help-overlay.ui:56
+msgctxt "shortcut window"
+msgid "Keyboard shortcuts"
+msgstr "Klavye kısayolları"
+
+#: data/ui/help-overlay.ui:63
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Çıkış"
+
+#: data/ui/help-overlay.ui:71
+msgctxt "shortcut window"
+msgid "Recording"
+msgstr "Kayıt"
+
+#: data/ui/help-overlay.ui:76
+msgctxt "shortcut window"
+msgid "Seek Backward"
+msgstr "10sn Geri Sar"
+
+#: data/ui/help-overlay.ui:83
+msgctxt "shortcut window"
+msgid "Seek Forward"
+msgstr "10sn İleri Sar"
+
+#: data/ui/help-overlay.ui:90
+msgctxt "shortcut window"
+msgid "Rename"
+msgstr "Yeniden adlandır"
+
+#: data/ui/help-overlay.ui:97
+msgctxt "shortcut window"
+msgid "Export"
+msgstr "Dışa aktar"
+
+#: data/ui/recorder.ui:72
+msgid "Resume Recording"
+msgstr "Kaydı Sürdür"
+
+#: data/ui/recorder.ui:96
+msgid "Pause Recording"
+msgstr "Kaydı Duraklat"
+
+#: data/ui/recorder.ui:128
+msgid "Stop Recording"
+msgstr "Kaydı Durdur"
+
+#: data/ui/recorder.ui:157
+msgid "Delete Recording"
+msgstr "Kaydı Sil"
+
+#: data/ui/row.ui:165 data/ui/row.ui:444
+msgid "Export"
+msgstr "Dışa Aktar"
+
+#: data/ui/row.ui:189 data/ui/row.ui:440
+msgid "Rename"
+msgstr "Yeniden Adlandır"
+
+#: data/ui/row.ui:241
+msgid "Save"
+msgstr "Kaydet"
+
+#: data/ui/row.ui:278 src/recorderWidget.js:100
+msgid "Delete"
+msgstr "Sil"
+
+#: data/ui/row.ui:313
+msgid "Seek 10s Backward"
+msgstr "10sn Geri Sar"
+
+#: data/ui/row.ui:341
+msgid "Play"
+msgstr "Oynat"
+
+#: data/ui/row.ui:367
+msgid "Pause"
+msgstr "Duraklat"
+
+#: data/ui/row.ui:399
+msgid "Seek 10s Forward"
+msgstr "10sn İleri Sar"
+
+#: data/ui/window.ui:60
+msgid "Record"
+msgstr "Kaydet"
+
+#: data/ui/window.ui:149
+msgid "Add Recordings"
+msgstr "Kayıt Ekle"
+
+#: data/ui/window.ui:166
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "Ses kaydı yapmak için <b>Kaydet</b> düğmesini kullanın"
+
+#: data/ui/window.ui:237
 msgid "Undo"
 msgstr "Geri Al"
 
-#: data/ui/window.ui:405
+#: data/ui/window.ui:254
 msgid "Close"
 msgstr "Kapat"
 
-#: data/ui/window.ui:430
+#: data/ui/window.ui:290
 msgid "Preferred Format"
 msgstr "Yeğlenen Biçim"
 
-#: data/ui/window.ui:432
+#: data/ui/window.ui:292
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: data/ui/window.ui:437
+#: data/ui/window.ui:297
 msgid "Opus"
 msgstr "Opus"
 
-#: data/ui/window.ui:442
+#: data/ui/window.ui:302
 msgid "FLAC"
 msgstr "FLAC"
 
-#: data/ui/window.ui:447
+#: data/ui/window.ui:307
 msgid "MP3"
 msgstr "MP3"
 
-#: data/ui/window.ui:452
+#: data/ui/window.ui:312
 msgid "M4A"
 msgstr "M4A"
 
-#: data/ui/window.ui:458
+#: data/ui/window.ui:318
 msgid "Audio Channel"
 msgstr "Ses Kanalı"
 
-#: data/ui/window.ui:460
+#: data/ui/window.ui:320
 msgid "Stereo"
 msgstr "Çiftli"
 
-#: data/ui/window.ui:465
+#: data/ui/window.ui:325
 msgid "Mono"
 msgstr "Tekli"
 
-#: data/ui/window.ui:473
+#: data/ui/window.ui:332
+msgid "_Keyboard Shortcuts"
+msgstr "_Klavye Kısayolları"
+
+#: data/ui/window.ui:337
 msgid "About Sound Recorder"
 msgstr "Ses Kaydedici Hakkında"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/application.js:167
+#: src/application.js:129
 msgid "translator-credits"
 msgstr ""
 "Muhammet Kara <muhammetk@gmail.com>\n"
 "Emin Tufan Çetin <etcetin@gmail.com>"
 
-#: src/application.js:169
+#: src/application.js:131
 msgid "A Sound Recording Application for GNOME"
 msgstr "GNOME için Ses Kayıt Uygulaması"
 
 #. Translators: ""Recording %d"" is the default name assigned to a file created
 #. by the application (for example, "Recording 1").
-#: src/recorder.js:108
+#: src/recorder.js:113
 #, javascript-format
 msgid "Recording %d"
 msgstr "Kayıt %d"
 
+#: src/recorderWidget.js:94
+msgid "Delete recording?"
+msgstr "Kayıt silinsin mi?"
+
+#: src/recorderWidget.js:95
+msgid "This recording will not be saved."
+msgstr "Bu kayıt kaydedilmeyecek."
+
+#: src/recorderWidget.js:99
+msgid "Resume"
+msgstr "Sürdür"
+
 #. Necessary code to move old recordings into the new location for few releases
 #. FIXME: Remove by 3.40/3.42
-#: src/recordingList.js:41
+#: src/recordingList.js:42
 msgid "Recordings"
 msgstr "Kayıtlar"
 
 #. Translators: ""%s (Old)"" is the new name assigned to a file moved from
 #. the old recordings location
-#: src/recordingList.js:57
+#: src/recordingList.js:59
 #, javascript-format
 msgid "%s (Old)"
 msgstr "%s (Eski)"
 
-#: src/row.js:67
+#: src/row.js:71
 msgid "Export Recording"
 msgstr "Kaydı Dışa Aktar"
 
-#: src/row.js:67
+#: src/row.js:71
 msgid "_Export"
 msgstr "_Dışa Aktar"
 
-#: src/row.js:67
+#: src/row.js:71
 msgid "_Cancel"
 msgstr "_İptal Et"
 
-#: src/utils.js:45
+#: src/utils.js:48
 msgid "Yesterday"
 msgstr "Dün"
 
-#: src/utils.js:47
+#: src/utils.js:50
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d gün önce"
 
-#: src/utils.js:49
+#: src/utils.js:52
 msgid "Last week"
 msgstr "Geçen hafta"
 
-#: src/utils.js:51
+#: src/utils.js:54
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d hafta önce"
 
-#: src/utils.js:53
+#: src/utils.js:56
 msgid "Last month"
 msgstr "Geçen ay"
 
-#: src/utils.js:55
+#: src/utils.js:58
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d ay önce"
 
-#: src/utils.js:57
+#: src/utils.js:60
 msgid "Last year"
 msgstr "Geçen yıl"
 
-#: src/utils.js:59
+#: src/utils.js:62
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "%d yıl önce"
 
-#: src/window.js:85
+#: src/window.js:71
 #, javascript-format
 msgid "\"%s\" deleted"
 msgstr "\"%s\"  silindi"
+
+#~ msgid "Cancel Recording"
+#~ msgstr "Kaydı İptal Et"
 
 #~ msgid "Microphone volume level"
 #~ msgstr "Mikrofon ses düzeyi"
@@ -428,9 +514,6 @@ msgstr "\"%s\"  silindi"
 
 #~ msgid "About"
 #~ msgstr "Hakkında"
-
-#~ msgid "Quit"
-#~ msgstr "Çıkış"
 
 #~ msgid "%Y-%m-%d %H:%M:%S"
 #~ msgstr "%d-%m-%Y %H:%M:%S"
