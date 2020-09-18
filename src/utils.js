@@ -23,7 +23,7 @@ const { GLib, Gst } = imports.gi;
 var formatTime = nanoSeconds => {
     const time = new Date(0, 0, 0, 0, 0, 0, parseInt(nanoSeconds / Gst.MSECOND));
 
-    const miliseconds = time.getMilliseconds().toString().padStart(2, '0').substring(0, 2);
+    const miliseconds = parseInt(time.getMilliseconds() / 100).toString();
     const seconds = time.getSeconds().toString().padStart(2, '0');
     const minutes = time.getMinutes().toString().padStart(2, '0');
     const hours = time.getHours().toString().padStart(2, '0');
