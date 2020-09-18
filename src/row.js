@@ -105,7 +105,6 @@ var Row = GObject.registerClass({
             this.emit('play', this._recording.uri);
             this.state = RowState.PLAYING;
         });
-        playAction.bind_property('enabled', pauseAction, 'enabled', GObject.BindingFlags.INVERT_BOOLEAN);
         this.actionGroup.add_action(playAction);
 
         let deleteAction = new Gio.SimpleAction({ name: 'delete' });
@@ -187,7 +186,11 @@ var Row = GObject.registerClass({
             this._rightStack.visible_child_name = 'options';
             this.grab_focus();
         }
-        this.actionGroup.lookup('rename').enabled = !state;
+
+        for (const action of this.actionGroup.list_actions()) {
+            if (action !== 'save')
+                this.actionGroup.lookup(action).enabled = !state;
+        }
     }
 
     get editMode() {
@@ -209,11 +212,13 @@ var Row = GObject.registerClass({
         switch (rowState) {
         case RowState.PLAYING:
             this.actionGroup.lookup('play').enabled = false;
+            this.actionGroup.lookup('pause').enabled = true;
             this._playbackStack.visible_child_name = 'pause';
             this._pauseBtn.grab_focus();
             break;
         case RowState.PAUSED:
             this.actionGroup.lookup('play').enabled = true;
+            this.actionGroup.lookup('pause').enabled = false;
             this._playbackStack.visible_child_name = 'play';
             this._playBtn.grab_focus();
             break;
