@@ -124,7 +124,8 @@ var Application = GObject.registerClass(class Application extends Gtk.Applicatio
                 'Sam Hewitt <hewittsamuel@gmail.com>'],
             authors: ['Meg Ford <megford@gnome.org>',
                 'Bilal Elmoussaoui <bil.elmoussaoui@gmail.com>',
-                'Felipe Borges <felipeborges@gnome.org>'],
+                'Felipe Borges <felipeborges@gnome.org>',
+                'Kavan Mevada <kavanmevada@gmail.com>'],
             /* Translators: Replace "translator-credits" with your names, one name per line */
             translator_credits: _('translator-credits'),
             program_name: GLib.get_application_name(),
