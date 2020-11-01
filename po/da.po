@@ -5,14 +5,13 @@
 # Kris Thomsen <mail@kristhomsen.dk>, 2014, 2016.
 # Alan Mortensen <alanmortensen.am@gmail.com>, 2019.
 # scootergrisen, 2020.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-"
 "recorder/issues\n"
-"POT-Creation-Date: 2020-07-29 16:10+0000\n"
-"PO-Revision-Date: 2020-07-30 12:44+0200\n"
+"POT-Creation-Date: 2020-09-09 18:18+0000\n"
+"PO-Revision-Date: 2020-10-10 00:00+0200\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
@@ -22,7 +21,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:5
-#: data/org.gnome.SoundRecorder.desktop.in.in:4 src/application.js:32
+#: data/org.gnome.SoundRecorder.desktop.in.in:4 data/ui/window.ui:28
+#: src/application.js:32
 msgid "Sound Recorder"
 msgstr "Lydoptagelse"
 
@@ -56,7 +56,7 @@ msgstr "Understøttede lydformater:"
 msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
 msgstr "Ogg Vorbis, Opus, FLAC, MP3 og MOV"
 
-#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:47
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:50
 msgid "The GNOME Project"
 msgstr "GNOME-projektet"
 
@@ -109,119 +109,193 @@ msgstr ""
 "Tildeler tilgængelige kanaler. Hvis ingen indstilling er givet, vil stereo-"
 "kanalen blive brugt som standard."
 
-#: data/ui/row.ui:146
-msgid "Delete"
-msgstr "Slet"
+#: data/ui/help-overlay.ui:15
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Generelt"
 
-#: data/ui/row.ui:176
-msgid "Rename"
-msgstr "Omdøb"
-
-#: data/ui/row.ui:200
-msgid "Save"
-msgstr "Gem"
-
-#: data/ui/row.ui:241
-msgid "Seek 10s Backward"
-msgstr "Søg 10 sekunder baglæns"
-
-#: data/ui/row.ui:273
-msgid "Play"
-msgstr "Afspil"
-
-#: data/ui/row.ui:302
-msgid "Pause"
-msgstr "Pause"
-
-#: data/ui/row.ui:339
-msgid "Seek 10s Forward"
-msgstr "Søg 10 sekunder fremad"
-
-#: data/ui/window.ui:62
+#: data/ui/help-overlay.ui:20
+#| msgid "Record"
+msgctxt "shortcut window"
 msgid "Record"
 msgstr "Optag"
 
-#: data/ui/window.ui:199
-#| msgid "Recordings"
-msgid "Resume Recording"
-msgstr "Genoptag optagelse"
-
-#: data/ui/window.ui:223
-#| msgid "Recordings"
-msgid "Pause Recording"
-msgstr "Sæt optagelse på pause"
-
-#: data/ui/window.ui:255
-#| msgid "Recordings"
+#: data/ui/help-overlay.ui:27
+#| msgid "Stop Recording"
+msgctxt "shortcut window"
 msgid "Stop Recording"
 msgstr "Stop optagelse"
 
-#: data/ui/window.ui:284
-#| msgid "Recordings"
-msgid "Cancel Recording"
-msgstr "Annuller optagelse"
+#: data/ui/help-overlay.ui:34
+msgctxt "shortcut window"
+msgid "Play / Pause / Resume"
+msgstr "Afspil/Paus/Genoptag"
 
-#: data/ui/window.ui:349
+#: data/ui/help-overlay.ui:42
+#| msgid "Delete"
+msgctxt "shortcut window"
+msgid "Delete"
+msgstr "Slet"
+
+#: data/ui/help-overlay.ui:49
+msgctxt "shortcut window"
+msgid "Open menu"
+msgstr "Åbn menu"
+
+#: data/ui/help-overlay.ui:56
+msgctxt "shortcut window"
+msgid "Keyboard shortcuts"
+msgstr "Tastaturgenveje"
+
+#: data/ui/help-overlay.ui:63
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Afslut"
+
+#: data/ui/help-overlay.ui:71
+#| msgid "Recordings"
+msgctxt "shortcut window"
+msgid "Recording"
+msgstr "Optagelse"
+
+#: data/ui/help-overlay.ui:76
+#| msgid "Seek 10s Backward"
+msgctxt "shortcut window"
+msgid "Seek Backward"
+msgstr "Søg baglæns"
+
+#: data/ui/help-overlay.ui:83
+#| msgid "Seek 10s Forward"
+msgctxt "shortcut window"
+msgid "Seek Forward"
+msgstr "Søg fremad"
+
+#: data/ui/help-overlay.ui:90
+#| msgid "Rename"
+msgctxt "shortcut window"
+msgid "Rename"
+msgstr "Omdøb"
+
+#: data/ui/help-overlay.ui:97
+msgctxt "shortcut window"
+msgid "Export"
+msgstr "Eksportér"
+
+#: data/ui/recorder.ui:72
+msgid "Resume Recording"
+msgstr "Genoptag optagelse"
+
+#: data/ui/recorder.ui:96
+msgid "Pause Recording"
+msgstr "Sæt optagelse på pause"
+
+#: data/ui/recorder.ui:128
+msgid "Stop Recording"
+msgstr "Stop optagelse"
+
+#: data/ui/recorder.ui:157
+#| msgid "Resume Recording"
+msgid "Delete Recording"
+msgstr "Slet optagelse"
+
+#: data/ui/row.ui:165 data/ui/row.ui:444
+msgid "Export"
+msgstr "Eksportér"
+
+#: data/ui/row.ui:189 data/ui/row.ui:440
+msgid "Rename"
+msgstr "Omdøb"
+
+#: data/ui/row.ui:241
+msgid "Save"
+msgstr "Gem"
+
+#: data/ui/row.ui:278 src/recorderWidget.js:100
+msgid "Delete"
+msgstr "Slet"
+
+#: data/ui/row.ui:313
+msgid "Seek 10s Backward"
+msgstr "Søg 10 sekunder baglæns"
+
+#: data/ui/row.ui:341
+msgid "Play"
+msgstr "Afspil"
+
+#: data/ui/row.ui:367
+msgid "Pause"
+msgstr "Paus"
+
+#: data/ui/row.ui:399
+msgid "Seek 10s Forward"
+msgstr "Søg 10 sekunder fremad"
+
+#: data/ui/window.ui:60
+msgid "Record"
+msgstr "Optag"
+
+#: data/ui/window.ui:149
 msgid "Add Recordings"
 msgstr "Tilføj optagelser"
 
-#: data/ui/window.ui:366
+#: data/ui/window.ui:166
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Brug <b>Optag</b>-knappen til at optage lyd"
 
-#: data/ui/window.ui:399
-#| msgid "Preferred format"
+#: data/ui/window.ui:237
+msgid "Undo"
+msgstr "Fortryd"
+
+#: data/ui/window.ui:254
+msgid "Close"
+msgstr "Luk"
+
+#: data/ui/window.ui:290
 msgid "Preferred Format"
 msgstr "Foretrukne format"
 
-#: data/ui/window.ui:401
-#| msgid "Ogg Vorbis"
+#: data/ui/window.ui:292
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: data/ui/window.ui:406
+#: data/ui/window.ui:297
 msgid "Opus"
 msgstr "Opus"
 
-#: data/ui/window.ui:411
+#: data/ui/window.ui:302
 msgid "FLAC"
 msgstr "FLAC"
 
-#: data/ui/window.ui:416
+#: data/ui/window.ui:307
 msgid "MP3"
 msgstr "MP3"
 
-#: data/ui/window.ui:421
+#: data/ui/window.ui:312
 msgid "M4A"
 msgstr "M4A"
 
-#: data/ui/window.ui:427
+#: data/ui/window.ui:318
 msgid "Audio Channel"
 msgstr "Lydkanal"
 
-#: data/ui/window.ui:429
+#: data/ui/window.ui:320
 msgid "Stereo"
 msgstr "Stereo"
 
-#: data/ui/window.ui:434
+#: data/ui/window.ui:325
 msgid "Mono"
 msgstr "Mono"
 
-#: data/ui/window.ui:442
+#: data/ui/window.ui:332
+msgid "_Keyboard Shortcuts"
+msgstr "_Tastaturgenveje"
+
+#: data/ui/window.ui:337
 msgid "About Sound Recorder"
 msgstr "Om Lydoptagelse"
 
-#. Translators: "Recordings" here refers to the name of the directory where the application places files
-#: src/application.js:24
-msgid "Recordings"
-msgstr "Lydoptagelser"
-
-#: src/application.js:132
-msgid "Sound Recorder started"
-msgstr "Lydoptager startet"
-
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/application.js:169
+#: src/application.js:129
 msgid "translator-credits"
 msgstr ""
 "Ask Hjorth Larsen\n"
@@ -231,58 +305,101 @@ msgstr ""
 "Websted http://dansk-gruppen.dk\n"
 "E-mail <dansk@dansk-gruppen.dk>"
 
-#: src/application.js:171
+#: src/application.js:131
 msgid "A Sound Recording Application for GNOME"
 msgstr "Et lydoptagelsesprogram til GNOME"
 
 #. Translators: ""Recording %d"" is the default name assigned to a file created
 #. by the application (for example, "Recording 1").
-#: src/recorder.js:107
+#: src/recorder.js:113
 #, javascript-format
-#| msgid "Recordings"
 msgid "Recording %d"
 msgstr "Optagelse %d"
 
-#: src/utils.js:45
+#: src/recorderWidget.js:94
+#| msgid "Resume Recording"
+msgid "Delete recording?"
+msgstr "Slet optagelse?"
+
+#: src/recorderWidget.js:95
+msgid "This recording will not be saved."
+msgstr "Optagelsen gemmes ikke."
+
+#: src/recorderWidget.js:99
+msgid "Resume"
+msgstr "Genoptag"
+
+#. Necessary code to move old recordings into the new location for few releases
+#. FIXME: Remove by 3.40/3.42
+#: src/recordingList.js:42
+msgid "Recordings"
+msgstr "Lydoptagelser"
+
+#. Translators: ""%s (Old)"" is the new name assigned to a file moved from
+#. the old recordings location
+#: src/recordingList.js:59
+#, javascript-format
+msgid "%s (Old)"
+msgstr "%s (gammel)"
+
+#: src/row.js:71
+#| msgid "Stop Recording"
+msgid "Export Recording"
+msgstr "Eksportér optagelse"
+
+#: src/row.js:71
+msgid "_Export"
+msgstr "_Eksportér"
+
+#: src/row.js:71
+msgid "_Cancel"
+msgstr "_Annuller"
+
+#: src/utils.js:48
 msgid "Yesterday"
 msgstr "I går"
 
-#: src/utils.js:47
+#: src/utils.js:50
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d dag siden"
 msgstr[1] "%d dage siden"
 
-#: src/utils.js:49
+#: src/utils.js:52
 msgid "Last week"
 msgstr "Sidste uge"
 
-#: src/utils.js:51
+#: src/utils.js:54
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d uge siden"
 msgstr[1] "%d uger siden"
 
-#: src/utils.js:53
+#: src/utils.js:56
 msgid "Last month"
 msgstr "Sidste måned"
 
-#: src/utils.js:55
+#: src/utils.js:58
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d måned siden"
 msgstr[1] "%d måneder siden"
 
-#: src/utils.js:57
+#: src/utils.js:60
 msgid "Last year"
 msgstr "Sidste år"
 
-#: src/utils.js:59
+#: src/utils.js:62
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "%d år siden"
 msgstr[1] "%d år siden"
+
+#: src/window.js:71
+#, javascript-format
+msgid "\"%s\" deleted"
+msgstr "“%s” slettet"
