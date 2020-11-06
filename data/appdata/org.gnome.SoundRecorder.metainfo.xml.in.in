@@ -69,4 +69,8 @@
   <developer_name>The GNOME Project</developer_name>
   <update_contact>meg387_at_gmail.com</update_contact>
   <translation type="gettext">@gettext-package@</translation>
+  <custom>
+    <value key="Purism::form_factor">workstation</value>
+    <value key="Purism::form_factor">mobile</value>
+  </custom>
 </component>

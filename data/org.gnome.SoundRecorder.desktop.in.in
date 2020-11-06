@@ -9,4 +9,6 @@ Categories=GNOME;GTK;Audio;AudioVideo;
 Keywords=Audio;Application;Record;
 Exec=gnome-sound-recorder
 StartupNotify=true
+# Translators: Do NOT translate or transliterate this text (these are enum types)!
+X-Purism-FormFactor=Workstation;Mobile;
 
