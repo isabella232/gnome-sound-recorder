@@ -7,11 +7,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-sound-recorder master\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
-"issues\n"
-"POT-Creation-Date: 2020-08-16 15:08+0000\n"
-"PO-Revision-Date: 2020-08-20 18:42+0200\n"
+"Project-Id-Version: gnome-sound-recorder\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/issues\n"
+"POT-Creation-Date: 2020-09-09 18:18+0000\n"
+"PO-Revision-Date: 2020-11-14 16:52+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: čeština <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -57,7 +56,7 @@ msgstr "Podporované zvukové formáty:"
 msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
 msgstr "Ogg Vorbis, Opus, FLAC, MP3 a MOV"
 
-#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:47
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:50
 msgid "The GNOME Project"
 msgstr "Projekt GNOME"
 
@@ -110,162 +109,243 @@ msgstr ""
 "Mapuje dostupné kanály. Jestliže není nastaveno žádné mapování, tak bude ve "
 "výchozím stavu použit stereo kanál."
 
-#: data/ui/row.ui:159 data/ui/row.ui:442
-msgid "Export"
-msgstr "Exportovat"
+#: data/ui/help-overlay.ui:15
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Obecné"
 
-#: data/ui/row.ui:184 data/ui/row.ui:438
-msgid "Rename"
-msgstr "Přejmenovat"
-
-#: data/ui/row.ui:238
-msgid "Save"
-msgstr "Uložit"
-
-#: data/ui/row.ui:275
-msgid "Delete"
-msgstr "Smazat"
-
-#: data/ui/row.ui:310
-msgid "Seek 10s Backward"
-msgstr "Přeskočit 10 s zpět"
-
-#: data/ui/row.ui:338
-msgid "Play"
-msgstr "Přehrát"
-
-#: data/ui/row.ui:364
-msgid "Pause"
-msgstr "Pozastavit"
-
-#: data/ui/row.ui:396
-msgid "Seek 10s Forward"
-msgstr "Přeskočit 10 s vpřed"
-
-#: data/ui/window.ui:63
+#: data/ui/help-overlay.ui:20
+msgctxt "shortcut window"
 msgid "Record"
-msgstr "Nahrát"
+msgstr "Nahrávat"
 
-#: data/ui/window.ui:144
-msgid "Add Recordings"
-msgstr "Přidání nahrávek"
-
-#: data/ui/window.ui:156
-msgid "Use the <b>Record</b> button to make sound recordings"
-msgstr "Použijte tlačítko <b>Nahrát</b> k vytvoření zvukové nahrávky"
-
-#: data/ui/window.ui:253
-msgid "Resume Recording"
-msgstr "Pokračovat v nahrávání"
-
-#: data/ui/window.ui:278
-msgid "Pause Recording"
-msgstr "Pozastavit nahrávání"
-
-#: data/ui/window.ui:309
+#: data/ui/help-overlay.ui:27
+msgctxt "shortcut window"
 msgid "Stop Recording"
 msgstr "Zastavit nahrávání"
 
-#: data/ui/window.ui:337
-msgid "Cancel Recording"
-msgstr "Zrušit nahrávání"
+#: data/ui/help-overlay.ui:34
+msgctxt "shortcut window"
+msgid "Play / Pause / Resume"
+msgstr "Přehrát / pozastavit / pokračovat"
 
-#: data/ui/window.ui:395
+#: data/ui/help-overlay.ui:42
+msgctxt "shortcut window"
+msgid "Delete"
+msgstr "Smazat"
+
+#: data/ui/help-overlay.ui:49
+msgctxt "shortcut window"
+msgid "Open menu"
+msgstr "Otevřít nabídku"
+
+#: data/ui/help-overlay.ui:56
+msgctxt "shortcut window"
+msgid "Keyboard shortcuts"
+msgstr "Klávesové zkratky"
+
+#: data/ui/help-overlay.ui:63
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Ukončit"
+
+#: data/ui/help-overlay.ui:71
+msgctxt "shortcut window"
+msgid "Recording"
+msgstr "Nahrávky"
+
+#: data/ui/help-overlay.ui:76
+msgctxt "shortcut window"
+msgid "Seek Backward"
+msgstr "Přeskočit zpět"
+
+#: data/ui/help-overlay.ui:83
+msgctxt "shortcut window"
+msgid "Seek Forward"
+msgstr "Přeskočit vpřed"
+
+#: data/ui/help-overlay.ui:90
+msgctxt "shortcut window"
+msgid "Rename"
+msgstr "Přejmenovat"
+
+#: data/ui/help-overlay.ui:97
+msgctxt "shortcut window"
+msgid "Export"
+msgstr "Exportovat"
+
+#: data/ui/recorder.ui:72
+msgid "Resume Recording"
+msgstr "Pokračovat v nahrávání"
+
+#: data/ui/recorder.ui:96
+msgid "Pause Recording"
+msgstr "Pozastavit nahrávání"
+
+#: data/ui/recorder.ui:128
+msgid "Stop Recording"
+msgstr "Zastavit nahrávání"
+
+#: data/ui/recorder.ui:157
+msgid "Delete Recording"
+msgstr "Smazat nahrávku"
+
+#: data/ui/row.ui:165 data/ui/row.ui:444
+msgid "Export"
+msgstr "Exportovat"
+
+#: data/ui/row.ui:189 data/ui/row.ui:440
+msgid "Rename"
+msgstr "Přejmenovat"
+
+#: data/ui/row.ui:241
+msgid "Save"
+msgstr "Uložit"
+
+#: data/ui/row.ui:278 src/recorderWidget.js:100
+msgid "Delete"
+msgstr "Smazat"
+
+#: data/ui/row.ui:313
+msgid "Seek 10s Backward"
+msgstr "Přeskočit 10 s zpět"
+
+#: data/ui/row.ui:341
+msgid "Play"
+msgstr "Přehrát"
+
+#: data/ui/row.ui:367
+msgid "Pause"
+msgstr "Pozastavit"
+
+#: data/ui/row.ui:399
+msgid "Seek 10s Forward"
+msgstr "Přeskočit 10 s vpřed"
+
+#: data/ui/window.ui:60
+msgid "Record"
+msgstr "Nahrát"
+
+#: data/ui/window.ui:149
+msgid "Add Recordings"
+msgstr "Přidání nahrávky"
+
+#: data/ui/window.ui:166
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "Použijte tlačítko <b>Nahrát</b> k vytvoření zvukové nahrávky"
+
+#: data/ui/window.ui:237
 msgid "Undo"
 msgstr "Zpět"
 
-#: data/ui/window.ui:405
+#: data/ui/window.ui:254
 msgid "Close"
 msgstr "Zavřít"
 
-#: data/ui/window.ui:430
+#: data/ui/window.ui:290
 msgid "Preferred Format"
 msgstr "Upřednostňovaný formát"
 
-#: data/ui/window.ui:432
+#: data/ui/window.ui:292
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: data/ui/window.ui:437
+#: data/ui/window.ui:297
 msgid "Opus"
 msgstr "Opus"
 
-#: data/ui/window.ui:442
+#: data/ui/window.ui:302
 msgid "FLAC"
 msgstr "FLAC"
 
-#: data/ui/window.ui:447
+#: data/ui/window.ui:307
 msgid "MP3"
 msgstr "MP3"
 
-#: data/ui/window.ui:452
+#: data/ui/window.ui:312
 msgid "M4A"
 msgstr "M4A"
 
-#: data/ui/window.ui:458
+#: data/ui/window.ui:318
 msgid "Audio Channel"
 msgstr "Zvukový kanál"
 
-#: data/ui/window.ui:460
+#: data/ui/window.ui:320
 msgid "Stereo"
 msgstr "Stereo"
 
-#: data/ui/window.ui:465
+#: data/ui/window.ui:325
 msgid "Mono"
 msgstr "Mono"
 
-#: data/ui/window.ui:473
+#: data/ui/window.ui:332
+msgid "_Keyboard Shortcuts"
+msgstr "_Klávesové zkratky"
+
+#: data/ui/window.ui:337
 msgid "About Sound Recorder"
 msgstr "O aplikaci Nahrávání zvuku"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/application.js:167
+#: src/application.js:129
 msgid "translator-credits"
 msgstr ""
 "Adam Matoušek <adamatousek@gmail.com>\n"
 "Marek Černocký <marek@manet.cz>"
 
-#: src/application.js:169
+#: src/application.js:131
 msgid "A Sound Recording Application for GNOME"
 msgstr "Aplikace pro GNOME k nahrávání zvuku"
 
 #. Translators: ""Recording %d"" is the default name assigned to a file created
 #. by the application (for example, "Recording 1").
-#: src/recorder.js:108
+#: src/recorder.js:113
 #, javascript-format
 msgid "Recording %d"
 msgstr "Nahrávka %d"
 
+#: src/recorderWidget.js:94
+msgid "Delete recording?"
+msgstr "Smazat nahrávku?"
+
+#: src/recorderWidget.js:95
+msgid "This recording will not be saved."
+msgstr "Tato nahrávka nebude uložena."
+
+#: src/recorderWidget.js:99
+msgid "Resume"
+msgstr "Pokračovat"
+
 #. Necessary code to move old recordings into the new location for few releases
 #. FIXME: Remove by 3.40/3.42
-#: src/recordingList.js:41
+#: src/recordingList.js:42
 msgid "Recordings"
 msgstr "Nahrávky"
 
 #. Translators: ""%s (Old)"" is the new name assigned to a file moved from
 #. the old recordings location
-#: src/recordingList.js:57
+#: src/recordingList.js:59
 #, javascript-format
 msgid "%s (Old)"
 msgstr "%s (stará)"
 
-#: src/row.js:67
+#: src/row.js:71
 msgid "Export Recording"
 msgstr "Export nahrávky"
 
-#: src/row.js:67
+#: src/row.js:71
 msgid "_Export"
 msgstr "_Export"
 
-#: src/row.js:67
+#: src/row.js:71
 msgid "_Cancel"
 msgstr "_Zrušit"
 
-#: src/utils.js:45
+#: src/utils.js:48
 msgid "Yesterday"
 msgstr "Včera"
 
-#: src/utils.js:47
+#: src/utils.js:50
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -273,11 +353,11 @@ msgstr[0] "Před %d dnem"
 msgstr[1] "Před %d dny"
 msgstr[2] "Před %d dny"
 
-#: src/utils.js:49
+#: src/utils.js:52
 msgid "Last week"
 msgstr "Minulý týden"
 
-#: src/utils.js:51
+#: src/utils.js:54
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -285,11 +365,11 @@ msgstr[0] "Před %d týdnem"
 msgstr[1] "Před %d týdny"
 msgstr[2] "Před %d týdny"
 
-#: src/utils.js:53
+#: src/utils.js:56
 msgid "Last month"
 msgstr "Minulý měsíc"
 
-#: src/utils.js:55
+#: src/utils.js:58
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
@@ -297,11 +377,11 @@ msgstr[0] "Před %d měsícem"
 msgstr[1] "Před %d měsíci"
 msgstr[2] "Před %d měsíci"
 
-#: src/utils.js:57
+#: src/utils.js:60
 msgid "Last year"
 msgstr "Minulý rok"
 
-#: src/utils.js:59
+#: src/utils.js:62
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
@@ -309,7 +389,7 @@ msgstr[0] "Před %d rokem"
 msgstr[1] "Před %d roky"
 msgstr[2] "Před %d lety"
 
-#: src/window.js:85
+#: src/window.js:71
 #, javascript-format
 msgid "\"%s\" deleted"
 msgstr "„%s“ byl smazán"
