@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/issues\n"
-"POT-Creation-Date: 2020-08-09 12:43+0000\n"
+"POT-Creation-Date: 2020-09-09 18:18+0000\n"
 "PO-Revision-Date: 2019-03-03 20:18+0100\n"
 "Last-Translator: Jordi Mas <jmas@softcatala.org>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:5
 #: data/org.gnome.SoundRecorder.desktop.in.in:4 data/ui/window.ui:28
-#: src/application.js:33
+#: src/application.js:32
 msgid "Sound Recorder"
 msgstr "Enregistradora de so"
 
@@ -57,7 +57,7 @@ msgstr "Formats d'àudio admesos:"
 msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
 msgstr "Ogg Vorbis, Opus, FLAC, MP3 i MOV"
 
-#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:47
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:50
 msgid "The GNOME Project"
 msgstr "El projecte GNOME"
 
@@ -113,195 +113,285 @@ msgstr ""
 "Mapa els canals disponibles. Si no hi ha cap mapa establert, el canal "
 "estèreo s'utilitzarà per defecte."
 
-#: data/ui/row.ui:166 data/ui/row.ui:473
-msgid "Export"
-msgstr "Exporta"
+#: data/ui/help-overlay.ui:15
+msgctxt "shortcut window"
+msgid "General"
+msgstr "General"
 
-#: data/ui/row.ui:192 data/ui/row.ui:469
-msgid "Rename"
-msgstr "Canvia el nom"
-
-#: data/ui/row.ui:247
-msgid "Save"
-msgstr "Desa"
-
-#: data/ui/row.ui:285
-msgid "Delete"
-msgstr "Suprimeix"
-
-#: data/ui/row.ui:320
-msgid "Seek 10s Backward"
-msgstr "Cerca 10s cap enrere"
-
-#: data/ui/row.ui:352
-msgid "Play"
-msgstr "Reprodueix"
-
-#: data/ui/row.ui:381
-msgid "Pause"
-msgstr "Fes una pausa"
-
-#: data/ui/row.ui:418
-msgid "Seek 10s Forward"
-msgstr "Cerca endavant 10s"
-
-#: data/ui/window.ui:63
+#: data/ui/help-overlay.ui:20
+msgctxt "shortcut window"
 msgid "Record"
 msgstr "Enregistra"
 
-#: data/ui/window.ui:200
-msgid "Resume Recording"
-msgstr "Continua l'enregistrament"
-
-#: data/ui/window.ui:224
-msgid "Pause Recording"
-msgstr "Posa en pausa l'enregistrament"
-
-#: data/ui/window.ui:256
+#: data/ui/help-overlay.ui:27
+msgctxt "shortcut window"
 msgid "Stop Recording"
 msgstr "Atura l'enregistrament"
 
-#: data/ui/window.ui:285
-msgid "Cancel Recording"
-msgstr "Cancel·la l'enregistrament"
+#: data/ui/help-overlay.ui:34
+msgctxt "shortcut window"
+msgid "Play / Pause / Resume"
+msgstr "Reprodueix / Pausa / Reprèn"
 
-#: data/ui/window.ui:350
+#: data/ui/help-overlay.ui:42
+msgctxt "shortcut window"
+msgid "Delete"
+msgstr "Suprimeix"
+
+#: data/ui/help-overlay.ui:49
+msgctxt "shortcut window"
+msgid "Open menu"
+msgstr "Obre el menú"
+
+#: data/ui/help-overlay.ui:56
+msgctxt "shortcut window"
+msgid "Keyboard shortcuts"
+msgstr "Dreceres de teclat"
+
+#: data/ui/help-overlay.ui:63
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Surt"
+
+#: data/ui/help-overlay.ui:71
+msgctxt "shortcut window"
+msgid "Recording"
+msgstr "Enregistraments"
+
+#: data/ui/help-overlay.ui:76
+msgctxt "shortcut window"
+msgid "Seek Backward"
+msgstr "Cerca cap enrere"
+
+#: data/ui/help-overlay.ui:83
+msgctxt "shortcut window"
+msgid "Seek Forward"
+msgstr "Cerca endavant"
+
+#: data/ui/help-overlay.ui:90
+msgctxt "shortcut window"
+msgid "Rename"
+msgstr "Canvia el nom"
+
+#: data/ui/help-overlay.ui:97
+msgctxt "shortcut window"
+msgid "Export"
+msgstr "Exporta"
+
+#: data/ui/recorder.ui:72
+msgid "Resume Recording"
+msgstr "Continua l'enregistrament"
+
+#: data/ui/recorder.ui:96
+msgid "Pause Recording"
+msgstr "Posa en pausa l'enregistrament"
+
+#: data/ui/recorder.ui:128
+msgid "Stop Recording"
+msgstr "Atura l'enregistrament"
+
+#: data/ui/recorder.ui:157
+msgid "Delete Recording"
+msgstr "Suprimeix l'enregistrament"
+
+#: data/ui/row.ui:165 data/ui/row.ui:444
+msgid "Export"
+msgstr "Exporta"
+
+#: data/ui/row.ui:189 data/ui/row.ui:440
+msgid "Rename"
+msgstr "Canvia el nom"
+
+#: data/ui/row.ui:241
+msgid "Save"
+msgstr "Desa"
+
+#: data/ui/row.ui:278 src/recorderWidget.js:100
+msgid "Delete"
+msgstr "Suprimeix"
+
+#: data/ui/row.ui:313
+msgid "Seek 10s Backward"
+msgstr "Cerca 10s cap enrere"
+
+#: data/ui/row.ui:341
+msgid "Play"
+msgstr "Reprodueix"
+
+#: data/ui/row.ui:367
+msgid "Pause"
+msgstr "Fes una pausa"
+
+#: data/ui/row.ui:399
+msgid "Seek 10s Forward"
+msgstr "Cerca endavant 10s"
+
+#: data/ui/window.ui:60
+msgid "Record"
+msgstr "Enregistra"
+
+#: data/ui/window.ui:149
 msgid "Add Recordings"
 msgstr "Afegeix enregistraments"
 
-#: data/ui/window.ui:367
+#: data/ui/window.ui:166
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr ""
 "Utilitzeu el botó <b>Enregistra</b> per a crear enregistraments d'àudio"
 
-#: data/ui/window.ui:400
+#: data/ui/window.ui:237
+msgid "Undo"
+msgstr "Desfés"
+
+#: data/ui/window.ui:254
+msgid "Close"
+msgstr "Tanca"
+
+#: data/ui/window.ui:290
 msgid "Preferred Format"
 msgstr "Format preferit"
 
-#: data/ui/window.ui:402
+#: data/ui/window.ui:292
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: data/ui/window.ui:407
+#: data/ui/window.ui:297
 msgid "Opus"
 msgstr "Opus"
 
-#: data/ui/window.ui:412
+#: data/ui/window.ui:302
 msgid "FLAC"
 msgstr "FLAC"
 
-#: data/ui/window.ui:417
+#: data/ui/window.ui:307
 msgid "MP3"
 msgstr "MP3"
 
-#: data/ui/window.ui:422
+#: data/ui/window.ui:312
 msgid "M4A"
 msgstr "M4A"
 
-#: data/ui/window.ui:428
+#: data/ui/window.ui:318
 msgid "Audio Channel"
 msgstr "Canal d'àudio"
 
-#: data/ui/window.ui:430
+#: data/ui/window.ui:320
 msgid "Stereo"
 msgstr "Estèreo"
 
-#: data/ui/window.ui:435
+#: data/ui/window.ui:325
 msgid "Mono"
 msgstr "Mono"
 
-#: data/ui/window.ui:443
+#: data/ui/window.ui:332
+msgid "_Keyboard Shortcuts"
+msgstr "_Dreceres de teclat"
+
+#: data/ui/window.ui:337
 msgid "About Sound Recorder"
 msgstr "Quant a l'Enregistradora de so"
 
-#: src/application.js:132
-msgid "Sound Recorder started"
-msgstr "S'ha iniciat l'Enregistradora de so"
-
 #. Translators: Replace "translator-credits" with your names, one name per
 #. line
-#: src/application.js:169
+#: src/application.js:129
 msgid "translator-credits"
 msgstr "Pau Iranzo <pau.iranzo@softcatala.org>"
 
-#: src/application.js:171
+#: src/application.js:131
 msgid "A Sound Recording Application for GNOME"
 msgstr "Una aplicació d'enregistrament de so per al GNOME"
 
 #. Translators: ""Recording %d"" is the default name assigned to a file
 #. created
 #. by the application (for example, "Recording 1").
-#: src/recorder.js:109
+#: src/recorder.js:113
 #, javascript-format
 msgid "Recording %d"
 msgstr "Enregistrament %d"
 
+#: src/recorderWidget.js:94
+msgid "Delete recording?"
+msgstr "Vols eliminar l'enregistrament?"
+
+#: src/recorderWidget.js:95
+msgid "This recording will not be saved."
+msgstr "Aquesta gravació no es desarà."
+
+#: src/recorderWidget.js:99
+msgid "Resume"
+msgstr "Reprendre"
+
 #. Necessary code to move old recordings into the new location for few
 #. releases
 #. FIXME: Remove by 3.40/3.42
-#: src/recordingList.js:41
+#: src/recordingList.js:42
 msgid "Recordings"
 msgstr "Enregistraments"
 
 #. Translators: ""%s (Old)"" is the new name assigned to a file moved from
 #. the old recordings location
-#: src/recordingList.js:57
+#: src/recordingList.js:59
 #, javascript-format
 msgid "%s (Old)"
 msgstr "%s (antic)"
 
-#: src/row.js:58
+#: src/row.js:71
 msgid "Export Recording"
 msgstr "Exporta l'enregistrament"
 
-#: src/row.js:58
+#: src/row.js:71
 msgid "_Export"
 msgstr "_Exporta"
 
-#: src/row.js:58
+#: src/row.js:71
 msgid "_Cancel"
 msgstr "_Cancel·la"
 
-#: src/utils.js:45
+#: src/utils.js:48
 msgid "Yesterday"
 msgstr "Ahir"
 
-#: src/utils.js:47
+#: src/utils.js:50
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "fa %d dia"
 msgstr[1] "fa %d dies"
 
-#: src/utils.js:49
+#: src/utils.js:52
 msgid "Last week"
 msgstr "Darrera setmana"
 
-#: src/utils.js:51
+#: src/utils.js:54
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "fa %d setmana"
 msgstr[1] "fa %d setmanes"
 
-#: src/utils.js:53
+#: src/utils.js:56
 msgid "Last month"
 msgstr "Darrer mes"
 
-#: src/utils.js:55
+#: src/utils.js:58
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "fa %d mes"
 msgstr[1] "fa %d mesos"
 
-#: src/utils.js:57
+#: src/utils.js:60
 msgid "Last year"
 msgstr "Darrer any"
 
-#: src/utils.js:59
+#: src/utils.js:62
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "fa %d any"
 msgstr[1] "fa %d anys"
+
+#: src/window.js:71
+#, javascript-format
+msgid "\"%s\" deleted"
+msgstr "«%s» esborrat"
