@@ -155,6 +155,8 @@ var RecorderWidget = GObject.registerClass({
         case RecorderState.STOPPED:
             this.actionsGroup.lookup('start').enabled = true;
             this.actionsGroup.lookup('stop').enabled = false;
+            this.actionsGroup.lookup('pause').enabled = false;
+            this.actionsGroup.lookup('resume').enabled = false;
             break;
         }
     }
