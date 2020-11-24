@@ -308,11 +308,6 @@
         <attribute name="action">app.audio-profile</attribute>
         <attribute name="target">mp3</attribute>
       </item>
-      <item>
-        <attribute translatable="yes" name="label">M4A</attribute>
-        <attribute name="action">app.audio-profile</attribute>
-        <attribute name="target">m4a</attribute>
-      </item>
     </submenu>
     <submenu>
       <attribute translatable="yes" name="label">Audio Channel</attribute>
