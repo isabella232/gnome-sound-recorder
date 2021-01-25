@@ -35,6 +35,31 @@
   </kudos>
   <content_rating type="oars-1.0" />
   <releases>
+    <release version="3.38.1" date="2021-01-25">
+      <description>
+        <p>Bugfix release</p>
+        <ul>
+          <li>
+            Translation updates
+          </li>
+          <li>
+            Fix export dialog for recordings disappears shortly after opening
+          </li>
+          <li>
+            Fix not able to use space bar in recording name input
+          </li>
+          <li>
+            Fix recording is lost when using space bar in name input
+          </li>
+          <li>
+            Fix ui becomes unusable and recording is lost after stopping a record
+          </li>
+          <li>
+            Remove m4a option since using it results in unusable recordings
+          </li>
+        </ul>
+      </description>
+    </release>
     <release version="3.38.0" date="2020-09-18">
       <description>
         <p>An overall update of Sound Recorder's design</p>

@@ -1,3 +1,12 @@
+ 3.38.1 [Unreleased]
+ ======
+ Translation updates
+ Fix export dialog for recordings disappears shortly after opening
+ Fix not able to use space bar in recording name input
+ Fix recording is lost when using space bar in name input
+ Fix ui becomes unusable and recording is lost after stopping a record
+ Remove m4a option since using it results in unusable recordings
+
  3.34.0
  ======
  Translation updates
