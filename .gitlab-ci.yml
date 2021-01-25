@@ -16,7 +16,7 @@ nightly:
   extends: ".publish_nightly"
 
 eslint:
-  image: registry.gitlab.gnome.org/gnome/gjs:fedora.static-analysis
+  image: registry.gitlab.gnome.org/gnome/gnome-shell/fedora/33:2020-11-17.0
 
   variables:
     LINT_LOG: "eslint-report.txt"
