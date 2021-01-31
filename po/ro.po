@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/"
 "issues\n"
-"POT-Creation-Date: 2020-08-10 14:13+0000\n"
-"PO-Revision-Date: 2020-08-14 15:04+0300\n"
+"POT-Creation-Date: 2020-11-24 14:33+0000\n"
+"PO-Revision-Date: 2021-01-31 17:43+0100\n"
 "Last-Translator: Florentina Mușat <florentina.musat.28@gmail.com>\n"
 "Language-Team: Gnome Romanian Translation Team <gnomero-list@lists."
 "sourceforge.net>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2);\n"
-"X-Generator: Poedit 2.4\n"
+"X-Generator: Poedit 2.4.2\n"
 "X-Project-Style: gnome\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -61,7 +61,7 @@ msgstr "Formate audio suportate:"
 msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
 msgstr "Ogg Vorbis, Opus, FLAC, MP3 și MOV"
 
-#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:47
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:69
 msgid "The GNOME Project"
 msgstr "Proiectul GNOME"
 
@@ -74,27 +74,27 @@ msgstr "Înregistrează sunet prin intermediul microfonului și îl redă"
 msgid "Audio;Application;Record;"
 msgstr "Audio;Application;Record;Înregistrare;"
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:16
+#: data/org.gnome.SoundRecorder.gschema.xml.in:15
 msgid "Window size"
 msgstr "Dimensiunea ferestrei"
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:17
+#: data/org.gnome.SoundRecorder.gschema.xml.in:16
 msgid "Window size (width and height)."
 msgstr "Dimensiunea ferestrei (lățime și înălțime)."
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:21
+#: data/org.gnome.SoundRecorder.gschema.xml.in:20
 msgid "Window position"
 msgstr "Poziția ferestrei"
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:22
+#: data/org.gnome.SoundRecorder.gschema.xml.in:21
 msgid "Window position (x and y)."
 msgstr "Poziția ferestrei (x și y)."
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:26
+#: data/org.gnome.SoundRecorder.gschema.xml.in:25
 msgid "Maps media types to audio encoder preset names."
 msgstr "Relaționează tipuri media cu nume de predefiniri de codoare audio."
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:27
+#: data/org.gnome.SoundRecorder.gschema.xml.in:26
 msgid ""
 "Maps media types to audio encoder preset names. If there is no mapping set, "
 "the default encoder settings will be used."
@@ -102,11 +102,11 @@ msgstr ""
 "Relaționează tipuri media cu nume de predefiniri de codoare audio. Dacă nu "
 "este configurată nicio relaționare, codorul implicit va fi folosit."
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:31
+#: data/org.gnome.SoundRecorder.gschema.xml.in:30
 msgid "Available channels"
 msgstr "Canale disponibile"
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:32
+#: data/org.gnome.SoundRecorder.gschema.xml.in:31
 msgid ""
 "Maps available channels. If there is not no mapping set, stereo channel will "
 "be used by default."
@@ -114,164 +114,241 @@ msgstr ""
 "Asociază canalele disponibile. Dacă nu este stabilită nicio asociere, "
 "canalul stereo va fi folosit ca implicit."
 
-#: data/ui/row.ui:188 data/ui/row.ui:500
-msgid "Export"
-msgstr "Exportă"
+#: data/ui/help-overlay.ui:15
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Generale"
 
-#: data/ui/row.ui:214 data/ui/row.ui:496
-msgid "Rename"
-msgstr "Redenumește"
-
-#: data/ui/row.ui:269
-msgid "Save"
-msgstr "Salvează"
-
-#: data/ui/row.ui:307
-msgid "Delete"
-msgstr "Șterge"
-
-#: data/ui/row.ui:347
-msgid "Seek 10s Backward"
-msgstr "Derulează 10s înapoi"
-
-#: data/ui/row.ui:379
-msgid "Play"
-msgstr "Redă"
-
-#: data/ui/row.ui:408
-msgid "Pause"
-msgstr "Pauză"
-
-#: data/ui/row.ui:445
-msgid "Seek 10s Forward"
-msgstr "Derulează 10s înainte"
-
-#: data/ui/window.ui:63
+#: data/ui/help-overlay.ui:20
+msgctxt "shortcut window"
 msgid "Record"
-msgstr "Înregistrare"
+msgstr "Înregistrează"
 
-#: data/ui/window.ui:204
-msgid "Resume Recording"
-msgstr "Reia înregistrarea"
-
-#: data/ui/window.ui:228
-msgid "Pause Recording"
-msgstr "Pauzează înregistrarea"
-
-#: data/ui/window.ui:260
+#: data/ui/help-overlay.ui:27
+msgctxt "shortcut window"
 msgid "Stop Recording"
 msgstr "Oprește înregistrarea"
 
-#: data/ui/window.ui:289
-msgid "Cancel Recording"
-msgstr "Anulează înregistrarea"
+#: data/ui/help-overlay.ui:34
+msgctxt "shortcut window"
+msgid "Play / Pause / Resume"
+msgstr "Redă / Suspendă / Reia"
 
-#: data/ui/window.ui:354
+#: data/ui/help-overlay.ui:42
+msgctxt "shortcut window"
+msgid "Delete"
+msgstr "Șterge"
+
+#: data/ui/help-overlay.ui:49
+msgctxt "shortcut window"
+msgid "Open menu"
+msgstr "Deschide meniu"
+
+#: data/ui/help-overlay.ui:56
+msgctxt "shortcut window"
+msgid "Keyboard shortcuts"
+msgstr "Scurtături de tastatură"
+
+#: data/ui/help-overlay.ui:63
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Ieșire"
+
+#: data/ui/help-overlay.ui:71
+msgctxt "shortcut window"
+msgid "Recording"
+msgstr "Înregistrare"
+
+#: data/ui/help-overlay.ui:76
+msgctxt "shortcut window"
+msgid "Seek Backward"
+msgstr "Derulează înapoi"
+
+#: data/ui/help-overlay.ui:83
+msgctxt "shortcut window"
+msgid "Seek Forward"
+msgstr "Derulează înainte"
+
+#: data/ui/help-overlay.ui:90
+msgctxt "shortcut window"
+msgid "Rename"
+msgstr "Redenumește"
+
+#: data/ui/help-overlay.ui:97
+msgctxt "shortcut window"
+msgid "Export"
+msgstr "Exportă"
+
+#: data/ui/recorder.ui:72
+msgid "Resume Recording"
+msgstr "Reia înregistrarea"
+
+#: data/ui/recorder.ui:96
+msgid "Pause Recording"
+msgstr "Pauzează înregistrarea"
+
+#: data/ui/recorder.ui:128
+msgid "Stop Recording"
+msgstr "Oprește înregistrarea"
+
+#: data/ui/recorder.ui:157
+msgid "Delete Recording"
+msgstr "Șterge înregistrarea"
+
+#: data/ui/row.ui:165 data/ui/row.ui:444
+msgid "Export"
+msgstr "Exportă"
+
+#: data/ui/row.ui:189 data/ui/row.ui:440
+msgid "Rename"
+msgstr "Redenumește"
+
+#: data/ui/row.ui:241
+msgid "Save"
+msgstr "Salvează"
+
+#: data/ui/row.ui:278 src/recorderWidget.js:100
+msgid "Delete"
+msgstr "Șterge"
+
+#: data/ui/row.ui:313
+msgid "Seek 10s Backward"
+msgstr "Derulează 10s înapoi"
+
+#: data/ui/row.ui:341
+msgid "Play"
+msgstr "Redă"
+
+#: data/ui/row.ui:367
+msgid "Pause"
+msgstr "Pauză"
+
+#: data/ui/row.ui:399
+msgid "Seek 10s Forward"
+msgstr "Derulează 10s înainte"
+
+#: data/ui/window.ui:60
+msgid "Record"
+msgstr "Înregistrare"
+
+#: data/ui/window.ui:149
 msgid "Add Recordings"
 msgstr "Adaugă înregistrări"
 
-#: data/ui/window.ui:371
+#: data/ui/window.ui:166
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Folosiți butonul <b>Înregistrare</b> pentru a înregistra clipuri audio"
 
-#: data/ui/window.ui:418
+#: data/ui/window.ui:237
 msgid "Undo"
 msgstr "Refă"
 
-#: data/ui/window.ui:459
+#: data/ui/window.ui:254
+msgid "Close"
+msgstr "Închide"
+
+#: data/ui/window.ui:290
 msgid "Preferred Format"
 msgstr "Format preferat"
 
-#: data/ui/window.ui:461
+#: data/ui/window.ui:292
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: data/ui/window.ui:466
+#: data/ui/window.ui:297
 msgid "Opus"
 msgstr "Opus"
 
-#: data/ui/window.ui:471
+#: data/ui/window.ui:302
 msgid "FLAC"
 msgstr "FLAC"
 
-#: data/ui/window.ui:476
+#: data/ui/window.ui:307
 msgid "MP3"
 msgstr "MP3"
 
-#: data/ui/window.ui:481
-msgid "M4A"
-msgstr "M4A"
-
-#: data/ui/window.ui:487
+#: data/ui/window.ui:313
 msgid "Audio Channel"
 msgstr "Canal audio"
 
-#: data/ui/window.ui:489
+#: data/ui/window.ui:315
 msgid "Stereo"
 msgstr "Stereo"
 
-#: data/ui/window.ui:494
+#: data/ui/window.ui:320
 msgid "Mono"
 msgstr "Mono"
 
-#: data/ui/window.ui:502
+#: data/ui/window.ui:327
+msgid "_Keyboard Shortcuts"
+msgstr "Scurtături de _tastatură"
+
+#: data/ui/window.ui:332
 msgid "About Sound Recorder"
 msgstr "Despre Înregistrator de sunet"
 
-#: src/application.js:131
-msgid "Sound Recorder started"
-msgstr "Înregistrator de sunet pornit"
-
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/application.js:168
+#: src/application.js:130
 msgid "translator-credits"
 msgstr ""
 "Bogdan Mințoi <mintoi.bogdan@gmail.com> 2014\n"
 "Florentina Mușat <florentina [dot] musat [dot] 28 [at] gmail [dot] com>, "
 "2019-2020\n"
-"Daniel Șerbănescu <daniel [at] serbanescu [dot] dk>, 2019"
+"Daniel Șerbănescu <daniel [at] serbanescu [dot] dk>, 2019-2021"
 
-#: src/application.js:170
+#: src/application.js:132
 msgid "A Sound Recording Application for GNOME"
 msgstr "O aplicație de înregistrare de sunet pentru GNOME"
 
 #. Translators: ""Recording %d"" is the default name assigned to a file created
 #. by the application (for example, "Recording 1").
-#: src/recorder.js:109
+#: src/recorder.js:113
 #, javascript-format
 msgid "Recording %d"
 msgstr "Se înregistrează %d"
 
+#: src/recorderWidget.js:94
+msgid "Delete recording?"
+msgstr "Ștergeți înregistrarea?"
+
+#: src/recorderWidget.js:95
+msgid "This recording will not be saved."
+msgstr "Înregistrarea nu va fi salvată."
+
+#: src/recorderWidget.js:99
+msgid "Resume"
+msgstr "Reia"
+
 #. Necessary code to move old recordings into the new location for few releases
 #. FIXME: Remove by 3.40/3.42
-#: src/recordingList.js:41
+#: src/recordingList.js:42
 msgid "Recordings"
 msgstr "Înregistrări"
 
 #. Translators: ""%s (Old)"" is the new name assigned to a file moved from
 #. the old recordings location
-#: src/recordingList.js:57
+#: src/recordingList.js:59
 #, javascript-format
 msgid "%s (Old)"
 msgstr "%s (Vechi)"
 
-#: src/row.js:56
+#: src/row.js:71
 msgid "Export Recording"
 msgstr "Exportă înregistrarea"
 
-#: src/row.js:56
+#: src/row.js:71
 msgid "_Export"
 msgstr "_Exportă"
 
-#: src/row.js:56
+#: src/row.js:71
 msgid "_Cancel"
 msgstr "_Anulează"
 
-#: src/utils.js:45
+#: src/utils.js:48
 msgid "Yesterday"
 msgstr "Ieri"
 
-#: src/utils.js:47
+#: src/utils.js:50
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -279,11 +356,11 @@ msgstr[0] "Acum %d zi"
 msgstr[1] "Acum %d zile"
 msgstr[2] "Acum %d de zile"
 
-#: src/utils.js:49
+#: src/utils.js:52
 msgid "Last week"
 msgstr "Săptămâna trecută"
 
-#: src/utils.js:51
+#: src/utils.js:54
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -291,11 +368,11 @@ msgstr[0] "Acum %d săptămână"
 msgstr[1] "Acum %d săptămâni"
 msgstr[2] "Acum %d de săptămâni"
 
-#: src/utils.js:53
+#: src/utils.js:56
 msgid "Last month"
 msgstr "Luna trecută"
 
-#: src/utils.js:55
+#: src/utils.js:58
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
@@ -303,11 +380,11 @@ msgstr[0] "Acum %d lună"
 msgstr[1] "Acum %d luni"
 msgstr[2] "Acum %d de luni"
 
-#: src/utils.js:57
+#: src/utils.js:60
 msgid "Last year"
 msgstr "Anul trecut"
 
-#: src/utils.js:59
+#: src/utils.js:62
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
@@ -315,10 +392,19 @@ msgstr[0] "Acum %d an"
 msgstr[1] "Acum %d ani"
 msgstr[2] "Acum %d de ani"
 
-#: src/window.js:70
+#: src/window.js:71
 #, javascript-format
 msgid "\"%s\" deleted"
 msgstr "„%s” șters"
+
+#~ msgid "Cancel Recording"
+#~ msgstr "Anulează înregistrarea"
+
+#~ msgid "M4A"
+#~ msgstr "M4A"
+
+#~ msgid "Sound Recorder started"
+#~ msgstr "Înregistrator de sunet pornit"
 
 #~ msgid "Recording from %F %A at %T"
 #~ msgstr "Se înregistrează de la %F %A la %T"
@@ -441,9 +527,6 @@ msgstr "„%s” șters"
 
 #~ msgid "About"
 #~ msgstr "Despre"
-
-#~ msgid "Quit"
-#~ msgstr "Ieșire"
 
 #~ msgid "%Y-%m-%d %H:%M:%S"
 #~ msgstr "%Y-%m-%d %H:%M:%S"
