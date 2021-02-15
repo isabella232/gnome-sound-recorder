@@ -1,16 +1,16 @@
 # Hungarian translation for gnome-sound-recorder.
-# Copyright (C) 2013, 2014, 2016, 2017, 2019. Free Software Foundation, Inc.
+# Copyright (C) 2013, 2014, 2016, 2017, 2019, 2021. Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-sound-recorder package.
 #
 # Gabor Kelemen <kelemeng at gnome dot hu>, 2013, 2014.
-# Balázs Úr <ur.balazs at fsf dot hu>, 2014, 2016, 2017, 2019.
+# Balázs Úr <ur.balazs at fsf dot hu>, 2014, 2016, 2017, 2019, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-sound-recorder/issu"
 "es\n"
-"POT-Creation-Date: 2019-03-25 19:51+0000\n"
-"PO-Revision-Date: 2019-06-06 06:49+0200\n"
+"POT-Creation-Date: 2021-02-14 20:23+0000\n"
+"PO-Revision-Date: 2021-02-15 01:20+0100\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
 "Language: hu\n"
@@ -18,19 +18,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 18.12.3\n"
+"X-Generator: Lokalize 19.12.3\n"
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:5
-#: data/org.gnome.SoundRecorder.desktop.in:4 src/application.js:152
-#: src/record.js:115
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:5
+#: data/org.gnome.SoundRecorder.desktop.in.in:4 data/ui/window.ui:28
+#: src/application.js:32
 msgid "Sound Recorder"
 msgstr "Hangrögzítő"
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:6
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:6
 msgid "A simple, modern sound recorder for GNOME"
 msgstr "Egy egyszerű, modern hangrögzítő a GNOME-hoz"
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:10
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:10
 msgid ""
 "Sound Recorder provides a simple and modern interface that provides a "
 "straight-forward way to record and play audio. It allows you to do basic "
@@ -40,7 +40,7 @@ msgstr ""
 "nyújt a hang rögzítéséhez és lejátszásához. Lehetővé teszi az alap "
 "szerkesztések elvégzését és hangfeljegyzések létrehozását."
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:15
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:15
 msgid ""
 "Sound Recorder automatically handles the saving process so that you do not "
 "need to worry about accidentally discarding the previous recording."
@@ -48,39 +48,48 @@ msgstr ""
 "A Hangrögzítő automatikusan kezeli a mentési folyamatot, ezért nem kell "
 "aggódnia a korábbi felvétel véletlen eldobása miatt."
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:19
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:19
 msgid "Supported audio formats:"
 msgstr "Támogatott hangformátumok:"
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:21
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:21
 msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
 msgstr "Ogg Vorbis, Opus, FLAC, MP3 és MOV"
 
-#: data/appdata/org.gnome.SoundRecorder.appdata.xml.in:42
+#: data/appdata/org.gnome.SoundRecorder.metainfo.xml.in.in:94
 msgid "The GNOME Project"
 msgstr "A GNOME projekt"
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:5
+#: data/org.gnome.SoundRecorder.desktop.in.in:5
+msgid "Record sound via the microphone and play it back"
+msgstr "Hangfelvétel a mikrofonból és lejátszás"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.SoundRecorder.desktop.in.in:10
+msgid "Audio;Application;Record;"
+msgstr "audio;hang;felvétel;rögzítés;mikrofon;"
+
+#: data/org.gnome.SoundRecorder.gschema.xml.in:15
 msgid "Window size"
 msgstr "Ablakméret"
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:6
+#: data/org.gnome.SoundRecorder.gschema.xml.in:16
 msgid "Window size (width and height)."
 msgstr "Ablak mérete (szélesség és magasság)."
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:10
+#: data/org.gnome.SoundRecorder.gschema.xml.in:20
 msgid "Window position"
 msgstr "Ablakpozíció"
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:11
+#: data/org.gnome.SoundRecorder.gschema.xml.in:21
 msgid "Window position (x and y)."
 msgstr "Ablakpozíció (x és y)."
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:15
+#: data/org.gnome.SoundRecorder.gschema.xml.in:25
 msgid "Maps media types to audio encoder preset names."
 msgstr "A médiatípusok leképezése a hangkódoló előre beállított neveire."
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:16
+#: data/org.gnome.SoundRecorder.gschema.xml.in:26
 msgid ""
 "Maps media types to audio encoder preset names. If there is no mapping set, "
 "the default encoder settings will be used."
@@ -89,11 +98,11 @@ msgstr ""
 "leképezés beállítva, akkor az alapértelmezett kódolóbeállítások lesznek "
 "felhasználva."
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:20
+#: data/org.gnome.SoundRecorder.gschema.xml.in:30
 msgid "Available channels"
 msgstr "Elérhető csatornák"
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:21
+#: data/org.gnome.SoundRecorder.gschema.xml.in:31
 msgid ""
 "Maps available channels. If there is not no mapping set, stereo channel will "
 "be used by default."
@@ -101,277 +110,392 @@ msgstr ""
 "Elérhető csatornák kiosztása. Ha nincs kiosztás megadva, akkor a sztereó "
 "csatorna lesz alapértelmezés szerint használva."
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:25
-msgid "Microphone volume level"
-msgstr "Mikrofon hangerőszintje"
+#: data/ui/help-overlay.ui:15
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Általános"
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:26
-msgid "Microphone volume level."
-msgstr "Mikrofon hangerőszintje."
+#: data/ui/help-overlay.ui:20
+#| msgid "Record"
+msgctxt "shortcut window"
+msgid "Record"
+msgstr "Felvétel"
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:30
-msgid "Speaker volume level"
-msgstr "Hangszóró hangerőszintje"
+#: data/ui/help-overlay.ui:27
+#| msgid "Recordings"
+msgctxt "shortcut window"
+msgid "Stop Recording"
+msgstr "Felvétel leállítása"
 
-#: data/org.gnome.SoundRecorder.gschema.xml.in:31
-msgid "Speaker volume level."
-msgstr "Hangszóró hangerőszintje."
+#: data/ui/help-overlay.ui:34
+msgctxt "shortcut window"
+msgid "Play / Pause / Resume"
+msgstr "Lejátszás / szüneteltetés / folytatás"
 
-#: data/org.gnome.SoundRecorder.desktop.in:5
-msgid "Record sound via the microphone and play it back"
-msgstr "Hangfelvétel a mikrofonból és lejátszás"
+#: data/ui/help-overlay.ui:42
+#| msgid "Delete"
+msgctxt "shortcut window"
+msgid "Delete"
+msgstr "Törlés"
 
-#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.SoundRecorder.desktop.in:10
-msgid "Audio;Application;Record;"
-msgstr "audio;hang;felvétel;rögzítés;mikrofon;"
+#: data/ui/help-overlay.ui:49
+msgctxt "shortcut window"
+msgid "Open menu"
+msgstr "Menü megnyitása"
 
-#: src/application.js:40
-msgid "SoundRecorder"
-msgstr "Hangrögzítő"
+#: data/ui/help-overlay.ui:56
+msgctxt "shortcut window"
+msgid "Keyboard shortcuts"
+msgstr "Gyorsbillentyűk"
 
-#: src/application.js:68
-msgid "Sound Recorder started"
-msgstr "A Hangrögzítő elindult"
+#: data/ui/help-overlay.ui:63
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Kilépés"
 
-#. Translators: "Recordings" here refers to the name of the directory where the application places files
-#: src/application.js:78
-msgid "Recordings"
-msgstr "Felvételek"
+#: data/ui/help-overlay.ui:71
+#| msgid "Recordings"
+msgctxt "shortcut window"
+msgid "Recording"
+msgstr "Felvétel"
+
+#: data/ui/help-overlay.ui:76
+msgctxt "shortcut window"
+msgid "Seek Backward"
+msgstr "Tekerés vissza"
+
+#: data/ui/help-overlay.ui:83
+msgctxt "shortcut window"
+msgid "Seek Forward"
+msgstr "Tekerés előre"
+
+#: data/ui/help-overlay.ui:90
+msgctxt "shortcut window"
+msgid "Rename"
+msgstr "Átnevezés"
+
+#: data/ui/help-overlay.ui:97
+msgctxt "shortcut window"
+msgid "Export"
+msgstr "Exportálás"
+
+#: data/ui/recorder.ui:72
+#| msgid "Recordings"
+msgid "Resume Recording"
+msgstr "Felvétel folytatása"
+
+#: data/ui/recorder.ui:96
+#| msgid "Recordings"
+msgid "Pause Recording"
+msgstr "Felvétel szüneteltetése"
+
+#: data/ui/recorder.ui:128
+#| msgid "Recordings"
+msgid "Stop Recording"
+msgstr "Felvétel leállítása"
+
+#: data/ui/recorder.ui:157
+#| msgid "Recordings"
+msgid "Delete Recording"
+msgstr "Felvétel törlése"
+
+#: data/ui/row.ui:165 data/ui/row.ui:444
+msgid "Export"
+msgstr "Exportálás"
+
+#: data/ui/row.ui:189 data/ui/row.ui:440
+msgid "Rename"
+msgstr "Átnevezés"
+
+#: data/ui/row.ui:241
+msgid "Save"
+msgstr "Mentés"
+
+#: data/ui/row.ui:278 src/recorderWidget.js:100
+msgid "Delete"
+msgstr "Törlés"
+
+#: data/ui/row.ui:313
+msgid "Seek 10s Backward"
+msgstr "Tekerés 10 másodpercet vissza"
+
+#: data/ui/row.ui:341
+msgid "Play"
+msgstr "Lejátszás"
+
+#: data/ui/row.ui:367
+msgid "Pause"
+msgstr "Szünet"
+
+#: data/ui/row.ui:399
+msgid "Seek 10s Forward"
+msgstr "Tekerés 10 másodpercet előre"
+
+#: data/ui/window.ui:60
+msgid "Record"
+msgstr "Felvétel"
+
+#: data/ui/window.ui:149
+msgid "Add Recordings"
+msgstr "Felvételek hozzáadása"
+
+#: data/ui/window.ui:166
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "A <b>Felvétel</b> gombbal készíthet hangfelvételeket"
+
+#: data/ui/window.ui:237
+msgid "Undo"
+msgstr "Visszavonás"
+
+#: data/ui/window.ui:254
+msgid "Close"
+msgstr "Bezárás"
+
+#: data/ui/window.ui:290
+#| msgid "Preferred format"
+msgid "Preferred Format"
+msgstr "Előnyben részesített formátum"
+
+#: data/ui/window.ui:292
+#| msgid "Ogg Vorbis"
+msgid "Vorbis"
+msgstr "Vorbis"
+
+#: data/ui/window.ui:297
+msgid "Opus"
+msgstr "Opus"
+
+#: data/ui/window.ui:302
+msgid "FLAC"
+msgstr "FLAC"
+
+#: data/ui/window.ui:307
+msgid "MP3"
+msgstr "MP3"
+
+#: data/ui/window.ui:313
+msgid "Audio Channel"
+msgstr "Hangcsatorna"
+
+#: data/ui/window.ui:315
+msgid "Stereo"
+msgstr "Sztereó"
+
+#: data/ui/window.ui:320
+msgid "Mono"
+msgstr "Mono"
+
+#: data/ui/window.ui:327
+msgid "_Keyboard Shortcuts"
+msgstr "_Gyorsbillentyűk"
+
+#: data/ui/window.ui:332
+msgid "About Sound Recorder"
+msgstr "A Hangrögzítő névjegye"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/application.js:151
+#: src/application.js:130
 msgid "translator-credits"
 msgstr "Kelemen Gábor <kelemeng at gnome dot hu>"
 
-#: src/fileUtil.js:84
+#: src/application.js:132
+msgid "A Sound Recording Application for GNOME"
+msgstr "Egy hangrögzítő alkalmazás a GNOME-hoz"
+
+#. Translators: ""Recording %d"" is the default name assigned to a file created
+#. by the application (for example, "Recording 1").
+#: src/recorder.js:113
+#, javascript-format
+#| msgid "Recordings"
+msgid "Recording %d"
+msgstr "Felvétel %d"
+
+#: src/recorderWidget.js:94
+#| msgid "Unable to play recording"
+msgid "Delete recording?"
+msgstr "Törli a felvételt?"
+
+#: src/recorderWidget.js:95
+msgid "This recording will not be saved."
+msgstr "Ez a felvétel nem lesz elmentve."
+
+#: src/recorderWidget.js:99
+msgid "Resume"
+msgstr "Folytatás"
+
+#. Necessary code to move old recordings into the new location for few releases
+#. FIXME: Remove by 3.40/3.42
+#: src/recordingList.js:42
+msgid "Recordings"
+msgstr "Felvételek"
+
+#. Translators: ""%s (Old)"" is the new name assigned to a file moved from
+#. the old recordings location
+#: src/recordingList.js:59
+#, javascript-format
+msgid "%s (Old)"
+msgstr "%s (régi)"
+
+#: src/row.js:71
+#| msgid "Recordings"
+msgid "Export Recording"
+msgstr "Felvétel exportálása"
+
+#: src/row.js:71
+msgid "_Export"
+msgstr "_Exportálás"
+
+#: src/row.js:71
+#| msgid "Cancel"
+msgid "_Cancel"
+msgstr "_Mégse"
+
+#: src/utils.js:48
 msgid "Yesterday"
 msgstr "Tegnap"
 
-#: src/fileUtil.js:86
+#: src/utils.js:50
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d napja"
 msgstr[1] "%d napja"
 
-#: src/fileUtil.js:90
+#: src/utils.js:52
 msgid "Last week"
 msgstr "Múlt héten"
 
-#: src/fileUtil.js:92
+#: src/utils.js:54
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d hete"
 msgstr[1] "%d hete"
 
-#: src/fileUtil.js:96
+#: src/utils.js:56
 msgid "Last month"
 msgstr "Múlt hónapban"
 
-#: src/fileUtil.js:98
+#: src/utils.js:58
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d hónapja"
 msgstr[1] "%d hónapja"
 
-#: src/fileUtil.js:102
+#: src/utils.js:60
 msgid "Last year"
 msgstr "Múlt évben"
 
-#: src/fileUtil.js:104
+#: src/utils.js:62
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "%d éve"
 msgstr[1] "%d éve"
 
-#: src/info.js:42 src/mainWindow.js:518
-msgid "Info"
-msgstr "Információ"
-
-#: src/info.js:47
-msgid "Cancel"
-msgstr "Mégse"
-
-#. finish button (stop recording)
-#: src/info.js:52 src/mainWindow.js:325
-msgid "Done"
-msgstr "Kész"
-
-#. File Name item
-#. Translators: "File Name" is the label next to the file name
-#. in the info dialog
-#: src/info.js:79
-msgctxt "File Name"
-msgid "Name"
-msgstr "Név"
-
-#. Source item
-#: src/info.js:86
-msgid "Source"
-msgstr "Forrás"
-
-#. Date Modified item
-#: src/info.js:95
-msgid "Date Modified"
-msgstr "Módosítás dátuma"
-
-#. Date Created item
-#: src/info.js:101
-msgid "Date Created"
-msgstr "Létrehozás dátuma"
-
-#. Media type item
-#. Translators: "Type" is the label next to the media type
-#. (Ogg Vorbis, AAC, ...) in the info dialog
-#: src/info.js:112
-msgctxt "Media Type"
-msgid "Type"
-msgstr "Típus"
-
-#. Media type data
-#: src/info.js:151
-msgid "Unknown"
-msgstr "Ismeretlen"
-
-#: src/mainWindow.js:115 src/mainWindow.js:782
-msgid "Record"
-msgstr "Felvétel"
-
-#: src/mainWindow.js:127 src/preferences.js:38
-msgid "Preferences"
-msgstr "Beállítások"
-
-#: src/mainWindow.js:128
-msgid "About Sound Recorder"
-msgstr "A Hangrögzítő névjegye"
-
-#: src/mainWindow.js:163
-msgid "Add Recordings"
-msgstr "Felvételek hozzáadása"
-
-#: src/mainWindow.js:168
-msgid "Use the <b>Record</b> button to make sound recordings"
-msgstr "A <b>Felvétel</b> gombbal készíthet hangfelvételeket"
-
-#: src/mainWindow.js:311
-msgid "Recording…"
-msgstr "Felvétel…"
-
-#. Translators: This is the title in the headerbar
-#: src/mainWindow.js:361
+#: src/window.js:71
 #, javascript-format
-msgid "%d Recorded Sound"
-msgid_plural "%d Recorded Sounds"
-msgstr[0] "%d felvett hang"
-msgstr[1] "%d felvett hang"
+msgid "\"%s\" deleted"
+msgstr "„%s” törölve"
 
-#: src/mainWindow.js:365
-msgid "No Recorded Sounds"
-msgstr "Nincsenek felvett hangok"
+#~ msgid "Microphone volume level"
+#~ msgstr "Mikrofon hangerőszintje"
 
-#: src/mainWindow.js:407
-msgid "Play"
-msgstr "Lejátszás"
+#~ msgid "Microphone volume level."
+#~ msgstr "Mikrofon hangerőszintje."
 
-#: src/mainWindow.js:427
-msgid "Pause"
-msgstr "Szünet"
+#~ msgid "Speaker volume level"
+#~ msgstr "Hangszóró hangerőszintje"
 
-#: src/mainWindow.js:532
-msgid "Delete"
-msgstr "Törlés"
+#~ msgid "Speaker volume level."
+#~ msgstr "Hangszóró hangerőszintje."
 
-#: src/mainWindow.js:814
-msgid "Ogg Vorbis"
-msgstr "Ogg Vorbis"
+#~ msgid "SoundRecorder"
+#~ msgstr "Hangrögzítő"
 
-#: src/mainWindow.js:814
-msgid "Opus"
-msgstr "Opus"
+#~ msgid "Sound Recorder started"
+#~ msgstr "A Hangrögzítő elindult"
 
-#: src/mainWindow.js:814
-msgid "FLAC"
-msgstr "FLAC"
+#~ msgid "Info"
+#~ msgstr "Információ"
 
-#: src/mainWindow.js:814
-msgid "MP3"
-msgstr "MP3"
+#~ msgid "Done"
+#~ msgstr "Kész"
 
-#: src/mainWindow.js:814
-msgid "MOV"
-msgstr "MOV"
+#~ msgctxt "File Name"
+#~ msgid "Name"
+#~ msgstr "Név"
 
-#: src/mainWindow.js:835
-msgid "Mono"
-msgstr "Mono"
+#~ msgid "Source"
+#~ msgstr "Forrás"
 
-#: src/mainWindow.js:835
-msgid "Stereo"
-msgstr "Sztereó"
+#~ msgid "Date Modified"
+#~ msgstr "Módosítás dátuma"
 
-#: src/mainWindow.js:856
-msgid "Load More"
-msgstr "Több betöltése"
+#~ msgid "Date Created"
+#~ msgstr "Létrehozás dátuma"
 
-#: src/play.js:85
-msgid "Unable to play recording"
-msgstr "Nem játszható le a felvétel"
+#~ msgctxt "Media Type"
+#~ msgid "Type"
+#~ msgstr "Típus"
 
-#: src/preferences.js:62
-msgid "Preferred format"
-msgstr "Előnyben részesített formátum"
+#~ msgid "Unknown"
+#~ msgstr "Ismeretlen"
 
-#: src/preferences.js:70
-msgid "Default mode"
-msgstr "Alapértelmezett mód"
+#~ msgid "Preferences"
+#~ msgstr "Beállítások"
 
-#: src/preferences.js:78
-msgid "Volume"
-msgstr "Hangerő"
+#~ msgid "Recording…"
+#~ msgstr "Felvétel…"
 
-#: src/preferences.js:92
-msgid "Microphone"
-msgstr "Mikrofon"
+#~ msgid "%d Recorded Sound"
+#~ msgid_plural "%d Recorded Sounds"
+#~ msgstr[0] "%d felvett hang"
+#~ msgstr[1] "%d felvett hang"
 
-#: src/record.js:69
-msgid "Unable to create Recordings directory."
-msgstr "Nem hozható létre a Felvételek könyvtár."
+#~ msgid "No Recorded Sounds"
+#~ msgstr "Nincsenek felvett hangok"
 
-#: src/record.js:82
-msgid "Please install the GStreamer 1.0 PulseAudio plugin."
-msgstr "Telepítse a GStreamer 1.0 PulseAudio bővítményt."
+#~ msgid "MOV"
+#~ msgstr "MOV"
 
-#: src/record.js:84
-msgid "Your audio capture settings are invalid."
-msgstr "A hangfelvételi beállítások érvénytelenek."
+#~ msgid "Load More"
+#~ msgstr "Több betöltése"
 
-#: src/record.js:132
-msgid "Not all elements could be created."
-msgstr "Nem minden elem hozható létre."
+#~ msgid "Default mode"
+#~ msgstr "Alapértelmezett mód"
 
-#: src/record.js:144
-msgid "Not all of the elements were linked."
-msgstr "Nem minden elem volt összekapcsolva."
+#~ msgid "Volume"
+#~ msgstr "Hangerő"
 
-#: src/record.js:169
-msgid "No Media Profile was set."
-msgstr "Nincs beállítva médiaprofil."
+#~ msgid "Microphone"
+#~ msgstr "Mikrofon"
 
-#: src/record.js:180
-msgid ""
-"Unable to set the pipeline \n"
-" to the recording state."
-msgstr ""
-"Az adatcsatorna nem állítható\n"
-" felvételi állapotba."
+#~ msgid "Unable to create Recordings directory."
+#~ msgstr "Nem hozható létre a Felvételek könyvtár."
 
-#. Translators: ""Clip %d"" is the default name assigned to a file created
-#. by the application (for example, "Clip 1").
-#: src/record.js:356
-#, javascript-format
-msgid "Clip %d"
-msgstr "Felvétel %d"
+#~ msgid "Please install the GStreamer 1.0 PulseAudio plugin."
+#~ msgstr "Telepítse a GStreamer 1.0 PulseAudio bővítményt."
+
+#~ msgid "Your audio capture settings are invalid."
+#~ msgstr "A hangfelvételi beállítások érvénytelenek."
+
+#~ msgid "Not all elements could be created."
+#~ msgstr "Nem minden elem hozható létre."
+
+#~ msgid "Not all of the elements were linked."
+#~ msgstr "Nem minden elem volt összekapcsolva."
+
+#~ msgid "No Media Profile was set."
+#~ msgstr "Nincs beállítva médiaprofil."
+
+#~ msgid ""
+#~ "Unable to set the pipeline \n"
+#~ " to the recording state."
+#~ msgstr ""
+#~ "Az adatcsatorna nem állítható\n"
+#~ " felvételi állapotba."
+
+#~ msgid "Clip %d"
+#~ msgstr "Felvétel %d"
