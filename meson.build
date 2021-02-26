@@ -39,7 +39,7 @@ dependency('gio-2.0', version: '>= 2.43.4')
 dependency('glib-2.0', version: '>= 2.39.3')
 dependency('gtk+-3.0', version: '>= 3.13.2')
 dependency('gstreamer-player-1.0', version: '>= 1.12')
-dependency('libhandy-1', version: '>= 0.80.0')
+dependency('libhandy-1', version: '>= 1.1.90')
 dependency('gobject-introspection-1.0', version: '>= 1.31.6')
 
 gnome = import('gnome')
