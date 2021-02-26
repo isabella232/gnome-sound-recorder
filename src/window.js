@@ -34,7 +34,7 @@ var WindowState = {
 var Window = GObject.registerClass({
     Template: 'resource:///org/gnome/SoundRecorder/ui/window.ui',
     InternalChildren: [
-        'mainStack', 'emptyIcon', 'column', 'headerRevealer',
+        'mainStack', 'emptyPage', 'column', 'headerRevealer',
         'notificationRevealer', 'notificationMessage',
         'notificationUndoBtn', 'notificationCloseBtn',
     ],
@@ -99,7 +99,7 @@ var Window = GObject.registerClass({
         this.recorderWidget.connect('canceled', this.onRecorderCanceled.bind(this));
         this.recorderWidget.connect('stopped', this.onRecorderStopped.bind(this));
         this.insert_action_group('recorder', this.recorderWidget.actionsGroup);
-        this._emptyIcon.icon_name = `${pkg.name}-symbolic`;
+        this._emptyPage.icon_name = `${pkg.name}-symbolic`;
         this.show();
     }
 
